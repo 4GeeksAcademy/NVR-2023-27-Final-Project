@@ -1,7 +1,7 @@
 
 import os
 from flask_admin import Admin
-from .models import db, User, MemberAccount, UserProfile, ProviderProfile, Address, ServiceRequest, Notification, ProviderAvailability, Exclusion, ServiceList
+from .models import db, MemberAccount, UserProfile, ProviderProfile, Address, ServiceRequest, Notification, Exclusion, ProviderAvaiability, ServiceDescription  
 from flask_admin.contrib.sqla import ModelView
 
 
@@ -11,7 +11,6 @@ def setup_admin(app):
     admin = Admin(app, name='4Geeks Admin', template_mode='bootstrap3')
 
     # Add your models here, for example this is how we add a the User model to the admin
-    admin.add_view(ModelView(User, db.session))
     admin.add_view(ModelView(MemberAccount, db.session))
     admin.add_view(ModelView(UserProfile, db.session))
     admin.add_view(ModelView(ProviderProfile, db.session))
@@ -19,8 +18,8 @@ def setup_admin(app):
     admin.add_view(ModelView(ServiceRequest, db.session))
     admin.add_view(ModelView(Notification, db.session))
     admin.add_view(ModelView(Exclusion, db.session))
-    admin.add_view(ModelView(ProviderAvailability, db.session))
-    admin.add_view(ModelView(ServiceList, db.session))
+    admin.add_view(ModelView(ProviderAvaiability, db.session))
+    admin.add_view(ModelView(ServiceDescription, db.session))
 
 
 # You can duplicate that line to add mew models
