@@ -124,6 +124,23 @@ class Address(db.Model):
             "provider_id": self.provider_id,
         }
 
+    def __repr__(self):
+        return f'<Address {self.id}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "is_main": self.is_main,
+            "street": self.street,
+            "apartment": self.apartment,
+            "city": self.city,
+            "state": self.state,
+            "postal_code": self.postal_code,
+            "country": self.country,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+        }
+
 
 class ServiceRequest(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -199,7 +216,6 @@ class Exclusion(db.Model):
             "user_id": self.user_id,
             "provider_id": self.provider_id,
         }
-
 
 class ProviderAvailability(db.Model):
     id = db.Column(db.Integer, primary_key=True)
