@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -19,34 +20,11 @@ class User(db.Model):
         }
 
 
-class MemberAccount(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    account_type = db.Column(db.Integer, nullable=False)
-    user_or_provider_id = db.Column(db.Integer, nullable=False)
-    member_name = db.Column(db.String(100), unique=True, nullable=True)
-    email = db.Column(db.String(200), unique=True, nullable=False)
-    password = db.Column(db.String(100), nullable=False)
-    user_profiles = db.relationship('UserProfile', backref='member_account')
-    provider_profiles = db.relationship(
-        'ProviderProfile', backref='member_account')
-    addresses = db.relationship('Address', backref='member_account')
-
-    def __repr__(self):
-        return f'<MemberAccount {self.email}>'
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "account_type": self.account_type,
-            "user_or_provider_id": self.user_or_provider_id,
-            "member_name": self.member_name,
-            "email": self.email,
-        }
-
-
 class UserProfile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    member_id = db.Column(db.Integer, db.ForeignKey('member_account.id'))
+    name = db.Column(db.String(100), unique=True, nullable=True)
+    email = db.Column(db.String(200), unique=True, nullable=False)
+    password = db.Column(db.String(100), nullable=False)
     must_have_certificate = db.Column(db.Boolean(), nullable=False)
     required_experience = db.Column(db.Integer, nullable=False)
     required_rating = db.Column(db.Float)
@@ -55,14 +33,16 @@ class UserProfile(db.Model):
         'ServiceRequest', backref='user_profile')
     notifications = db.relationship('Notification', backref='user_profile')
     exclusions = db.relationship('Exclusion', backref='user_profile')
+    addresses = db.relationship('Address', backref='user_profile')
 
     def __repr__(self):
-        return f'<UserProfile {self.member_id}>'
+        return f'<UserProfile {self.id}>'
 
     def serialize(self):
         return {
             "id": self.id,
-            "member_id": self.member_id,
+            "name": self.name,
+            "email": self.email,
             "must_have_certificate": self.must_have_certificate,
             "required_experience": self.required_experience,
             "required_rating": self.required_rating,
@@ -71,7 +51,9 @@ class UserProfile(db.Model):
 
 class ProviderProfile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    member_id = db.Column(db.Integer, db.ForeignKey('member_account.id'))
+    name = db.Column(db.String(100), unique=True, nullable=True)
+    email = db.Column(db.String(200), unique=True, nullable=False)
+    password = db.Column(db.String(100), nullable=False)
     has_certificate = db.Column(db.Boolean())
     experience = db.Column(db.Integer, nullable=False)
     service_radius = db.Column(db.Integer, nullable=False)
@@ -86,14 +68,17 @@ class ProviderProfile(db.Model):
     provider_availabilities = db.relationship(
         'ProviderAvailability', backref='provider_profile')
     exclusions = db.relationship('Exclusion', backref='provider_profile')
+    address = db.relationship(
+        'Address', backref='provider_profile', uselist=False)
 
     def __repr__(self):
-        return f'<ProviderProfile {self.member_id}>'
+        return f'<ProviderProfile {self.id}>'
 
     def serialize(self):
         return {
             "id": self.id,
-            "member_id": self.member_id,
+            "name": self.name,
+            "email": self.email,
             "has_certificate": self.has_certificate,
             "experience": self.experience,
             "service_radius": self.service_radius,
@@ -105,7 +90,6 @@ class ProviderProfile(db.Model):
 class Address(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     is_main = db.Column(db.Boolean())
-    member_id = db.Column(db.Integer, db.ForeignKey('member_account.id'))
     street = db.Column(db.String(100), nullable=True)
     apartment = db.Column(db.String(100), nullable=True)
     city = db.Column(db.String(100), nullable=True)
@@ -114,6 +98,10 @@ class Address(db.Model):
     country = db.Column(db.String(100), nullable=True)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
+    provider_id = db.Column(db.Integer, db.ForeignKey(
+        'provider_profile.id'), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        'user_profile.id'), nullable=True)
 
     def __repr__(self):
         return f'<Address {self.id}>'
@@ -206,6 +194,7 @@ class Exclusion(db.Model):
             "provider_id": self.provider_id,
         }
 
+
 class ProviderAvailability(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     provider_id = db.Column(db.Integer, db.ForeignKey('provider_profile.id'))
@@ -232,6 +221,8 @@ class ServiceDescription(db.Model):
     price = db.Column(db.Float, nullable=False)
     duration = db.Column(db.Integer, nullable=False)
     includes_consumables = db.Column(db.Boolean, nullable=False)
+    service_provided = db.Column(db.Integer, db.ForeignKey(
+        'service_provided.id'), nullable=False)
 
     def __repr__(self):
         return f'<ServiceDescription {self.name}>'
@@ -252,8 +243,8 @@ class ServiceProvided(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     provider_id = db.Column(db.Integer, db.ForeignKey(
         'provider_profile.id'), nullable=False)
-    service_id = db.Column(db.Integer, db.ForeignKey(
-        'service_description.id'), nullable=False)
+    services_descriptions = db.relationship(
+        'ServiceDescription', backref='service_provider', uselist=False)
 
     def __repr__(self):
         return f'<ServiceProvided {self.id}>'
