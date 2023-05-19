@@ -1,7 +1,7 @@
 
 import os
 from flask_admin import Admin
-from .models import db, MemberAccount, UserProfile, ProviderProfile, Address, ServiceRequest, Notification, Exclusion, ProviderAvaiability, ServiceDescription  
+from .models import db, MemberAccount, UserProfile, ProviderProfile, Address, ServiceRequest, Notification, Exclusion, ProviderAvailability, ServiceDescription  
 from flask_admin.contrib.sqla import ModelView
 
 
@@ -18,7 +18,7 @@ def setup_admin(app):
     admin.add_view(ModelView(ServiceRequest, db.session))
     admin.add_view(ModelView(Notification, db.session))
     admin.add_view(ModelView(Exclusion, db.session))
-    admin.add_view(ModelView(ProviderAvaiability, db.session))
+    admin.add_view(ModelView(ProviderAvailability, db.session))
     admin.add_view(ModelView(ServiceDescription, db.session))
 
 
