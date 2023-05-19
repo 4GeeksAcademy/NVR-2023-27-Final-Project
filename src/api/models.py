@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -19,24 +20,6 @@ class User(db.Model):
         }
 
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
-
-    def __repr__(self):
-        return f'<User {self.email}>'
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "email": self.email,
-            # do not serialize the password, its a security breach
-        }
-
-# Database tables
-    
 class UserProfile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True, nullable=True)
@@ -140,24 +123,6 @@ class Address(db.Model):
             "provider_id": self.provider_id,
         }
 
-    def __repr__(self):
-        return f'<Address {self.id}>'
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "is_main": self.is_main,
-            "street": self.street,
-            "apartment": self.apartment,
-            "city": self.city,
-            "state": self.state,
-            "postal_code": self.postal_code,
-            "country": self.country,
-            "latitude": self.latitude,
-            "longitude": self.longitude,
-        }
-
-
 class ServiceRequest(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     status = db.Column(db.Integer, nullable=False)
@@ -232,6 +197,7 @@ class Exclusion(db.Model):
             "user_id": self.user_id,
             "provider_id": self.provider_id,
         }
+
 
 class ProviderAvailability(db.Model):
     id = db.Column(db.Integer, primary_key=True)
