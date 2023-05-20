@@ -7,18 +7,29 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const navigate = useNavigate();
 
-	const handleClickRegister = () => {
+	const handleClickRegisterUser = () => {
 		navigate("/registerUser");
 	}
+
+	const handleClickRegisterProvider = () => {
+		navigate("/registerProvider");
+	}
+
 
 	return (
 		<>
 			<p>Home</p>
 			<button className="btn btn-primary mx-3">
-			Sign in
+			User Sign in 
 			</button>
-			<button className="btn btn-success mx-3" onClick={handleClickRegister}>
-			Register
+			<button className="btn btn-primary mx-3">
+			Provider Sign in 
+			</button>
+			<button className="btn btn-success mx-3" onClick={handleClickRegisterUser}>
+			User Register
+			</button>
+			<button className="btn btn-success mx-3" onClick={handleClickRegisterProvider}>
+			Provider Register
 			</button>
 		</>
 	);
