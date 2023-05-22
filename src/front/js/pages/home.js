@@ -15,21 +15,29 @@ export const Home = () => {
 		navigate("/registerProvider");
 	}
 
+	const handleClickUserSignIn = () => {
+		navigate("/signInUser");
+	}
+
+	const handleClickProviderSignIn = () => {
+		navigate("/signInProvider");
+	}
+
 
 	return (
 		<>
 			<p>Home</p>
-			<button className="btn btn-primary mx-3">
-			User Sign in 
+			<button className="btn btn-primary mx-3" onClick={handleClickUserSignIn}>
+				User Sign in
 			</button>
-			<button className="btn btn-primary mx-3">
-			Provider Sign in 
+			<button className="btn btn-primary mx-3" onClick={handleClickProviderSignIn}>
+				Provider Sign in
 			</button>
 			<button className="btn btn-success mx-3" onClick={handleClickRegisterUser}>
-			User Register
+				User Register
 			</button>
 			<button className="btn btn-success mx-3" onClick={handleClickRegisterProvider}>
-			Provider Register
+				Provider Register
 			</button>
 		</>
 	);
