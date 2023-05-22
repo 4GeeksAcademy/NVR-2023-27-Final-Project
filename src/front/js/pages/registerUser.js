@@ -22,10 +22,12 @@ export const RegisterUser = () => {
         apartment: "",
         city: "",
         state: "",
-        postalCode: "",
+        postal_code: "",
         country: "",
         latitude: 0,
         longitude: 0,
+        user_id: null,
+        provider_id: null
 
     });
 
@@ -35,13 +37,14 @@ export const RegisterUser = () => {
         apartment: "",
         city: "",
         state: "",
-        postalCode: "",
+        postal_code: "",
         country: "",
         latitude: 0,
         longitude: 0,
+        user_id: null,
+        provider_id: null
 
     });
-
 
     const navigate = useNavigate();
 
@@ -68,17 +71,18 @@ export const RegisterUser = () => {
     };
 
     const getAddressGeoCoordinates = async (address) => {
+
+        // AUxiliary function
         const getAddressString = () => {
             const addressString = Object.entries(address)
-                .filter(([key, value]) => key !== 'is_main' && key !== 'latitude' && key !== 'longitude' && value !== '')
+                .filter(([key, value]) => key !== "is_main" && key !== "latitude" && key !== "longitude" && key !== "user_id" && key !== "provider_id" && value !== "")
                 .map(([key, value]) => value)
                 .join(', ');
             return addressString;
         };
 
         const addressString = getAddressString(address);
-        alert(addressString);
-        const apiKey = "-NTyGKRVk";
+        const apiKey = "AIzaSyA0Wq3nAEPCtgSku9z8_bcRM7-NTyGKRVk";
         const url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + addressString + "+CA&key=" + apiKey;
 
         try {
@@ -87,56 +91,106 @@ export const RegisterUser = () => {
                 throw new Error('Request failed with status ' + response.status);
             }
             const data = await response.json();
-            console.log(data);
             return data;
         } catch (error) {
             console.error('Error:', error);
         }
     };
 
+    // handleSubmitForm 
+
     const handleSubmitForm = async (event) => {
         event.preventDefault();
-        alert('1st Call to Google API');
-        const responseObject = await getAddressGeoCoordinates(userAddress);
-        if (responseObject) {
-            alert('Response Arrived');
-            const addressLatitude = responseObject.results[0].geometry.location.lat;
-            const addressLongitude = responseObject.results[0].geometry.location.lng;
-            setUserAddress((currentUserAddress) => ({ ...currentUserAddress, latitude: addressLatitude }));
-            setUserAddress((currentUserAddress) => ({ ...currentUserAddress, longitude: addressLongitude }));
 
-            if (
-                JSON.stringify(userSecondaryAddress) !==
-                JSON.stringify({
-                    is_main: false,
-                    street: "",
-                    apartment: "",
-                    city: "",
-                    state: "",
-                    postalCode: "",
-                    country: "",
-                    latitude: 0,
-                    longitude: 0,
-                })
-            ) {
-                alert('2nd Call to Google API');
-                const secondResponseObject = await getAddressGeoCoordinates(userSecondaryAddress);
-                if (secondResponseObject) {
-                    alert('Response Arrived');
-                    const SecondaryAddressLatitude = secondResponseObject.results[0].geometry.location.lat;
-                    const SecondaryAddressLongitude = secondResponseObject.results[0].geometry.location.lng;
-                    setUserSecondaryAddress((currentUserSecondaryAddress) => ({
-                        ...currentUserSecondaryAddress,
-                        latitude: SecondaryAddressLatitude,
-                    }));
-                    setUserSecondaryAddress((currentUserSecondaryAddress) => ({
-                        ...currentUserSecondaryAddress,
-                        longitude: SecondaryAddressLongitude,
-                    }));
+        // handleSubmitForm auxiliary functions
+        const registerNewUser = async (credentials) => {
+            try {
+                const response = await fetch(process.env.BACKEND_URL + "api/users", {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                    body: JSON.stringify(credentials),
+                });
+                if (response.ok) {
+                    console.log("user successfully created");
+                    const data = await response.json();
+                    return data.id;
                 }
+            } catch (error) {
+                console.error("Error registering user:", error);
+                return false;
+            }
+        };
+
+        const registerNewAddress = async (address) => {
+            try {
+                const response = await fetch(process.env.BACKEND_URL + "api/addresses", {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                    body: JSON.stringify(address),
+                });
+                if (response.ok) {
+                    console.log("address successfully created");
+                    const data = await response.json();
+                    return data.id;
+                }
+            } catch (error) {
+                console.error("Error registering address:", error);
+                return false;
+            }
+        };
+
+        // Main Function
+        const mainApiResponse = await getAddressGeoCoordinates(userAddress);
+        if (mainApiResponse) {
+            const addressLatitude = mainApiResponse.results[0].geometry.location.lat;
+            const addressLongitude = mainApiResponse.results[0].geometry.location.lng;
+            setUserAddress((currentUserAddress) => ({
+                ...currentUserAddress,
+                latitude: addressLatitude,
+                longitude: addressLongitude,
+            }));
+        }
+
+        if (userSecondaryAddress.street !== "") {
+            const secondaryApiResponse = await getAddressGeoCoordinates(userSecondaryAddress);
+            if (secondaryApiResponse) {
+                const secondaryAddressLatitude = secondaryApiResponse.results[0].geometry.location.lat;
+                const secondaryAddressLongitude = secondaryApiResponse.results[0].geometry.location.lng;
+                setUserSecondaryAddress((currentUserSecondaryAddress) => ({
+                    ...currentUserSecondaryAddress,
+                    latitude: secondaryAddressLatitude,
+                    longitude: secondaryAddressLongitude,
+                }));
             }
         }
+
+        const newUserId = await registerNewUser(userCredentials);
+        setUserAddress((previousUserAddress) => ({
+            ...previousUserAddress,
+            user_id: newUserId,
+        }));
+        setUserSecondaryAddress((previousUserSecondaryAddress) => ({
+            ...previousUserSecondaryAddress,
+            user_id: newUserId,
+        }));
+
+        try {
+            await registerNewAddress(userAddress);
+        } catch (error) {
+            console.error("Error occurred while registering userAddress:", error);
+        }
+
+        try {
+            await registerNewAddress(userSecondaryAddress);
+        } catch (error) {
+            console.error("An error occurred while registering userSecondaryAddress:", error);
+        }
     };
+
 
 
     return (
@@ -233,8 +287,8 @@ export const RegisterUser = () => {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="postalCode"
-                                    value={userAddress.postalCode}
+                                    name="postal_code"
+                                    value={userAddress.postal_code}
                                     onChange={handleChangeAddress}
                                 />
                             </div>
@@ -297,8 +351,8 @@ export const RegisterUser = () => {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="postalCode"
-                                    value={userSecondaryAddress.postalCode}
+                                    name="postal_code"
+                                    value={userSecondaryAddress.postal_code}
                                     onChange={handleChangeSecondaryAddress}
                                 />
                             </div>
