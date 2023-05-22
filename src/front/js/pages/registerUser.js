@@ -98,7 +98,6 @@ export const RegisterUser = () => {
     };
 
     // handleSubmitForm 
-
     const handleSubmitForm = async (event) => {
         event.preventDefault();
 
@@ -145,9 +144,10 @@ export const RegisterUser = () => {
 
         // Main Function
         const mainApiResponse = await getAddressGeoCoordinates(userAddress);
+        let addressLatitude,  addressLongitude = 0;
         if (mainApiResponse) {
-            const addressLatitude = mainApiResponse.results[0].geometry.location.lat;
-            const addressLongitude = mainApiResponse.results[0].geometry.location.lng;
+             addressLatitude = mainApiResponse.results[0].geometry.location.lat;
+             addressLongitude = mainApiResponse.results[0].geometry.location.lng;
             setUserAddress((currentUserAddress) => ({
                 ...currentUserAddress,
                 latitude: addressLatitude,
@@ -155,11 +155,12 @@ export const RegisterUser = () => {
             }));
         }
 
-        if (userSecondaryAddress.street !== "") {
+        let  secondaryAddressLatitude , secondaryAddressLongitude = 0;
+        if (userSecondaryAddress.street !=="") {
             const secondaryApiResponse = await getAddressGeoCoordinates(userSecondaryAddress);
             if (secondaryApiResponse) {
-                const secondaryAddressLatitude = secondaryApiResponse.results[0].geometry.location.lat;
-                const secondaryAddressLongitude = secondaryApiResponse.results[0].geometry.location.lng;
+                 secondaryAddressLatitude = secondaryApiResponse.results[0].geometry.location.lat;
+                 secondaryAddressLongitude = secondaryApiResponse.results[0].geometry.location.lng;
                 setUserSecondaryAddress((currentUserSecondaryAddress) => ({
                     ...currentUserSecondaryAddress,
                     latitude: secondaryAddressLatitude,
@@ -177,15 +178,17 @@ export const RegisterUser = () => {
             ...previousUserSecondaryAddress,
             user_id: newUserId,
         }));
-
+        
+        const mainAddressCopy = {...userAddress, user_id: newUserId, latitude: addressLatitude, longitude: addressLongitude}
         try {
-            await registerNewAddress(userAddress);
+            await registerNewAddress(mainAddressCopy);
         } catch (error) {
             console.error("Error occurred while registering userAddress:", error);
         }
 
+        const secondaryAddressCopy = {...userSecondaryAddress, user_id: newUserId, latitude: secondaryAddressLatitude, longitude: secondaryAddressLongitude}
         try {
-            await registerNewAddress(userSecondaryAddress);
+            await registerNewAddress(secondaryAddressCopy);
         } catch (error) {
             console.error("An error occurred while registering userSecondaryAddress:", error);
         }

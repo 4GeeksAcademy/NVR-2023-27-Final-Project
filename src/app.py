@@ -68,3 +68,25 @@ def serve_any_other_file(path):
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3001))
     app.run(host='0.0.0.0', port=PORT, debug=True)
+
+# Loads up service_description table, if empty
+# to be confirmed with Mattia
+
+import json
+from api.models import ServiceDescription
+from app import db
+
+def load_service_description():
+    if db.session.query(ServiceDescription).count() == 0:
+        file_path = "src/api/serviceDescription.json"
+
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+
+        services = [ServiceDescription(**item) for item in data]
+
+        db.session.bulk_save_objects(services)
+        db.session.commit()
+        print("Table successfully loaded")
+    else:
+        print("Table already loaded up")
