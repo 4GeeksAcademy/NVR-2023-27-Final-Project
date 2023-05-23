@@ -38,8 +38,8 @@ def create_user():
     db.session.commit()
     return jsonify({"id": new_user.id}), 200
 
-@api.route("/providers", methods=["POST"])
-def create_provider():
+@api.route("/signinprovider", methods=["POST"])
+def signin_provider():
     body = request.json
     provider_already_exists = ProviderProfile.query.filter_by(email=body["email"]).first()
     if provider_already_exists:

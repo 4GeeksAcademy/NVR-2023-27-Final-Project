@@ -21,16 +21,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
-			getMessage: async () => {
-				try{
-					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
-					const data = await resp.json()
-					setStore({ message: data.message })
-					// don't forget to return something, that is how the async resolves
-					return data;
-				}catch(error){
-					console.log("Error loading message from backend", error)
+			signinProvider: async (email, password) => {
+				console.log("@@@@@@@@@@@@@@@@@@@@@@HHHH########");
+				const response = await fetch(process.env.BACKEND_URL + "api/signinprovider", {
+					method: "POST",
+					headers: {
+						"Content-type": "application/json"
+					},
+					body: JSON.stringify({
+						email: email,
+						password: password
+					})
+				});
+				console.log("@@@@@@@@@@@@@@@@@@@@@@HHHH########");
+				try {
+					console.log("@@@@@@@@@@@@@@@@@@@@")
+					if (response.ok) {
+						console.log("@@@@@@@@@@@@@@@@@@@@1")
+						const data = await response.json();
+						console.log("@@@@@@@@@@@@@@@@@@@@2")
+						localStorage.setItem("ptoken", data.ptoken);
+						setStore({ ptoken: data.ptoken })
+						return true;
+					}
+				} catch (error) {
+					return false;
 				}
 			},
 			changeColor: (index, color) => {
