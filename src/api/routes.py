@@ -31,7 +31,7 @@ def signin_user():
         return jsonify({"token":token}), 200
     return jsonify({"error":"error login"}), 401
 
-api.route("/signinprovider", methods=["POST"])
+@api.route("/signinprovider", methods=["POST"])
 def signin_provider():
     body = request.json
     provider = ProviderProfile.query.filter_by(

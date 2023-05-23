@@ -48,7 +48,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				console.log("@@@@@@@@@@@@@@@@@@@@@@HHHH########");
 				try {
+					console.log("@@@@@@@@@@@@@@@@@@@@")
 					if (response.ok) {
+						console.log("@@@@@@@@@@@@@@@@@@@@1")
 						const data = await response.json();
 						console.log("@@@@@@@@@@@@@@@@@@@@2")
 						localStorage.setItem("ptoken", data.ptoken);
