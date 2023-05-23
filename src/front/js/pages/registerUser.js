@@ -144,10 +144,10 @@ export const RegisterUser = () => {
 
         // Main Function
         const mainApiResponse = await getAddressGeoCoordinates(userAddress);
-        let addressLatitude,  addressLongitude = 0;
+        let addressLatitude, addressLongitude = 0;
         if (mainApiResponse) {
-             addressLatitude = mainApiResponse.results[0].geometry.location.lat;
-             addressLongitude = mainApiResponse.results[0].geometry.location.lng;
+            addressLatitude = mainApiResponse.results[0].geometry.location.lat;
+            addressLongitude = mainApiResponse.results[0].geometry.location.lng;
             setUserAddress((currentUserAddress) => ({
                 ...currentUserAddress,
                 latitude: addressLatitude,
@@ -155,12 +155,12 @@ export const RegisterUser = () => {
             }));
         }
 
-        let  secondaryAddressLatitude , secondaryAddressLongitude = 0;
-        if (userSecondaryAddress.street !=="") {
+        let secondaryAddressLatitude, secondaryAddressLongitude = 0;
+        if (userSecondaryAddress.street !== "") {
             const secondaryApiResponse = await getAddressGeoCoordinates(userSecondaryAddress);
             if (secondaryApiResponse) {
-                 secondaryAddressLatitude = secondaryApiResponse.results[0].geometry.location.lat;
-                 secondaryAddressLongitude = secondaryApiResponse.results[0].geometry.location.lng;
+                secondaryAddressLatitude = secondaryApiResponse.results[0].geometry.location.lat;
+                secondaryAddressLongitude = secondaryApiResponse.results[0].geometry.location.lng;
                 setUserSecondaryAddress((currentUserSecondaryAddress) => ({
                     ...currentUserSecondaryAddress,
                     latitude: secondaryAddressLatitude,
@@ -170,31 +170,22 @@ export const RegisterUser = () => {
         }
 
         const newUserId = await registerNewUser(userCredentials);
-        setUserAddress((previousUserAddress) => ({
-            ...previousUserAddress,
-            user_id: newUserId,
-        }));
-        setUserSecondaryAddress((previousUserSecondaryAddress) => ({
-            ...previousUserSecondaryAddress,
-            user_id: newUserId,
-        }));
-        
-        const mainAddressCopy = {...userAddress, user_id: newUserId, latitude: addressLatitude, longitude: addressLongitude}
+
+        const mainAddressCopy = { ...userAddress, user_id: newUserId, latitude: addressLatitude, longitude: addressLongitude }
         try {
             await registerNewAddress(mainAddressCopy);
         } catch (error) {
             console.error("Error occurred while registering userAddress:", error);
         }
 
-        const secondaryAddressCopy = {...userSecondaryAddress, user_id: newUserId, latitude: secondaryAddressLatitude, longitude: secondaryAddressLongitude}
+        const secondaryAddressCopy = { ...userSecondaryAddress, user_id: newUserId, latitude: secondaryAddressLatitude, longitude: secondaryAddressLongitude }
         try {
             await registerNewAddress(secondaryAddressCopy);
         } catch (error) {
             console.error("An error occurred while registering userSecondaryAddress:", error);
         }
+        navigate("/");
     };
-
-
 
     return (
         <>
@@ -371,27 +362,12 @@ export const RegisterUser = () => {
                             </div>
                         </div>
                     </div>
-
                     <div className="d-flex justify-content-end">
                         <button type="submit" className="btn btn-success w-100">
                             Submit
                         </button>
                     </div>
                 </form>
-                <div className="row py-3 mx-5">
-                    <div className="col">
-                        <h2>Credentials:</h2>
-                        <pre className="fs-3">{JSON.stringify(userCredentials, null, 2)}</pre>
-                    </div>
-                    <div className="col">
-                        <h2>Address:</h2>
-                        <pre className="fs-3">{JSON.stringify(userAddress, null, 2)}</pre>
-                    </div>
-                    <div className="col">
-                        <h2>Secondary Address:</h2>
-                        <pre className="fs-3">{JSON.stringify(userSecondaryAddress, null, 2)}</pre>
-                    </div>
-                </div>
             </div>
         </>
     );

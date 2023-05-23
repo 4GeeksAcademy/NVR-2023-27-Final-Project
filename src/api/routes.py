@@ -38,6 +38,27 @@ def create_user():
     db.session.commit()
     return jsonify({"id": new_user.id}), 200
 
+@api.route("/providers", methods=["POST"])
+def create_provider():
+    body = request.json
+    provider_already_exists = ProviderProfile.query.filter_by(email=body["email"]).first()
+    if provider_already_exists:
+        return jsonify({"Message": "Email already in use"}), 301
+    new_provider = ProviderProfile(
+        name=body["name"],
+        email=body["email"],
+        password=body["password"],
+        has_certificate=body["has_certificate"],
+        experience=body["experience"],
+        service_radius=body["service_radius"],
+        average_rating=body["average_rating"],
+        ratings_counter=body["ratings_counter"],
+        avatar_image=body["avatar_image"]
+    )
+    db.session.add(new_provider)
+    db.session.commit()
+    return jsonify({"id": new_provider.id}), 200
+
 
 @api.route("/addresses", methods=["POST"])
 def create_address():
