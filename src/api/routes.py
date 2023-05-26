@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, UserProfile, ProviderProfile
+from api.models import db, UserProfile, ProviderProfile
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -27,7 +27,7 @@ def signin_user():
     user = UserProfile.query.filter_by(
         email=body["email"], password=body["password"]).first()
     if user:
-        token= create_access_token(identity=user.id) 
+        token= create_access_token(identity=user.email) 
         return jsonify({"token":token}), 200
     return jsonify({"error":"error login"}), 401
 
@@ -36,8 +36,24 @@ def signin_provider():
     body = request.json
     provider = ProviderProfile.query.filter_by(
         email=body["email"], password=body["password"]).first()
-    print("HELLO")
     if provider:
-        ptoken= create_access_token(identity=provider.id) 
-        return jsonify({"ptoken":ptoken}), 200
+        token= create_access_token(identity=provider.email) 
+        return jsonify({"token":token}), 200
     return jsonify({"error":"error login"}), 401
+
+@api.route("/getuser", methods=["GET"])
+@jwt_required()
+def get_user_by_id():
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    user_email=get_jwt_identity()
+    user=UserProfile.query.filter_by(email=user_email).first()
+    return jsonify({"user":user.serialize()}), 200
+
+@api.route("/getprovider", methods=["GET"])
+@jwt_required()
+def get_provider_by_id():
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    provider_email=get_jwt_identity()
+    provider=ProviderProfile.query.filter_by(email=provider_email).first()
+    return jsonify({"provider":provider.serialize()}), 200
+

@@ -8,8 +8,6 @@ import { RegisterUser } from "./pages/registerUser";
 import { RegisterProvider } from "./pages/registerProvider";
 import { PrivateUser } from "./pages/privateUser";
 import { PrivateProvider } from "./pages/privateProvider";
-import { SignInUser } from "./pages/signInUser";
-import { SignInProvider } from "./pages/signInProvider";
 
 import injectContext from "./store/appContext";
 
@@ -33,8 +31,6 @@ const Layout = () => {
                         <Route element={<RegisterProvider />} path="/registerProvider" />
                         <Route element={<PrivateUser />} path="/privateUser" />
                         <Route element={<PrivateProvider />} path="/privateProvider" />
-                        <Route element={<SignInUser />} path="/signInUser" />
-                        <Route element={<SignInProvider />} path="/signInProvider" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                 </ScrollToTop>
