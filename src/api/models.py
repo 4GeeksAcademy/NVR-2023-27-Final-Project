@@ -16,9 +16,9 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
-            # do not serialize the password, it's a security breach
-        }
 
+            # do not serialize the password, its a security breach
+        }
 
 class UserProfile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -98,10 +98,13 @@ class Address(db.Model):
     country = db.Column(db.String(100), nullable=True)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
-    provider_id = db.Column(db.Integer, db.ForeignKey(
-        'provider_profile.id'), nullable=True)
+
     user_id = db.Column(db.Integer, db.ForeignKey(
         'user_profile.id'), nullable=True)
+    provider_id = db.Column(db.Integer, db.ForeignKey(
+        'provider_profile.id'), nullable=True)
+ 
+
 
     def __repr__(self):
         return f'<Address {self.id}>'
@@ -118,6 +121,8 @@ class Address(db.Model):
             "country": self.country,
             "latitude": self.latitude,
             "longitude": self.longitude,
+            "user_id": self.user_id,
+            "provider_id": self.provider_id,
         }
 
 
@@ -127,6 +132,7 @@ class ServiceRequest(db.Model):
     date = db.Column(db.Date, nullable=False)
     time = db.Column(db.Time)
     recurrence = db.Column(db.Integer)
+    quantity = db.Column(db.Integer) 
     service_description_id = db.Column(db.Integer, db.ForeignKey(
         'service_description.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(
@@ -144,8 +150,10 @@ class ServiceRequest(db.Model):
             "id": self.id,
             "status": self.status,
             "date": self.date,
-            "time_slot": self.time_slot,
+
+            "time": self.time,
             "recurrence": self.recurrence,
+            "quantity": self.quantity,
             "service_description_id": self.service_description_id,
             "user_id": self.user_id,
             "provider_id": self.provider_id,
@@ -215,17 +223,20 @@ class ProviderAvailability(db.Model):
 
 class ServiceDescription(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.String(255), nullable=False)
-    category = db.Column(db.String(100), nullable=False)
-    price = db.Column(db.Float, nullable=False)
-    duration = db.Column(db.Integer, nullable=False)
-    includes_consumables = db.Column(db.Boolean, nullable=False)
+    category = db.Column(db.String(100), nullable= True)
+    service = db.Column(db.String(100), nullable= True)
+    description = db.Column(db.String(255), nullable= True)
+    unit = db.Column(db.String(100), nullable= True)
+    duration = db.Column(db.Integer, nullable= True)
+    personnel = db.Column(db.Integer, nullable= True)
+    included = db.Column(db.String(100), nullable= True)
+    price = db.Column(db.Float, nullable= True)
     service_provided = db.Column(db.Integer, db.ForeignKey(
-        'service_provided.id'), nullable=False)
+        'service_provided.id'), nullable=True)
 
     def __repr__(self):
-        return f'<ServiceDescription {self.name}>'
+        return f'<ServiceDescription {self.service}>'
+
 
     def serialize(self):
         return {
@@ -236,6 +247,15 @@ class ServiceDescription(db.Model):
             "price": self.price,
             "duration": self.duration,
             "includes_consumables": self.includes_consumables,
+            "category": self.category,
+            "service": self.service,
+            "description": self.description,
+            "unit": self.unit,
+            "duration": self.duration,
+            "personnel": self.personnel,
+            "included": self.included,
+            "price": self.price
+
         }
 
 
@@ -254,4 +274,4 @@ class ServiceProvided(db.Model):
             "id": self.id,
             "provider_id": self.provider_id,
             "service_id": self.service_id,
-        }
+

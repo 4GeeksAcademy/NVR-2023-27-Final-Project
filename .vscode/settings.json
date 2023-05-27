@@ -4,12 +4,16 @@
     "workbench.editorAssociations": {   
         "*.md": "vscode.markdown.preview.editor"
     },
-<<<<<<< HEAD
+
     "[javascript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
-=======
+
     "[python]": {
         "editor.defaultFormatter": "ms-python.python"
->>>>>>> 7f8a87e395edfab3fe163703468bb7cafc155e1b
+
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+
     }
 }
