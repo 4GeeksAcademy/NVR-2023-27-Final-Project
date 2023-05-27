@@ -11,6 +11,8 @@ from api.models import db
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+import json
+from api.models import ServiceDescription
 
 #from models import Person
 
@@ -46,11 +48,27 @@ app.register_blueprint(api, url_prefix='/api')
 @app.errorhandler(APIException)
 def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
+def load_service_description():
+    if db.session.query(ServiceDescription).count() == 0:
+        file_path = "src/serviceDescription.json"
+
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+        services = [ServiceDescription(**item) for item in data]
+
+        db.session.bulk_save_objects(services)
+        db.session.commit()
+        print("Table successfully loaded")
+    else:
+        print("Table already loaded up")
+
+
 
 # generate sitemap with all your endpoints
 @app.route('/')
 def sitemap():
     if ENV == "development":
+        load_service_description()
         return generate_sitemap(app)
     return send_from_directory(static_file_dir, 'index.html')
 
@@ -64,29 +82,11 @@ def serve_any_other_file(path):
     return response
 
 
+
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3001))
     app.run(host='0.0.0.0', port=PORT, debug=True)
 
-# Loads up service_description table, if empty
-# to be confirmed with Mattia
 
-import json
-from api.models import ServiceDescription
-from app import db
 
-def load_service_description():
-    if db.session.query(ServiceDescription).count() == 0:
-        file_path = "src/api/serviceDescription.json"
-
-        with open(file_path, 'r') as file:
-            data = json.load(file)
-
-        services = [ServiceDescription(**item) for item in data]
-
-        db.session.bulk_save_objects(services)
-        db.session.commit()
-        print("Table successfully loaded")
-    else:
-        print("Table already loaded up")
