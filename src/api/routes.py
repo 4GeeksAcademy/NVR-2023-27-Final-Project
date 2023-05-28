@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, UserProfile, ProviderProfile, Address 
+from api.models import db, UserProfile, ProviderProfile, Address, ServiceDescription
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -17,7 +17,7 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
-# POST endpoints
+# REGISTER endpoints
 
 @api.route("/users", methods=["POST"])
 def create_user():
@@ -79,3 +79,22 @@ def create_address():
     db.session.add(new_address)
     db.session.commit()
     return jsonify({"Message": "Address created"}), 200
+
+# USER_PRIVATE endpoints
+
+@api.route("/servicedescriptions")
+def get_service_descriptions():
+    try:
+        service_descriptions = ServiceDescription.query.all()
+        serialized_service_descriptions = []
+        
+        for description in service_descriptions:
+            serialized_description = description.serialize()
+            serialized_description.pop("service_provided", None)
+            serialized_service_descriptions.append(serialized_description)
+        
+        return jsonify(serialized_service_descriptions), 200
+    
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
