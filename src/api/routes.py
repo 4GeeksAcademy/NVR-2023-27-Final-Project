@@ -50,7 +50,7 @@ def signin_provider():
 
 @api.route("/getuser", methods=["GET"])
 @jwt_required()
-def get_user_by_id():
+def get_user():
     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
     user_email=get_jwt_identity()
     user=UserProfile.query.filter_by(email=user_email).first()
@@ -58,7 +58,7 @@ def get_user_by_id():
 
 @api.route("/getprovider", methods=["GET"])
 @jwt_required()
-def get_provider_by_id():
+def get_provider():
     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
     provider_email=get_jwt_identity()
     provider=ProviderProfile.query.filter_by(email=provider_email).first()

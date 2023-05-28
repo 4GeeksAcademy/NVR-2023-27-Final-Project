@@ -13,14 +13,6 @@ export const Home = () => {
 	const navigate = useNavigate();
 
 
-	const handleClickRegisterUser = () => {
-		navigate("/registerUser");
-	}
-
-	const handleClickRegisterProvider = () => {
-		navigate("/registerProvider");
-	}
-
 	const handleClickUserSignIn = async () => {
 		if (await actions.signinUser(userEmail, userPassword)) {
 			navigate("/privateUser");
