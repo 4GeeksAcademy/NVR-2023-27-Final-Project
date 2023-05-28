@@ -9,12 +9,19 @@ export const PrivateUser = () => {
     const handleClickHome = () => {
         navigate("/");
     }
+    const signout = () => {
+        actions.signout();
+        navigate("/");
+    }
  
     return (
         <>
             <p>Private user</p>
             <button className="btn btn-primary mx-3" onClick={handleClickHome}>
             Home
+            </button>
+            <button className="btn btn-primary mx-3" onClick={signout}>
+            Sign Out
             </button>
         </>
     );

@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 61c8bcf9f75c
+Revision ID: ddace0e53cf2
 Revises: 
-Create Date: 2023-05-21 12:34:33.886479
+Create Date: 2023-05-28 14:22:21.342841
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '61c8bcf9f75c'
+revision = 'ddace0e53cf2'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -65,8 +65,8 @@ def upgrade():
     sa.Column('country', sa.String(length=100), nullable=True),
     sa.Column('latitude', sa.Float(), nullable=False),
     sa.Column('longitude', sa.Float(), nullable=False),
-    sa.Column('provider_id', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('provider_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['provider_id'], ['provider_profile.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user_profile.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -107,13 +107,15 @@ def upgrade():
     )
     op.create_table('service_description',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=100), nullable=False),
-    sa.Column('description', sa.String(length=255), nullable=False),
-    sa.Column('category', sa.String(length=100), nullable=False),
-    sa.Column('price', sa.Float(), nullable=False),
-    sa.Column('duration', sa.Integer(), nullable=False),
-    sa.Column('includes_consumables', sa.Boolean(), nullable=False),
-    sa.Column('service_provided', sa.Integer(), nullable=False),
+    sa.Column('category', sa.String(length=100), nullable=True),
+    sa.Column('service', sa.String(length=100), nullable=True),
+    sa.Column('description', sa.String(length=255), nullable=True),
+    sa.Column('unit', sa.String(length=100), nullable=True),
+    sa.Column('duration', sa.Integer(), nullable=True),
+    sa.Column('personnel', sa.Integer(), nullable=True),
+    sa.Column('included', sa.String(length=100), nullable=True),
+    sa.Column('price', sa.Float(), nullable=True),
+    sa.Column('service_provided', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['service_provided'], ['service_provided.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -123,6 +125,7 @@ def upgrade():
     sa.Column('date', sa.Date(), nullable=False),
     sa.Column('time', sa.Time(), nullable=True),
     sa.Column('recurrence', sa.Integer(), nullable=True),
+    sa.Column('quantity', sa.Integer(), nullable=True),
     sa.Column('service_description_id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('provider_id', sa.Integer(), nullable=True),

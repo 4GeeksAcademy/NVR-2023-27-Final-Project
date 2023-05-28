@@ -11,7 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			}
 		},
 		actions: {
-			userDetails: async () => {
+			getUserDetails: async () => {
 				const response = await fetch(process.env.BACKEND_URL + "api/getuser", {
 					method: "GET",
 					headers: {
@@ -21,7 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (response.ok) {
 					const data = await response.json();
 					setStore({ user: data.user });
-					setStore({ credentials: { token: data.token, email: data.user.email, name: data.user.name, id: data.user.id, type: "user" } })
+					setStore({ credentials: { token: localStorage.getItem("token"), email: data.user.email, name: data.user.name, id: data.user.id, type: "user" } });
 				}
 			},
 
@@ -40,7 +40,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (response.ok) {
 						const data = await response.json();
 						localStorage.setItem("token", data.token);
-						await getActions().userDetails();
+						await getActions().getUserDetails();
 						return true;
 					}
 				} catch (error) {
@@ -65,7 +65,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (response.ok) {
 							const data = await response.json();
 							localStorage.setItem("token", data.token);
-							await getActions().providerDetails();
+							await getActions().getProviderDetails();
 							return true;
 						}
 					}
@@ -74,7 +74,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
-			providerDetails: async () => {
+			getProviderDetails: async () => {
 				const response = await fetch(process.env.BACKEND_URL + "api/getprovider", {
 					method: "GET",
 					headers: {
@@ -84,9 +84,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (response.ok) {
 					const data = await response.json();
 					setStore({ user: data.provider });
-					setStore({ credentials: { token: data.token, email: data.provider.email, name: data.provider.name, id: data.provider.id, type: "provider" } });
+					setStore({ credentials: { token: localStorage.getItem("token") , email: data.provider.email, name: data.provider.name, id: data.provider.id, type: "provider" } });
 				}
+			},
+
+			signout: ()=>{
+				localStorage.removeItem("token");
+				setStore({user:{}, credentials: {
+					token: null,
+					email: "",
+					name: "",
+					id: "",
+					type: ""
+				}});
 			}
+
 
 		}
 	};

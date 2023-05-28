@@ -13,14 +13,6 @@ export const Home = () => {
 	const navigate = useNavigate();
 
 
-	const handleClickRegisterUser = () => {
-		navigate("/registerUser");
-	}
-
-	const handleClickRegisterProvider = () => {
-		navigate("/registerProvider");
-	}
-
 	const handleClickUserSignIn = async () => {
 		if (await actions.signinUser(userEmail, userPassword)) {
 			navigate("/privateUser");
@@ -104,12 +96,6 @@ export const Home = () => {
 					</div>
 				</div>
 			</>
-			<button className="btn btn-success mx-3" onClick={handleClickRegisterUser}>
-				User Register
-			</button>
-			<button className="btn btn-success mx-3" onClick={handleClickRegisterProvider}>
-				Provider Register
-			</button>
 		</>
 	);
 };
