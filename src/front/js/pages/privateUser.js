@@ -27,18 +27,19 @@ export const PrivateUser = () => {
   };
 
   const filteredServices = serviceSearchBar !== ""
-    ? store.serviceDescriptions.filter((description) =>
-        (selectedCategory === "All Categories" || description.category === selectedCategory) &&
-        (description.service.toLowerCase().includes(serviceSearchBar.toLowerCase()) ||
-          description.category.toLowerCase().includes(serviceSearchBar.toLowerCase()) ||
-          description.description.toLowerCase().includes(serviceSearchBar.toLowerCase()))
+    ? store.serviceDescriptions.filter((service) =>
+        (selectedCategory === "All Categories" || service.category === selectedCategory) &&
+        (service.service.toLowerCase().includes(serviceSearchBar.toLowerCase()) ||
+          service.category.toLowerCase().includes(serviceSearchBar.toLowerCase()) ||
+          service.description.toLowerCase().includes(serviceSearchBar.toLowerCase()))
       )
     : selectedCategory === "All Categories"
       ? store.serviceDescriptions
-      : store.serviceDescriptions.filter((description) => description.category === selectedCategory);
+      : store.serviceDescriptions.filter((service) => service.category === selectedCategory);
 
-  const categories = ["All Categories", ...new Set(store.serviceDescriptions.map((description) => description.category))];
-
+      const categories = ["All Categories", ...new Set(store.serviceDescriptions.map((service) => service.category))];
+      categories.sort();
+      
   return (
     <>
       <nav className="navbar bg-light fixed-top">
