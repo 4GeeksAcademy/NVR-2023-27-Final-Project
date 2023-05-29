@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import "../../styles/home.css";
 
 export const PrivateUser = () => {
+  const  [ serviceSearchBar, setServiceSearchBar] = useState("");
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
 
@@ -14,6 +15,16 @@ export const PrivateUser = () => {
   const handleClickHome = () => {
     navigate("/");
   };
+
+  const handleChange = (event) => {
+    setServiceSearchBar(event.target.value)
+  }
+
+  const filteredServices = serviceSearchBar !== ""
+  ? store.serviceDescriptions.filter((description) =>
+      description.service.toLowerCase().includes(serviceSearchBar.toLowerCase())
+    )
+  : store.serviceDescriptions;
 
   return (
     <>
@@ -50,18 +61,16 @@ export const PrivateUser = () => {
               type="search"
               placeholder="Search"
               aria-label="Search"
+              value = {serviceSearchBar}
+              onChange={handleChange}
             />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
-
           </form>
         </div>
       </nav>
 
-      {/* Display service descriptions */}
       <div className="py-5">
-        {store.serviceDescriptions.map((description, index) => (
+        <p>{serviceSearchBar}</p>
+        {filteredServices.map((description, index) => (
           <div key={index}>
             <h3>Category: {description.category}</h3>
             <p>Service: {description.service}</p>
