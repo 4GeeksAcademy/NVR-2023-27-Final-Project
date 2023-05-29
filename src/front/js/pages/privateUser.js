@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
-import "../../styles/home.css";
+import "../../styles/privateuser.css";
 
 export const PrivateUser = () => {
   const [serviceSearchBar, setServiceSearchBar] = useState("");
@@ -57,7 +57,7 @@ export const PrivateUser = () => {
             </button>
             <ul className="dropdown-menu rounded-0">
               {categories.map((category, index) => (
-                <li key={index} onClick={() => handleCategorySelect(category)}>
+                <li className="category-item" key={index} onClick={() => handleCategorySelect(category)}>
                   {category}
                 </li>
               ))}

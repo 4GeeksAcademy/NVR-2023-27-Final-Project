@@ -1,0 +1,11 @@
+.category-item:hover {
+    padding-bottom: 3px;
+    border-bottom: 1px solid black;;
+
+}
+
+.dropdown-menu {
+    max-height: 200px; /* Adjust the height as per your requirements */
+    overflow: auto;
+  }
+  
