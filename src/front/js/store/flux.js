@@ -44,7 +44,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return true;
 					}
 					else {
-						console.log("Invalid username or password");
+						alert("Invalid username or password");
 					}
 
 				} catch (error) {
@@ -66,12 +66,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				try {
 					if (response.ok) {
-						if (response.ok) {
-							const data = await response.json();
-							localStorage.setItem("token", data.token);
-							await getActions().getProviderDetails();
-							return true;
-						}
+						const data = await response.json();
+						localStorage.setItem("token", data.token);
+						await getActions().getProviderDetails();
+						return true;
+					} else {
+						alert("Invalid username or password");
 					}
 				} catch (error) {
 					return false;
