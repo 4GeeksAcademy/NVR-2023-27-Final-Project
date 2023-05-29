@@ -2,7 +2,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -18,7 +17,6 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, it's a security breach
         }
-
 
 class UserProfile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -47,7 +45,6 @@ class UserProfile(db.Model):
             "required_experience": self.required_experience,
             "required_rating": self.required_rating,
         }
-
 
 class ProviderProfile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -102,7 +99,7 @@ class Address(db.Model):
         'user_profile.id'), nullable=True)
     provider_id = db.Column(db.Integer, db.ForeignKey(
         'provider_profile.id'), nullable=True)
- 
+    service_request= db.relationship('ServiceRequest', backref='address')
 
     def __repr__(self):
         return f'<Address {self.id}>'
@@ -155,7 +152,6 @@ class ServiceRequest(db.Model):
             "provider_id": self.provider_id,
             "address_id": self.address_id,
         }
-
 
 class Notification(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -229,6 +225,8 @@ class ServiceDescription(db.Model):
     price = db.Column(db.Float, nullable= True)
     service_provided = db.Column(db.Integer, db.ForeignKey(
         'service_provided.id'), nullable=True)
+    service_request = db.relationship('ServiceRequest', backref='service_description')
+    
 
     def __repr__(self):
         return f'<ServiceDescription {self.service}>'
@@ -245,7 +243,6 @@ class ServiceDescription(db.Model):
             "included": self.included,
             "price": self.price
         }
-
 
 class ServiceProvided(db.Model):
     id = db.Column(db.Integer, primary_key=True)

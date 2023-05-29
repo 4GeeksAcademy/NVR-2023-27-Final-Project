@@ -43,6 +43,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						await getActions().getUserDetails();
 						return true;
 					}
+					else {
+						console.log("Invalid username or password");
+					}
+
 				} catch (error) {
 					return false;
 				}
@@ -84,19 +88,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (response.ok) {
 					const data = await response.json();
 					setStore({ user: data.provider });
-					setStore({ credentials: { token: localStorage.getItem("token") , email: data.provider.email, name: data.provider.name, id: data.provider.id, type: "provider" } });
+					setStore({ credentials: { token: localStorage.getItem("token"), email: data.provider.email, name: data.provider.name, id: data.provider.id, type: "provider" } });
 				}
 			},
 
-			signout: ()=>{
+			signout: () => {
 				localStorage.removeItem("token");
-				setStore({user:{}, credentials: {
-					token: null,
-					email: "",
-					name: "",
-					id: "",
-					type: ""
-				}});
+				setStore({
+					user: {}, credentials: {
+						token: null,
+						email: "",
+						name: "",
+						id: "",
+						type: ""
+					}
+				});
 			}
 
 

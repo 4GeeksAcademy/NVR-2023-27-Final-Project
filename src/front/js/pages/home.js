@@ -16,15 +16,27 @@ export const Home = () => {
 	const handleClickUserSignIn = async () => {
 		if (await actions.signinUser(userEmail, userPassword)) {
 			navigate("/privateUser");
+		}else{
+			console.log("Invalid username or password");
 		}
 	}
 
 	const handleClickProviderSignIn = async () => {
 		if (await actions.signinProvider(providerEmail, providerPassword)) {
 			navigate("/privateProvider");
-			console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+		}else{
+			console.log("Invalid username or password");
 		}
 	}
+
+	const handleClickRegisterUser = () => {
+		navigate("/registerUser");
+	}
+
+	const handleClickRegisterProvider = () => {
+		navigate("/registerProvider");
+	}
+
 	return (
 		<>
 			<p>Home</p>
