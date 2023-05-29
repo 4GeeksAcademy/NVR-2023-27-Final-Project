@@ -1,52 +1,111 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			user: {},
+			credentials: {
+				token: null,
+				email: "",
+				name: "",
+				id: "",
+				type: ""
+			}
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-
-			getMessage: async () => {
-				try{
-					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
-					const data = await resp.json()
-					setStore({ message: data.message })
-					// don't forget to return something, that is how the async resolves
-					return data;
-				}catch(error){
-					console.log("Error loading message from backend", error)
+			getUserDetails: async () => {
+				const response = await fetch(process.env.BACKEND_URL + "api/getuser", {
+					method: "GET",
+					headers: {
+						"Authorization": "Bearer " + localStorage.getItem("token")
+					}
+				})
+				if (response.ok) {
+					const data = await response.json();
+					setStore({ user: data.user });
+					setStore({ credentials: { token: localStorage.getItem("token"), email: data.user.email, name: data.user.name, id: data.user.id, type: "user" } });
 				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
+			signinUser: async (email, password) => {
+				const response = await fetch(process.env.BACKEND_URL + "api/signinuser", {
+					method: "POST",
+					headers: {
+						"Content-type": "application/json"
+					},
+					body: JSON.stringify({
+						email: email,
+						password: password,
+					})
 				});
+				try {
+					if (response.ok) {
+						const data = await response.json();
+						localStorage.setItem("token", data.token);
+						await getActions().getUserDetails();
+						return true;
+					}
+					else {
+						console.log("Invalid username or password");
+					}
 
-				//reset the global store
-				setStore({ demo: demo });
+				} catch (error) {
+					return false;
+				}
+
+			},
+
+			signinProvider: async (email, password) => {
+				const response = await fetch(process.env.BACKEND_URL + "api/signinprovider", {
+					method: "POST",
+					headers: {
+						"Content-type": "application/json"
+					},
+					body: JSON.stringify({
+						email: email,
+						password: password
+					})
+				});
+				try {
+					if (response.ok) {
+						if (response.ok) {
+							const data = await response.json();
+							localStorage.setItem("token", data.token);
+							await getActions().getProviderDetails();
+							return true;
+						}
+					}
+				} catch (error) {
+					return false;
+				}
+
+			},
+			getProviderDetails: async () => {
+				const response = await fetch(process.env.BACKEND_URL + "api/getprovider", {
+					method: "GET",
+					headers: {
+						"Authorization": "Bearer " + localStorage.getItem("token")
+					}
+				})
+				if (response.ok) {
+					const data = await response.json();
+					setStore({ user: data.provider });
+					setStore({ credentials: { token: localStorage.getItem("token"), email: data.provider.email, name: data.provider.name, id: data.provider.id, type: "provider" } });
+				}
+			},
+
+			signout: () => {
+				localStorage.removeItem("token");
+				setStore({
+					user: {}, credentials: {
+						token: null,
+						email: "",
+						name: "",
+						id: "",
+						type: ""
+					}
+				});
 			}
+
+
 		}
 	};
 };

@@ -10,11 +10,19 @@ export const PrivateProvider = () => {
         navigate("/");
     }
 
+    const signout = () => {
+        actions.signout();
+        navigate("/");
+    }
+ 
     return (
         <>
             <p>Private Provider</p>
             <button className="btn btn-primary mx-3" onClick={handleClickHome}>
                 Home
+            </button>
+            <button className="btn btn-primary mx-3" onClick={signout}>
+            Sign Out
             </button>
 
         </>

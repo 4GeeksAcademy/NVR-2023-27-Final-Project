@@ -179,11 +179,16 @@ export const RegisterUser = () => {
         }
 
         const secondaryAddressCopy = { ...userSecondaryAddress, user_id: newUserId, latitude: secondaryAddressLatitude, longitude: secondaryAddressLongitude }
-        try {
-            await registerNewAddress(secondaryAddressCopy);
-        } catch (error) {
-            console.error("An error occurred while registering userSecondaryAddress:", error);
+        if (secondaryAddressCopy.street!="" && secondaryAddressCopy.apartment !="") {
+            try {
+                await registerNewAddress(secondaryAddressCopy);
+            } catch (error) {
+                console.error("An error occurred while registering userSecondaryAddress:", error);
+            }
+        }else{
+            console.log("No secondary address")
         }
+
         navigate("/");
     };
 

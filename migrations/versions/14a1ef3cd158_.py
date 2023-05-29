@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: e36db0c5c93b
-Revises: 1df9a5e103d9
-Create Date: 2023-05-21 18:22:26.433908
+Revision ID: 14a1ef3cd158
+Revises: 
+Create Date: 2023-05-29 16:42:08.380922
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e36db0c5c93b'
-down_revision = '1df9a5e103d9'
+revision = '14a1ef3cd158'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -32,6 +32,14 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('name')
+    )
+    op.create_table('user',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('email', sa.String(length=120), nullable=False),
+    sa.Column('password', sa.String(length=80), nullable=False),
+    sa.Column('is_active', sa.Boolean(), nullable=False),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('email')
     )
     op.create_table('user_profile',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -57,8 +65,8 @@ def upgrade():
     sa.Column('country', sa.String(length=100), nullable=True),
     sa.Column('latitude', sa.Float(), nullable=False),
     sa.Column('longitude', sa.Float(), nullable=False),
-    sa.Column('provider_id', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('provider_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['provider_id'], ['provider_profile.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user_profile.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -141,5 +149,6 @@ def downgrade():
     op.drop_table('exclusion')
     op.drop_table('address')
     op.drop_table('user_profile')
+    op.drop_table('user')
     op.drop_table('provider_profile')
     # ### end Alembic commands ###
