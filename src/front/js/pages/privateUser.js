@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/home.css";
 
 export const PrivateUser = () => {
-  const  [ serviceSearchBar, setServiceSearchBar] = useState("");
+  const [serviceSearchBar, setServiceSearchBar] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All Categories");
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
 
@@ -17,20 +18,32 @@ export const PrivateUser = () => {
   };
 
   const handleChange = (event) => {
-    setServiceSearchBar(event.target.value)
-  }
+    setServiceSearchBar(event.target.value);
+  };
+
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+    setServiceSearchBar("");
+  };
 
   const filteredServices = serviceSearchBar !== ""
-  ? store.serviceDescriptions.filter((description) =>
-      description.service.toLowerCase().includes(serviceSearchBar.toLowerCase())
-    )
-  : store.serviceDescriptions;
+    ? store.serviceDescriptions.filter((description) =>
+        (selectedCategory === "All Categories" || description.category === selectedCategory) &&
+        (description.service.toLowerCase().includes(serviceSearchBar.toLowerCase()) ||
+          description.category.toLowerCase().includes(serviceSearchBar.toLowerCase()) ||
+          description.description.toLowerCase().includes(serviceSearchBar.toLowerCase()))
+      )
+    : selectedCategory === "All Categories"
+      ? store.serviceDescriptions
+      : store.serviceDescriptions.filter((description) => description.category === selectedCategory);
+
+  const categories = ["All Categories", ...new Set(store.serviceDescriptions.map((description) => description.category))];
 
   return (
     <>
       <nav className="navbar bg-light fixed-top">
         <div className="container-fluid">
-          <button className="btn btn-primary" onClick={(handleClickHome)}>
+          <button className="btn btn-primary" onClick={handleClickHome}>
             Home
           </button>
           <div className="dropdown">
@@ -40,18 +53,14 @@ export const PrivateUser = () => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Category
+              Category: {selectedCategory}
             </button>
             <ul className="dropdown-menu rounded-0">
-              <li>
-                  Action
-              </li>
-              <li>
-                  Another action
-              </li>
-              <li>
-                Something else here
-              </li>
+              {categories.map((category, index) => (
+                <li key={index} onClick={() => handleCategorySelect(category)}>
+                  {category}
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -61,7 +70,7 @@ export const PrivateUser = () => {
               type="search"
               placeholder="Search"
               aria-label="Search"
-              value = {serviceSearchBar}
+              value={serviceSearchBar}
               onChange={handleChange}
             />
           </form>
