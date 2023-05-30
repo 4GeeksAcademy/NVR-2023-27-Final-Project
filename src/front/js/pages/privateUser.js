@@ -6,6 +6,8 @@ import "../../styles/privateuser.css";
 export const PrivateUser = () => {
   const [serviceSearchBar, setServiceSearchBar] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  const [newServiceDate, setNewServiceDate] = useState(new Date().toISOString().slice(0, 10));
+
   const [selectedPrice, setSelectedPrice] = useState("Any price");
 
 
@@ -167,8 +169,42 @@ export const PrivateUser = () => {
                       service: {filteredService.service}
                     </div>
                     <div className="form-group">
-                    price: {filteredService.price}
+                      price: {filteredService.price}
                     </div>
+                    <input
+                      className="task-input"
+                      type="date"
+                      id="datepicker"
+                      name="datepicker"
+                      lang="en"
+                      min={new Date()
+                        .toLocaleDateString("fr-CA")
+                        .split("/")
+                        .reverse()
+                        .join("-")}
+                      value={newServiceDate}
+                      onChange={(event) => setNewServiceDate(event.target.value)}
+                    />
+                    {/* time picker */}
+                    <input
+                      type="time"
+                      step="1800" // Step of 1800 seconds (30 minutes)
+                      min="08:00" // Minimum time value
+                      max="21:00" // Maximum time value
+                      onInput={(event) => {
+                        const inputTime = event.target.value.split(':');
+                        const hours = parseInt(inputTime[0], 10);
+                        const minutes = parseInt(inputTime[1], 10);
+
+                        // Round minutes to either 0 or 30
+                        const roundedMinutes = Math.round(minutes / 30) * 30;
+
+                        // Adjust the input value
+                        event.target.value = `${hours.toString().padStart(2, '0')}:${roundedMinutes.toString().padStart(2, '0')}`;
+                      }}
+                    />
+
+
                   </div>
                   <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => {
@@ -180,7 +216,7 @@ export const PrivateUser = () => {
             </div>
           </div>
         ))}
-    </div >
+      </div >
     </>
   );
 };
