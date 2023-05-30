@@ -13,9 +13,9 @@ export const PrivateUser = () => {
   const navigate = useNavigate();
 
   const handleBook = (id, service, price) => {
-    alert(`The key value of the ${service} is: ${id} , with price ${price}`);
+    return true;
   };
-  
+
 
   useEffect(() => {
     actions.getServiceDescriptions();
@@ -44,11 +44,11 @@ export const PrivateUser = () => {
     if (selectedCategory !== "All Categories" && service.category !== selectedCategory) {
       return false;
     }
-  
+
     // Filter by price
     if (selectedPrice !== "Any price") {
       const price = parseFloat(service.price);
-  
+
       if (selectedPrice === "less than 50" && price >= 50) {
         return false;
       } else if (selectedPrice === "between 50 and 100" && (price < 50 || price > 100)) {
@@ -57,11 +57,11 @@ export const PrivateUser = () => {
         return false;
       }
     }
-  
+
     // Filter by search bar content
     if (serviceSearchBar.trim() !== "") {
       const searchTerm = serviceSearchBar.toLowerCase();
-  
+
       if (
         !service.category.toLowerCase().includes(searchTerm) &&
         !service.service.toLowerCase().includes(searchTerm) &&
@@ -70,10 +70,10 @@ export const PrivateUser = () => {
         return false;
       }
     }
-  
+
     return true;
   });
-  
+
   const categories = ["All Categories", ...new Set(store.serviceDescriptions.map((service) => service.category))];
   categories.sort();
 
@@ -154,10 +154,33 @@ export const PrivateUser = () => {
             <span>Personnel: {filteredService.personnel}</span>
             <span>Includes: {filteredService.included}</span>
             <span>Price: {filteredService.price}</span>
-            <button className="btn btn-success m-3" onClick={() => handleBook(filteredService.id, filteredService.service, filteredService.price)}>Book</button>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#bookModal" className="btn btn-success m-3" onClick={() => handleBook(filteredService.id, filteredService.service, filteredService.price)}>Book</button>
+            <div className="modal fade" id="bookModal" tabIndex="-1">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h1 className="modal-title fs-5">Book</h1>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+                  <div className="modal-body">
+                    <div className="form-group">
+                      service: {filteredService.service}
+                    </div>
+                    <div className="form-group">
+                    price: {filteredService.price}
+                    </div>
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => {
+                      handleClickUserSignIn();
+                    }} > Book</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         ))}
-      </div>
+    </div >
     </>
   );
 };
