@@ -1,8 +1,9 @@
-.category-item:hover {
-    padding-bottom: 3px;
-    border-bottom: 1px solid black;;
-
+.category-item:hover,
+.price-item:hover {
+  padding-bottom: 3px;
+  border-bottom: 1px solid black;
 }
+
 
 .dropdown-menu {
     max-height: 200px;
@@ -40,3 +41,8 @@
     width: 5px;
   }
   
+
+  .service-wrapper {
+    border: 1px solid black;
+    margin-block: 1rem;
+  }
