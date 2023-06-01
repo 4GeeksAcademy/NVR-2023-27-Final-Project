@@ -13,7 +13,7 @@ export const Home = () => {
 	const navigate = useNavigate();
 
 
-	const handleClickUserSignIn = async () => {
+	const handleUserSignIn = async () => {
 		if (await actions.signinUser(userEmail, userPassword)) {
 			navigate("/privateUser");
 		}else{
@@ -21,11 +21,11 @@ export const Home = () => {
 		}
 	}
 
-	const handleClickProviderSignIn = async () => {
+	const handleProviderSignIn = async () => {
 		if (await actions.signinProvider(providerEmail, providerPassword)) {
 			navigate("/privateProvider");
 		}else{
-			console.log("Invalid username or password");
+			console.log("Invalid Provider username or password");
 		}
 	}
 
@@ -67,7 +67,7 @@ export const Home = () => {
 							</div>
 							<div className="modal-footer">
 								<button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => {
-									handleClickUserSignIn();
+									handleUserSignIn();
 								}} > Login</button>
 							</div>
 						</div>
@@ -101,7 +101,7 @@ export const Home = () => {
 							</div>
 							<div className="modal-footer">
 								<button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => {
-									handleClickProviderSignIn();
+									handleProviderSignIn();
 								}}>Login</button>
 							</div>
 						</div>

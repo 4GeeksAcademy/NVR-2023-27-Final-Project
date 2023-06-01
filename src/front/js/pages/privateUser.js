@@ -1,28 +1,52 @@
-import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 import "../../styles/home.css";
 
 export const PrivateUser = () => {
     const { store, actions } = useContext(Context);
+
     const navigate = useNavigate();
+
+    useEffect(() =>{
+            const checkCredentials = () => {
+                if (!localStorage.getItem("credentials")) { navigate("/")};
+            };
+
+            checkCredentials();
+            actions.getServiceDescriptions();
+
+    }, []);
+
+
     const handleClickHome = () => {
         navigate("/");
     }
-    const signout = () => {
+    const handleSignout = () => {
         actions.signout();
         navigate("/");
     }
  
     return (
-        <>
-            <p>Private user</p>
-            <button className="btn btn-primary mx-3" onClick={handleClickHome}>
-            Home
-            </button>
-            <button className="btn btn-primary mx-3" onClick={signout}>
-            Sign Out
-            </button>
+        <>  
+            <div className="container-fluid">
+                <header>
+                    <p>Private User</p>
+                    <p>{localStorage.getItem("credentials")}</p>
+                    <button className="btn btn-primary mx-3" onClick={handleClickHome}>
+                    Home
+                    </button>
+                    <button className="btn btn-primary mx-3" onClick={handleSignout}>
+                    Sign Out
+                    </button>
+                </header>
+                <main>
+                    
+                </main>
+                <footer>
+
+                </footer>
+            </div>
         </>
     );
 };

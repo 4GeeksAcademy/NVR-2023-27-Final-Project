@@ -1,30 +1,20 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			user: {},
 			credentials: {
 				token: null,
 				email: "",
 				name: "",
 				id: "",
 				type: ""
-			}
-		},
-		actions: {
-			getUserDetails: async () => {
-				const response = await fetch(process.env.BACKEND_URL + "api/getuser", {
-					method: "GET",
-					headers: {
-						"Authorization": "Bearer " + localStorage.getItem("token")
-					}
-				})
-				if (response.ok) {
-					const data = await response.json();
-					setStore({ user: data.user });
-					setStore({ credentials: { token: localStorage.getItem("token"), email: data.user.email, name: data.user.name, id: data.user.id, type: "user" } });
-				}
 			},
 
+			serviceDescriptions: [{}],
+
+		},
+		actions: {
+
+			// SIGIN functions
 			signinUser: async (email, password) => {
 				const response = await fetch(process.env.BACKEND_URL + "api/signinuser", {
 					method: "POST",
@@ -53,6 +43,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 
+			getUserDetails: async () => {
+				const response = await fetch(process.env.BACKEND_URL + "api/getuser", {
+					method: "GET",
+					headers: {
+						"Authorization": "Bearer " + localStorage.getItem("token")
+					}
+				})
+				if (response.ok) {
+					const data = await response.json();
+					setStore({ credentials: { token: localStorage.getItem("token"), email: data.user.email, name: data.user.name, id: data.user.id, type: "user" } });
+					const credentialsString = JSON.stringify({ token: localStorage.getItem("token"), email: data.user.email, name: data.user.name, id: data.user.id, type: "user" });
+					localStorage.setItem("credentials", credentialsString);
+					localStorage.removeItem("token");
+
+
+				}
+			},
+
+
+
+
 			signinProvider: async (email, password) => {
 				const response = await fetch(process.env.BACKEND_URL + "api/signinprovider", {
 					method: "POST",
@@ -61,7 +72,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify({
 						email: email,
-						password: password
+						password: password,
 					})
 				});
 				try {
@@ -70,14 +81,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 						localStorage.setItem("token", data.token);
 						await getActions().getProviderDetails();
 						return true;
-					} else {
-						alert("Invalid username or password");
 					}
+					else {
+						alert("Invalid provider username or password");
+					}
+
 				} catch (error) {
 					return false;
 				}
 
 			},
+
+
 			getProviderDetails: async () => {
 				const response = await fetch(process.env.BACKEND_URL + "api/getprovider", {
 					method: "GET",
@@ -87,15 +102,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				if (response.ok) {
 					const data = await response.json();
-					setStore({ user: data.provider });
 					setStore({ credentials: { token: localStorage.getItem("token"), email: data.provider.email, name: data.provider.name, id: data.provider.id, type: "provider" } });
+					const credentialsString = JSON.stringify({ token: localStorage.getItem("token"), email: data.provider.email, name: data.provider.name, id: data.provider.id, type: "provider" });
+					localStorage.setItem("credentials", credentialsString);
+					localStorage.removeItem("token");
+
+
 				}
 			},
 
 			signout: () => {
-				localStorage.removeItem("token");
+				localStorage.removeItem("credentials");
 				setStore({
-					user: {}, credentials: {
+					credentials: {
 						token: null,
 						email: "",
 						name: "",
@@ -103,7 +122,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 						type: ""
 					}
 				});
-			}
+			},
+
+			// Onload functions
+			// PPRIVATE USER
+
+			getServiceDescriptions: async () => {
+				try {
+					const url = process.env.BACKEND_URL + "api/servicedescriptions";
+					const response = await fetch(url);
+					const data = await response.json();
+					setStore({ serviceDescriptions: data });
+				} catch (error) {
+					console.log("Error loading service descriptions", error);
+				}
+			},
+
 
 
 		}
