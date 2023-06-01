@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				type: ""
 			},
 
-			serviceDescriptions: [{}],
+			serviceDescriptions: null,
 
 		},
 		actions: {
