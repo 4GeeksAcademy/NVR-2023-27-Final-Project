@@ -77,10 +77,11 @@ body {
   color: black !important;
 }
 
-.accordion-button,
-.accordion-body {
-  border: none;
+.accordion-button:not(.collapsed) {
+  box-shadow: none;
 }
+
+
 
 
 
