@@ -10,13 +10,13 @@ body {
     all: unset;
     font-variant: small-caps;
     font-size: 0.7rem;
-    letter-spacing: 0.21rem;
+    letter-spacing: 0.23rem;
     text-align: center;
     margin-inline: 1.2rem;
     padding-inline: 0;
     gap: 0;
     padding-bottom: 0.27rem;
-    border-bottom: 1px solid transparent;
+    border-bottom: 0.7px solid transparent;
     transition: border-bottom 0.5s ease-in-out, transform 0.5s cubic-bezier(0.77, 0, 0.175, 1), color 0.5s ease-in-out;
     position: relative;
     overflow: hidden;
