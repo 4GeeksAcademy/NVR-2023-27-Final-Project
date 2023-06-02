@@ -11,7 +11,7 @@ body {
   color: black;
 }
 
-.menu-button {
+.menuLabel {
   all: unset;
   font-variant: small-caps;
   font-size: 0.7rem;
@@ -27,7 +27,7 @@ body {
   overflow: hidden;
 }
 
-.menu-button::before {
+.menuLabel::before {
   content: "";
   position: absolute;
   bottom: 0;
@@ -43,28 +43,21 @@ body {
   transform: translateX(0);
 }
 
-.menu-button span {
+.menuLabel span {
   transition: color 0.5s ease-in-out;
 }
 
-.menu-button:hover > span {
-  color: black;
+.menuLabel:hover span {
+  color: green;
 }
+
 
 .sideBanner {
   border-left: 0.5px solid;
   background: var(--background);
   width: 12rem;
-  padding-inline: 0.5rem;
-  margin-right: 1rem;
-  overflow-x: hidden;
   display: flex;
-  justify-content: center;
-}
-
-
-.accordion {
-  max-width: 100%; /* Allow the accordion to adjust to the available width */
+  justify-content: left;
 }
 
 
@@ -79,6 +72,28 @@ body {
 
 .accordion-button:not(.collapsed) {
   box-shadow: none;
+}
+
+hr {
+  color: black !important;
+  height: 0.35px !important;
+}
+
+.settingsLabel {
+  font-variant: small-caps;
+  font-size: 0.7rem;
+  letter-spacing: 0.23rem;
+}
+
+.settingsLabel::after {
+  font-size: 3rem;
+}
+
+.accordion-button::after {
+  transform: scale(0.5);
+}
+.accordion-button.collapsed::after {
+  transform: scale(0.5);
 }
 
 

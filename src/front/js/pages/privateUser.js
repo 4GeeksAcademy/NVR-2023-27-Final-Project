@@ -56,35 +56,60 @@ export const PrivateUser = () => {
                         className="offcanvas offcanvas-end sideBanner"
                         data-bs-scroll="true"
                         data-bs-backdrop="false"
-
                         tabIndex={-1}
                         id="offcanvasScrolling"
                         aria-labelledby="offcanvasScrollingLabel"
                     >
                         <span
                             type="button"
-                            className="dimissBAnner"
+                            className="dimissBanner ps-3 pt-3"
                             data-bs-dismiss="offcanvas"
                             aria-label="Close"
-                        >Dismiss</span>
-                        <div className="offcanvas-body vw-100 px-0 mx-0 gx-0">
-                            {/* side banner ACCORDION */}
-                            <div className="accordion accordion-flush vw-50" id="accordionFlushExample">
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" height="15.12" viewBox="0 -302.4 302.4 302.4" width="15.12">
+                                <path d="m176.715-76.23-13.545-13.23 52.92-52.92H50.4v-18.9h165.555L154.215-214.23l13.545-13.23 76.23 76.23-76.23 76.23Z" />
+                            </svg>
+                        </span>
+                        {/* side banner ACCORDION */}
+                        <div className="offcanvas-body">
+                            <div className="accordion accordion-flush" id="accordionFlushExample">
                                 <div className="accordion-item">
-                                    <h2 className="accordion-header">
-                                        <span
-                                            className="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#flush-collapseOne"
-                                            aria-expanded="false"
-                                            aria-controls="flush-collapseOne"
-                                        >
-                                            Accordion Item #1
-                                        </span>
-                                    </h2>
+                                    <span
+                                        className="accordion-button collapsed settingsLabel"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne"
+                                        aria-expanded="false"
+                                        aria-controls="flush-collapseOne"
+                                    >
+                                        service preferences
+                                    </span>
                                     <div
                                         id="flush-collapseOne"
+                                        className="accordion-collapse collapse"
+                                        data-bs-parent="#accordionFlushExample"
+                                    >
+                                        <div className="accordion-body mx-auto">
+                                            Placeholder content for this accordion, which is intended to demonstrate
+                                            the <code>.accordion-flush</code> class. This is the first item's
+                                            accordion body.
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr></hr>
+                                <div className="accordion-item">
+                                    <span
+                                        className="accordion-button collapsed settingsLabel"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseTwo"
+                                        aria-expanded="false"
+                                        aria-controls="flush-collapseTwo"
+                                    >
+                                        account details
+                                    </span>
+                                    <div
+                                        id="flush-collapseTwo"
                                         className="accordion-collapse collapse"
                                         data-bs-parent="#accordionFlushExample"
                                     >
@@ -95,19 +120,20 @@ export const PrivateUser = () => {
                                         </div>
                                     </div>
                                 </div>
+                                <hr></hr>
                                 <div className="accordion-item">
-                                    <h2 className="accordion-header">
-                                        <span
-                                            className="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#flush-collapseTwo"
-                                            aria-expanded="false"
-                                            aria-controls="flush-collapseTwo"
-                                        >
-                                            Accordion Item #2
-                                        </span>
-                                    </h2>
+                                    <span
+                                        className="accordion-button collapsed settingsLabel"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseTwo"
+                                        aria-expanded="false"
+                                        aria-controls="flush-collapseTwo"
+                                    >
+                                        account details
+                                    </span>
+                                    <span>
+                                    </span>
                                     <div
                                         id="flush-collapseTwo"
                                         className="accordion-collapse collapse"
@@ -121,19 +147,19 @@ export const PrivateUser = () => {
                                         </div>
                                     </div>
                                 </div>
+                                <hr></hr>
+
                                 <div className="accordion-item">
-                                    <h2 className="">
-                                        <span
-                                            className="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#flush-collapseThree"
-                                            aria-expanded="false"
-                                            aria-controls="flush-collapseThree"
-                                        >
-                                            Accordion Item #3
-                                        </span>
-                                    </h2>
+                                    <span
+                                        className="accordion-button collapsed settingsLabel"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseThree"
+                                        aria-expanded="false"
+                                        aria-controls="flush-collapseThree"
+                                    >
+                                        credit card info
+                                    </span>
                                     <div
                                         id="flush-collapseThree"
                                         className="accordion-collapse collapse"
@@ -148,6 +174,7 @@ export const PrivateUser = () => {
                                             real-world application.
                                         </div>
                                     </div>
+                                    <hr></hr>
                                 </div>
                             </div>
 
@@ -158,15 +185,15 @@ export const PrivateUser = () => {
                     <div className="mainWrapper">
                         <div className="menu d-flex justify-content-center">
                             <button
-                                className={`menu-button ${selectedSection === "requestService" ? "selectedSectionButton active" : ""}`}
+                                className={`menuLabel ${selectedSection === "requestService" ? "selectedSectionButton active" : ""}`}
                                 onClick={() => handleSectionClick("requestService")}
                             ><span>request service</span></button>
                             <button
-                                className={`menu-button ${selectedSection === "myRequests" ? "selectedSectionButton active" : ""}`}
+                                className={`menuLabel ${selectedSection === "myRequests" ? "selectedSectionButton active" : ""}`}
                                 onClick={() => handleSectionClick("myRequests")}
                             ><span>my requests</span></button>
                             <button
-                                className={`menu-button ${selectedSection === "notifications" ? "selectedSectionButton active" : ""}`}
+                                className={`menuLabel ${selectedSection === "notifications" ? "selectedSectionButton active" : ""}`}
                                 onClick={() => handleSectionClick("notifications")}
                             ><span>notifications</span></button>
                         </div>
