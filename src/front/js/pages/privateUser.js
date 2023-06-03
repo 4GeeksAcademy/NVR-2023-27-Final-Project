@@ -8,7 +8,18 @@ export const PrivateUser = () => {
     const navigate = useNavigate();
     const [selectedSection, setSelectedSection] = useState("requestService");
 
-
+    // SERVICE REQUEST variables
+    const [selectedCategory, setSelectedCategory] = useState("All Categories");
+    const [selectedPrice, setSelectedPrice] = useState("Any price");
+    const [serviceSearchBar, setServiceSearchBar] = useState("");
+    const [newServiceDate, setNewServiceDate] = useState(new Date().toISOString().slice(0, 10));
+    const [newServiceTime, setNewServiceTime] = useState("09:00");
+    const [newServiceQuantity, setNewServiceQuantity] = useState(1);
+    const [newServiceRecurrency, setNewServiceReccurency] = useState(1);
+    const [categories, setCategories] = useState([]);
+    const [prices , setPrices] = useState(["Any price", "More affordable", "Mid range", "More expebsive"]);
+    let priceIntervals={};
+    // 
     useEffect(() => {
         const checkCredentials = () => {
             if (!localStorage.getItem("credentials")) { navigate("/") };
@@ -18,6 +29,55 @@ export const PrivateUser = () => {
         actions.getServiceDescriptions();
 
     }, []);
+
+    useEffect(() => {
+        const findPriceIntervals = () => {
+            if (store.serviceDescriptions.length === 0) {
+              return null; // Return null if the matrix is empty
+            }
+          
+            const prices = store.serviceDescriptions.map((item) => item.price); // Extract all prices
+            const lowestPrice = Math.min(...prices); // Find the lowest price
+            const highestPrice = Math.max(...prices); // Find the highest price
+          
+            const intervalRange = (highestPrice - lowestPrice) / 3; // Calculate the range of each interval
+          
+            const roundToTwoDecimalPlaces = (num) => {
+                const roundedNum = Math.floor(num * 10) / 10;
+                return roundedNum.toFixed(2);
+              };
+              
+          
+            const intervals = {
+              interval1Min: roundToTwoDecimalPlaces(lowestPrice),
+              interval1Max: roundToTwoDecimalPlaces(lowestPrice + intervalRange),
+              interval2Min: roundToTwoDecimalPlaces(lowestPrice + intervalRange),
+              interval2Max: roundToTwoDecimalPlaces(lowestPrice + intervalRange * 2),
+              interval3Min: roundToTwoDecimalPlaces(lowestPrice + intervalRange * 2),
+              interval3Max: roundToTwoDecimalPlaces(highestPrice),
+            };
+          
+            return intervals;
+          };        
+        
+        if (store.serviceDescriptions) {
+            const newCategories = ["All Categories", ...new Set(store.serviceDescriptions.map((service) => service.category))].sort();
+            setCategories(newCategories);
+            
+            priceIntervals = findPriceIntervals();
+            
+            const updatedPrices = [
+                "Any price",
+                `More affordable: ${priceIntervals.interval1Min}€ - ${priceIntervals.interval1Max}€`,
+                `Mid range: ${priceIntervals.interval2Min}€ - ${priceIntervals.interval2Max}€`,
+                `More expensive: ${priceIntervals.interval3Min}€ - ${priceIntervals.interval3Max}€`
+            ];
+            setPrices(updatedPrices);
+
+        }
+
+
+    }, [store.serviceDescriptions]);
 
 
     const handleClickHome = () => {
@@ -31,6 +91,17 @@ export const PrivateUser = () => {
     const handleSectionClick = (section) => {
         setSelectedSection(section)
     }
+
+    const handleCategorySelect = (category) => {
+        setSelectedCategory(category);
+        setServiceSearchBar("");
+    };
+
+    const handlePriceSelect = (price) => {
+        setSelectedPrice(price);
+        setServiceSearchBar("");
+    };
+
     return (
         <>
             <div className="container-fluid">
@@ -198,10 +269,54 @@ export const PrivateUser = () => {
                             ><span>notifications</span></button>
                         </div>
                         <div className="content">
+                            {/* REQUEST A SERVICE SECTION*/}
                             {selectedSection === 'requestService' && (
-                                <div>
-                                    <h2>Request a service</h2>
-                                    {/* Content of the "Request a service" section */}
+                                <div className="row d-flex justify-content-center">
+                                    {/* FILETR & SEARCH*/}
+                                    {/* Category Dropdown*/}
+                                    <div className="dropdown">
+                                        <button
+                                            className="border-0"
+                                            type="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                        >
+                                            Category: {selectedCategory}
+                                        </button>
+                                        <ul className="dropdown-menu rounded-0">
+                                            {categories.map((category, index) => (
+                                                <li className="category-item" key={index} onClick={() => handleCategorySelect(category)}>
+                                                    {category}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    {/* Price Dropdown*/}
+                                    <div className="dropdown">
+                                        <button
+                                            className="border-0"
+                                            type="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                        >
+                                            Price: {selectedPrice}
+                                        </button>
+                                        <ul className="dropdown-menu rounded-0">
+                                            {prices.map((price, index) => (
+                                                <li className="price-item" key={index} onClick={() => handlePriceSelect(price)}>
+                                                    {price}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        {selectedCategory}
+                                        {selectedPrice}
+                                    </div>
+                                    {/* Search Bar*/}
+
+                                  
+
                                 </div>
                             )}
                             {selectedSection === 'myRequests' && (
