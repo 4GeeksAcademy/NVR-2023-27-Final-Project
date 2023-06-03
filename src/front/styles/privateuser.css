@@ -4,11 +4,15 @@
   --background: rgb(222, 222, 222);
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
+* {
+
   background: var(--background);
-  color: black;
+
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
 }
 
 .menuLabel {
@@ -52,6 +56,8 @@ body {
 }
 
 
+
+
 .sideBanner {
   border-left: 0.5px solid;
   background: var(--background);
@@ -81,7 +87,7 @@ hr {
 
 .settingsLabel {
   font-variant: small-caps;
-  font-size: 0.7rem;
+  font-size: 0.875rem;
   letter-spacing: 0.23rem;
 }
 
@@ -96,7 +102,113 @@ hr {
   transform: scale(0.5);
 }
 
+.searchRibbon {
 
+  border-top: .7px solid;
+  border-bottom: .7px solid;
+}
+
+.pullDownLabel {
+  font-size: 0.7rem;
+  letter-spacing: 0.12rem;
+}
+
+.italic {
+  font-style: italic;
+}
+
+input[type="search"] {
+  border: none;
+  outline: none;
+  background: transparent;
+  position: relative;
+}
+
+input[type="search"]::placeholder {
+  color: #000;
+}
+
+input[type="search"]::-webkit-input-placeholder {
+  color: #000;
+}
+
+input[type="search"]::-moz-placeholder {
+  color: #000;
+}
+
+input[type="search"]:-ms-input-placeholder {
+  color: #000;
+}
+
+input[type="search"]::-ms-input-placeholder {
+  color: #000;
+}
+
+input[type="search"]::placeholder {
+  color: #000;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+input[type="search"]::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.7px;
+  background-color: #000;
+}
+
+input::placeholder {
+  /* CSS styles for the placeholder text */
+  color: rgb(156, 156, 156);
+  font-size: .875rem;
+  font-style: italic;
+}
+
+.firstBavBar {
+  height: 5rem !important;
+}
+
+
+.secondNavBar {
+  margin-top: 5rem !important;
+  height: 3rem !important;
+  border-top: .7px solid;
+  border-bottom: .7px solid;
+}
+
+
+
+.main {
+  margin-top: 8rem !important;
+}
+
+
+.ribbon {
+  position: relative !important;
+}
+
+ .ribbonElement1 {
+  position: absolute !important;
+  left: 15% !important;
+}
+
+.ribbonElement2 {
+  position: absolute !important;
+  left: 40% !important;
+}
+
+.ribbonElement3 {
+  position: absolute !important;
+  left: 60% !important;
+}
 
 
 

@@ -17,8 +17,8 @@ export const PrivateUser = () => {
     const [newServiceQuantity, setNewServiceQuantity] = useState(1);
     const [newServiceRecurrency, setNewServiceReccurency] = useState(1);
     const [categories, setCategories] = useState([]);
-    const [prices , setPrices] = useState(["Any price", "More affordable", "Mid range", "More expebsive"]);
-    let priceIntervals={};
+    const [prices, setPrices] = useState(["Any price", "More affordable", "Mid range", "More expebsive"]);
+    let priceIntervals = {};
     // 
     useEffect(() => {
         const checkCredentials = () => {
@@ -33,49 +33,42 @@ export const PrivateUser = () => {
     useEffect(() => {
         const findPriceIntervals = () => {
             if (store.serviceDescriptions.length === 0) {
-              return null; // Return null if the matrix is empty
+                return null; // Return null if the matrix is empty
             }
-          
+
             const prices = store.serviceDescriptions.map((item) => item.price); // Extract all prices
             const lowestPrice = Math.min(...prices); // Find the lowest price
             const highestPrice = Math.max(...prices); // Find the highest price
-          
+
             const intervalRange = (highestPrice - lowestPrice) / 3; // Calculate the range of each interval
-          
-            const roundToTwoDecimalPlaces = (num) => {
-                const roundedNum = Math.floor(num * 10) / 10;
-                return roundedNum.toFixed(2);
-              };
-              
-          
+
             const intervals = {
-              interval1Min: roundToTwoDecimalPlaces(lowestPrice),
-              interval1Max: roundToTwoDecimalPlaces(lowestPrice + intervalRange),
-              interval2Min: roundToTwoDecimalPlaces(lowestPrice + intervalRange),
-              interval2Max: roundToTwoDecimalPlaces(lowestPrice + intervalRange * 2),
-              interval3Min: roundToTwoDecimalPlaces(lowestPrice + intervalRange * 2),
-              interval3Max: roundToTwoDecimalPlaces(highestPrice),
+                interval1Min: Math.ceil(lowestPrice),
+                interval1Max: Math.ceil(lowestPrice + intervalRange),
+                interval2Min: Math.ceil(lowestPrice + intervalRange),
+                interval2Max: Math.ceil(lowestPrice + intervalRange * 2),
+                interval3Min: Math.ceil(lowestPrice + intervalRange * 2),
+                interval3Max: Math.ceil(highestPrice),
             };
-          
+
             return intervals;
-          };        
-        
+        };
+
         if (store.serviceDescriptions) {
             const newCategories = ["All Categories", ...new Set(store.serviceDescriptions.map((service) => service.category))].sort();
             setCategories(newCategories);
-            
+
             priceIntervals = findPriceIntervals();
-            
+
             const updatedPrices = [
                 "Any price",
-                `More affordable: ${priceIntervals.interval1Min}€ - ${priceIntervals.interval1Max}€`,
-                `Mid range: ${priceIntervals.interval2Min}€ - ${priceIntervals.interval2Max}€`,
-                `More expensive: ${priceIntervals.interval3Min}€ - ${priceIntervals.interval3Max}€`
+                `${priceIntervals.interval1Min}€ - ${priceIntervals.interval1Max}€`,
+                `${priceIntervals.interval2Min}€ - ${priceIntervals.interval2Max}€`,
+                `${priceIntervals.interval3Min}€ - ${priceIntervals.interval3Max}€`
             ];
             setPrices(updatedPrices);
 
         }
-
 
     }, [store.serviceDescriptions]);
 
@@ -102,159 +95,16 @@ export const PrivateUser = () => {
         setServiceSearchBar("");
     };
 
+    const handleChangeSearchBar = (event) => {
+        setServiceSearchBar(event.target.value);
+    };
+
     return (
         <>
-            <div className="container-fluid">
+            <div className="container-fluid mx-0 px-0 gx-0">
                 <header>
-                    <p>Private User</p>
-                    <p>{localStorage.getItem("credentials")}</p>
-                    <button className="btn btn-primary mx-3" onClick={handleClickHome}>
-                        Home
-                    </button>
-                    <button className="btn btn-primary mx-3" onClick={handleSignout}>
-                        Sign Out
-                    </button>
-                    {/* side banner  */}
-                    <button
-                        className="btn btn-primary"
-                        type="button"
-                        data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasScrolling"
-                        aria-controls="offcanvasScrolling"
-                    > 123
-                    </button>
-                    <div
-                        className="offcanvas offcanvas-end sideBanner"
-                        data-bs-scroll="true"
-                        data-bs-backdrop="false"
-                        tabIndex={-1}
-                        id="offcanvasScrolling"
-                        aria-labelledby="offcanvasScrollingLabel"
-                    >
-                        <span
-                            type="button"
-                            className="dimissBanner ps-3 pt-3"
-                            data-bs-dismiss="offcanvas"
-                            aria-label="Close"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" height="15.12" viewBox="0 -302.4 302.4 302.4" width="15.12">
-                                <path d="m176.715-76.23-13.545-13.23 52.92-52.92H50.4v-18.9h165.555L154.215-214.23l13.545-13.23 76.23 76.23-76.23 76.23Z" />
-                            </svg>
-                        </span>
-                        {/* side banner ACCORDION */}
-                        <div className="offcanvas-body">
-                            <div className="accordion accordion-flush" id="accordionFlushExample">
-                                <div className="accordion-item">
-                                    <span
-                                        className="accordion-button collapsed settingsLabel"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseOne"
-                                        aria-expanded="false"
-                                        aria-controls="flush-collapseOne"
-                                    >
-                                        service preferences
-                                    </span>
-                                    <div
-                                        id="flush-collapseOne"
-                                        className="accordion-collapse collapse"
-                                        data-bs-parent="#accordionFlushExample"
-                                    >
-                                        <div className="accordion-body mx-auto">
-                                            Placeholder content for this accordion, which is intended to demonstrate
-                                            the <code>.accordion-flush</code> class. This is the first item's
-                                            accordion body.
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr></hr>
-                                <div className="accordion-item">
-                                    <span
-                                        className="accordion-button collapsed settingsLabel"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseTwo"
-                                        aria-expanded="false"
-                                        aria-controls="flush-collapseTwo"
-                                    >
-                                        account details
-                                    </span>
-                                    <div
-                                        id="flush-collapseTwo"
-                                        className="accordion-collapse collapse"
-                                        data-bs-parent="#accordionFlushExample"
-                                    >
-                                        <div className="accordion-body">
-                                            Placeholder content for this accordion, which is intended to demonstrate
-                                            the <code>.accordion-flush</code> class. This is the first item's
-                                            accordion body.
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr></hr>
-                                <div className="accordion-item">
-                                    <span
-                                        className="accordion-button collapsed settingsLabel"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseTwo"
-                                        aria-expanded="false"
-                                        aria-controls="flush-collapseTwo"
-                                    >
-                                        account details
-                                    </span>
-                                    <span>
-                                    </span>
-                                    <div
-                                        id="flush-collapseTwo"
-                                        className="accordion-collapse collapse"
-                                        data-bs-parent="#accordionFlushExample"
-                                    >
-                                        <div className="accordion-body">
-                                            Placeholder content for this accordion, which is intended to demonstrate
-                                            the <code>.accordion-flush</code> class. This is the second item's
-                                            accordion body. Let's imagine this being filled with some actual
-                                            content.
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr></hr>
-
-                                <div className="accordion-item">
-                                    <span
-                                        className="accordion-button collapsed settingsLabel"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseThree"
-                                        aria-expanded="false"
-                                        aria-controls="flush-collapseThree"
-                                    >
-                                        credit card info
-                                    </span>
-                                    <div
-                                        id="flush-collapseThree"
-                                        className="accordion-collapse collapse"
-                                        data-bs-parent="#accordionFlushExample"
-                                    >
-                                        <div className="accordion-body">
-                                            Placeholder content for this accordion, which is intended to demonstrate
-                                            the <code>.accordion-flush</code> class. This is the third item's
-                                            accordion body. Nothing more exciting happening here in terms of
-                                            content, but just filling up the space to make it look, at least at
-                                            first glance, a bit more representative of how this would look in a
-                                            real-world application.
-                                        </div>
-                                    </div>
-                                    <hr></hr>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </header>
-                <main>
-                    <div className="mainWrapper">
-                        <div className="menu d-flex justify-content-center">
+                    <nav className="navbar fixed-top px-3 firstBavBar">
+                            <button onClick={() => handleSectionClick("home")}>Home</button>
                             <button
                                 className={`menuLabel ${selectedSection === "requestService" ? "selectedSectionButton active" : ""}`}
                                 onClick={() => handleSectionClick("requestService")}
@@ -267,77 +117,91 @@ export const PrivateUser = () => {
                                 className={`menuLabel ${selectedSection === "notifications" ? "selectedSectionButton active" : ""}`}
                                 onClick={() => handleSectionClick("notifications")}
                             ><span>notifications</span></button>
-                        </div>
-                        <div className="content">
-                            {/* REQUEST A SERVICE SECTION*/}
-                            {selectedSection === 'requestService' && (
-                                <div className="row d-flex justify-content-center">
-                                    {/* FILETR & SEARCH*/}
-                                    {/* Category Dropdown*/}
-                                    <div className="dropdown">
-                                        <button
-                                            className="border-0"
-                                            type="button"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
-                                            Category: {selectedCategory}
-                                        </button>
-                                        <ul className="dropdown-menu rounded-0">
-                                            {categories.map((category, index) => (
-                                                <li className="category-item" key={index} onClick={() => handleCategorySelect(category)}>
-                                                    {category}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                    {/* Price Dropdown*/}
-                                    <div className="dropdown">
-                                        <button
-                                            className="border-0"
-                                            type="button"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
-                                            Price: {selectedPrice}
-                                        </button>
-                                        <ul className="dropdown-menu rounded-0">
-                                            {prices.map((price, index) => (
-                                                <li className="price-item" key={index} onClick={() => handlePriceSelect(price)}>
-                                                    {price}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        {selectedCategory}
-                                        {selectedPrice}
-                                    </div>
-                                    {/* Search Bar*/}
-
-                                  
-
+                            <button onClick={handleSignout}>Sign Out</button>
+                            <button>Avatar</button>
+                    </nav>
+                    {selectedSection === "requestService" && (
+                        <nav className="navbar fixed-top secondNavBar d-flex justify-content-center align-items-center ">
+                            <div className="d-flex justify-content-center align-items-center">
+                                <div className="dropdown ribbonElement1">
+                                    <button
+                                        className="border-0"
+                                        type="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        <span className="pullDownLabel">Category:</span>
+                                        <span className="pullDownLabel italic ms-1">{selectedCategory}</span>
+                                        <span className=""></span>
+                                    </button>
+                                    <ul className="dropdown-menu rounded-0">
+                                        {categories.map((category, index) => (
+                                            <li className="category-item" key={index} onClick={() => handleCategorySelect(category)}>
+                                                {category}
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
-                            )}
-                            {selectedSection === 'myRequests' && (
-                                <div>
-                                    <h2>My requests</h2>
-                                    {/* Content of the "My requests" section */}
+                                {/* Price Dropdown*/}
+                                <div className="dropdown ribbonElement2">
+                                    <button
+                                        className="border-0"
+                                        type="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        <span className="pullDownLabel">Price:</span>
+                                        <span className="pullDownLabel italic ms-1">{selectedPrice}</span>
+                                        <span>
+                                        </span>
+                                    </button>
+                                    <ul className="dropdown-menu rounded-0">
+                                        {prices.map((price, index) => (
+                                            <li className="price-item" key={index} onClick={() => handlePriceSelect(price)}>
+                                                {price}
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
-                            )}
-                            {selectedSection === 'notifications' && (
-                                <div>
-                                    <h2>Notifications</h2>
-                                    {/* Content of the "Notifications" section */}
+                                {/* Search Bar*/}
+                                <div className="ribbonElement3">
+                                    <form role="search">
+                                       <label htmlFor="searchField" className="pullDownLabel">Find:</label>
+                                        <input
+                                            id="searchField"
+                                            type="search"
+                                            placeholder="Search for services "
+                                            aria-label="Search"
+                                            value={serviceSearchBar}
+                                            onChange={handleChangeSearchBar}
+                                        />
+                                    </form>
                                 </div>
-                            )}
-                        </div>
+                            </div>
+                        </nav>
+                    )}
+                    {selectedSection === "myRequests" && (
+                        <nav className="navbar fixed-top p-3 secondNavBar">
+                            My Requests
+                        </nav>
+                    )}
+                    {selectedSection === "notifications" && (
+                        <nav className="navbar fixed-top p-3 secondNavBar">
+                            Notifications
+                        </nav>
+                    )}
+                </header>
+                <div className="main container-fluid">
+                    <div className="row p-3">
+                        <p>{localStorage.getItem("credentials")}</p>
+                        {selectedCategory}
+                        {selectedPrice}
+                        {serviceSearchBar}
                     </div>
-                </main>
-                <footer>
-
-                </footer>
+                </div>
             </div>
         </>
     );
+
+
 };
