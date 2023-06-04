@@ -186,7 +186,7 @@ ul.dropdown-menu.rounded-0 {
   padding: 0;
   width: 12rem;
   margin-top: 6px;
-  animation: slideDown .63s both;
+  animation: slideDown .45s both;
   max-height: 0;
   overflow: hidden;
   opacity: .3;
@@ -202,6 +202,8 @@ ul.dropdown-menu.rounded-0 {
     opacity: 1;
   }
 }
+
+
 
 /* Ribbon elements  */
 li.list-item {

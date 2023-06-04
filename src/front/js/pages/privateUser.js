@@ -17,8 +17,9 @@ export const PrivateUser = () => {
     const [newServiceQuantity, setNewServiceQuantity] = useState(1);
     const [newServiceRecurrency, setNewServiceReccurency] = useState(1);
     const [categories, setCategories] = useState([]);
-    const [prices, setPrices] = useState(["Any price", "More affordable", "Mid range", "More expebsive"]);
-    let priceIntervals = {};
+    const [prices, setPrices] = useState({});
+    let filteredServices = null;
+
     // 
     useEffect(() => {
         const checkCredentials = () => {
@@ -33,14 +34,14 @@ export const PrivateUser = () => {
     useEffect(() => {
         const findPriceIntervals = () => {
             if (store.serviceDescriptions.length === 0) {
-                return null; // Return null if the matrix is empty
+                return null;
             }
 
-            const prices = store.serviceDescriptions.map((item) => item.price); // Extract all prices
-            const lowestPrice = Math.min(...prices); // Find the lowest price
-            const highestPrice = Math.max(...prices); // Find the highest price
+            const prices = store.serviceDescriptions.map((item) => item.price);
+            const lowestPrice = Math.min(...prices);
+            const highestPrice = Math.max(...prices);
 
-            const intervalRange = (highestPrice - lowestPrice) / 3; // Calculate the range of each interval
+            const intervalRange = (highestPrice - lowestPrice) / 3;
 
             const intervals = {
                 interval1Min: Math.ceil(lowestPrice),
@@ -58,15 +59,9 @@ export const PrivateUser = () => {
             const newCategories = ["All Categories", ...new Set(store.serviceDescriptions.map((service) => service.category))].sort();
             setCategories(newCategories);
 
-            priceIntervals = findPriceIntervals();
-
-            const updatedPrices = [
-                "Any price",
-                `${priceIntervals.interval1Min}€ - ${priceIntervals.interval1Max}€`,
-                `${priceIntervals.interval2Min}€ - ${priceIntervals.interval2Max}€`,
-                `${priceIntervals.interval3Min}€ - ${priceIntervals.interval3Max}€`
-            ];
+            const updatedPrices = findPriceIntervals();
             setPrices(updatedPrices);
+
 
         }
 
@@ -99,6 +94,46 @@ export const PrivateUser = () => {
         setServiceSearchBar(event.target.value);
     };
 
+
+    if (store.serviceDescriptions) {
+
+        filteredServices = store.serviceDescriptions.filter((service) => {
+            // Filter by category
+            if (selectedCategory !== "All Categories" && service.category !== selectedCategory) {
+                return false;
+            }
+
+            // Filter by price
+            if (selectedPrice !== "Any price") {
+                console.log("selectedPrice:", selectedPrice);
+                console.log("prices:", prices);
+                const price = parseFloat(service.price);
+
+                if (
+                    (selectedPrice === `${prices.interval1Min}€ - ${prices.interval1Max}€` && (price < prices.interval1Min || price >= prices.interval1Max)) ||
+                    (selectedPrice === `${prices.interval2Min}€ - ${prices.interval2Max}€` && (price < prices.interval2Min || price >= prices.interval2Max)) ||
+                    (selectedPrice === `${prices.interval3Min}€ - ${prices.interval3Max}€` && (price < prices.interval3Min || price >= prices.interval3Max))
+                ) {
+                    return false;
+                }
+            }
+
+            // Filter by search bar content
+            if (serviceSearchBar.trim() !== "") {
+                const searchTerm = serviceSearchBar.toLowerCase();
+
+                if (
+                    !service.category.toLowerCase().includes(searchTerm) &&
+                    !service.service.toLowerCase().includes(searchTerm) &&
+                    !service.description.toLowerCase().includes(searchTerm)
+                ) {
+                    return false;
+                }
+            }
+            return true;
+        });
+    };
+
     return (
         <>
             <div className="container-fluid mx-0 px-0 gx-0">
@@ -124,7 +159,7 @@ export const PrivateUser = () => {
                         <nav className="navbar fixed-top secondNavBar d-flex justify-content-center align-items-center ">
                             <div className="d-flex justify-content-center align-items-center">
                                 {/* Category Dropdown*/}
-                               <div className="dropdown ribbonElement1">
+                                <div className="dropdown ribbonElement1">
                                     <button
                                         className="border-0"
                                         type="button"
@@ -166,11 +201,18 @@ export const PrivateUser = () => {
                                         <span className="pullDownLabel italic ms-1">{selectedPrice}</span>
                                     </button>
                                     <ul className="dropdown-menu rounded-0">
-                                        {prices.map((price, index) => (
-                                            <li className="list-item" key={index} onClick={() => handlePriceSelect(price)}>
-                                                {price}
-                                            </li>
-                                        ))}
+                                        <li className="list-item" key={0} onClick={() => handlePriceSelect("Any price")}>
+                                            Any price
+                                        </li>
+                                        <li className="list-item" key={1} onClick={() => handlePriceSelect(`${prices.interval1Min}€ - ${prices.interval1Max}€`)}>
+                                            ${prices.interval1Min}€ - ${prices.interval1Max}€
+                                        </li>
+                                        <li className="list-item" key={2} onClick={() => handlePriceSelect(`${prices.interval2Min}€ - ${prices.interval2Max}€`)}>
+                                            ${prices.interval2Min}€ - ${prices.interval2Max}€
+                                        </li>
+                                        <li className="list-item" key={3} onClick={() => handlePriceSelect(`${prices.interval3Min}€ - ${prices.interval3Max}€`)}>
+                                            ${prices.interval3Min}€ - ${prices.interval3Max}€
+                                        </li>
                                     </ul>
                                 </div>
                                 {/* Search Bar*/}
@@ -183,7 +225,7 @@ export const PrivateUser = () => {
                                         <input
                                             id="searchField"
                                             type="search"
-                                            placeholder="Type to search for services "
+                                            placeholder="Type…"
                                             aria-label="Search"
                                             value={serviceSearchBar}
                                             onChange={handleChangeSearchBar}
@@ -204,14 +246,21 @@ export const PrivateUser = () => {
                         </nav>
                     )}
                 </header>
-                <div className="main container-fluid">
-                    <div className="row p-3">
-                        <p>{localStorage.getItem("credentials")}</p>
-                        {selectedCategory}
-                        {selectedPrice}
-                        {serviceSearchBar}
+                <main>
+                    <div className="main container-fluid">
+                        <div className="row p-3">
+                            <p>{localStorage.getItem("credentials")}</p>
+                            <p>{selectedCategory}</p>
+                            <p>{selectedPrice}</p>
+                            <p>{serviceSearchBar}</p>
+                        </div>
                     </div>
-                </div>
+                    {filteredServices && filteredServices.map((filteredService, index) => (
+                        <div>
+                            <p>{filteredService.service}</p>
+                        </div>
+                    ))}
+                </main>
             </div>
         </>
     );
