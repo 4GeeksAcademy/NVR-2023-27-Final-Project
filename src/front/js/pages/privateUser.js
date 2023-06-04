@@ -130,7 +130,7 @@ export const PrivateUser = () => {
                                         data-bs-toggle="dropdown"
                                         aria-expanded="false"
                                     >
-                                        <span className="menuIcon">
+                                        <span className="dropDownIcon1">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M384-264v-72h192v72H384ZM240-444v-72h480v72H240Zm-96-180v-72h672v72H144Z"/></svg>
                                         </span>
                                         <span className="pullDownLabel me-1">Category:</span>
@@ -141,7 +141,7 @@ export const PrivateUser = () => {
                                     </button>
                                     <ul className="dropdown-menu rounded-0">
                                         {categories.map((category, index) => (
-                                            <li className="category-item" key={index} onClick={() => handleCategorySelect(category)}>
+                                            <li className="list-item" key={index} onClick={() => handleCategorySelect(category)}>
                                                 {category}
                                             </li>
                                         ))}
@@ -155,7 +155,7 @@ export const PrivateUser = () => {
                                         data-bs-toggle="dropdown"
                                         aria-expanded="false"
                                     >
-                                        <span className="menuIcon">
+                                        <span className="dropDownIcon2">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M192-96v-72h576v72H192Zm288-144L336-384l51-51 57 57v-204l-57 57-51-51 144-144 144 144-51 51-57-57v204l57-57 51 51-144 144ZM192-792v-72h576v72H192Z"/></svg>
                                         </span>
                                         <span className="pullDownLabel me-1">Price:</span>
@@ -166,7 +166,7 @@ export const PrivateUser = () => {
                                     </button>
                                     <ul className="dropdown-menu rounded-0">
                                         {prices.map((price, index) => (
-                                            <li className="price-item" key={index} onClick={() => handlePriceSelect(price)}>
+                                            <li className="list-item" key={index} onClick={() => handlePriceSelect(price)}>
                                                 {price}
                                             </li>
                                         ))}
@@ -182,7 +182,7 @@ export const PrivateUser = () => {
                                         <input
                                             id="searchField"
                                             type="search"
-                                            placeholder="Search for services "
+                                            placeholder="Type to search for services "
                                             aria-label="Search"
                                             value={serviceSearchBar}
                                             onChange={handleChangeSearchBar}
