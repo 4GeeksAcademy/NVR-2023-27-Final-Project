@@ -15,12 +15,17 @@ export const ServiceRollUp = (props) => {
                 <div className="quick-example">
                     <div>
                         <div className="expandable ">
-                        
+                            <div className="expandableContent">
+                                <div>
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi corrupti,
                                 sint distinctio deserunt vel unde consequatur sequi nobis necessitatibus
                                 quis ad officiis doloremque ab, blanditiis facere possimus obcaecati
                                 voluptate sed!
-                        
+                                </div>
+                                <div className="scheduleButtonWrapper">
+                                    <button className="scheduleButton">Schedule</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

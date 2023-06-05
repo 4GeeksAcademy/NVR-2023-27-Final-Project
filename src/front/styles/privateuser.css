@@ -303,9 +303,6 @@ form input[type=search] {
 
 /* TEST  */
 
-.container {
-  position: relative;
-}
 
 .banner {
   background-color: rgb(209, 209, 209);
@@ -342,9 +339,22 @@ form input[type=search] {
   overflow: hidden;
 }
 
-.expandable {
+.expandable,
+.expandable * {
   background-color: rgb(209, 209, 209);
 }
+
+.expandableContent {
+  padding: .5rem;
+}
+.scheduleButtonWrapper {
+  margin-top: .5rem;
+  display: flex;
+  justify-content: right;
+}
+
+
+
 
 
 
