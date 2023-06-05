@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+
+import { ServiceRollUp } from "../component/serviceRollUp";
 import "../../styles/privateuser.css";
 
 export const PrivateUser = () => {
@@ -151,9 +153,143 @@ export const PrivateUser = () => {
                         <button
                             className={`menuLabel ${selectedSection === "notifications" ? "selectedSectionButton active" : ""}`}
                             onClick={() => handleSectionClick("notifications")}
-                        ><span>notifications</span></button>
+                        ><span className="">notifications</span></button>
                         <button onClick={handleSignout}>Sign Out</button>
-                        <button>Avatar</button>
+                        <button
+                            className="avatarButton"
+                            type="button"
+                            data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasScrolling"
+                            aria-controls="offcanvasScrolling"
+                        >
+                            Avatar
+                        </button>
+                        {/* Offcanvas */}
+                        <div className="offcanvas offcanvas-end sideBanner"
+                            data-bs-scroll="true"
+                            data-bs-backdrop="false"
+                            tabIndex={-1}
+                            id="offcanvasScrolling"
+                            aria-labelledby="offcanvasScrollingLabel"
+                        >
+                            <span
+                                className="btn-close"
+                                data-bs-dismiss="offcanvas"
+                                aria-label="Close"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M400-280v-400l200 200-200 200Z"/></svg>
+                            </span>
+
+                            {/* side banner ACCORDION */}
+                            <div className="offcanvas-body">
+                                <div className="accordion accordion-flush" id="accordionFlushExample">
+                                    <div className="accordion-item">
+                                        <h2 className="accordion-header">
+                                            <span
+                                                className="accordion-button collapsed settingsLabel"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#flush-collapseOne"
+                                                aria-expanded="false"
+                                                aria-controls="flush-collapseOne"
+                                            >
+                                                service preferences
+                                            </span>
+                                        </h2>
+                                        <div
+                                            id="flush-collapseOne"
+                                            className="accordion-collapse collapse"
+                                            data-bs-parent="#accordionFlushExample"
+                                        >
+                                            <div className="accordion-body mx-auto">
+                                                Placeholder
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div className="accordion-item">
+                                        <h2 className="accordion-header">
+                                            <span
+                                                className="accordion-button collapsed settingsLabel"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#flush-collapseTwo"
+                                                aria-expanded="false"
+                                                aria-controls="flush-collapseTwo"
+                                            >
+                                                account details
+                                            </span>
+                                        </h2>
+                                        <div
+                                            id="flush-collapseTwo"
+                                            className="accordion-collapse collapse"
+                                            data-bs-parent="#accordionFlushExample"
+                                        >
+                                            <div className="accordion-body">
+                                                Placeholder.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div className="accordion-item">
+                                        <h2 className="accordion-header">
+                                            <span
+                                                className="accordion-button collapsed settingsLabel"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#flush-collapseThree"
+                                                aria-expanded="false"
+                                                aria-controls="flush-collapseThree"
+                                            >
+                                                credit card info
+                                            </span>
+                                        </h2>
+                                        <div
+                                            id="flush-collapseThree"
+                                            className="accordion-collapse collapse"
+                                            data-bs-parent="#accordionFlushExample"
+                                        >
+                                            <div className="accordion-body">
+                                                Placeholder.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span
+                            type="button"
+                            className="dimissBanner ps-3 pt-3"
+                        ></span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     </nav>
                     {selectedSection === "requestService" && (
                         <nav className="navbar fixed-top secondNavBar d-flex justify-content-center align-items-center ">
@@ -247,19 +383,19 @@ export const PrivateUser = () => {
                     )}
                 </header>
                 <main>
-                    <div className="main container-fluid">
-                        <div className="row p-3">
-                            <p>{localStorage.getItem("credentials")}</p>
+                    <div className="main container-fluid m-0 p-0 g-0">
+                        <div className="row d-flex justify content-center p-3">
+                           {/*  <p>{localStorage.getItem("credentials")}</p>
                             <p>{selectedCategory}</p>
                             <p>{selectedPrice}</p>
-                            <p>{serviceSearchBar}</p>
+                            <p>{serviceSearchBar}</p> */}
+                            {filteredServices && filteredServices.map((filteredService, index) => (
+                                <div className="col-12 d-flex justify-content-center" key={filteredService.id}>
+                                    <div><ServiceRollUp serviceObject={filteredService}/></div>
+                                </div>
+                            ))}
                         </div>
                     </div>
-                    {filteredServices && filteredServices.map((filteredService, index) => (
-                        <div>
-                            <p>{filteredService.service}</p>
-                        </div>
-                    ))}
                 </main>
             </div>
         </>
