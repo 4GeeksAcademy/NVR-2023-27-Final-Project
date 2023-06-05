@@ -340,6 +340,13 @@ form input[type=search] {
 
 .quick-example > div {
   overflow: hidden;
-
 }
+
+.expandable {
+  background-color: rgb(209, 209, 209);
+}
+
+
+
+
 

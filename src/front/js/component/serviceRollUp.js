@@ -13,13 +13,15 @@ export const ServiceRollUp = (props) => {
                     123456789
                 </div>
                 <div className="quick-example">
-                    <div className="expandable">
-                    
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi corrupti,
-                            sint distinctio deserunt vel unde consequatur sequi nobis necessitatibus
-                            quis ad officiis doloremque ab, blanditiis facere possimus obcaecati
-                            voluptate sed!
-                    
+                    <div>
+                        <div className="expandable ">
+                        
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi corrupti,
+                                sint distinctio deserunt vel unde consequatur sequi nobis necessitatibus
+                                quis ad officiis doloremque ab, blanditiis facere possimus obcaecati
+                                voluptate sed!
+                        
+                        </div>
                     </div>
                 </div>
             </div>
