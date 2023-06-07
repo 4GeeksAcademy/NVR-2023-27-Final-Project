@@ -9,7 +9,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				type: ""
 			},
 
+			userSettings: null,
+			userAddresses: null,
+			userExclusions: null,
+			userRequetss: null,
+			userNotifications: null,
 			serviceDescriptions: null,
+
 
 		},
 		actions: {
@@ -56,13 +62,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const credentialsString = JSON.stringify({ token: localStorage.getItem("token"), email: data.user.email, name: data.user.name, id: data.user.id, type: "user" });
 					localStorage.setItem("credentials", credentialsString);
 					localStorage.removeItem("token");
-
-
 				}
 			},
-
-
-
 
 			signinProvider: async (email, password) => {
 				const response = await fetch(process.env.BACKEND_URL + "api/signinprovider", {
@@ -138,7 +139,68 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			getUserSettings: async () => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/getusersettings", {
+						method: "GET",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
 
+						}
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						setStore({ userSettings: data.user_settings });
+					} else {
+						console.log("Error:", response.status);
+					}
+				} catch (error) {
+					console.log("Error:", error);
+				}
+			},
+
+			getUserAddresses: async () => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/getuseraddresses", {
+						method: "GET",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+
+						}
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						setStore({ userAddresses: data.user_addresses });
+					} else {
+						console.log("Error:", response.status);
+					}
+				} catch (error) {
+					console.log("Error:", error);
+				}
+			},
+
+			getUserExclusions: async () => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/getuserexclusions", {
+						method: "GET",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+
+						}
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						setStore({ userExclusions: data.user_exclusions });
+					} else {
+						console.log("Error:", response.status);
+					}
+				} catch (error) {
+					console.log("Error:", error);
+				}
+			},
 
 		}
 	};

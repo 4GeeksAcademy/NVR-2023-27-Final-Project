@@ -44,6 +44,8 @@ class UserProfile(db.Model):
             "must_have_certificate": self.must_have_certificate,
             "required_experience": self.required_experience,
             "required_rating": self.required_rating,
+            "avatar_image": self.avatar_image,
+
         }
 
 class ProviderProfile(db.Model):
@@ -81,6 +83,7 @@ class ProviderProfile(db.Model):
             "service_radius": self.service_radius,
             "average_rating": self.average_rating,
             "ratings_counter": self.ratings_counter,
+            "avatar_image": self.avatar_image,
         }
 
 

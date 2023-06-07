@@ -25,13 +25,22 @@ export const PrivateUser = () => {
     // 
     useEffect(() => {
         const checkCredentials = () => {
-            if (!localStorage.getItem("credentials")) { navigate("/") };
+            if (!localStorage.getItem("credentials")) {
+                navigate("/");
+            }
         };
-
+    
         checkCredentials();
-        actions.getServiceDescriptions();
-
+    
+        if (localStorage.getItem("credentials")) {
+            const currentUserId = JSON.parse(localStorage.getItem("credentials")).id;
+            actions.getUserSettings();
+            actions.getUserAddresses();
+            actions.getUserExclusions();
+            actions.getServiceDescriptions();
+        }
     }, []);
+    
 
     useEffect(() => {
         const findPriceIntervals = () => {
@@ -261,35 +270,6 @@ export const PrivateUser = () => {
                             type="button"
                             className="dimissBanner ps-3 pt-3"
                         ></span>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     </nav>
                     {selectedSection === "requestService" && (
                         <nav className="navbar fixed-top secondNavBar d-flex justify-content-center align-items-center ">
@@ -384,17 +364,7 @@ export const PrivateUser = () => {
                 </header>
                 <main>
                     <div className="main container-fluid m-0 p-0 g-0">
-                        <div className="row d-flex justify content-center p-3">
-                           {/*  <p>{localStorage.getItem("credentials")}</p>
-                            <p>{selectedCategory}</p>
-                            <p>{selectedPrice}</p>
-                            <p>{serviceSearchBar}</p> */}
-                            {filteredServices && filteredServices.map((filteredService, index) => (
-                                <div className="col-12 d-flex justify-content-center" key={filteredService.id}>
-                                    <div><ServiceRollUp serviceObject={filteredService}/></div>
-                                </div>
-                            ))}
-                        </div>
+                        <span>UserSettings</span>
                     </div>
                 </main>
             </div>
