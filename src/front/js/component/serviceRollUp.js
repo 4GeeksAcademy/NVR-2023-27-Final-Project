@@ -1,26 +1,50 @@
 import React from "react";
 
 export const ServiceRollUp = (props) => {
-    const { id, category, service, description, price } = props.serviceObject;
+    const { id, category, service, description, unit, duration, personnel, included, price } = props.serviceObject;
 
-
+    const generateRGBColor = (inputString) => {
+        const substring = inputString.substring(0, 3);
+        const charCodes = substring.split('').map((char) => char.charCodeAt(0));
+        const hue = charCodes[0] % 360;
+        const saturation = 70 + (charCodes[1] % 31);
+        const lightness = 50 + (charCodes[2] % 31);
+        return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+      };
 
     return (
-
         <>
-            <div className="Outer my-1">
-                <div className="banner py-0 my-0 gy-0">
-                    123456789
+            <div className="serviceRollUp my-1">
+                <div className="serviceRollUpBanner">
+                    <div className="rollUpCategoryLabelWrapper">
+                        <span className="rollUpCategoryLabel">{category}</span>
+                    </div>
+                    <div className="">
+                        <span className="rollUpServiceLabel">{service}</span>
+                        <span className="">{duration}</span>                       
+                        <span className="rollUpPriceDescription">price: </span>
+                        <span className="rollUpPriceLabel">{price}€</span>
+                    </div>
                 </div>
-                <div className="quick-example">
+                <div className="expandableWrapper">
                     <div>
                         <div className="expandable ">
                             <div className="expandableContent">
                                 <div>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi corrupti,
-                                sint distinctio deserunt vel unde consequatur sequi nobis necessitatibus
-                                quis ad officiis doloremque ab, blanditiis facere possimus obcaecati
-                                voluptate sed!
+                                    <div className="">"
+                                        <div>Description:</div>
+                                        <div className="rollUpDescriptionLabel">{description}</div>
+                                    </div>
+                                    <div className="cardLabels">
+                                        <div>provision:</div>
+                                        <div>included::</div>
+                                        <div>personnel:</div>
+                                    </div>
+                                    <div className="cardInfo">
+                                        <div>{unit}</div>
+                                        <div>{included}</div>
+                                        <div>{personnel}</div>
+                                    </div>
                                 </div>
                                 <div className="scheduleButtonWrapper">
                                     <button className="scheduleButton">Schedule</button>
