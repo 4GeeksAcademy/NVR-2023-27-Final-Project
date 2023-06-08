@@ -286,6 +286,23 @@ form input[type=search] {
   justify-content: right;
 }
 
+.rollUpCategoryColorWrapper {
+  display: flex;
+  align-items: center;
+  transform: skew(-18deg);
+  padding-inline: 3px;
+  width: .3rem;
+}
+
+.rollUpCategoryColor {
+  display: inline-block;
+  padding-inline: .12rem;
+  padding-block: .03rem;
+  color: var(--background);
+  transform: skew(18deg);
+  font-size: .7rem;
+}
+
 .rollUpCategoryLabelWrapper {
   display: flex;
   align-items: center;
@@ -319,6 +336,10 @@ form input[type=search] {
   position: absolute;
   left: 36%;
 }
+
+
+
+
 
 
 .rollUpPriceDescription {

@@ -3,25 +3,38 @@ import React from "react";
 export const ServiceRollUp = (props) => {
     const { id, category, service, description, unit, duration, personnel, included, price } = props.serviceObject;
 
-    const generateRGBColor = (inputString) => {
-        const substring = inputString.substring(0, 3);
-        const charCodes = substring.split('').map((char) => char.charCodeAt(0));
-        const hue = charCodes[0] % 360;
-        const saturation = 70 + (charCodes[1] % 31);
-        const lightness = 50 + (charCodes[2] % 31);
-        return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-      };
+    const colorMap = new Map([
+        ["abc", "red"],
+        ["def", "blue"],
+        ["ghi", "green"],
+        ["jkl", "yellow"],
+        ["mno", "purple"],
+        ["pqr", "orange"],
+        ["stu", "pink"],
+        ["vwx", "brown"],
+        ["yza", "gray"],
+        ["bcd", "teal"],
+        ["efg", "navy"],
+        ["hij", "magenta"],
+        ["klm", "lime"],
+        ["nop", "cyan"],
+        ["qrs", "silver"],
+      ]);
+      
 
     return (
         <>
             <div className="serviceRollUp my-1">
-                <div className="serviceRollUpBanner">
+                <div className="serviceRollUpBanner ps-3">
+                    <div className="rollUpCategoryColorWrapper" style={{ backgroundColor: "green" }}>
+                        <span className="rollUpCategoryColor" style={{ backgroundColor: "green" }}>&nbsp;</span>
+                    </div>
                     <div className="rollUpCategoryLabelWrapper">
                         <span className="rollUpCategoryLabel">{category}</span>
                     </div>
                     <div className="">
                         <span className="rollUpServiceLabel">{service}</span>
-                        <span className="">{duration}</span>                       
+                        <span className="">{duration}</span>
                         <span className="rollUpPriceDescription">price: </span>
                         <span className="rollUpPriceLabel">{price}€</span>
                     </div>
