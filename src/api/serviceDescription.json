@@ -1,524 +1,522 @@
-[    {
-    "category": "cleaning",
-    "service": "regular cleaning",
-    "description": "performing routine cleaning tasks such as dusting, vacuuming, mopping, and bathroom cleaning",
-    "unit": "1 area up to 100 m²",
-    "duration": 3,
-    "personnel": 1,
-    "included": "cleaning products",
-    "price": 50
-},
-{
-    "category": "cleaning",
-    "service": "deep cleaning",
-    "description": "conducting a thorough cleaning of the entire living space, including deep cleaning of surfaces, appliances, and furniture.",
-    "unit": "1 area up to 100 m²",
-    "duration": 7,
-    "personnel": 2,
-    "included": "cleaning products",
-    "price": 150
-},
-{
-    "category": "cleaning",
-    "service": "one-time cleaning",
-    "description": "providing intensive cleaning services to address specific cleaning needs or areas of the living space",
-    "unit": "1 area up to 100 m²",
-    "duration": 6,
-    "personnel": 1,
-    "included": "cleaning products",
-    "price": 90
-},
-{
-    "category": "cleaning",
-    "service": "move-in/move-out cleaning",
-    "description": "performing comprehensive cleaning services specifically designed for move-in or move-out situations",
-    "unit": "1 area up to 100 m²",
-    "duration": 7,
-    "personnel": 1,
-    "included": "cleaning products",
-    "price": 110
-},
-{
-    "category": "cleaning",
-    "service": "deep carpet cleaning",
-    "description": "conducting a thorough cleaning of carpets using specialized techniques and equipment for deep stain and odor removal",
-    "unit": "1 carpet of up to 12 m²",
-    "duration": 2,
-    "personnel": 1,
-    "included": "carpet cleaning equipment and consumables",
-    "price": 80
-},
-{
-    "category": "wardrobe",
-    "service": "vapor ironing ",
-    "description": "ironing and pressing garments to remove wrinkles and create a neat appearance ",
-    "unit": "up to 20 items of clothing",
-    "duration": 1,
-    "personnel": 1,
-    "included": "professional vapor iron for the session only",
-    "price": 50
-},
-{
-    "category": "wardrobe",
-    "service": "wardrobe organization",
-    "description": "organizing the contents of wardrobes, including sorting, folding, and arranging clothing and accessories",
-    "unit": "1 wardrobe of up to 7m³",
-    "duration": 2,
-    "personnel": 1,
-    "included": "cleaning products",
-    "price": 60
-},
-{
-    "category": "wardrobe",
-    "service": "shoe polishing",
-    "description": "providing shoe polishing service to restore shine and enhance the appearance of shoes",
-    "unit": "up to 5 pairs of shoes",
-    "duration": 0.75,
-    "personnel": 1,
-    "included": "utensils and consumables",
-    "price": 60
-},
-{
-    "category": "plumbing",
-    "service": "leak repair",
-    "description": "identifying and fixing small leaks in plumbing systems to prevent water wastage and potential damage.",
-    "unit": "1 leak",
-    "duration": 1.5,
-    "personnel": 1,
-    "included": "tools and consumables",
-    "price": 60
-},
-{
-    "category": "plumbing",
-    "service": "drain unclogging",
-    "description": "clearing minor clogs in drains to restore proper water flow and prevent backups.",
-    "unit": "1 drain",
-    "duration": 1.5,
-    "personnel": 1,
-    "included": "tools and consumables",
-    "price": 70
-},
-{
-    "category": "plumbing",
-    "service": "exterior faucet maintenance",
-    "description": "inspecting and maintaining exterior faucets to ensure their proper functioning and prevent leaks or other issues.",
-    "unit": "1 exterior faucet in a block of up to 20 flats",
-    "duration": 6,
-    "personnel": 2,
-    "included": "tools and consumables",
-    "price": 190
-},
-{
-    "category": "electrical",
-    "service": "light fixture installation",
-    "description": "installing or replacing light fixtures, including wiring and connection",
-    "unit": "1 fixture",
-    "duration": 1,
-    "personnel": 1,
-    "included": "fixture provided by client, all other necessay utensils and consumables provided",
-    "price": 60
-},
-{
-    "category": "hvac",
-    "service": "HVAC basic maintenance",
-    "description": "performing routine maintenance on the HVAC system, including cleaning filters, inspecting components, and ensuring proper functionality",
-    "unit": "1 HVAC unit",
-    "duration": 2,
-    "personnel": 1,
-    "included": "tools and consumables included, eventual required spare parts not included",
-    "price": 70
-},
-{
-    "category": "security",
-    "service": "alarm system basic repair",
-    "description": "repairing alarm systems, including alarms, sensors, or keypad malfunctions", 
-    "unit": "1 alarm system",
-    "duration": 2,
-    "personnel": 1,
-    "included": "tools and consumables",
-    "price": 70
-},
-{
-    "category": "security",
-    "service": "surveillance camera basic repair",
-    "description": "repairing surveillance cameras, addressing issues such as connectivity problems, image quality, or positioning",
-    "unit": "up to 2 surveillance cameras",
-    "duration": 2,
-    "personnel": 1,
-    "included": "tools and consumables included, eventual requried spare parts not included",
-    "price": 60
-},
-{
-    "category": "handyman",
-    "service": "shelf hanging",
-    "description": "installing shelves on walls securely and accurately according to desired placement",
-    "unit": "up to 5 shelves",
-    "duration": 1,
-    "personnel": 1,
-    "included": "tools and consumables provided, shelves provided by client",
-    "price": 40
-},
-{
-    "category": "handyman",
-    "service": "door hinge adjustment",
-    "description": "adjusting door hinges to ensure proper alignment, smooth operation, and eliminate squeaking or sticking",
-    "unit": "1 door",
-    "duration": 1,
-    "personnel": 1,
-    "included": "tools and consumables",
-    "price": 60
-},
-{
-    "category": "handyman",
-    "service": "window repair, simple glass",
-    "description": "repairing windows with simple glass, addressing issues such as cracks, broken panes, or faulty seals",
-    "unit": "1 window of up to 2 m²",
-    "duration": 1,
-    "personnel": 1,
-    "included": "tools, consumables and one simple 2 square meters glass pane",
-    "price": 90
-},
-
-{
-"category": "handyman",
-"service": "locksmithing",
-"description": "providing locksmith services for lock repair of hammered locks.",
-"unit": "1 lock",
-"duration": 1,
-"personnel": 1,
-"included": "tools and consumables provided, eventual required spare parts not provided",
-"price": 80
-}   ,
-{
-    "category": "handyman",
-    "service": "blindfold repair, venetian and vertical",
-    "description": "repairing venetian and vertical blinds",
-    "unit": "1 blind",
-    "duration": 2,
-    "personnel": 1,
-    "included": "spare blind slats provided by client, tools and spare cord included",
-    "price": 70
-},
-{
-    "category": "handyman",
-    "service": "small appliance basic repair",
-     "description": "repairing small appliances such as toasters, blenders, coffee makers, irons, electric fans, and food processors whose fix does not require any spare aprts",
-    "unit": "1 small appliance",
-    "duration": 2,
-    "personnel": 1,
-    "included": "tools and consumables, eventual required spare parts not included",
-    "price": 70
-},
-{
-    "category": "patching",
-    "service": "drywall repair",
-    "description": "repairing damaged drywall, including patching holes, cracks, or dents, and applying finishing materials for a smooth surface.", 
-    "unit": "1 surface of up 20 m²",
-    "duration": 3,
-    "personnel": 1,
-    "included": "tools and consumables",
-    "price": 60
-},
-{
-    "category": "patching",
-    "service": "painting of interior wall, single coat",
-    "description": "applying a single coat of paint to interior walls, refreshing the appearance or changing the color",
-    "unit": "1 wall of up to 25 square meters",
-    "duration": 3,
-    "personnel": 1,
-    "included": "paint provided by client",
-    "price": 80
-},
-{
-    "category": "patching",
-    "service": "painting of interior wall, double coat",
-    "description": "applying a double coat of paint to interior walls, ensuring full coverage and a smooth finish",
-    "unit": "1 wall of up to 25 m²s",
-    "duration": 3,
-    "personnel": 1,
-    "included": "paint provided by client",
-    "price": 80
-},
-{
-    "category": "patching",
-    "service": "painting of ground floor exterior wall, single coat",
-    "description": "applying a single coat of paint to the ground floor exterior walls, enhancing the visual appeal and protection against weather elements",
-    "unit": "1 ground floor exterior wall of up to 40 m²",
-    "duration": 4,
-    "personnel": 1,
-    "included": "paint provided by client",
-    "price": 80
-},
-{
-    "category": "patching",
-    "service": "painting of ground floor exterior wall, double coat",
-    "description": "applying a double coat of paint to the ground floor exterior walls, providing added durability and an even finish",
-    "unit": "1 ground floor exterior wall of up to 150 m²",
-    "duration": 4,
-    "personnel": 1,
-    "included": "paint provided by client",
-    "price": 60
-},
-{
-    "category": "patching",
-    "service": "wall repair",
-    "description": "repairing damaged walls by filling cracks, holes, or other imperfections and smoothing the surface for a seamless appearance",
-    "unit": "1 wall of up to 30 m²",
-    "duration": 3,
-    "personnel": 1,
-    "included": "paint provided by client",
-    "price": 60
-},
-{
-    "category": "patching",
-    "service": "wall staining",
-    "description": "applying stain to walls, creating a decorative finish and enhancing the natural texture and color of the surface",
-    "unit": "1 interior wall of up to 25 m²",
-    "duration": 4,
-    "personnel": 1,
-    "included": "paint provided by client",
-    "price": 90
-},
-{
-    "category": "gardening",
-    "service": "lawn mowing",
-    "description": "cutting the grass on the lawn to maintain an even and well-manicured appearance",
-    "unit": "1 lawn of up to 250 m²",
-    "duration": 1,
-    "personnel": 1,
-    "included": "lawnmower",
-    "price": 50
-},
-{
-    "category": "gardening",
-    "service": "hedge trimming",
-    "description": "trimming the hedges to promote healthy growth, maintain shape, and enhance the overall aesthetics of the garden",
-    "unit": "up to 40 m",
-    "duration": 2,
-    "personnel": 1,
-    "included": "trimming tools",
-    "price": 50
-},
-{
-    "category": "gardening",
-    "service": "tree trimming",
-    "description": "pruning the trees by removing dead branches and shaping them for better growth and appearance",
-    "unit": "up to 4 medium-sized trees",
-    "duration": 2,
-    "personnel": 1,
-    "included": "trimming tools",
-    "price": 50
-},
-{
-    "category": "gardening",
-    "service": "fertilization",
-    "description": "applying fertilizers to promote healthy growth and nourishment of plants in the garden",
-    "unit": "1 area of up to 500 m²",
-    "duration": 2,
-    "personnel": 1,
-    "included": " tools included, fertilizer provided by client",
-    "price": 60
-},
-{
-    "category": "gardening",
-    "service": "weed control",
-    "description": "removing weeds from the garden to prevent their growth and ensure the overall health of plants and aesthetics of the space.",
-    "unit": "1 garden of up to 150 m²",
-    "duration": 2,
-    "personnel": 1,
-    "included": "weeding tools",
-    "price": 60
-},
-{
-    "category": "extermiantion",
-    "service": "insect extermination",
-    "description": "exterminating common household insects, such as ants, cockroaches, and spiders, using safe and effective methods to eliminate infestations and prevent future occurrences.",
-    "unit": "1 area of up to 150 m²",
-    "duration": 2,
-    "personnel": 1,
-    "included": "tools and insecticides",
-    "price": 90
-},
-{
-    "category": "extremination",
-    "service": "pest prevention",
-    "description": "implementing measures to prevent pest infestations, including sealing entry points, installing traps or barriers, and providing advice on maintaining a pest-free environment",
-    "unit": "1 area of up to 150 m²",
-    "duration": 2,
-    "personnel": 1,
-    "included": "traps and baits",
-    "price": 130
-},
-{
-    "category": "extremiantion",
-    "service": "pest removal",
-    "description": "removing pests from the premises, safely capturing or relocating unwanted animals without harm or damage to property",
-    "unit": "1 area of up to 150 m²",
-    "duration": 2,
-    "personnel": 1,
-    "included": "tools and products",
-    "price": 90
-},
-{
-    "category": "extermination",
-    "service": "wasp and hornet Nest Removal",
-    "description": "professional removal of wasp and hornet nests to eliminate the threat and ensure the safety of your property.",
-    "unit": "1 wasp’s or 1 hornet’s nest",
-    "duration": 1.5,
-    "personnel": 1,
-    "included": "utensils and consumables",
-    "price": 130
-},
-{
-    "category": "petcare",
-    "service": "dog walk",
-    "description": "taking dogs for a walk, providing exercise and stimulation for their well-being",
-    "unit": "1 30-minute dog walk",
-    "duration": 0.66,
-    "personnel": 1,
-    "included": "no consumables required",
-    "price": 30
-},
-{
-    "category": "petcare",
-    "service": "dog grooming",
-    "description": "providing grooming services for dogs, including bathing, brushing, nail trimming, ear cleaning, and haircutting, to keep them clean, healthy, and well-groomed",
-    "unit": "1 grooming session for 1 dog",
-    "duration": 1,
-    "personnel": 1,
-    "included": "grooming tools and products",
-    "price": 60
-},
-{
-    "category": "petcare",
-    "service": "pet transportation to vet appointments",
-    "description": "transporting pets to veterinary appointments, ensuring their safe and comfortable travel to receive necessary medical care.",
-    "duration": 2,
-    "unit": "1 transportation of 1 pet to the designated vet within 5 km of client's address",
-    "personnel": 1,
-    "included": "Pet carrier provided by client",
-    "price": 80
-},
-{
-    "category": "grooming",
-    "service": "hairdressing",
-    "description": "providing professional hairdressing services, including hair washing, cutting, and styling, to enhance personal grooming and appearance",
-    "unit": "1 session comprising of wash, cut and bsic styling",
-    "duration": 1,
-    "personnel": 1,
-    "included": "utensils and hair products",
-    "price": 90
-},
-{
-    "category": "grooming",
-    "service": "nail care",
-    "description": "offering comprehensive nail care services for either hands or feet, including trimming, shaping, and polishing nails for a neat and well-maintained look",
-    "unit": "1 manicure session for both hands",
-    "duration": 1,
-    "personnel": 1,
-    "included": "nail care utensils and products",
-    "price": 50
-},
-{
-    "category": "grooming",
-    "service": "nail care",
-    "description": "offering comprehensive nail care services for either hands or feet, including trimming, shaping, and polishing nails for a neat and well-maintained look",
-    "unit": "1 pedicure session for both feet",
-    "duration": 1.5,
-    "personnel": 1,
-    "included": "nail care utensils and products",
-    "price": 70
-},
-{
-    "category": "grooming",
-    "service": "makeup application",
-    "description": "applying makeup products to enhance facial features and achieve the desired look for special occasions or everyday wear",
-    "unit": "1 face makeup",
-    "duration": 1.5,
-    "personnel": 1,
-    "included": "makeup utensils and products",
-    "price": 120
-},
- 
-{
-    "category": "nannying",
-    "service": "nanny services",
-    "description": "providing professional nanny services to take care of children, ensuring their safety, well-being, and engaging them in age-appropriate activities",
-    "unit": "1 nanny session for 1 child",
-    "duration": 3,
-    "personnel": 1,
-    "included": "eventual child meals provided by client",
-    "price": 80
+[
+    {
+        "category": "Cleaning",
+        "service": "Regular cleaning",
+        "description": "Performing routine cleaning tasks such as dusting, vacuuming, mopping, and bathroom cleaning",
+        "unit": "1 area up to 100 m²",
+        "duration": 3,
+        "personnel": 1,
+        "included": "Cleaning products",
+        "price": 50
     },
-{
-    "category": "grooming",
-    "service": "ayurvedic massage",
-    "description": "providing ayurvedic massage techniques, tailored to individual needs, to promote relaxation, relieve muscle tension, and enhance overall well-being",
-    "unit": "1 massage for 1 person",
-    "duration": 0.75,
-    "personnel": 1,
-    "included": "oils included, towels provided by client",
-    "price": 40
-},
-{
-    "category": "nursing",
-    "service": "temperature and blood pressure monitoring",
-    "description": "conducting monitoring of temperature and blood pressure, ensuring accurate measurements for healthcare assessment and monitoring purposes",
-    "unit": "1 pressure and temperature measurement",
-    "duration": 0.5,
-    "personnel": 1,
-    "included": "gauge and thermometer provided for the session only",
-    "price": 35
-},
-{
-    "category": "grooming",
-    "service": "fitness training",
-    "description": "providing one-to-one guided workout sessions with a personal trainer. Each session is tailored to your specific fitness goals and needs",
-    "unit": "1 hour session for 1 client",
-    "duration": 0.75,
-    "personnel": 1,
-    "included": "weights",
-    "price": 60
-},
-{
-    "category": "companionship",
-    "service": "conversation",
-    "description": "engaging in meaningful conversations to provide companionship and stimulate social interaction, promoting mental well-being and emotional support",
-    "unit": "1 conversation with 1 client",
-    "duration": 1,
-    "personnel": 1,
-    "included": "no consumables required",
-    "price": 40
-},
-{
-    "category": "companionship",
-    "service": "accompaniment to social events",
-    "description": "accompanying clients to social events, ensuring their participation and enjoyment, while aiding and supporting as needed",
-    "unit": "1 social event",
-    "duration": 2,
-    "personnel": 1,
-    "included": "no consumables required",
-    "price": 70
-},
-{
-    "category": "companionship",
-    "service": "card and board games",
-    "description": "engaging individuals in a variety of board and card games, including popular classics such as chess, scrabble, monopoly, poker, and uno, fostering cognitive skills, strategic thinking, social interaction, and entertainment",
-    "unit": "1 session of card or board games with 1 client",
-    "duration": 1,
-    "personnel": 1,
-    "included": "1 card game and 1 board game provided for the session only",
-    "price": 60
-},
-{
-    "category": "Eventing",
-    "service": "DJing",
-    "description": "Providing professional DJ services for various events and occasions. Offering a wide selection of music genres, seamless mixing, and energetic performances to keep the crowd engaged and entertained throughout the event.",
-    "unit": "1 DJ set featuring contemporary House and Techno music",
-    "duration": 3,
-    "personnel": 1,
-    "included": "Sound system setup provided by client, DJ equipment and music playlist customization included",
-    "price": 180
-}
-
-] 
+    {
+        "category": "Cleaning",
+        "service": "Deep cleaning",
+        "description": "Conducting a thorough cleaning of the entire living space, including deep cleaning of surfaces, appliances, and furniture.",
+        "unit": "1 area up to 100 m²",
+        "duration": 7,
+        "personnel": 2,
+        "included": "Cleaning products",
+        "price": 150
+    },
+    {
+        "category": "Cleaning",
+        "service": "One-time cleaning",
+        "description": "Providing intensive cleaning services to address specific cleaning needs or areas of the living space",
+        "unit": "1 area up to 100 m²",
+        "duration": 6,
+        "personnel": 1,
+        "included": "Cleaning products",
+        "price": 90
+    },
+    {
+        "category": "Cleaning",
+        "service": "Move-in/out cleaning",
+        "description": "Performing comprehensive cleaning services specifically designed for move-in or move-out situations",
+        "unit": "1 area up to 100 m²",
+        "duration": 7,
+        "personnel": 1,
+        "included": "Cleaning products",
+        "price": 110
+    },
+    {
+        "category": "Cleaning",
+        "service": "Deep carpet cleaning",
+        "description": "Conducting a thorough cleaning of carpets using specialized techniques and equipment for deep stain and odor removal",
+        "unit": "1 carpet of up to 12 m²",
+        "duration": 2,
+        "personnel": 1,
+        "included": "Carpet cleaning equipment and consumables",
+        "price": 80
+    },
+    {
+        "category": "Wardrobe",
+        "service": "Vapor ironing ",
+        "description": "Ironing and pressing garments to remove wrinkles and create a neat appearance ",
+        "unit": "Up to 20 items of clothing",
+        "duration": 1,
+        "personnel": 1,
+        "included": "Professional vapor iron for the session",
+        "price": 50
+    },
+    {
+        "category": "Wardrobe",
+        "service": "Wardrobe organization",
+        "description": "Organizing the contents of wardrobes, including sorting, folding, and arranging clothing and accessories",
+        "unit": "1 wardrobe of up to 7m³",
+        "duration": 2,
+        "personnel": 1,
+        "included": "Cleaning products",
+        "price": 60
+    },
+    {
+        "category": "Wardrobe",
+        "service": "Shoe polishing",
+        "description": "Providing shoe polishing service to restore shine and enhance the appearance of shoes",
+        "unit": "Up to 5 pairs of shoes",
+        "duration": 0.75,
+        "personnel": 1,
+        "included": "Utensils and consumables",
+        "price": 60
+    },
+    {
+        "category": "Plumbing",
+        "service": "Leak repair",
+        "description": "Identifying and fixing small leaks in plumbing systems to prevent water wastage and potential damage.",
+        "unit": "1 leak",
+        "duration": 1.5,
+        "personnel": 1,
+        "included": "Tools and consumables",
+        "price": 60
+    },
+    {
+        "category": "Plumbing",
+        "service": "Drain unclogging",
+        "description": "Clearing minor clogs in drains to restore proper water flow and prevent backups.",
+        "unit": "1 drain",
+        "duration": 1.5,
+        "personnel": 1,
+        "included": "Tools and consumables",
+        "price": 70
+    },
+    {
+        "category": "Plumbing",
+        "service": "Exterior faucet maintenance",
+        "description": "Inspecting and maintaining exterior faucets to ensure their proper functioning and prevent leaks or other issues.",
+        "unit": "1 exterior faucet in a block of up to 20 flats",
+        "duration": 6,
+        "personnel": 2,
+        "included": "Tools and consumables",
+        "price": 190
+    },
+    {
+        "category": "Electrical",
+        "service": "Light fixture installation",
+        "description": "Installing or replacing light fixtures, including wiring and connection",
+        "unit": "1 fixture",
+        "duration": 1,
+        "personnel": 1,
+        "included": "Fixture provided by client, all other necessay utensils and consumables provided",
+        "price": 60
+    },
+    {
+        "category": "Hvac",
+        "service": "HVAC maintenance",
+        "description": "Performing basic routine maintenance on the HVAC system, including cleaning filters, inspecting components, and ensuring proper functionality",
+        "unit": "1 HVAC unit",
+        "duration": 2,
+        "personnel": 1,
+        "included": "Tools and consumables included, eventual required spare parts not included",
+        "price": 70
+    },
+    {
+        "category": "Security",
+        "service": "Alarm system repair",
+        "description": "Repairing alarm systems, including alarms, sensors, or keypad malfunctions",
+        "unit": "1 alarm system",
+        "duration": 2,
+        "personnel": 1,
+        "included": "Tools and consumables, eventual spare parts not included",
+        "price": 70
+    },
+    {
+        "category": "Security",
+        "service": "Surveillance camera repair",
+        "description": "Repairing surveillance cameras, addressing baisc issues such as connectivity problems, image quality, or positioning",
+        "unit": "Up to 2 surveillance cameras",
+        "duration": 2,
+        "personnel": 1,
+        "included": "Tools and consumables included, eventual requried spare parts not included",
+        "price": 60
+    },
+    {
+        "category": "Handyman",
+        "service": "Shelf hanging",
+        "description": "Installing shelves on walls securely and accurately according to desired placement",
+        "unit": "Up to 5 shelves",
+        "duration": 1,
+        "personnel": 1,
+        "included": "Tools and consumables provided, shelves provided by client",
+        "price": 40
+    },
+    {
+        "category": "Handyman",
+        "service": "Door hinge adjustment",
+        "description": "Adjusting door hinges to ensure proper alignment, smooth operation, and eliminate squeaking or sticking",
+        "unit": "1 door",
+        "duration": 1,
+        "personnel": 1,
+        "included": "Tools and consumables",
+        "price": 60
+    },
+    {
+        "category": "Handyman",
+        "service": "Window repair, simple glass",
+        "description": "Repairing windows with simple glass, addressing issues such as cracks, broken panes, or faulty seals",
+        "unit": "1 window of up to 2 m²",
+        "duration": 1,
+        "personnel": 1,
+        "included": "Tools, consumables and one simple 2 square meters glass pane",
+        "price": 90
+    },
+    {
+        "category": "Handyman",
+        "service": "Locksmithing",
+        "description": "Providing locksmith services for lock repair of hammered locks.",
+        "unit": "1 lock",
+        "duration": 1,
+        "personnel": 1,
+        "included": "Tools and consumables provided, eventual required spare parts not provided",
+        "price": 80
+    },
+    {
+        "category": "Handyman",
+        "service": "Blindfold repair, venetian and vertical",
+        "description": "Repairing venetian and vertical blinds",
+        "unit": "1 blind",
+        "duration": 2,
+        "personnel": 1,
+        "included": "Spare blind slats provided by client, tools and spare cord included",
+        "price": 70
+    },
+    {
+        "category": "Handyman",
+        "service": "Small appliance basic repair",
+        "description": "Repairing small appliances such as toasters, blenders, coffee makers, irons, electric fans, and food processors whose fix does not require any spare aprts",
+        "unit": "1 small appliance",
+        "duration": 2,
+        "personnel": 1,
+        "included": "Tools and consumables, eventual required spare parts not included",
+        "price": 70
+    },
+    {
+        "category": "Patching",
+        "service": "Drywall repair",
+        "description": "Repairing damaged drywall, including patching holes, cracks, or dents, and applying finishing materials for a smooth surface.",
+        "unit": "1 surface of up 20 m²",
+        "duration": 3,
+        "personnel": 1,
+        "included": "Tools and consumables",
+        "price": 60
+    },
+    {
+        "category": "Patching",
+        "service": "Single painting of interior wall",
+        "description": "Applying a single coat of paint to interior walls, refreshing the appearance or changing the color",
+        "unit": "1 wall of up to 25 square meters",
+        "duration": 3,
+        "personnel": 1,
+        "included": "Paint provided by client",
+        "price": 80
+    },
+    {
+        "category": "Patching",
+        "service": "Double painting of interior wall",
+        "description": "Applying a double coat of paint to interior walls, ensuring full coverage and a smooth finish",
+        "unit": "1 wall of up to 25 m²s",
+        "duration": 3,
+        "personnel": 1,
+        "included": "Paint provided by client",
+        "price": 80
+    },
+    {
+        "category": "Patching",
+        "service": "Painting of exterior wall",
+        "description": "Applying a single coat of paint to a ground floor exterior walls, enhancing the visual appeal and protection against weather elements",
+        "unit": "1 ground floor exterior wall of up to 40 m²",
+        "duration": 4,
+        "personnel": 1,
+        "included": "Paint provided by client",
+        "price": 80
+    },
+    {
+        "category": "Patching",
+        "service": "Double painting of ground floor exterior wall",
+        "description": "Applying a double coat of paint to the ground floor exterior walls, providing added durability and an even finish",
+        "unit": "1 ground floor exterior wall of up to 150 m²",
+        "duration": 4,
+        "personnel": 1,
+        "included": "Paint provided by client, all other tools and consummables provided",
+        "price": 60
+    },
+    {
+        "category": "Patching",
+        "service": "Wall repair",
+        "description": "Repairing damaged walls by filling cracks, holes, or other imperfections and smoothing the surface for a seamless appearance",
+        "unit": "1 wall of up to 30 m²",
+        "duration": 3,
+        "personnel": 1,
+        "included": "Tools and consummabels provided",
+        "price": 60
+    },
+    {
+        "category": "Patching",
+        "service": "Wall staining",
+        "description": "Applying stain to walls, creating a decorative finish and enhancing the natural texture and color of the surface",
+        "unit": "1 interior wall of up to 25 m²",
+        "duration": 4,
+        "personnel": 1,
+        "included": "Paint provided by client, all otehr tools and consummables provided",
+        "price": 90
+    },
+    {
+        "category": "Gardening",
+        "service": "Lawn mowing",
+        "description": "Cutting the grass on the lawn to maintain an even and well-manicured appearance",
+        "unit": "1 lawn of up to 250 m²",
+        "duration": 1,
+        "personnel": 1,
+        "included": "Lawnmower povided for session",
+        "price": 50
+    },
+    {
+        "category": "Gardening",
+        "service": "Hedge trimming",
+        "description": "Trimming the hedges to promote healthy growth, maintain shape, and enhance the overall aesthetics of the garden",
+        "unit": "Up to 40 m",
+        "duration": 2,
+        "personnel": 1,
+        "included": "Trimming tools for session",
+        "price": 50
+    },
+    {
+        "category": "Gardening",
+        "service": "Tree trimming",
+        "description": "Pruning the trees by removing dead branches and shaping them for better growth and appearance",
+        "unit": "up to 4 medium-sized trees",
+        "duration": 2,
+        "personnel": 1,
+        "included": "Trimming tools",
+        "price": 50
+    },
+    {
+        "category": "Gardening",
+        "service": "Fertilization",
+        "description": "Applying fertilizers to promote healthy growth and nourishment of plants in the garden",
+        "unit": "1 area of up to 500 m²",
+        "duration": 2,
+        "personnel": 1,
+        "included": " Tools included, fertilizer provided by client",
+        "price": 60
+    },
+    {
+        "category": "Gardening",
+        "service": "Weed control",
+        "description": "Removing weeds from the garden to prevent their growth and ensure the overall health of plants and aesthetics of the space.",
+        "unit": "1 garden of up to 150 m²",
+        "duration": 2,
+        "personnel": 1,
+        "included": "Weeding tools",
+        "price": 60
+    },
+    {
+        "category": "Extermination",
+        "service": "Insect extermination",
+        "description": "Exterminating common household insects, such as ants, cockroaches, and spiders, using safe and effective methods to eliminate infestations and prevent future occurrences.",
+        "unit": "1 area of up to 150 m²",
+        "duration": 2,
+        "personnel": 1,
+        "included": "Tools and insecticides",
+        "price": 90
+    },
+    {
+        "category": "Extermination",
+        "service": "Pest prevention",
+        "description": "Implementing measures to prevent pest infestations, including sealing entry points, installing traps or barriers, and providing advice on maintaining a pest-free environment",
+        "unit": "1 area of up to 150 m²",
+        "duration": 2,
+        "personnel": 1,
+        "included": "Traps and baits",
+        "price": 130
+    },
+    {
+        "category": "Extermination",
+        "service": "Pest removal",
+        "description": "Removing pests from the premises, safely capturing or relocating unwanted animals without harm or damage to property",
+        "unit": "1 area of up to 150 m²",
+        "duration": 2,
+        "personnel": 1,
+        "included": "Tools and products",
+        "price": 90
+    },
+    {
+        "category": "Extermination",
+        "service": "Wasp and hornet nest removal",
+        "description": "Professional removal of wasp and hornet nests to eliminate the threat and ensure the safety of your property.",
+        "unit": "1 wasp’s or 1 hornet’s nest",
+        "duration": 1.5,
+        "personnel": 1,
+        "included": "Utensils and consumables",
+        "price": 130
+    },
+    {
+        "category": "Petcare",
+        "service": "Dog walk",
+        "description": "Taking dogs for a walk, providing exercise and stimulation for their well-being",
+        "unit": "1 30-minute dog walk",
+        "duration": 0.66,
+        "personnel": 1,
+        "included": "No consumables required",
+        "price": 30
+    },
+    {
+        "category": "Petcare",
+        "service": "Dog grooming",
+        "description": "Providing grooming services for dogs, including bathing, brushing, nail trimming, ear cleaning, and haircutting, to keep them clean, healthy, and well-groomed",
+        "unit": "1 Grooming session for 1 dog",
+        "duration": 1,
+        "personnel": 1,
+        "included": "Grooming tools and products",
+        "price": 60
+    },
+    {
+        "category": "Petcare",
+        "service": "Pet transportation to vet",
+        "description": "Transporting pets to veterinary appointments, ensuring their safe and comfortable travel to receive necessary medical care.",
+        "duration": 2,
+        "unit": "1 Transportation of 1 pet to the designated vet within 5 km of client's address",
+        "personnel": 1,
+        "included": "Pet carrier provided by client",
+        "price": 80
+    },
+    {
+        "category": "Grooming",
+        "service": "Hairdressing",
+        "description": "Providing professional hairdressing services, including hair washing, cutting, and styling, to enhance personal grooming and appearance",
+        "unit": "1 session comprising of wash, cut and bsic styling",
+        "duration": 1,
+        "personnel": 1,
+        "included": "Utensils and hair products",
+        "price": 90
+    },
+    {
+        "category": "Grooming",
+        "service": "Nail care",
+        "description": "Offering comprehensive nail care services for either hands or feet, including trimming, shaping, and polishing nails for a neat and well-maintained look",
+        "unit": "1 manicure session for both hands",
+        "duration": 1,
+        "personnel": 1,
+        "included": "Nail care utensils and products",
+        "price": 50
+    },
+    {
+        "category": "Grooming",
+        "service": "Nail care",
+        "description": "Offering comprehensive nail care services for either hands or feet, including trimming, shaping, and polishing nails for a neat and well-maintained look",
+        "unit": "1 pedicure session for both feet",
+        "duration": 1.5,
+        "personnel": 1,
+        "included": "Nail care utensils and products",
+        "price": 70
+    },
+    {
+        "category": "Grooming",
+        "service": "Makeup application",
+        "description": "Applying makeup products to enhance facial features and achieve the desired look for special occasions or everyday wear",
+        "unit": "1 face makeup",
+        "duration": 1.5,
+        "personnel": 1,
+        "included": "Makeup utensils and products",
+        "price": 120
+    },
+    {
+        "category": "Nannying",
+        "service": "Nanny services",
+        "description": "Providing professional nanny services to take care of children, ensuring their safety, well-being, and engaging them in age-appropriate activities",
+        "unit": "1 nanny session for 1 child",
+        "duration": 3,
+        "personnel": 1,
+        "included": "Eventual child meals provided by client",
+        "price": 80
+    },
+    {
+        "category": "Nursing",
+        "service": "Vitals monitoring",
+        "description": "Conducting monitoring of temperature and blood pressure, ensuring accurate measurements for healthcare assessment and monitoring purposes",
+        "unit": "1 pressure and temperature measurement",
+        "duration": 0.5,
+        "personnel": 1,
+        "included": "Gauge and thermometer provided for the session only",
+        "price": 35
+    },
+    {
+        "category": "Wellness",
+        "service": "Fitness training",
+        "description": "Providing one-to-one guided workout sessions with a personal trainer. Each session is tailored to your specific fitness goals and needs",
+        "unit": "1 hour session for 1 client",
+        "duration": 0.75,
+        "personnel": 1,
+        "included": "Weights for session",
+        "price": 60
+    },
+    {
+        "category": "Wellness",
+        "service": "Ayurvedic massage",
+        "description": "Providing ayurvedic massage techniques, tailored to individual needs, to promote relaxation, relieve muscle tension, and enhance overall well-being",
+        "unit": "1 massage for 1 person",
+        "duration": 0.75,
+        "personnel": 1,
+        "included": "Oils included, towels provided by client",
+        "price": 40
+    },
+    {
+        "category": "Companionship",
+        "service": "Conversation",
+        "description": "Engaging in meaningful conversations to provide companionship and stimulate social interaction, promoting mental well-being and emotional support",
+        "unit": "1 conversation with 1 client",
+        "duration": 1,
+        "personnel": 1,
+        "included": "No consumables required",
+        "price": 40
+    },
+    {
+        "category": "Companionship",
+        "service": "Accompaniment to social events",
+        "description": "Accompanying clients to social events, ensuring their participation and enjoyment, while aiding and supporting as needed",
+        "unit": "1 social event",
+        "duration": 2,
+        "personnel": 1,
+        "included": "No consumables required",
+        "price": 70
+    },
+    {
+        "category": "Companionship",
+        "service": "Card and board games",
+        "description": "Engaging individuals in a variety of board and card games, including popular classics such as chess, scrabble, monopoly, poker, and uno, fostering cognitive skills, strategic thinking, social interaction, and entertainment",
+        "unit": "1 session of card or board games with 1 client",
+        "duration": 1,
+        "personnel": 1,
+        "included": "1 card game and 1 board game provided for the session only",
+        "price": 60
+    },
+    {
+        "category": "Eventing",
+        "service": "DJing",
+        "description": "Providing professional DJ services for various events and occasions. Offering a wide selection of music genres, seamless mixing, and energetic performances to keep the crowd engaged and entertained throughout the event.",
+        "unit": "1 DJ set featuring contemporary House and Techno music",
+        "duration": 3,
+        "personnel": 1,
+        "included": "Sound system setup provided by client, DJ equipment and music playlist customization included",
+        "price": 180
+    }
+]

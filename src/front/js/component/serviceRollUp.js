@@ -25,7 +25,12 @@ export const ServiceRollUp = (props) => {
     
     category = category.charAt(0).toLowerCase() + category.slice(1);
     const categoryColor = serviceColoMMap.get(category);
-
+    let durationString="";
+    if (duration < 1) {
+        durationString =`${parseInt(duration*60)} mins`
+    }
+    else if (duration === 1 ) {durationString="1 hr"}
+    else {durationString = `${parseInt(duration)} hrs`}
     return (
         <>
             <div className="serviceRollUp my-1">
@@ -40,8 +45,8 @@ export const ServiceRollUp = (props) => {
                         <span className="rollUpServiceDescription">service:</span>
                         <span className="rollUpServiceLabel">{service}</span>
                         
-                        <span className="rollUpDurationDescription">durantion: </span>
-                        <span className="rollUpDurationLabel">{duration}hr</span>
+                        <span className="rollUpDurationDescription">duration: </span>
+                        <span className="rollUpDurationLabel">{durationString}</span>
                         
                         <span className="rollUpPriceDescription">price: </span>
                         <span className="rollUpPriceLabel">{price}€</span>

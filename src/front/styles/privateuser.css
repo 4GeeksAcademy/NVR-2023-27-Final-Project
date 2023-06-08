@@ -347,21 +347,21 @@ form input[type=search] {
   font-size: .875rem;
   background: rgb(209, 209, 209);
   position: absolute;
-  left: 54%;
+  left: 57%;
   font-variant: small-caps;
 }
 .rollUpDurationLabel {
   font-size: .7rem;
   background: rgb(209, 209, 209);
   position: absolute;
-  left: 60%;
+  left: 65%;
 }
 
 .rollUpPriceDescription {
   font-size: .875rem;
   background: rgb(209, 209, 209);
   position: absolute;
-  left: 63%;
+  left: 72%;
   font-variant: small-caps;
 }
 
@@ -370,7 +370,7 @@ form input[type=search] {
   background: rgb(209, 209, 209);
   position: absolute;
   font-variant-numeric: tabular-nums;
-  left: 67%;
+  left: 69%;
 }
 
 .cardLabels {
