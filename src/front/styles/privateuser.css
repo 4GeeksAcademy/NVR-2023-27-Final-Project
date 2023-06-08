@@ -94,7 +94,6 @@ hr {
 
 /* end of OFFCANVAS */
 
-
 .settingsLabel {
   font-variant: small-caps;
   font-size: 0.875rem;
@@ -228,7 +227,6 @@ li.list-item {
   width: .5rem;
 }
 
-
 li.list-item:hover {
   border-block: .7px solid black;
 }
@@ -330,23 +328,40 @@ form input[type=search] {
   width: 0.21rem;
 }
 
+
+.rollUpServiceDescription {
+  font-size: .875rem;
+  background: rgb(209, 209, 209);
+  position: absolute;
+  left: 35%;
+  font-variant: small-caps;
+}
 .rollUpServiceLabel {
   font-size: .7rem;
   background: rgb(209, 209, 209);
   position: absolute;
-  left: 36%;
+  left: 40%;
 }
 
-
-
-
-
+.rollUpDurationDescription {
+  font-size: .875rem;
+  background: rgb(209, 209, 209);
+  position: absolute;
+  left: 54%;
+  font-variant: small-caps;
+}
+.rollUpDurationLabel {
+  font-size: .7rem;
+  background: rgb(209, 209, 209);
+  position: absolute;
+  left: 60%;
+}
 
 .rollUpPriceDescription {
   font-size: .875rem;
   background: rgb(209, 209, 209);
   position: absolute;
-  left: 50%;
+  left: 63%;
   font-variant: small-caps;
 }
 
@@ -355,7 +370,7 @@ form input[type=search] {
   background: rgb(209, 209, 209);
   position: absolute;
   font-variant-numeric: tabular-nums;
-  left: 55%;
+  left: 67%;
 }
 
 .cardLabels {

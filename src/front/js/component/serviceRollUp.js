@@ -11,7 +11,7 @@ export const ServiceRollUp = (props) => {
         ["hvac", "purple"],
         ["security", "#9400D3"],
         ["handyman", "#EE4B2B"],
-        ["patching", "brown"],
+        ["patching", "yellow"],
         ["gardening", "green"],
         ["extermination", "teal"],
         ["eventing", "purple"],
@@ -19,7 +19,7 @@ export const ServiceRollUp = (props) => {
         ["grooming", "navy"],
         ["nursing", "green"],
         ["nannying", "cyan"],
-        ["petcare", "gold"],
+        ["petcare", "brown"],
         ["wellness", "pink"],
       ]);
     
@@ -36,9 +36,13 @@ export const ServiceRollUp = (props) => {
                     <div className="rollUpCategoryLabelWrapper">
                         <span className="rollUpCategoryLabel">{category}</span>
                     </div>
-                    <div className="">
+                    <div className="d-flex align-items-bottom">
+                        <span className="rollUpServiceDescription">service:</span>
                         <span className="rollUpServiceLabel">{service}</span>
-                        <span className="">{duration}</span>
+                        
+                        <span className="rollUpDurationDescription">durantion: </span>
+                        <span className="rollUpDurationLabel">{duration}hr</span>
+                        
                         <span className="rollUpPriceDescription">price: </span>
                         <span className="rollUpPriceLabel">{price}€</span>
                     </div>
