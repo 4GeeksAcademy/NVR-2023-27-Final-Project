@@ -11,7 +11,7 @@ export const PrivateUser = () => {
     const [selectedSection, setSelectedSection] = useState("requestService");
 
     // SERVICE REQUEST variables
-    const [selectedCategory, setSelectedCategory] = useState("All Categories");
+    const [selectedCategory, setSelectedCategory] = useState("Any category");
     const [selectedPrice, setSelectedPrice] = useState("Any price");
     const [serviceSearchBar, setServiceSearchBar] = useState("");
     const [newServiceDate, setNewServiceDate] = useState(new Date().toISOString().slice(0, 10));
@@ -58,7 +58,7 @@ export const PrivateUser = () => {
         };
 
         if (store.serviceDescriptions) {
-            const newCategories = ["All Categories", ...new Set(store.serviceDescriptions.map((service) => service.category))].sort();
+            const newCategories = ["Any category", ...new Set(store.serviceDescriptions.map((service) => service.category))].sort();
             setCategories(newCategories);
 
             const updatedPrices = findPriceIntervals();
@@ -101,14 +101,12 @@ export const PrivateUser = () => {
 
         filteredServices = store.serviceDescriptions.filter((service) => {
             // Filter by category
-            if (selectedCategory !== "All Categories" && service.category !== selectedCategory) {
+            if (selectedCategory !== "Any category" && service.category !== selectedCategory) {
                 return false;
             }
 
             // Filter by price
             if (selectedPrice !== "Any price") {
-                console.log("selectedPrice:", selectedPrice);
-                console.log("prices:", prices);
                 const price = parseFloat(service.price);
 
                 if (
@@ -134,6 +132,8 @@ export const PrivateUser = () => {
             }
             return true;
         });
+        filteredServices.sort((firstService, secondService) => firstService.category.localeCompare(secondService.category));
+
     };
 
     return (

@@ -1,33 +1,37 @@
 import React from "react";
 
 export const ServiceRollUp = (props) => {
-    const { id, category, service, description, unit, duration, personnel, included, price } = props.serviceObject;
+    let { id, category, service, description, unit, duration, personnel, included, price } = props.serviceObject;
 
-    const colorMap = new Map([
-        ["abc", "red"],
-        ["def", "blue"],
-        ["ghi", "green"],
-        ["jkl", "yellow"],
-        ["mno", "purple"],
-        ["pqr", "orange"],
-        ["stu", "pink"],
-        ["vwx", "brown"],
-        ["yza", "gray"],
-        ["bcd", "teal"],
-        ["efg", "navy"],
-        ["hij", "magenta"],
-        ["klm", "lime"],
-        ["nop", "cyan"],
-        ["qrs", "silver"],
+    const serviceColoMMap = new Map([
+        ["cleaning", "#32CD32"],
+        ["wardrobe", "red"],
+        ["plumbing", "#AFEEEE"],
+        ["electrical", "yellow"],
+        ["hvac", "purple"],
+        ["security", "#9400D3"],
+        ["handyman", "#EE4B2B"],
+        ["patching", "brown"],
+        ["gardening", "green"],
+        ["extermination", "teal"],
+        ["eventing", "purple"],
+        ["companionship", "#FF69B5"],
+        ["grooming", "navy"],
+        ["nursing", "green"],
+        ["nannying", "cyan"],
+        ["petcare", "gold"],
+        ["wellness", "pink"],
       ]);
-      
+    
+    category = category.charAt(0).toLowerCase() + category.slice(1);
+    const categoryColor = serviceColoMMap.get(category);
 
     return (
         <>
             <div className="serviceRollUp my-1">
                 <div className="serviceRollUpBanner ps-3">
-                    <div className="rollUpCategoryColorWrapper" style={{ backgroundColor: "green" }}>
-                        <span className="rollUpCategoryColor" style={{ backgroundColor: "green" }}>&nbsp;</span>
+                    <div className="rollUpCategoryColorWrapper" style={{ backgroundColor: categoryColor }}>
+                        <span className="rollUpCategoryColor" style={{ backgroundColor: categoryColor }}>&nbsp;</span>
                     </div>
                     <div className="rollUpCategoryLabelWrapper">
                         <span className="rollUpCategoryLabel">{category}</span>
