@@ -341,13 +341,13 @@ export const PrivateUser = () => {
                                             Any price
                                         </li>
                                         <li className="list-item" key={1} onClick={() => handlePriceSelect(`${prices.interval1Min}€ - ${prices.interval1Max}€`)}>
-                                            ${prices.interval1Min}€ - ${prices.interval1Max}€
+                                            {prices.interval1Min}€ - {prices.interval1Max}€
                                         </li>
                                         <li className="list-item" key={2} onClick={() => handlePriceSelect(`${prices.interval2Min}€ - ${prices.interval2Max}€`)}>
-                                            ${prices.interval2Min}€ - ${prices.interval2Max}€
+                                            {prices.interval2Min}€ - {prices.interval2Max}€
                                         </li>
                                         <li className="list-item" key={3} onClick={() => handlePriceSelect(`${prices.interval3Min}€ - ${prices.interval3Max}€`)}>
-                                            ${prices.interval3Min}€ - ${prices.interval3Max}€
+                                            {prices.interval3Min}€ - {prices.interval3Max}€
                                         </li>
                                     </ul>
                                 </div>
