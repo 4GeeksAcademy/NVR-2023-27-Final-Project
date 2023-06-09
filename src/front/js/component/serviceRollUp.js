@@ -56,6 +56,11 @@ export const ServiceRollUp = (props) => {
                             <span className="bannerDescription">price: </span>
                             <span className="bannerValue">{priceString}</span>
                         </span>
+                        <span className="bannerLabel4">
+                            <span className="bannerIcon">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg> 
+                            </span>
+                        </span>
                     </div>
                 </div>
                 <div className="expandableWrapper">

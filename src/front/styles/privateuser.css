@@ -359,7 +359,14 @@ form input[type=search] {
   display: flex;
   align-items: baseline;
   position: absolute;
-  left: 65%;
+  left: 64%;
+}
+
+.bannerLabel4 {
+  display: flex;
+  align-items: baseline;
+  position: absolute;
+  left: 73%;
 }
 
 .bannerDescription {
