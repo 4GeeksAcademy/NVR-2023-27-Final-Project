@@ -221,7 +221,7 @@
 },
 {
     "category": "Patching",
-    "service": "Painting of interior wall, single coat",
+    "service": "Single painting of interior wall",
     "description": "Applying a single coat of paint to interior walls, refreshing the appearance or changing the color",
     "unit": "1 wall of up to 25 square meters",
     "duration": 3,
@@ -231,7 +231,7 @@
 },
 {
     "category": "Patching",
-    "service": "Painting of interior wall, double coat",
+    "service": "Double painting of interior wall",
     "description": "Applying a double coat of paint to interior walls, ensuring full coverage and a smooth finish",
     "unit": "1 wall of up to 25 m²s",
     "duration": 3,
@@ -241,7 +241,7 @@
 },
 {
     "category": "Patching",
-    "service": "Painting of ground floor exterior wall, single coat",
+    "service": "Single painting of exterior wall",
     "description": "Applying a single coat of paint to the ground floor exterior walls, enhancing the visual appeal and protection against weather elements",
     "unit": "1 ground floor exterior wall of up to 40 m²",
     "duration": 4,
@@ -251,7 +251,7 @@
 },
 {
     "category": "Patching",
-    "service": "Painting of ground floor exterior wall, double coat",
+    "service": "Double painting of exterior",
     "description": "Applying a double coat of paint to the ground floor exterior walls, providing added durability and an even finish",
     "unit": "1 ground floor exterior wall of up to 150 m²",
     "duration": 4,
@@ -361,7 +361,7 @@
 },
 {
     "category": "Extermination",
-    "service": "Wasp and hornet Nest Removal",
+    "service": "Wasp's or hornet's nest Removal",
     "description": "Professional removal of wasp and hornet nests to eliminate the threat and ensure the safety of your property.",
     "unit": "1 wasp’s or 1 hornet’s nest",
     "duration": 1.5,
@@ -391,7 +391,7 @@
 },
 {
     "category": "Petcare",
-    "service": "Pet transportation to vet appointments",
+    "service": "Pet transportation to vet",
     "description": "Transporting pets to veterinary appointments, ensuring their safe and comfortable travel to receive necessary medical care.",
     "duration": 2,
     "unit": "1 Transportation of 1 pet to the designated vet within 5 km of client's address",
@@ -453,7 +453,7 @@
 
 {
     "category": "Nursing",
-    "service": "Temperature and blood pressure monitoring",
+    "service": "Vitals monitoring",
     "description": "Conducting monitoring of temperature and blood pressure, ensuring accurate measurements for healthcare assessment and monitoring purposes",
     "unit": "1 pressure and temperature measurement",
     "duration": 0.5,
