@@ -31,25 +31,31 @@ export const ServiceRollUp = (props) => {
     }
     else if (duration === 1 ) {durationString="1 hr"}
     else {durationString = `${parseInt(duration)} hrs`}
+    
+    const priceString = price+".00€"
     return (
         <>
             <div className="serviceRollUp my-1">
                 <div className="serviceRollUpBanner ps-3">
-                    <div className="rollUpCategoryColorWrapper" style={{ backgroundColor: categoryColor }}>
-                        <span className="rollUpCategoryColor" style={{ backgroundColor: categoryColor }}>&nbsp;</span>
+                    <div className="bannerCategoryColorWrapper" style={{ backgroundColor: categoryColor }}>
+                        <span className="bannerCategoryColor" style={{ backgroundColor: categoryColor }}>&nbsp;</span>
                     </div>
-                    <div className="rollUpCategoryLabelWrapper">
-                        <span className="rollUpCategoryLabel">{category}</span>
+                    <div className="bannerCategoryLabelWrapper">
+                        <span className="bannerCategoryLabel">{category}</span>
                     </div>
-                    <div className="d-flex align-items-bottom">
-                        <span className="rollUpServiceDescription">service:</span>
-                        <span className="rollUpServiceLabel">{service}</span>
-                        
-                        <span className="rollUpDurationDescription">duration: </span>
-                        <span className="rollUpDurationLabel">{durationString}</span>
-                        
-                        <span className="rollUpPriceDescription">price: </span>
-                        <span className="rollUpPriceLabel">{price}€</span>
+                    <div className="bannerLabels">
+                        <span className="bannerLabel1">
+                            <span className="bannerDescription">service:</span>
+                            <span className="bannerValue">{service}</span>
+                        </span>
+                        <span className="bannerLabel2">
+                            <span className="bannerDescription">duration: </span>
+                            <span className="bannerValue">{durationString}</span>
+                        </span>
+                        <span className="bannerLabel3">
+                            <span className="bannerDescription">price: </span>
+                            <span className="bannerValue">{priceString}</span>
+                        </span>
                     </div>
                 </div>
                 <div className="expandableWrapper">

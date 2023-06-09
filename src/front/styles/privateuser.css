@@ -243,13 +243,16 @@ form input[type=search] {
   height: 1.8rem;
   width: 36rem;
   padding-inline: 1rem;
+  padding-block: .3rem;
   display: flex;
-  padding: .3rem
 }
+
+.serviceRollUpBanner * {
+  background-color: rgb(209, 209, 209);
+ }
 
 .serviceRollUpBanner:hover ~ .expandableWrapper {
   grid-template-rows: 1fr;
-
 }
 
 .expandableWrapper:hover {
@@ -277,14 +280,25 @@ form input[type=search] {
 
 .expandableContent {
   padding: .5rem;
+  border-top: .5px solid rgb(40, 40, 40);
+
 }
+
 .scheduleButtonWrapper {
   margin-top: .5rem;
   display: flex;
   justify-content: right;
 }
 
-.rollUpCategoryColorWrapper {
+/* Banner  */
+
+.bannerLabels {
+  display: flex;
+  align-items: baseline;
+  background: rgb(209, 209, 209);
+}
+
+.bannerCategoryColorWrapper {
   display: flex;
   align-items: center;
   transform: skew(-18deg);
@@ -292,7 +306,7 @@ form input[type=search] {
   width: .3rem;
 }
 
-.rollUpCategoryColor {
+.bannerCategoryColor {
   display: inline-block;
   padding-inline: .12rem;
   padding-block: .03rem;
@@ -301,15 +315,14 @@ form input[type=search] {
   font-size: .7rem;
 }
 
-.rollUpCategoryLabelWrapper {
+.bannerCategoryLabelWrapper {
   display: flex;
-  align-items: center;
   background-color: rgb(136, 136, 136);
   transform: skew(-18deg);
   padding-inline: 3px;
 }
 
-.rollUpCategoryLabel {
+.bannerCategoryLabel {
   display: inline-block;
   padding-inline: .12rem;
   padding-block: .03rem;
@@ -321,76 +334,48 @@ form input[type=search] {
   letter-spacing: .1rem;
 }
 
-.rollUpCategoryLabel::before,
-.rollUpCategoryLabel::after {
+.bannerCategoryLabel::before,
+.bannerCategoryLabel::after {
   content: "";
   display: inline-block;
   width: 0.21rem;
 }
 
-
-.rollUpServiceDescription {
-  font-size: .875rem;
-  background: rgb(209, 209, 209);
+.bannerLabel1 {
+  display: flex;
+  align-items: baseline;
   position: absolute;
-  left: 35%;
-  font-variant: small-caps;
-}
-.rollUpServiceLabel {
-  font-size: .7rem;
-  background: rgb(209, 209, 209);
-  position: absolute;
-  left: 40%;
+  left: 37%;
 }
 
-.rollUpDurationDescription {
-  font-size: .875rem;
-  background: rgb(209, 209, 209);
+.bannerLabel2 {
+  display: flex;
+  align-items: baseline;
   position: absolute;
-  left: 57%;
-  font-variant: small-caps;
+  left: 54%;
 }
-.rollUpDurationLabel {
-  font-size: .7rem;
-  background: rgb(209, 209, 209);
+
+.bannerLabel3 {
+  display: flex;
+  align-items: baseline;
   position: absolute;
   left: 65%;
 }
 
-.rollUpPriceDescription {
+.bannerDescription {
+  display: flex;
+  align-items: baseline;
   font-size: .875rem;
   background: rgb(209, 209, 209);
-  position: absolute;
-  left: 72%;
   font-variant: small-caps;
 }
 
-.rollUpPriceLabel {
+.bannerValue {
+  display: flex;
+  align-items: baseline;
   font-size: .7rem;
   background: rgb(209, 209, 209);
-  position: absolute;
-  font-variant-numeric: tabular-nums;
-  left: 69%;
-}
-
-.cardLabels {
-  display: flex;
-  width: 12rem;
-  flex-direction: column;
-  font-variant: small-caps;
-  justify-content: flex-end;
-  text-align: right;
-  margin-right: 0.3rem;
-  font-size: .875rem;
-}
-
-.cardInfo {
-  display: flex;
-  width: 5rem;
-  flex-direction: column;
-  justify-content: flex-start;
-  text-align: left;
-  font-size: .875rem;
+  padding-left: .27rem;
 }
 
 

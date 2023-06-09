@@ -191,9 +191,9 @@
     },
     {
         "category": "Handyman",
-        "service": "Blindfold repair, venetian and vertical",
+        "service": "Blindfold repair",
         "description": "Repairing venetian and vertical blinds",
-        "unit": "1 blind",
+        "unit": "1 blindfold",
         "duration": 2,
         "personnel": 1,
         "included": "Spare blind slats provided by client, tools and spare cord included",
@@ -201,7 +201,7 @@
     },
     {
         "category": "Handyman",
-        "service": "Small appliance basic repair",
+        "service": "Small appliance repair",
         "description": "Repairing small appliances such as toasters, blenders, coffee makers, irons, electric fans, and food processors whose fix does not require any spare aprts",
         "unit": "1 small appliance",
         "duration": 2,
@@ -361,7 +361,7 @@
     },
     {
         "category": "Extermination",
-        "service": "Wasp and hornet nest removal",
+        "service": "Wasp's or hornet's nest removal",
         "description": "Professional removal of wasp and hornet nests to eliminate the threat and ensure the safety of your property.",
         "unit": "1 wasp’s or 1 hornet’s nest",
         "duration": 1.5,
@@ -441,7 +441,7 @@
     },
     {
         "category": "Nannying",
-        "service": "Nanny services",
+        "service": "Nanny",
         "description": "Providing professional nanny services to take care of children, ensuring their safety, well-being, and engaging them in age-appropriate activities",
         "unit": "1 nanny session for 1 child",
         "duration": 3,

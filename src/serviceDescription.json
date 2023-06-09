@@ -73,7 +73,7 @@
     "service": "Shoe polishing",
     "description": "Providing shoe polishing service to restore shine and enhance the appearance of shoes",
     "unit": "Up to 5 pairs of shoes",
-    "duration": 0.75,
+    "duration": 0.5,
     "personnel": 1,
     "included": "Utensils and consumables",
     "price": 60
@@ -495,7 +495,7 @@
 },
 {
     "category": "Companionship",
-    "service": "Accompaniment to social events",
+    "service": "Accompaniment to events",
     "description": "Accompanying clients to social events, ensuring their participation and enjoyment, while aiding and supporting as needed",
     "unit": "1 social event",
     "duration": 2,
