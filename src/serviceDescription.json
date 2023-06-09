@@ -170,7 +170,7 @@
 },
 {
     "category": "Handyman",
-    "service": "Window repair, simple glass",
+    "service": "Window repair",
     "description": "Repairing windows with simple glass, addressing issues such as cracks, broken panes, or faulty seals",
     "unit": "1 window of up to 2 m²",
     "duration": 1,
@@ -191,7 +191,7 @@
 }   ,
 {
     "category": "Handyman",
-    "service": "Blindfold repair, venetian and vertical",
+    "service": "Blindfold repair",
     "description": "Repairing venetian and vertical blinds",
     "unit": "1 blind",
     "duration": 2,
@@ -221,7 +221,7 @@
 },
 {
     "category": "Patching",
-    "service": "Single painting of interior wall",
+    "service": "Single painting of partition",
     "description": "Applying a single coat of paint to interior walls, refreshing the appearance or changing the color",
     "unit": "1 wall of up to 25 square meters",
     "duration": 3,
@@ -231,7 +231,7 @@
 },
 {
     "category": "Patching",
-    "service": "Double painting of interior wall",
+    "service": "Double painting of partition",
     "description": "Applying a double coat of paint to interior walls, ensuring full coverage and a smooth finish",
     "unit": "1 wall of up to 25 m²s",
     "duration": 3,
@@ -241,7 +241,7 @@
 },
 {
     "category": "Patching",
-    "service": "Single painting of exterior wall",
+    "service": "Single painting of facade",
     "description": "Applying a single coat of paint to the ground floor exterior walls, enhancing the visual appeal and protection against weather elements",
     "unit": "1 ground floor exterior wall of up to 40 m²",
     "duration": 4,
@@ -251,7 +251,7 @@
 },
 {
     "category": "Patching",
-    "service": "Double painting of exterior",
+    "service": "Double painting of facade",
     "description": "Applying a double coat of paint to the ground floor exterior walls, providing added durability and an even finish",
     "unit": "1 ground floor exterior wall of up to 150 m²",
     "duration": 4,
