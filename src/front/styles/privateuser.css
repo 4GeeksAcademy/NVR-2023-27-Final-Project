@@ -345,28 +345,28 @@ form input[type=search] {
   display: flex;
   align-items: baseline;
   position: absolute;
-  left: 37%;
+  left: 36%;
 }
 
 .bannerLabel2 {
   display: flex;
   align-items: baseline;
   position: absolute;
-  left: 54%;
+  left: 55%;
 }
 
 .bannerLabel3 {
   display: flex;
   align-items: baseline;
   position: absolute;
-  left: 64%;
+  left: 65%;
 }
 
 .bannerLabel4 {
   display: flex;
   align-items: baseline;
   position: absolute;
-  left: 73%;
+  left: 74%;
 }
 
 .bannerDescription {
@@ -385,6 +385,35 @@ form input[type=search] {
   padding-left: .27rem;
 }
 
+table,
+td {
+  border: 1px solid transparent;
+}
+
+.expandableTbale td.right-align {
+  text-align: right;
+}
+
+.expandableTbale td.left-align {
+  text-align: left;
+}
+
+.expandabelTable,
+td {
+  border: 1px solid transparent;
+  align-items: top;
+}
+
+.expandableValue , .expandableDescription {
+  font-size: .7rem;
+}
+
+.expandableDescription {
+  width: 11.1rem;
+  font-size: .875rem;
+  font-variant: small-caps;
+  align-items: top;
+}
 
 
 

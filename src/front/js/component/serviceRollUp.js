@@ -21,18 +21,18 @@ export const ServiceRollUp = (props) => {
         ["nannying", "cyan"],
         ["petcare", "brown"],
         ["wellness", "pink"],
-      ]);
-    
+    ]);
+
     category = category.charAt(0).toLowerCase() + category.slice(1);
     const categoryColor = serviceColoMMap.get(category);
-    let durationString="";
+    let durationString = "";
     if (duration < 1) {
-        durationString =`${parseInt(duration*60)} mins`
+        durationString = `${parseInt(duration * 60)} mins`
     }
-    else if (duration === 1 ) {durationString="1 hr"}
-    else {durationString = `${parseInt(duration)} hrs`}
-    
-    const priceString = price+".00€"
+    else if (duration === 1) { durationString = "1 hr" }
+    else { durationString = `${parseInt(duration)} hrs` }
+
+    const priceString = price + ".00€"
     return (
         <>
             <div className="serviceRollUp my-1">
@@ -58,7 +58,7 @@ export const ServiceRollUp = (props) => {
                         </span>
                         <span className="bannerLabel4">
                             <span className="bannerIcon">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg> 
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg>
                             </span>
                         </span>
                     </div>
@@ -67,50 +67,32 @@ export const ServiceRollUp = (props) => {
                     <div>
                         <div className="expandable ">
                             <div className="expandableContent">
-                                <div>
-                                    <div className="">"
-                                        <div>Description:</div>
-                                        <div className="rollUpDescriptionLabel">{description}</div>
-                                    </div>
-                                    <div className="cardLabels">
-                                        <div>provision:</div>
-                                        <div>included::</div>
-                                        <div>personnel:</div>
-                                    </div>
-                                    <div className="cardInfo">
-                                        <div>{unit}</div>
-                                        <div>{included}</div>
-                                        <div>{personnel}</div>
-                                    </div>
-                                </div>
-                                <div className="scheduleButtonWrapper">
-                                    <button className="scheduleButton">Schedule</button>
-                                </div>
+                                <table className="expandableTbale">
+                                    <tbody>
+                                        <tr className="expandableTableRow">
+                                            <td className="expandableDescription right-align">unit:</td>
+                                            <td className="expandableValue left-align">{unit}</td>
+                                        </tr>
+                                        <tr className="expandableTableRow">
+                                            <td className="expandableDescription right-align">included:</td>
+                                            <td className="expandableValue left-align">{included}</td>
+                                        </tr>
+                                        <tr className="expandableTableRow">
+                                            <td className="expandableDescription right-align">personnel:</td>
+                                            <td className="expandableValue left-align">{personnel}</td>
+                                        </tr>
+                                        <tr className="expandableTableRow">
+                                            <td className="expandableDescription right-align">description:</td>
+                                            <td className="expandableValue left-align">{description}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
-
-
     );
 };
 
-{/* <div className="serviceRollUp">
-
-<div className="serviceRollUpCategoryLabelWrapper">
-    <span className="serviceRollUpCategoryLabel">{category}</span>
-</div>
-<span className="serviceRollUpServiceLabel">{service}</span>
-<span className="serviceRollUpPriceLabel">Price: {price}€</span>
-<span className="">
-    <button
-        className="reviewServiceButton ms-auto"
-        type="button"
-    >
-        review and schedule
-    </button>
-</span>
-
-</div> */}
