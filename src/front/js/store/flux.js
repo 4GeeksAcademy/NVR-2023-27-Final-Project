@@ -12,7 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userSettings: null,
 			userAddresses: null,
 			userExclusions: null,
-			userRequetss: null,
+			userRequests: null,
 			userNotifications: null,
 			serviceDescriptions: null,
 
@@ -201,6 +201,48 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error:", error);
 				}
 			},
+
+			getUserRequests: async () => {
+				try {
+				  const response = await fetch(process.env.BACKEND_URL + "api/getuserservicerequests", {
+					method: "GET",
+					headers: {
+					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+					}
+				  });
+			  
+				  if (response.ok) {
+					const data = await response.json();
+					console.log(data);
+					setStore({ userRequests: data.user_requests });
+				  } else {
+					console.log("Error:", response.status);
+				  }
+				} catch (error) {
+				  console.log("An error occurred:", error);
+				}
+			  },
+			  
+
+			getUserNotifications: async () => {
+				const response = await fetch(process.env.BACKEND_URL + "api/getusernotifications", {
+					method: "GET",
+					headers: {
+						"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+					}
+				});
+
+				if (response.ok) {
+					const data = await response.json();
+					console.log(data);
+					setStore({ userNotifications: data.notifications });
+				} else {
+					console.log("Error:", response.status);
+				}
+			}
+
+
+
 
 		}
 	};

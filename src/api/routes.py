@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, UserProfile, ProviderProfile, Address, Exclusion, ServiceDescription
+from api.models import db, UserProfile, ProviderProfile, Address, Exclusion, ServiceRequest, Notification,ServiceDescription
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -182,12 +182,14 @@ def get_user_addresses():
             secondary_address = Address.query.filter_by(
                 user_id=user.id, is_main=False).first()
             user_addresses = {
+                "id1": main_address.id or "",
                 "street1": main_address.street or "",
                 "apartment1": main_address.apartment or "",
                 "city1": main_address.city or "",
                 "state1": main_address.state or "",
                 "postalcode1": main_address.postal_code or "",
                 "country1": main_address.country or "",
+                "id2": secondary_address.id or "",
                 "street2": secondary_address.street or "",
                 "apartment2": secondary_address.apartment or "",
                 "city2": secondary_address.city or "",
@@ -241,3 +243,50 @@ def get_user_exclusions():
             "message": "An error occurred",
             "error": str(e)
         }), 500
+
+
+
+@api.route("/getuserservicerequests", methods=["GET"])
+@jwt_required()
+def get_user_service_requests():
+    try:
+        user_email = get_jwt_identity()
+        user = UserProfile.query.filter_by(email=user_email).first()
+        if user:
+            service_requests = ServiceRequest.query.filter_by(user_id=user.id).all()
+            serialized_service_requests = [request.serialize() for request in service_requests]
+            return jsonify({
+                "message": "Service requests successfully retrieved",
+                "user_requests": serialized_service_requests
+            })
+        else:
+            return jsonify({"message": "User not found"}), 404
+    except Exception as e:
+        return jsonify({
+            "message": "An error occurred",
+            "error": str(e)
+        }), 500
+
+
+
+@api.route("/getusernotifications", methods=["GET"])
+@jwt_required()
+def get_user_notifications():
+    try:
+        user_email = get_jwt_identity()
+        user = UserProfile.query.filter_by(email=user_email).first()
+        if user:
+            notifications = Notification.query.filter_by(user_id=user.id).all()
+            serialized_notifications = [notification.serialize() for notification in notifications]
+            return jsonify({
+                "message": "Notifications successfully retrieved",
+                "notifications": serialized_notifications
+            })
+        else:
+            return jsonify({"message": "User not found"}), 404
+    except Exception as e:
+        return jsonify({
+            "message": "An error occurred",
+            "error": str(e)
+        }), 500
+ 

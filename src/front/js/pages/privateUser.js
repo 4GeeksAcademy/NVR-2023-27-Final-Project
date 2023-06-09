@@ -11,7 +11,7 @@ export const PrivateUser = () => {
     const [selectedSection, setSelectedSection] = useState("requestService");
 
     // SERVICE REQUEST variables
-    const [selectedCategory, setSelectedCategory] = useState("All Categories");
+    const [selectedCategory, setSelectedCategory] = useState("Any category");
     const [selectedPrice, setSelectedPrice] = useState("Any price");
     const [serviceSearchBar, setServiceSearchBar] = useState("");
     const [newServiceDate, setNewServiceDate] = useState(new Date().toISOString().slice(0, 10));
@@ -29,18 +29,18 @@ export const PrivateUser = () => {
                 navigate("/");
             }
         };
-    
+
         checkCredentials();
-    
+
         if (localStorage.getItem("credentials")) {
-            const currentUserId = JSON.parse(localStorage.getItem("credentials")).id;
             actions.getUserSettings();
             actions.getUserAddresses();
             actions.getUserExclusions();
+            actions.getUserRequests();
+            actions.getUserNotifications();
             actions.getServiceDescriptions();
         }
     }, []);
-    
 
     useEffect(() => {
         const findPriceIntervals = () => {
@@ -67,7 +67,7 @@ export const PrivateUser = () => {
         };
 
         if (store.serviceDescriptions) {
-            const newCategories = ["All Categories", ...new Set(store.serviceDescriptions.map((service) => service.category))].sort();
+            const newCategories = ["Any category", ...new Set(store.serviceDescriptions.map((service) => service.category))].sort();
             setCategories(newCategories);
 
             const updatedPrices = findPriceIntervals();
@@ -110,14 +110,12 @@ export const PrivateUser = () => {
 
         filteredServices = store.serviceDescriptions.filter((service) => {
             // Filter by category
-            if (selectedCategory !== "All Categories" && service.category !== selectedCategory) {
+            if (selectedCategory !== "Any category" && service.category !== selectedCategory) {
                 return false;
             }
 
             // Filter by price
             if (selectedPrice !== "Any price") {
-                console.log("selectedPrice:", selectedPrice);
-                console.log("prices:", prices);
                 const price = parseFloat(service.price);
 
                 if (
@@ -143,6 +141,8 @@ export const PrivateUser = () => {
             }
             return true;
         });
+        filteredServices.sort((firstService, secondService) => firstService.category.localeCompare(secondService.category));
+
     };
 
     return (
@@ -186,7 +186,7 @@ export const PrivateUser = () => {
                                 data-bs-dismiss="offcanvas"
                                 aria-label="Close"
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M400-280v-400l200 200-200 200Z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M400-280v-400l200 200-200 200Z" /></svg>
                             </span>
 
                             {/* side banner ACCORDION */}
@@ -270,6 +270,35 @@ export const PrivateUser = () => {
                             type="button"
                             className="dimissBanner ps-3 pt-3"
                         ></span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     </nav>
                     {selectedSection === "requestService" && (
                         <nav className="navbar fixed-top secondNavBar d-flex justify-content-center align-items-center ">
@@ -321,13 +350,13 @@ export const PrivateUser = () => {
                                             Any price
                                         </li>
                                         <li className="list-item" key={1} onClick={() => handlePriceSelect(`${prices.interval1Min}€ - ${prices.interval1Max}€`)}>
-                                            ${prices.interval1Min}€ - ${prices.interval1Max}€
+                                            {prices.interval1Min}€ - {prices.interval1Max}€
                                         </li>
                                         <li className="list-item" key={2} onClick={() => handlePriceSelect(`${prices.interval2Min}€ - ${prices.interval2Max}€`)}>
-                                            ${prices.interval2Min}€ - ${prices.interval2Max}€
+                                            {prices.interval2Min}€ - {prices.interval2Max}€
                                         </li>
                                         <li className="list-item" key={3} onClick={() => handlePriceSelect(`${prices.interval3Min}€ - ${prices.interval3Max}€`)}>
-                                            ${prices.interval3Min}€ - ${prices.interval3Max}€
+                                            {prices.interval3Min}€ - {prices.interval3Max}€
                                         </li>
                                     </ul>
                                 </div>
@@ -364,7 +393,17 @@ export const PrivateUser = () => {
                 </header>
                 <main>
                     <div className="main container-fluid m-0 p-0 g-0">
-                        <span>UserSettings</span>
+                        <div className="row d-flex justify content-center p-3">
+                            {/*  <p>{localStorage.getItem("credentials")}</p>
+                            <p>{selectedCategory}</p>
+                            <p>{selectedPrice}</p>
+                            <p>{serviceSearchBar}</p> */}
+                            {filteredServices && filteredServices.map((filteredService, index) => (
+                                <div className="col-12 d-flex justify-content-center" key={filteredService.id}>
+                                    <div><ServiceRollUp serviceObject={filteredService} /></div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </main>
             </div>

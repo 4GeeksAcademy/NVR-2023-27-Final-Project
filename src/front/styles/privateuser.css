@@ -94,7 +94,6 @@ hr {
 
 /* end of OFFCANVAS */
 
-
 .settingsLabel {
   font-variant: small-caps;
   font-size: 0.875rem;
@@ -214,9 +213,6 @@ ul.dropdown-menu.rounded-0 {
   }
 }
 
-
-
-
 /* Ribbon elements  */
 li.list-item {
   font-size: .7rem;
@@ -231,39 +227,102 @@ li.list-item {
   width: .5rem;
 }
 
-
 li.list-item:hover {
   border-block: .7px solid black;
 }
 
 /* Dropdown lists  */
-
 form input[type=search] {
   font-size: .7rem;
   font-style: italic;
 }
 
-/* serviceTollUp  */
-
-.serviceRollUp {
+/* serviceRollUp  */
+.serviceRollUpBanner {
   background-color: rgb(209, 209, 209);
-  margin-bottom: .3rem;
   height: 1.8rem;
   width: 36rem;
   padding-inline: 1rem;
+  padding-block: .3rem;
   display: flex;
-  align-items: center;
 }
 
-.serviceRollUpCategoryLabelWrapper {
+.serviceRollUpBanner * {
+  background-color: rgb(209, 209, 209);
+ }
+
+.serviceRollUpBanner:hover ~ .expandableWrapper {
+  grid-template-rows: 1fr;
+}
+
+.expandableWrapper:hover {
+  grid-template-rows: 1fr;
+
+}
+
+.expandableWrapper {
+  width: 36rem;
+  margin: .001rem;
+  padding: .001rem;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 500ms;
+}
+
+.expandableWrapper > div {
+  overflow: hidden;
+}
+
+.expandable,
+.expandable * {
+  background-color: rgb(209, 209, 209);
+}
+
+.expandableContent {
+  padding: .5rem;
+  border-top: .5px solid rgb(40, 40, 40);
+
+}
+
+.scheduleButtonWrapper {
+  margin-top: .5rem;
+  display: flex;
+  justify-content: right;
+}
+
+/* Banner  */
+
+.bannerLabels {
+  display: flex;
+  align-items: baseline;
+  background: rgb(209, 209, 209);
+}
+
+.bannerCategoryColorWrapper {
   display: flex;
   align-items: center;
+  transform: skew(-18deg);
+  padding-inline: 3px;
+  width: .3rem;
+}
+
+.bannerCategoryColor {
+  display: inline-block;
+  padding-inline: .12rem;
+  padding-block: .03rem;
+  color: var(--background);
+  transform: skew(18deg);
+  font-size: .7rem;
+}
+
+.bannerCategoryLabelWrapper {
+  display: flex;
   background-color: rgb(136, 136, 136);
   transform: skew(-18deg);
   padding-inline: 3px;
 }
 
-.serviceRollUpCategoryLabel {
+.bannerCategoryLabel {
   display: inline-block;
   padding-inline: .12rem;
   padding-block: .03rem;
@@ -275,87 +334,86 @@ form input[type=search] {
   letter-spacing: .1rem;
 }
 
-.serviceRollUpCategoryLabel::before,
-.serviceRollUpCategoryLabel::after {
+.bannerCategoryLabel::before,
+.bannerCategoryLabel::after {
   content: "";
   display: inline-block;
-  width: 0.2rem;
+  width: 0.21rem;
 }
 
-.serviceRollUpServiceLabel {
-  font-size: .875rem;
-  background:  rgb(209, 209, 209);
-}
-
-.serviceRollUpPriceLabel {
-  font-size: .875rem;
-  background:  rgb(209, 209, 209);
-  font-weight: 600;
-}
-
-.reviewServiceButton {
-  height: 1rem;
-  font-size: .3rem;
-
-}
-
-
-
-/* TEST  */
-
-
-.banner {
-  background-color: rgb(209, 209, 209);
-  margin-top: 1rem;
-  height: 1.8rem;
-  width: 36rem;
-  padding-inline: 1rem;
+.bannerLabel1 {
   display: flex;
-  align-items: center;
-  
+  align-items: baseline;
+  position: absolute;
+  left: 36%;
 }
 
-.banner:hover ~ .quick-example {
-  grid-template-rows: 1fr;
-
-}
-
-.quick-example:hover {
-  grid-template-rows: 1fr;
-
-}
-
-.quick-example {
-  width: 36rem;
-  margin: .001rem;
-  padding: .001rem;
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 500ms;
-  
-}
-
-.quick-example > div {
-  overflow: hidden;
-}
-
-.expandable,
-.expandable * {
-  background-color: rgb(209, 209, 209);
-}
-
-.expandableContent {
-  padding: .5rem;
-}
-.scheduleButtonWrapper {
-  margin-top: .5rem;
+.bannerLabel2 {
   display: flex;
-  justify-content: right;
+  align-items: baseline;
+  position: absolute;
+  left: 55%;
 }
 
+.bannerLabel3 {
+  display: flex;
+  align-items: baseline;
+  position: absolute;
+  left: 65%;
+}
 
+.bannerLabel4 {
+  display: flex;
+  align-items: baseline;
+  position: absolute;
+  left: 74%;
+}
 
+.bannerDescription {
+  display: flex;
+  align-items: baseline;
+  font-size: .875rem;
+  background: rgb(209, 209, 209);
+  font-variant: small-caps;
+}
 
+.bannerValue {
+  display: flex;
+  align-items: baseline;
+  font-size: .7rem;
+  background: rgb(209, 209, 209);
+  padding-left: .27rem;
+}
+
+table,
+td {
+  border: 1px solid transparent;
+}
+
+.expandableTbale td.right-align {
+  text-align: right;
+}
+
+.expandableTbale td.left-align {
+  text-align: left;
+}
+
+.expandabelTable,
+td {
+  border: 1px solid transparent;
+  align-items: top;
+}
+
+.expandableValue , .expandableDescription {
+  font-size: .7rem;
+}
+
+.expandableDescription {
+  width: 11.1rem;
+  font-size: .875rem;
+  font-variant: small-caps;
+  align-items: top;
+}
 
 
 

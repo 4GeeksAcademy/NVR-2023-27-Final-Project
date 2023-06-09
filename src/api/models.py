@@ -127,7 +127,7 @@ class ServiceRequest(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     status = db.Column(db.Integer, nullable=False)
     date = db.Column(db.Date, nullable=False)
-    time = db.Column(db.Time)
+    time = db.Column(db.String(250), nullable=False )
     recurrence = db.Column(db.Integer)
     quantity = db.Column(db.Integer) 
     service_description_id = db.Column(db.Integer, db.ForeignKey(
