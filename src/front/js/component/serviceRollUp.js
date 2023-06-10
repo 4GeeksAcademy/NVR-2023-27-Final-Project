@@ -24,16 +24,16 @@ export const ServiceRollUp = (props) => {
     ]);
 
     // Format props
-    category = category.charAt(0).toLowerCase() + category.slice(1);
+    service = service.charAt(0).toUpperCase() + service.slice(1);
     const categoryColor = serviceColoMMap.get(category);
     let durationString = "";
     if (duration < 1) {
-        durationString = `${parseInt(duration * 60)} mins`
+        durationString = `${parseInt(duration * 60)} minutes`
     }
-    else if (duration === 1) { durationString = "1 hr" }
-    else { durationString = `${parseInt(duration)} hrs` }
+    else if (duration === 1) { durationString = "1 hourr" }
+    else { durationString = `${parseInt(duration)} hours` }
     const priceString = price + ".00€"
-    
+
     // Main JSX
     return (
         <>
@@ -45,12 +45,12 @@ export const ServiceRollUp = (props) => {
                     <div className="bannerCategoryLabelWrapper">
                         <span className="bannerCategoryLabel">{category}</span>
                     </div>
-                    <div className="bannerLabels">
+                    <div className="bannerLabels d-flex alin-items-center">
                         <span className="bannerLabel1">
                             <span className="bannerDescription">service:</span>
                             <span className="bannerValue">{service}</span>
                         </span>
-                        <span className="bannerLabel2">
+                        <span className="bannerLabel2 d-flex align-items-center">
                             <span className="bannerDescription">duration: </span>
                             <span className="bannerValue">{durationString}</span>
                         </span>
@@ -58,28 +58,28 @@ export const ServiceRollUp = (props) => {
                             <span className="bannerDescription">price: </span>
                             <span className="bannerValue">{priceString}</span>
                         </span>
-                        <span className="bannerLabel4">
-                            <button className="bookButton">Book</button>
+                        <span className="bannerLabel4 d-flex align-items-center">
+                            <button className="bookButton mt-1">book</button>
                         </span>
                     </div>
+                 
                 </div>
                 <div className="expandableWrapper">
-                    <div>
-                        <div className="expandable ">
+                    <div className="expandable ">
+                        <div className="expandableContent">
+                            <div className="">
+                                <span className="expandableDescription">description:</span>
+                                <span className="expandableValue">{description}</span>
+                            </div>
+                            <div className="">
+                                <span className="expandableDescription">unit:</span>
+                                <span className="expandableValue">{unit}</span>
 
-                            <div className="expandableContent">
-                                            <div>
-                                                <span className="expandableDescription right-align">description:</span>
-                                                <span className="expandableValue left-align">{description}</span>
-                                            </div>
-                                            <div>
-                                                <span className="expandableDescription right-align">unit:</span>
-                                                <span className="expandableValue left-align me-3">{unit}</span>
-                                                <span className="expandableDescription right-align">personnel:</span>
-                                                <span className="expandableValue left-align me-3">{personnel}</span>
-                                                <span className="expandableDescription right-align">included:</span>
-                                                <span className="expandableValue left-align">{included}</span>
-                                            </div>
+                                <span className="expandableDescription">personnel:</span>
+                                <span className="expandableValue me-1">{personnel}</span>
+                                
+                                <span className="expandableDescription me-1">included:</span>
+                                <span className="expandableValue">{included}</span>
                             </div>
                         </div>
                     </div>

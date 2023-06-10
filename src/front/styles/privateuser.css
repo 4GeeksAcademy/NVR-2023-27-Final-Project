@@ -284,15 +284,10 @@ form input[type=search] {
 
 .expandableContent {
   padding: .5rem;
-  border-top: .5px solid rgb(40, 40, 40);
+  border-top: .5px solid rgb(111, 111, 111);
 
 }
 
-.scheduleButtonWrapper {
-  margin-top: .5rem;
-  display: flex;
-  justify-content: right;
-}
 
 /* Banner  */
 
@@ -373,13 +368,14 @@ form input[type=search] {
   display: flex;
   align-items: baseline;
   position: absolute;
-  left: 74%;
+  left: 73%;
 }
+
 
 .bannerDescription {
   display: flex;
   align-items: baseline;
-  font-size: .875rem;
+  font-size: .7rem;
   background:  var(--elementBackground);
   font-variant: small-caps;
 }
@@ -392,45 +388,41 @@ form input[type=search] {
   padding-left: .27rem;
 }
 
-table,
-td {
-  border: 1px solid transparent;
+
+.expandableContent {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+  padding: 0;
+  margin: 0;
 }
 
-.expandableTbale td.right-align {
-  text-align: right;
-}
-
-.expandableTbale td.left-align {
-  text-align: left;
-}
-
-.expandabelTable,
-td {
-  border: 1px solid transparent;
-  align-items: top;
+.expandbleSection1 {
+  display: flex;
+  background: var(--background);
+  margin: 0;
+  padding: 0;
+  gap: 0;
 }
 
 .expandableValue , .expandableDescription {
-  font-size: .7rem;
+  font-size: .63rem;
 }
 
 .expandableDescription {
+  margin-left: .3rem;
   width: 11.1rem;
-  font-size: .875rem;
+  font-size: .7rem;
   font-variant: small-caps;
   align-items: top;
 }
 
 /* book Button  */
 .bookButton {
-
-  height: 1rem;
-  width: 3rem;
-  background-color:  var(--standOutGreen);
-
-
+  background: var(--standOutGreen);
+  color:  var(--background);
+  border: none;
+  font-variant: small-caps;
+  font-size: .7rem;
+  letter-spacing: .1rem;
 }
-
-
-
