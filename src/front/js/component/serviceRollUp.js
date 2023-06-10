@@ -25,6 +25,7 @@ export const ServiceRollUp = (props) => {
 
     // Format props
     service = service.charAt(0).toUpperCase() + service.slice(1);
+    description = description.charAt(0).toUpperCase() + description.slice(1);
     const categoryColor = serviceColoMMap.get(category);
     let durationString = "";
     if (duration < 1) {
@@ -45,7 +46,7 @@ export const ServiceRollUp = (props) => {
                     <div className="bannerCategoryLabelWrapper">
                         <span className="bannerCategoryLabel">{category}</span>
                     </div>
-                    <div className="bannerLabels d-flex alin-items-center">
+                    <div className="bannerLabels">
                         <span className="bannerLabel1">
                             <span className="bannerDescription">service:</span>
                             <span className="bannerValue">{service}</span>
@@ -58,6 +59,8 @@ export const ServiceRollUp = (props) => {
                             <span className="bannerDescription">price: </span>
                             <span className="bannerValue">{priceString}</span>
                         </span>
+                    </div>
+                    <div>
                         <span className="bannerLabel4 d-flex align-items-center">
                             <button className="bookButton mt-1">book</button>
                         </span>
@@ -68,15 +71,15 @@ export const ServiceRollUp = (props) => {
                     <div className="expandable ">
                         <div className="expandableContent">
                             <div className="">
-                                <span className="expandableDescription">description:</span>
+                                <span className="expandableDescription me-1">description:</span>
                                 <span className="expandableValue">{description}</span>
                             </div>
                             <div className="">
-                                <span className="expandableDescription">unit:</span>
+                                <span className="expandableDescription me-1">unit:</span>
                                 <span className="expandableValue">{unit}</span>
 
-                                <span className="expandableDescription">personnel:</span>
-                                <span className="expandableValue me-1">{personnel}</span>
+                                <span className="expandableDescription me-1">personnel:</span>
+                                <span className="expandableValue">{personnel}</span>
                                 
                                 <span className="expandableDescription me-1">included:</span>
                                 <span className="expandableValue">{included}</span>

@@ -222,7 +222,7 @@ class ServiceDescription(db.Model):
     service = db.Column(db.String(100), nullable= True)
     description = db.Column(db.String(255), nullable= True)
     unit = db.Column(db.String(100), nullable= True)
-    duration = db.Column(db.Integer, nullable= True)
+    duration = db.Column(db.Float, nullable= True)
     personnel = db.Column(db.Integer, nullable= True)
     included = db.Column(db.String(100), nullable= True)
     price = db.Column(db.Float, nullable= True)

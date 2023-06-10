@@ -343,34 +343,33 @@ form input[type=search] {
   width: 0.18rem;
 }
 
+.bannerLabels {
+  display: flex;
+  align-items: center;
+}
 .bannerLabel1 {
   display: flex;
-  align-items: baseline;
   position: absolute;
   left: 36%;
 }
 
 .bannerLabel2 {
   display: flex;
-  align-items: baseline;
   position: absolute;
   left: 55%;
 }
 
 .bannerLabel3 {
   display: flex;
-  align-items: baseline;
   position: absolute;
   left: 65%;
 }
 
 .bannerLabel4 {
   display: flex;
-  align-items: baseline;
   position: absolute;
   left: 73%;
 }
-
 
 .bannerDescription {
   display: flex;
