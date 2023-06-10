@@ -42,6 +42,9 @@ export const PrivateUser = () => {
             actions.getUserRequests();
             actions.getUserNotifications();
             actions.getServiceDescriptions();
+            
+            actions.alertUser("welcome back, ", "yellow", "black");
+
         }
     }, []);
 
@@ -110,7 +113,6 @@ export const PrivateUser = () => {
 
 
     if (store.serviceDescriptions) {
-
         filteredServices = store.serviceDescriptions.filter((service) => {
             // Filter by category
             if (selectedCategory !== "Any category" && service.category !== selectedCategory) {

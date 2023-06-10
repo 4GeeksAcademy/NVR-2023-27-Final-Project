@@ -21,6 +21,47 @@ body {
   padding: 0;
 }
 
+.alertUser {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 2rem;
+  width: 10.25rem;
+  border: none;
+  padding: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7rem;
+  font-variant: small-caps;
+  letter-spacing: 0.1rem;
+  opacity: 1;
+  z-index: 9999;
+  animation: fade-in-out 2.1s ease-in-out forwards;
+}
+
+@keyframes fade-in-out {
+  0% {
+      transform: translate(-50%, -50%) scale(0);
+  }
+
+  10% {
+      transform: translate(-50%, -50%) scale(1);
+  }
+
+  90% {
+      transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+      transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+/* Main CSS */
+
+
+
 .menuLabel {
   all: unset;
   font-variant: small-caps;
@@ -393,20 +434,13 @@ form input[type=search] {
   flex-direction: column;
   background-color: var(--background);
   padding: 0;
-  margin: 0;
+  margin: .5rem;
 }
 
-.expandbleSection1 {
-  display: flex;
-  background: var(--background);
-  margin: 0;
-  padding: 0;
-  gap: 0;
-}
 
 .expandableValue , .expandableDescription {
   font-size: .63rem;
-}
+ }
 
 .expandableDescription {
   margin-left: .3rem;
@@ -417,6 +451,12 @@ form input[type=search] {
 }
 
 /* book Button  */
+.bookButtonWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: .3rem;
+}
+
 .bookButton {
   background: var(--standOutGreen);
   color:  var(--background);
@@ -424,4 +464,8 @@ form input[type=search] {
   font-variant: small-caps;
   font-size: .7rem;
   letter-spacing: .1rem;
+  padding-inline: .63rem;
 }
+
+/* book Button  */
+

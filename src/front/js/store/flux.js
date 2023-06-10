@@ -20,6 +20,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 
+			// Displays Alerts, available to every other method 
+			alertUser: (message, backgroundColor, color) => {
+				const alertElement = document.createElement("div");
+				alertElement.classList.add("alertUser");
+				alertElement.textContent = message;
+				alertElement.style.backgroundColor = backgroundColor;
+				alertElement.style.color = color;
+				document.body.appendChild(alertElement);
+				setTimeout(() => {
+					alertElement.remove();
+				}, 2100);
+			},
+
 			// SIGIN functions
 			signinUser: async (email, password) => {
 				const response = await fetch(process.env.BACKEND_URL + "api/signinuser", {

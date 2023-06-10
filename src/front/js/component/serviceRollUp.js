@@ -1,6 +1,10 @@
 import React from "react";
+import { useContext } from "react";
+import { Context } from "../store/appContext";
+
 
 export const ServiceRollUp = (props) => {
+    const { store, actions } = useContext(Context);
     let { id, category, service, description, unit, duration, personnel, included, price } = props.serviceObject;
 
     const serviceColoMMap = new Map([
@@ -23,9 +27,19 @@ export const ServiceRollUp = (props) => {
         ["wellness", "pink"],
     ]);
 
+    const handleBookClick = (idTag) => {
+        
+      };
+    
+      
+      
+
     // Format props
     service = service.charAt(0).toUpperCase() + service.slice(1);
     description = description.charAt(0).toUpperCase() + description.slice(1);
+    unit = unit.charAt(0).toUpperCase() + unit.slice(1);
+    included = included.charAt(0).toUpperCase() + included.slice(1);
+
     const categoryColor = serviceColoMMap.get(category);
     let durationString = "";
     if (duration < 1) {
@@ -34,6 +48,7 @@ export const ServiceRollUp = (props) => {
     else if (duration === 1) { durationString = "1 hourr" }
     else { durationString = `${parseInt(duration)} hours` }
     const priceString = price + ".00€"
+
 
     // Main JSX
     return (
@@ -60,29 +75,39 @@ export const ServiceRollUp = (props) => {
                             <span className="bannerValue">{priceString}</span>
                         </span>
                     </div>
-                    <div>
-                        <span className="bannerLabel4 d-flex align-items-center">
-                            <button className="bookButton mt-1">book</button>
-                        </span>
+                    <div className="bookButtonWrapper">
+                        <div className="bannerLabel4 d-flex align-items-center">
+                            <button 
+                            className="bookButton mt-1"
+                            onClick={handleBookClick("expandableWrapperId"+id)}
+                            >book
+                            </button>
+                        </div>
                     </div>
-                 
+
                 </div>
-                <div className="expandableWrapper">
+                <div className="expandableWrapper" id={"expandableWrapperId"+id}>
                     <div className="expandable ">
                         <div className="expandableContent">
-                            <div className="">
+                            <div className="expandableSection1">
                                 <span className="expandableDescription me-1">description:</span>
-                                <span className="expandableValue">{description}</span>
+                                <span className="expandableValue">
+                                    <p>{description}</p>
+                                </span>
                             </div>
-                            <div className="">
+                            <div className="expandableSection1">
                                 <span className="expandableDescription me-1">unit:</span>
                                 <span className="expandableValue">{unit}</span>
 
                                 <span className="expandableDescription me-1">personnel:</span>
                                 <span className="expandableValue">{personnel}</span>
-                                
+
                                 <span className="expandableDescription me-1">included:</span>
-                                <span className="expandableValue">{included}</span>
+                                <span className="expandableValue">
+                                    <p>
+                                        {included}
+                                    </p>
+                                </span>
                             </div>
                         </div>
                     </div>
