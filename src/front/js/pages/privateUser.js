@@ -377,7 +377,7 @@ export const PrivateUser = () => {
                             </div>
                         </div>)
                     }                   
-                
+         
                 </main>
             </div>
         </>

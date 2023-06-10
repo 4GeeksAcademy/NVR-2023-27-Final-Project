@@ -23,6 +23,7 @@ export const ServiceRollUp = (props) => {
         ["wellness", "pink"],
     ]);
 
+    // Format props
     category = category.charAt(0).toLowerCase() + category.slice(1);
     const categoryColor = serviceColoMMap.get(category);
     let durationString = "";
@@ -31,8 +32,9 @@ export const ServiceRollUp = (props) => {
     }
     else if (duration === 1) { durationString = "1 hr" }
     else { durationString = `${parseInt(duration)} hrs` }
-
     const priceString = price + ".00€"
+    
+    // Main JSX
     return (
         <>
             <div className="serviceRollUp my-1">
@@ -57,36 +59,27 @@ export const ServiceRollUp = (props) => {
                             <span className="bannerValue">{priceString}</span>
                         </span>
                         <span className="bannerLabel4">
-                            <span className="bannerIcon">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg>
-                            </span>
+                            <button className="bookButton">Book</button>
                         </span>
                     </div>
                 </div>
                 <div className="expandableWrapper">
                     <div>
                         <div className="expandable ">
+
                             <div className="expandableContent">
-                                <table className="expandableTbale">
-                                    <tbody>
-                                        <tr className="expandableTableRow">
-                                            <td className="expandableDescription right-align">unit:</td>
-                                            <td className="expandableValue left-align">{unit}</td>
-                                        </tr>
-                                        <tr className="expandableTableRow">
-                                            <td className="expandableDescription right-align">included:</td>
-                                            <td className="expandableValue left-align">{included}</td>
-                                        </tr>
-                                        <tr className="expandableTableRow">
-                                            <td className="expandableDescription right-align">personnel:</td>
-                                            <td className="expandableValue left-align">{personnel}</td>
-                                        </tr>
-                                        <tr className="expandableTableRow">
-                                            <td className="expandableDescription right-align">description:</td>
-                                            <td className="expandableValue left-align">{description}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                            <div>
+                                                <span className="expandableDescription right-align">description:</span>
+                                                <span className="expandableValue left-align">{description}</span>
+                                            </div>
+                                            <div>
+                                                <span className="expandableDescription right-align">unit:</span>
+                                                <span className="expandableValue left-align me-3">{unit}</span>
+                                                <span className="expandableDescription right-align">personnel:</span>
+                                                <span className="expandableValue left-align me-3">{personnel}</span>
+                                                <span className="expandableDescription right-align">included:</span>
+                                                <span className="expandableValue left-align">{included}</span>
+                                            </div>
                             </div>
                         </div>
                     </div>
