@@ -14,10 +14,13 @@ export const PrivateUser = () => {
     const [selectedCategory, setSelectedCategory] = useState("Any category");
     const [selectedPrice, setSelectedPrice] = useState("Any price");
     const [serviceSearchBar, setServiceSearchBar] = useState("");
+
     const [newServiceDate, setNewServiceDate] = useState(new Date().toISOString().slice(0, 10));
     const [newServiceTime, setNewServiceTime] = useState("09:00");
     const [newServiceQuantity, setNewServiceQuantity] = useState(1);
     const [newServiceRecurrency, setNewServiceReccurency] = useState(1);
+    const [newServiceAddress, setNewServiceAddress] = useState("");
+
     const [categories, setCategories] = useState([]);
     const [prices, setPrices] = useState({});
     let filteredServices = null;
@@ -189,7 +192,7 @@ export const PrivateUser = () => {
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M400-280v-400l200 200-200 200Z" /></svg>
                             </span>
 
-                            {/* side banner ACCORDION */}
+                            {/* Offcanvas ACCORDION */}
                             <div className="offcanvas-body">
                                 <div className="accordion accordion-flush" id="accordionFlushExample">
                                     <div className="accordion-item">
@@ -270,35 +273,6 @@ export const PrivateUser = () => {
                             type="button"
                             className="dimissBanner ps-3 pt-3"
                         ></span>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     </nav>
                     {selectedSection === "requestService" && (
                         <nav className="navbar fixed-top secondNavBar d-flex justify-content-center align-items-center ">
@@ -392,19 +366,18 @@ export const PrivateUser = () => {
                     )}
                 </header>
                 <main>
-                    <div className="main container-fluid m-0 p-0 g-0">
-                        <div className="row d-flex justify content-center p-3">
-                            {/*  <p>{localStorage.getItem("credentials")}</p>
-                            <p>{selectedCategory}</p>
-                            <p>{selectedPrice}</p>
-                            <p>{serviceSearchBar}</p> */}
-                            {filteredServices && filteredServices.map((filteredService, index) => (
-                                <div className="col-12 d-flex justify-content-center" key={filteredService.id}>
-                                    <div><ServiceRollUp serviceObject={filteredService} /></div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                    {selectedSection === "requestService" && (
+                        <div className="main container-fluid m-0 p-0 g-0">
+                            <div className="row d-flex justify content-center p-3">
+                                {filteredServices && filteredServices.map((filteredService, index) => (
+                                    <div className="col-12 d-flex justify-content-center" key={filteredService.id}>
+                                        <div><ServiceRollUp serviceObject={filteredService} /></div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>)
+                    }                   
+                
                 </main>
             </div>
         </>
@@ -412,3 +385,9 @@ export const PrivateUser = () => {
 
 
 };
+
+
+{/*  <p>{localStorage.getItem("credentials")}</p>
+   <p>{selectedCategory}</p>
+   <p>{selectedPrice}</p>
+  <p>{serviceSearchBar}</p> */}
