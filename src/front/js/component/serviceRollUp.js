@@ -1,7 +1,6 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-
+import { CalendarModal } from "./calendarModal";
 
 export const ServiceRollUp = (props) => {
     const { store, actions } = useContext(Context);
@@ -27,12 +26,10 @@ export const ServiceRollUp = (props) => {
         ["wellness", "pink"],
     ]);
 
-    const handleBookClick = (idTag) => {
-        
-      };
-    
-      
-      
+    const handleBookClick = () => {
+        const dialog = document.querySelector("dialog")
+        dialog.showModal()
+    };
 
     // Format props
     service = service.charAt(0).toUpperCase() + service.slice(1);
@@ -77,16 +74,16 @@ export const ServiceRollUp = (props) => {
                     </div>
                     <div className="bookButtonWrapper">
                         <div className="bannerLabel4 d-flex align-items-center">
-                            <button 
-                            className="bookButton mt-1"
-                            onClick={handleBookClick("expandableWrapperId"+id)}
-                            >book
+                            <button
+                                className="bookButton mt-1"
+                                onClick={handleBookClick}
+                            >
+                                book
                             </button>
                         </div>
                     </div>
-
                 </div>
-                <div className="expandableWrapper" id={"expandableWrapperId"+id}>
+                <div className="expandableWrapper" id={"expandableWrapperId" + id}>
                     <div className="expandable ">
                         <div className="expandableContent">
                             <div className="expandableSection1">
@@ -112,6 +109,7 @@ export const ServiceRollUp = (props) => {
                         </div>
                     </div>
                 </div>
+                <CalendarModal key={id}/>
             </div >
         </>
     );

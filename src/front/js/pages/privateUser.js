@@ -396,8 +396,3 @@ export const PrivateUser = () => {
 
 };
 
-
-                    {/*  <p>{localStorage.getItem("credentials")}</p>
-   <p>{selectedCategory}</p>
-   <p>{selectedPrice}</p>
-  <p>{serviceSearchBar}</p> */}

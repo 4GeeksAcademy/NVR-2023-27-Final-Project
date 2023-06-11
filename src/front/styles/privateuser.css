@@ -406,6 +406,8 @@ form input[type=search] {
   left: 65%;
 }
 
+
+
 .bannerLabel4 {
   display: flex;
   position: absolute;
@@ -462,10 +464,86 @@ form input[type=search] {
   color:  var(--background);
   border: none;
   font-variant: small-caps;
-  font-size: .7rem;
+  font-size: .63rem;
   letter-spacing: .1rem;
   padding-inline: .63rem;
 }
 
 /* book Button  */
+button .bookButton, button .bookButto:focus , button .bookButto:active    {
+  outline: none;
+  border: none;
+}
+
+/* Calendar Modal */
+
+dialog {
+  position: fixed;
+  width: 30rem;
+  border: 1px solid red;
+}
+
+dialog::backdrop {
+  background-color: transparent !important;
+}
+
+dialog {
+  transform: scale(0);
+  opacity: 0;
+  animation: modal-appear 0.5s ease-in-out forwards;
+}
+
+dialog[data-modal="closing"] {
+  animation: modal-disappear 0.5s ease-in-out forwards;
+}
+
+@keyframes modal-appear {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes modal-disappear {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  90% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* Calendar */
+
+
+
+/* Expandable */
+
+.expand-toggle {
+  display: none;
+  visibility: hidden;
+}
+.expand-label {
+  display: block;
+  padding: 0.5em;
+}
+
+.expand-content {
+  height: 0px;
+  overflow: hidden;
+  transition: height 0.5s;
+}
+.expand-toggle:checked ~ .expand-content {
+  height: 100px;
+}
 

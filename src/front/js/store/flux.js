@@ -33,6 +33,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}, 2100);
 			},
 
+			calendarModal: (message, backgroundColor, color) => {
+				const modalElement = document.createElement("div");
+				modalElement.classList.add("calendarModal");
+			  
+				const closeButton = document.createElement("button");
+				closeButton.textContent = "Close";
+				closeButton.addEventListener("click", () => {
+				  modalElement.remove();
+				});
+				modalElement.appendChild(closeButton);
+			  
+				const contentElement = document.createElement("div");
+				contentElement.textContent = message;
+				contentElement.style.backgroundColor = backgroundColor;
+				contentElement.style.color = color;
+				modalElement.appendChild(contentElement);
+			  
+				document.body.appendChild(modalElement);
+			  },
+			  
+
 			// SIGIN functions
 			signinUser: async (email, password) => {
 				const response = await fetch(process.env.BACKEND_URL + "api/signinuser", {
@@ -217,25 +238,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getUserRequests: async () => {
 				try {
-				  const response = await fetch(process.env.BACKEND_URL + "api/getuserservicerequests", {
-					method: "GET",
-					headers: {
-					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+					const response = await fetch(process.env.BACKEND_URL + "api/getuserservicerequests", {
+						method: "GET",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+						}
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data);
+						setStore({ userRequests: data.user_requests });
+					} else {
+						console.log("Error:", response.status);
 					}
-				  });
-			  
-				  if (response.ok) {
-					const data = await response.json();
-					console.log(data);
-					setStore({ userRequests: data.user_requests });
-				  } else {
-					console.log("Error:", response.status);
-				  }
 				} catch (error) {
-				  console.log("An error occurred:", error);
+					console.log("An error occurred:", error);
 				}
-			  },
-			  
+			},
+
 
 			getUserNotifications: async () => {
 				const response = await fetch(process.env.BACKEND_URL + "api/getusernotifications", {
@@ -252,9 +273,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					console.log("Error:", response.status);
 				}
-			}
-
-
+			},
 
 
 		}
