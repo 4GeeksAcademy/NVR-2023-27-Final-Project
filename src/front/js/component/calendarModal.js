@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 export const CalendarModal = (props) => {
     const { id, service } = props
+    console.log(id , service);
     const [serviceSelectedDate, setServiceSelectedDate] = useState("");
 
     const handleClickCancel = () => {
@@ -66,7 +67,7 @@ export const CalendarModal = (props) => {
                         style={cellStyle}
                         className={buttonClassName}
                         onClick={() => setServiceSelectedDate(new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1).toISOString().split('T')[0])}
-                        disabled={buttonClassName.includes('unviableDay')}
+                        disabled={buttonClassName.includes("unviableDay")}
                     >
                         {dayOfMonth}
                     </button>
@@ -82,7 +83,7 @@ export const CalendarModal = (props) => {
     //CalendarModal JSX
     return (
         <>
-            <dialog data-modal className="">
+            <dialog data-modal id={"dialog"+id} className="">
                 <div>
                     <Calendar />
                 </div>
@@ -100,6 +101,12 @@ export const CalendarModal = (props) => {
                         Invisible content to expand
                     </div>
                 </div>
+                <p>
+                    {id}
+                </p>
+                <p>
+                    {service}
+                </p>
             </dialog>
 
         </>

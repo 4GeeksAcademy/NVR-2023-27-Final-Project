@@ -28,9 +28,7 @@ export const ServiceRollUp = (props) => {
     
     // Set store Variables and open Calendar modla
     const handleBookClick = () => {
-        alert(`id: ${id} ${service}`)
-        // actions.setStore({newServiceRequestName: service});
-        const dialog = document.querySelector("dialog")
+        const dialog = document.querySelector(`#dialog${id}`)
         dialog.showModal()
     };
 
@@ -125,9 +123,8 @@ export const ServiceRollUp = (props) => {
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <CalendarModal key={id} />
+                <CalendarModal id={id} service={service} key={id} />
             </div >
         </>
     );
