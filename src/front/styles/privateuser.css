@@ -437,7 +437,7 @@ form input[type=search] {
 }
 
 .expandableColumn1 {
-  flex: 1;
+  flex: 2;
   display: flex;
   flex-direction: column;
   line-height: .8rem;
@@ -454,24 +454,22 @@ form input[type=search] {
 }
 
 .expandableColumn3 {
-  flex: 1;
+  flex: 1.5;
   display: flex;
   flex-direction: column;
   line-height: .8rem;
 }
 
-
-
-.expandableValue , .expandableDescription {
-  font-size: .63rem;
- }
-
 .expandableDescription {
-  margin-left: .3rem;
+  font-size: .675rem;
   width: 11.1rem;
   font-variant: small-caps;
   align-items: top;
 }
+
+.expandableValue {
+  font-size: .6rem;
+ }
 
 /* book Button  */
 .bookButtonWrapper {
