@@ -53,7 +53,10 @@ export const CalendarModal = (props) => {
                 const day = new Date(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate() + j);
                 const dayOfMonth = day.getDate();
 
-                const isUnviableDay = day < currentDate || (i === 3 && j > currentDate.getDay());
+                const previousDate = new Date(currentDate);
+                previousDate.setDate(currentDate.getDate() - 1);
+
+                const isUnviableDay = (day < previousDate) || (i === 3 && j > currentDate.getDay());
                 const isCurrentDay = day.getDate() === currentDate.getDate() && day.getMonth() === currentDate.getMonth() && day.getFullYear() === currentDate.getFullYear();
                 const buttonClassName = `calendarDays ${isUnviableDay ? "unviableDay" : "viableDay"} ${isCurrentDay ? "currentDay" : ""}`;
                 
@@ -63,6 +66,7 @@ export const CalendarModal = (props) => {
                         style={cellStyle}
                         className={buttonClassName}
                         onClick={() => setServiceSelectedDate(new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1).toISOString().split('T')[0])}
+                        disabled={buttonClassName.includes('unviableDay')}
                     >
                         {dayOfMonth}
                     </button>

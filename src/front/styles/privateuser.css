@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
-  --background: #f5efd9;
-  --elementBackground: #e9e2c6;
-  --modalBackground: #e4dbbb;
+  --background: #f7f2df;
+  --elementBackground: #efe9d3;
+  --modalBackground: #efe8d1;
   --categoryLabelBackground: rgb(154, 154, 154);
   --standOutGreen: rgb(0, 70, 0);;
 }
@@ -501,8 +501,8 @@ dialog {
   position: fixed;
   margin-top: 7.48rem;
   width: 30%;
-  border: none;
   background: var(--modalBackground);
+  border: none;
   transform: scale(0);
   opacity: 0;
   animation: modal-appear 0.75s ease-in-out forwards;
@@ -553,9 +553,8 @@ dialog::backdrop {
   font-variant: small-caps;
   font-size: .675rem;
   background: var(--modalBackground);
-  border-top: .5px black solid;
-  border-bottom: 0;
-
+  border-top: 1px black solid;
+  border-bottom: 1px black solid;
 }
 
 .calendarDays {
@@ -565,7 +564,7 @@ dialog::backdrop {
   align-items: center;
   justify-content: center;
   font-style: italic;
-  font-size: .5rem !important;
+  font-size: .6rem;
   margin: 0;
   padding: 0;
   border-bottom: 0.5px solid black;
@@ -573,14 +572,19 @@ dialog::backdrop {
   border-collapse: collapse;
 }
 
-.calendarDays:hover {
+.calendarDays.viableDay:hover {
   background: rgb(53, 53, 99);
   color: var(--background);
   transform: scale(1.2);
 }
 
+.calendarDays.currentDay {
+font-weight: 600;
+}
+
 .unviableDay {
-  color: red;
+  font-size: .5rem !important;
+  color:rgb(198, 198, 198);
 }
 
 /* .calendarDays:hover::after {
@@ -596,12 +600,10 @@ dialog::backdrop {
   z-index: -1;
 } */
 
-
 button.calendarDays {
   border: none;
 
 }
-
 
 /* Expandable */
 
