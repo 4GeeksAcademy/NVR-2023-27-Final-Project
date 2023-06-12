@@ -61,8 +61,6 @@ body {
 
 /* Main CSS */
 
-
-
 .menuLabel {
   all: unset;
   font-variant: small-caps;
@@ -165,10 +163,8 @@ hr {
 .pullDownLabel {
   font-size: 0.7rem;
   letter-spacing: 0.12rem;
-}
-
-.italic {
   font-style: italic;
+
 }
 
 input[type="search"] {
@@ -313,13 +309,13 @@ form input[type=search] {
   align-items: center;
   transform: skew(-18deg);
   padding-inline: 3px;
-  width: .3rem;
+  width: .27rem;
 }
 
 .bannerCategoryColor {
   display: inline-block;
-  padding-inline: .12rem;
-  padding-block: .03rem;
+  padding-inline: .1rem;
+  padding-block: .025rem;
   color: var(--background);
   transform: skew(18deg);
   font-size: .63rem;
@@ -350,7 +346,7 @@ form input[type=search] {
 .bannerCategoryLabel::after {
   content: "";
   display: inline-block;
-  width: 0.18rem;
+  width: 0.16rem;
 }
 
 .bannerLabels {
@@ -366,19 +362,19 @@ form input[type=search] {
 .bannerLabel2 {
   display: flex;
   position: absolute;
-  left: 55%;
+  left: 54%;
 }
 
 .bannerLabel3 {
   display: flex;
   position: absolute;
-  left: 65%;
+  left: 64%;
 }
 
 .bannerLabel4 {
   display: flex;
   position: absolute;
-  left: 73%;
+  left: 72%;
 }
 
 .bannerDescription {
@@ -502,21 +498,10 @@ dialog {
   width: 30%;
   border: none;
   background: var(--modalBackground);
-
-}
-
-dialog::backdrop {
-  background-color: transparent !important;
-}
-
-dialog {
   transform: scale(0);
   opacity: 0;
   animation: modal-appear 0.75s ease-in-out forwards;
-}
 
-dialog[data-modal="closing"] {
-  animation: modal-disappear 0.5s ease-in-out forwards;
 }
 
 @keyframes modal-appear {
@@ -543,6 +528,10 @@ dialog[data-modal="closing"] {
     transform: scale(0);
     opacity: 0;
   }
+}
+
+dialog::backdrop {
+  background-color: transparent !important;
 }
 
 /* Calendar */
