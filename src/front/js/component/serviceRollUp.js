@@ -27,6 +27,10 @@ export const ServiceRollUp = (props) => {
     ]);
 
     const handleBookClick = () => {
+        // alert(`${id} ${service}`)
+        // const banner = document.getElementById(`${id}`);
+        // const siblingDivHtml = `<div className="xyz1" id="siblingId${id}">Sibling Div</div>`;
+        // banner.insertAdjacentHTML('afterend', siblingDivHtml);
         const dialog = document.querySelector("dialog")
         dialog.showModal()
     };
@@ -51,7 +55,7 @@ export const ServiceRollUp = (props) => {
     return (
         <>
             <div className="serviceRollUp my-1">
-                <div className="serviceRollUpBanner ps-3">
+                <div className="serviceRollUpBanner ps-3" id={id}>
                     <div className="bannerCategoryColorWrapper" style={{ backgroundColor: categoryColor }}>
                         <span className="bannerCategoryColor" style={{ backgroundColor: categoryColor }}>&nbsp;</span>
                     </div>
@@ -84,32 +88,43 @@ export const ServiceRollUp = (props) => {
                     </div>
                 </div>
                 <div className="expandableWrapper" id={"expandableWrapperId" + id}>
-                    <div className="expandable ">
+                    <div className="expandable">
                         <div className="expandableContent">
-                            <div className="expandableSection1">
-                                <span className="expandableDescription me-1">description:</span>
-                                <span className="expandableValue">
-                                    <p>{description}</p>
-                                </span>
-                            </div>
-                            <div className="expandableSection1">
-                                <span className="expandableDescription me-1">unit:</span>
-                                <span className="expandableValue">{unit}</span>
-
-                                <span className="expandableDescription me-1">personnel:</span>
-                                <span className="expandableValue">{personnel}</span>
-
-                                <span className="expandableDescription me-1">included:</span>
-                                <span className="expandableValue">
-                                    <p>
-                                        {included}
-                                    </p>
-                                </span>
+                            <div className="expandableColumns">
+                                <div className="expandableColumn1">
+                                    <div>
+                                        <span className="expandableDescription me-1">description:</span>
+                                        <span className="expandableValue">{description}</span>
+                                    </div>
+                                </div>
+                                <div className="expandableColumn2">
+                                    <div>
+                                        <span className="expandableDescription me-1">unit:</span>
+                                    </div>
+                                    <div>
+                                        <span className="expandableDescription me-1">personnel:</span>
+                                    </div>
+                                    <div>
+                                        <span className="expandableDescription me-1">included:</span>
+                                    </div>
+                                </div>
+                                <div className="expandableColumn3">
+                                    <div>
+                                        <span className="expandableValue">{unit}</span>
+                                    </div>
+                                    <div>
+                                        <span className="expandableValue">{personnel}</span>
+                                    </div>
+                                    <div>
+                                        <span className="expandableValue">{included}</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
-                <CalendarModal key={id}/>
+                <CalendarModal key={id} />
             </div >
         </>
     );

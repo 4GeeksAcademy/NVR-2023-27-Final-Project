@@ -378,7 +378,7 @@ export const PrivateUser = () => {
                             <main>
                                 {selectedSection === "requestService" && (
                                     <div className="main container-fluid m-0 p-0 g-0">
-                                        <div className="row d-flex justify content-center p-3">
+                                        <div className="row d-flex justify content-center ">
                                             {filteredServices && filteredServices.map((filteredService, index) => (
                                                 <div className="col-12 d-flex justify-content-center" key={filteredService.id}>
                                                     <div><ServiceRollUp serviceObject={filteredService} /></div>

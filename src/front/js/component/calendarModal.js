@@ -30,16 +30,13 @@ export const CalendarModal = (props) => {
             currentDate.getFullYear(), 
             currentDate.getMonth(), 
             currentDate.getDate() - currentDate.getDay());
-
-
-
-        const weekdayAbbreviations = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const weekdayAbbreviations = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
         const weeks = [];
         weeks.push(
-            <div key="weekdays" style={containerStyle}>
+            <div key="weekdays" className="calendarContainer">
                 {weekdayAbbreviations.map((day, index) => (
-                    <div key={index} style={cellStyle}>
+                    <div key={index} className="weekDaysAbbreviations" style={cellStyle}>
                         {day}
                     </div>
                 ))}
@@ -55,7 +52,8 @@ export const CalendarModal = (props) => {
                 const cell = (
                     <div 
                         key={`${i}-${j}`} 
-                        style={cellStyle} 
+                        style={cellStyle}
+                        className="dayOfMonthCalendar"
                         onClick={() => setServiceSelectedDate(new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1).toISOString().split('T')[0])}
                     >
                         {dayOfMonth}
@@ -66,16 +64,13 @@ export const CalendarModal = (props) => {
             weeks.push(<div key={i} style={containerStyle}>{week}</div>);
         }
 
-        return <div>{weeks}</div>;
+        return <div className="calendarWrapper">{weeks}</div>;
     };
-
-
-
 
     //CalendarModal JSX
     return (
         <>
-            <dialog data-modal className="container-fluid vw-100">
+            <dialog data-modal className="">
                 <div>
                     <Calendar />
                 </div>

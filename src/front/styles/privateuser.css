@@ -3,6 +3,7 @@
 :root {
   --background: #f5efd9;
   --elementBackground: #e9e2c6;
+  --modalBackground: #ebe1bd;
   --categoryLabelBackground: rgb(154, 154, 154);
   --standOutGreen: rgb(0, 70, 0);;
 }
@@ -299,41 +300,9 @@ form input[type=search] {
   grid-template-rows: 1fr;
 }
 
-.expandableWrapper:hover {
-  grid-template-rows: 1fr;
-
-}
-
-.expandableWrapper {
-  width: 36rem;
-  margin: .001rem;
-  padding: .001rem;
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 500ms;
-}
-
-.expandableWrapper > div {
-  overflow: hidden;
-}
-
-.expandable,
-.expandable * {
-  background-color:  var(--elementBackground)
-  ;
-}
-
-.expandableContent {
-  padding: .5rem;
-  border-top: .5px solid rgb(111, 111, 111);
-
-}
-
-
 /* Banner  */
 
 .bannerLabels {
-  display: flex;
   align-items: baseline;
   background:  var(--elementBackground)
   ;
@@ -406,8 +375,6 @@ form input[type=search] {
   left: 65%;
 }
 
-
-
 .bannerLabel4 {
   display: flex;
   position: absolute;
@@ -430,14 +397,69 @@ form input[type=search] {
   padding-left: .27rem;
 }
 
+/* Expandable */
+
+.expandableWrapper {
+  width: 36rem;
+  margin: .001rem;
+  padding: .001rem;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 500ms;
+}
+
+.expandableWrapper:hover {
+  grid-template-rows: 1fr;
+
+}
+
+.expandableWrapper > div {
+  overflow: hidden;
+}
+
+.expandable {
+  background-color: var(--elementBackground);
+}
+
+.expandable * {
+  background-color: inherit;
+}
+
 
 .expandableContent {
+  border-top: .5px solid rgb(111, 111, 111);
+  background-color: var(--elementBackground);
+  padding: .3rem;
+}
+
+.expandableColumns {
+  display: flex;
+}
+
+.expandableColumn1 {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: var(--background);
-  padding: 0;
-  margin: .5rem;
+  line-height: .8rem;
 }
+
+.expandableColumn2 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  line-height: .8rem;
+  justify-content: right;
+  text-align: right;
+ 
+}
+
+.expandableColumn3 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  line-height: .8rem;
+}
+
 
 
 .expandableValue , .expandableDescription {
@@ -447,7 +469,6 @@ form input[type=search] {
 .expandableDescription {
   margin-left: .3rem;
   width: 11.1rem;
-  font-size: .7rem;
   font-variant: small-caps;
   align-items: top;
 }
@@ -479,8 +500,11 @@ button .bookButton, button .bookButto:focus , button .bookButto:active    {
 
 dialog {
   position: fixed;
-  width: 30rem;
-  border: 1px solid red;
+  margin-top: 7.48rem;
+  width: 30%;
+  border: none;
+  background: var(--modalBackground);
+
 }
 
 dialog::backdrop {
@@ -490,7 +514,7 @@ dialog::backdrop {
 dialog {
   transform: scale(0);
   opacity: 0;
-  animation: modal-appear 0.5s ease-in-out forwards;
+  animation: modal-appear 0.75s ease-in-out forwards;
 }
 
 dialog[data-modal="closing"] {
@@ -525,6 +549,34 @@ dialog[data-modal="closing"] {
 
 /* Calendar */
 
+.calendarContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.weekDaysAbbreviations {
+  font-variant: small-caps;
+  font-size: .675rem;
+  background: var(--modalBackground);
+  border-top: .5px black solid;
+  border-bottom: 0;
+
+}
+
+.dayOfMonthCalendar {
+  display: flex;
+  height: 1.4rem;
+  width: 2.1rem;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+  font-size: .5rem !important;
+  margin: 0;
+  padding: 0;
+  border-bottom: 0.5px solid black;
+  background: var(--modalBackground);
+  border-collapse: collapse;
+  }
 
 
 /* Expandable */
@@ -543,7 +595,9 @@ dialog[data-modal="closing"] {
   overflow: hidden;
   transition: height 0.5s;
 }
+
 .expand-toggle:checked ~ .expand-content {
-  height: 100px;
+  height: 50px;
 }
+
 
