@@ -1,17 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
-  --background: #f7f2df;
-  --elementBackground: #efe9d3;
-  --modalBackground: #efe8d1;
-  --categoryLabelBackground: rgb(154, 154, 154);
+  --background: #fff9e5;
+  --elementBackground: #f3eedb;
+  --modalBackground: #f7f3dc;
+  --categoryLabelBackground: rgb(173, 173, 173);
   --standOutGreen: rgb(0, 70, 0);;
 }
 
 * {
-
   background: var(--background);
-
 }
 
 body {
@@ -125,7 +123,6 @@ body {
   color: black !important;
 }
 
-
 .accordion-button:not(.collapsed) {
   box-shadow: none !important;
 }
@@ -155,7 +152,6 @@ hr {
 }
 
 .searchRibbon {
-
   border-top: .7px solid;
   border-bottom: .7px solid;
 }
@@ -213,7 +209,6 @@ input::placeholder {
   margin-top: 8rem !important;
 }
 
-
 /* Ribbon elements  */
 
  .ribbonElement1 {
@@ -265,7 +260,7 @@ li.list-item {
  li.list-item::before {
   content: " ";
   display: inline-block;
-  width: .5rem;
+  width: .35rem;
 }
 
 li.list-item:hover {
@@ -315,7 +310,7 @@ form input[type=search] {
 .bannerCategoryColor {
   display: inline-block;
   padding-inline: .1rem;
-  padding-block: .025rem;
+  padding-block: .021rem;
   color: var(--background);
   transform: skew(18deg);
   font-size: .63rem;
@@ -331,7 +326,7 @@ form input[type=search] {
 .bannerCategoryLabel {
   display: inline-block;
   align-items: center;
-  padding-inline: .12rem;
+  padding-inline: .1rem;
   padding-top: .12rem;
   background-color: var(--categoryLabelBackground);
   color: var(--background);
@@ -345,7 +340,7 @@ form input[type=search] {
 .bannerCategoryLabel::after {
   content: "";
   display: inline-block;
-  width: 0.12rem;
+  width: 0.1rem;
 }
 
 .bannerLabels {
@@ -441,14 +436,14 @@ form input[type=search] {
   flex: 2;
   display: flex;
   flex-direction: column;
-  line-height: .8rem;
+  line-height: .7rem;
 }
 
 .expandableColumn2 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  line-height: .8rem;
+  line-height: .7rem;
   justify-content: right;
   text-align: right;
  
@@ -458,7 +453,7 @@ form input[type=search] {
   flex: 1.7;
   display: flex;
   flex-direction: column;
-  line-height: .8rem;
+  line-height: .7rem;
 }
 
 .expandableDescription {
@@ -504,18 +499,15 @@ dialog {
   background: var(--modalBackground);
   border: none;
   transform: scale(0);
-  opacity: 0;
-  animation: modal-appear 0.75s ease-in-out forwards;
+  animation: modal-appear 0.35s ease-in-out forwards;
 }
 
 @keyframes modal-appear {
   0% {
     transform: scale(0);
-    opacity: 0;
   }
   100% {
     transform: scale(1);
-    opacity: 1;
   }
 }
 
@@ -550,11 +542,20 @@ dialog::backdrop {
 }
 
 .weekDaysAbbreviations {
-  font-variant: small-caps;
+  display: flex;
+  align-Items: center;
+  justify-content: center;
+  text-align: center;
+  height: 1.6rrem;
+  width: 2.1rem;
+  margin: 0px;
+  padding: 0px;
   font-size: .675rem;
+  font-variant: small-caps;
   background: var(--modalBackground);
-  border-top: 1px black solid;
-  border-bottom: 1px black solid;
+  border-top: .7px black solid;
+  border-bottom: .7px black solid;
+  margin-bottom: .3rem;
 }
 
 .calendarDays {
@@ -563,28 +564,46 @@ dialog::backdrop {
   width: 1.8rem;
   align-items: center;
   justify-content: center;
-  font-style: italic;
   font-size: .6rem;
   margin: 0;
   padding: 0;
-  border-bottom: 0.5px solid black;
   background: var(--modalBackground);
-  border-collapse: collapse;
 }
 
 .calendarDays.viableDay:hover {
   background: rgb(53, 53, 99);
   color: var(--background);
-  transform: scale(1.2);
 }
 
-.calendarDays.currentDay {
-font-weight: 600;
+
+
+.calendarDays.currentDay::before {
+  content: "→";
+  position: absolute;
+  left: 2.61rem;
+
 }
 
 .unviableDay {
-  font-size: .5rem !important;
-  color:rgb(198, 198, 198);
+  font-size: .35rem !important;
+  color: black;
+}
+
+.calendarSelectedDate {
+  font-variant: small-caps;
+  font-size: .7rem;
+}
+
+.cellStyle {
+  text-align: center;
+  height: 1.4rem;
+  width: 1.8rem;
+  margin: 0;
+  padding: 0;
+  font-size: 0.675rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* .calendarDays:hover::after {
@@ -604,6 +623,14 @@ button.calendarDays {
   border: none;
 
 }
+
+.cancelModal {
+  border: none;
+  
+}
+
+
+
 
 /* Expandable */
 

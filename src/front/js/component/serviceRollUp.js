@@ -43,7 +43,7 @@ export const ServiceRollUp = (props) => {
     if (duration < 1) {
         durationString = `${parseInt(duration * 60)} minutes`
     }
-    else if (duration === 1) { durationString = "1 hourr" }
+    else if (duration === 1) { durationString = "1 hour" }
     else { durationString = `${parseInt(duration)} hours` }
     const priceString = price + ".00€"
 
@@ -124,7 +124,7 @@ export const ServiceRollUp = (props) => {
                         </div>
                     </div>
                 </div>
-                <CalendarModal id={id} service={service} key={id} />
+                <CalendarModal id={id} service={service} price={price} key={id} />
             </div >
         </>
     );
