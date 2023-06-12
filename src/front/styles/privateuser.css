@@ -3,7 +3,7 @@
 :root {
   --background: #f5efd9;
   --elementBackground: #e9e2c6;
-  --modalBackground: #ebe1bd;
+  --modalBackground: #e4dbbb;
   --categoryLabelBackground: rgb(154, 154, 154);
   --standOutGreen: rgb(0, 70, 0);;
 }
@@ -355,21 +355,26 @@ form input[type=search] {
 .bannerLabel1 {
   display: flex;
   position: absolute;
-  left: 36%;
+  left: 35%;
 }
 
 .bannerLabel2 {
   display: flex;
   position: absolute;
-  left: 54%;
+  left: 53%;
 }
 
 .bannerLabel3 {
   display: flex;
   position: absolute;
-  left: 64%;
+  left: 63.3%; 
 }
 
+.priceString {
+  display: flex;
+  justify-content: right;
+  text-align: right;
+}
 .bannerLabel4 {
   display: flex;
   position: absolute;
@@ -414,6 +419,7 @@ form input[type=search] {
 
 .expandable {
   background-color: var(--elementBackground);
+  padding-inline: .7rem;
 }
 
 .expandable * {
@@ -449,7 +455,7 @@ form input[type=search] {
 }
 
 .expandableColumn3 {
-  flex: 1.62;
+  flex: 1.7;
   display: flex;
   flex-direction: column;
   line-height: .8rem;
@@ -552,7 +558,7 @@ dialog::backdrop {
 
 }
 
-.dayOfMonthCalendar {
+.calendarDays {
   display: flex;
   height: 1.2rem;
   width: 1.8rem;
@@ -565,7 +571,36 @@ dialog::backdrop {
   border-bottom: 0.5px solid black;
   background: var(--modalBackground);
   border-collapse: collapse;
-  }
+}
+
+.calendarDays:hover {
+  background: rgb(53, 53, 99);
+  color: var(--background);
+  transform: scale(1.2);
+}
+
+.unviableDay {
+  color: red;
+}
+
+/* .calendarDays:hover::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid black;
+  border-radius: 50%;
+  z-index: -1;
+} */
+
+
+button.calendarDays {
+  border: none;
+
+}
 
 
 /* Expandable */

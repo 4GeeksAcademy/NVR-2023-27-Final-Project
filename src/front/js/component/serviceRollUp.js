@@ -25,12 +25,11 @@ export const ServiceRollUp = (props) => {
         ["petcare", "brown"],
         ["wellness", "pink"],
     ]);
-
+    
+    // Set store Variables and open Calendar modla
     const handleBookClick = () => {
-        // alert(`${id} ${service}`)
-        // const banner = document.getElementById(`${id}`);
-        // const siblingDivHtml = `<div className="xyz1" id="siblingId${id}">Sibling Div</div>`;
-        // banner.insertAdjacentHTML('afterend', siblingDivHtml);
+        alert(`id: ${id} ${service}`)
+        // actions.setStore({newServiceRequestName: service});
         const dialog = document.querySelector("dialog")
         dialog.showModal()
     };
@@ -55,7 +54,7 @@ export const ServiceRollUp = (props) => {
     return (
         <>
             <div className="serviceRollUp my-1">
-                <div className="serviceRollUpBanner ps-3" id={id}>
+                <div className="serviceRollUpBanner" id={id}>
                     <div className="bannerCategoryColorWrapper" style={{ backgroundColor: categoryColor }}>
                         <span className="bannerCategoryColor" style={{ backgroundColor: categoryColor }}>&nbsp;</span>
                     </div>
@@ -73,7 +72,11 @@ export const ServiceRollUp = (props) => {
                         </span>
                         <span className="bannerLabel3">
                             <span className="bannerDescription">price: </span>
-                            <span className="bannerValue">{priceString}</span>
+                            <span className="bannerValue">
+                                <span className="priceString">
+                                    {priceString}
+                                </span>    
+                            </span>
                         </span>
                     </div>
                     <div className="bookButtonWrapper">

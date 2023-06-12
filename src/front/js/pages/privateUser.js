@@ -42,8 +42,7 @@ export const PrivateUser = () => {
             actions.getUserRequests();
             actions.getUserNotifications();
             actions.getServiceDescriptions();
-            
-            actions.alertUser("welcome back, ", "yellow", "black");
+            actions.alertUser(`welcome back, ${JSON.parse(localStorage.getItem("credentials")).name.toLowerCase()} `, "yellow", "black");
 
         }
     }, []);

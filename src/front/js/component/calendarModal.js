@@ -4,6 +4,9 @@ export const CalendarModal = (props) => {
     const { id, service } = props
     const [serviceSelectedDate, setServiceSelectedDate] = useState("");
 
+    const handleClickCancel = () => {
+        return true;
+    }
 
     const Calendar = () => {
         const cellStyle = {
@@ -27,8 +30,8 @@ export const CalendarModal = (props) => {
 
         const currentDate = new Date();
         const startDate = new Date(
-            currentDate.getFullYear(), 
-            currentDate.getMonth(), 
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
             currentDate.getDate() - currentDate.getDay());
         const weekdayAbbreviations = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
@@ -49,15 +52,20 @@ export const CalendarModal = (props) => {
             for (let j = 0; j < 7; j++) {
                 const day = new Date(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate() + j);
                 const dayOfMonth = day.getDate();
+
+                const isUnviableDay = day < currentDate || (i === 3 && j > currentDate.getDay());
+                const isCurrentDay = day.getDate() === currentDate.getDate() && day.getMonth() === currentDate.getMonth() && day.getFullYear() === currentDate.getFullYear();
+                const buttonClassName = `calendarDays ${isUnviableDay ? "unviableDay" : "viableDay"} ${isCurrentDay ? "currentDay" : ""}`;
+                
                 const cell = (
-                    <div 
-                        key={`${i}-${j}`} 
+                    <button
+                        key={`${i}-${j}`}
                         style={cellStyle}
-                        className="dayOfMonthCalendar"
+                        className={buttonClassName}
                         onClick={() => setServiceSelectedDate(new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1).toISOString().split('T')[0])}
                     >
                         {dayOfMonth}
-                    </div>
+                    </button>
                 );
                 week.push(cell);
             }
@@ -79,11 +87,11 @@ export const CalendarModal = (props) => {
                 </div>
                 <div>
                     <form method="dialog">
-                        <button>OK</button>;
+                        <button onClick={(handleClickCancel)}>Cancel</button>
                     </form>
 
-                    <input className="expand-toggle" id="expand-toggle" type="checkbox" />
-                    <label htmlFor="expand-toggle" className="expand-label">Toggle</label>
+                    <input className="expand-toggle" id={`expand-toggle${id}`} type="checkbox" />
+                    <label htmlFor={`expand-toggle${id}`} className="expand-label">Toggle</label>
                     <div className="expand-content">
                         Invisible content to expand
                     </div>

@@ -16,7 +16,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userNotifications: null,
 			serviceDescriptions: null,
 
-			newSerViceRequest: {},
+			newSerViceRequest: {
+				status: null,
+				date: "",
+				time: "",
+				recurrence: null,
+				quantity: null,
+				service_description_id: null, 
+				user_id: null,
+				provider_id: null,
+				address_id: null,
+			},
+
+			newServiceRequestName: "",
 
 
 		},
