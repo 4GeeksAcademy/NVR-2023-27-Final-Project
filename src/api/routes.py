@@ -158,6 +158,9 @@ def get_user_settings():
 
         if user:
             user_settings = {
+                "id": user.id,
+                "name": user.name,
+                "email": user.email,
                 "must_have_certificate": user.must_have_certificate,
                 "required_experience": user.required_experience,
                 "required_rating": user.required_rating,

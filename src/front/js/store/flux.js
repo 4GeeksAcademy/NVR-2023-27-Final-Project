@@ -16,6 +16,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userNotifications: null,
 			serviceDescriptions: null,
 
+			newSerViceRequest: {},
+
 
 		},
 		actions: {

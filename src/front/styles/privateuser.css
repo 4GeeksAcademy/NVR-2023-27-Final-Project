@@ -309,7 +309,7 @@ form input[type=search] {
   align-items: center;
   transform: skew(-18deg);
   padding-inline: 3px;
-  width: .27rem;
+  width: .25rem;
 }
 
 .bannerCategoryColor {
@@ -324,7 +324,6 @@ form input[type=search] {
 .bannerCategoryLabelWrapper {
   display: flex;
   background-color: var(--categoryLabelBackground);
-  ;
   transform: skew(-18deg);
   padding-inline: 3px;
 }
@@ -338,7 +337,7 @@ form input[type=search] {
   color: var(--background);
   transform: skew(18deg);
   font-variant: small-caps;
-  font-size: .63rem;
+  font-size: .6rem;
   letter-spacing: .1rem;
 }
 
@@ -346,7 +345,7 @@ form input[type=search] {
 .bannerCategoryLabel::after {
   content: "";
   display: inline-block;
-  width: 0.16rem;
+  width: 0.12rem;
 }
 
 .bannerLabels {
@@ -374,7 +373,7 @@ form input[type=search] {
 .bannerLabel4 {
   display: flex;
   position: absolute;
-  left: 72%;
+  left: 72.3%;
 }
 
 .bannerDescription {
@@ -450,7 +449,7 @@ form input[type=search] {
 }
 
 .expandableColumn3 {
-  flex: 1.5;
+  flex: 1.62;
   display: flex;
   flex-direction: column;
   line-height: .8rem;
@@ -501,7 +500,6 @@ dialog {
   transform: scale(0);
   opacity: 0;
   animation: modal-appear 0.75s ease-in-out forwards;
-
 }
 
 @keyframes modal-appear {
@@ -530,6 +528,10 @@ dialog {
   }
 }
 
+dialog * {
+  background: inherit;
+}
+
 dialog::backdrop {
   background-color: transparent !important;
 }
@@ -552,8 +554,8 @@ dialog::backdrop {
 
 .dayOfMonthCalendar {
   display: flex;
-  height: 1.4rem;
-  width: 2.1rem;
+  height: 1.2rem;
+  width: 1.8rem;
   align-items: center;
   justify-content: center;
   font-style: italic;
