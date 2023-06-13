@@ -586,7 +586,8 @@ color: blue;
 }
 
 .calendarCell.selectedRequestDay {
-  color: red;
+  background:  var(--standOutGreen);
+  color: var(--background);
 }
 
 .unviableDay {

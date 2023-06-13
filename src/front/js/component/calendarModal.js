@@ -84,8 +84,9 @@ export const CalendarModal = (props) => {
                 const isSelectedServiceDay = (newServiceRequest.date === newDateString);
 
                 const buttonClassName = `calendarCell ${
-                    isUnviableDay ? "unviableDay" : isCurrentDay ? "currentDay" : ""
-                  } ${isSelectedServiceDay ? "selectedRequestDay" : ""}`;
+                    isUnviableDay ? "unviableDay" : "viableDay"
+                  } ${isCurrentDay ? "currentDay" : ""} ${isSelectedServiceDay ? "selectedRequestDay" : ""}`;
+                  
                   
                 const cell = (
                     <button
