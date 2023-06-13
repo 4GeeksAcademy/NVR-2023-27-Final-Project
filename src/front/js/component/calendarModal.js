@@ -43,12 +43,11 @@ export const CalendarModal = (props) => {
 
         const handleDateClick = (newDate) => {
             setNewServiceRequest((prevState) => ({
-              ...prevState,
-              date: newDate,
+                ...prevState,
+                date: newDate,
             }));
         };
-          
-        
+
         const currentDate = new Date();
         const startDate = new Date(
             currentDate.getFullYear(),
@@ -80,14 +79,13 @@ export const CalendarModal = (props) => {
                 const newDateString = new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1).toISOString().split('T')[0];
                 const isUnviableDay = (day < previousDate) || (i === 4 && j > currentDate.getDay());
                 const isCurrentDay = day.getDate() === currentDate.getDate() && day.getMonth() === currentDate.getMonth() && day.getFullYear() === currentDate.getFullYear();
-                
+
                 const isSelectedServiceDay = (newServiceRequest.date === newDateString);
 
-                const buttonClassName = `calendarCell ${
-                    isUnviableDay ? "unviableDay" : "viableDay"
-                  } ${isCurrentDay ? "currentDay" : ""} ${isSelectedServiceDay ? "selectedRequestDay" : ""}`;
-                  
-                  
+                const buttonClassName = `calendarCell ${isUnviableDay ? "unviableDay" : "viableDay"
+                    } ${isCurrentDay ? "currentDay" : ""} ${isSelectedServiceDay ? "selectedRequestDay" : ""}`;
+
+
                 const cell = (
                     <button
                         key={`${i}-${j}`}
@@ -111,43 +109,34 @@ export const CalendarModal = (props) => {
     return (
         <>
             <dialog data-modal id={"dialog" + id} className="">
-                <span>
-                    <form method="dialog">
-                        <button onClick={(handleClickCancel)}>
+                <div className=" d-flex justify-content-center align-items-center">
+                    <span className="modalTitle">book: {service.toLowerCase()}</span>
+                    <span>
+                  {/*   <form method="dialog">
+                        <button className="dismissModalButton" onClick={(handleClickCancel)}>
                             <span className="cancelModal">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="48"><path d="m336-294 144-144 144 144 42-42-144-144 144-144-42-42-144 144-144-144-42 42 144 144-144 144 42 42ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm0-600v600-600Z" /></svg>
+                                <svg className="p-0 m-0 g-0" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="48"><path d="m336-294 144-144 144 144 42-42-144-144 144-144-42-42-144 144-144-144-42 42 144 144-144 144 42 42ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm0-600v600-600Z" /></svg>
                             </span>
                         </button>
-                    </form>
+                    </form> */}
                 </span>
-                <div>
-                    Addressid: {newServiceRequest.address_id}
                 </div>
-                <div className="menuLabel d-flex justify-content-center align-items-center">
-                    book {service.toLowerCase()}
-                </div>
-                <div>
+                <div className="calendarContainer">
                     <Calendar />
                 </div>
                 <div>
                     Service date: {newServiceRequest.date}
                 </div>
+                <p>
+                    {id} {newServiceRequest.address_id} {service} {price}
+                </p>
                 <div>
                     <input className="expand-toggle" id={`expand-toggle${id}`} type="checkbox" />
-                    <label htmlFor={`expand-toggle${id}`} className="expand-label">Toggle</label>
+                    <label htmlFor={`expand-toggle${id}`} className="expand-label">review and confirm</label>
                     <div className="expand-content">
-                        Invisible content to expand
+                            <div>Order summary</div>
                     </div>
                 </div>
-                <p>
-                    {id}
-                </p>
-                <p>
-                    {service}
-                </p>
-                <p>
-                    {price}
-                </p>
             </dialog>
         </>
     );
