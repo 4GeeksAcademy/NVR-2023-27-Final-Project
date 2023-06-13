@@ -39,6 +39,8 @@ export const CalendarModal = (props) => {
         return true;
     }
 
+
+    // Calendar Subcomponent
     const Calendar = () => {
 
         const handleDateClick = (newDate) => {
@@ -102,9 +104,56 @@ export const CalendarModal = (props) => {
             weeks.push(<div key={i} className="weekContainer">{week}</div>);
         }
 
-        return <div className="calendarWrapper">{weeks}</div>;
+        return (
+            <div className="calendarWrapper">
+                {weeks}
+            </div>
+        );
     };
 
+    // Hourpicjer Subcomponent
+
+    const HourPicker = () => {
+
+        const handleIncreaseHour = () => {
+            const serviceHour = newServiceRequest.time;
+            if (serviceHour === "22:00") {
+              return true;
+            }
+          
+            let hours = parseInt(serviceHour.charAt(0) + serviceHour.charAt(1));
+            let halfHours = parseInt(serviceHour.charAt(3) + serviceHour.charAt(4));
+          
+            if (!halfHours) {
+              halfHours = 30;
+            } else {
+              halfHours = 0;
+              hours++;
+            }
+          
+            const hourString = hours.toString().padStart(2, "0") + ":" + halfHours.toString().padEnd(2, "0");
+            setNewServiceRequest({ ...newServiceRequest, time: hourString });
+          };
+          
+          
+        
+
+        const handleDecreseHour = () => {
+            return true;
+        };
+
+        return (
+            <>
+                <div className="hourPickerWrapper">
+                    <span className="hourValue">{newServiceRequest.time}</span>
+                    <span><button onClick={(handleIncreaseHour)}>+</button></span>
+                    <span><button onClick={(handleDecreseHour)}>-</button></span>
+                </div>
+         
+            </>
+        );
+
+    }
     //CalendarModal JSX
     return (
         <>
@@ -112,18 +161,22 @@ export const CalendarModal = (props) => {
                 <div className=" d-flex justify-content-center align-items-center">
                     <span className="modalTitle">book: {service.toLowerCase()}</span>
                     <span>
-                  {/*   <form method="dialog">
+                        {/*   <form method="dialog">
                         <button className="dismissModalButton" onClick={(handleClickCancel)}>
                             <span className="cancelModal">
                                 <svg className="p-0 m-0 g-0" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="48"><path d="m336-294 144-144 144 144 42-42-144-144 144-144-42-42-144 144-144-144-42 42 144 144-144 144 42 42ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm0-600v600-600Z" /></svg>
                             </span>
                         </button>
                     </form> */}
-                </span>
+                    </span>
                 </div>
                 <div className="calendarContainer">
                     <Calendar />
                 </div>
+                <div className="calendarContainer">
+                    <HourPicker />
+                </div>
+               
                 <div>
                     Service date: {newServiceRequest.date}
                 </div>
@@ -134,7 +187,7 @@ export const CalendarModal = (props) => {
                     <input className="expand-toggle" id={`expand-toggle${id}`} type="checkbox" />
                     <label htmlFor={`expand-toggle${id}`} className="expand-label">review and confirm</label>
                     <div className="expand-content">
-                            <div>Order summary</div>
+                        <div>Order summary</div>
                     </div>
                 </div>
             </dialog>
