@@ -15,12 +15,6 @@ export const PrivateUser = () => {
     const [selectedPrice, setSelectedPrice] = useState("Any price");
     const [serviceSearchBar, setServiceSearchBar] = useState("");
 
-    const [newServiceDate, setNewServiceDate] = useState(new Date().toISOString().slice(0, 10));
-    const [newServiceTime, setNewServiceTime] = useState("09:00");
-    const [newServiceQuantity, setNewServiceQuantity] = useState(1);
-    const [newServiceRecurrency, setNewServiceReccurency] = useState(1);
-    const [newServiceAddress, setNewServiceAddress] = useState("");
-
     const [categories, setCategories] = useState([]);
     const [prices, setPrices] = useState({});
     let filteredServices = null;

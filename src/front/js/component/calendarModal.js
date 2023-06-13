@@ -1,9 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
 
 export const CalendarModal = (props) => {
+    const { store, actions } = useContext(Context);
     const { id, service, price } = props
-    console.log(id, service);
-    const [serviceSelectedDate, setServiceSelectedDate] = useState("");
+
+    const [ serviceSelectedDate , setServiceSelectedDate] = useState("");
+
+    const [ newSerViceRequest , setNewServiceRequest ] = useState({
+        status: 1,
+        date: "",
+        time: "",
+        recurrence: 1,
+        quantity: 1,
+        service_description_id: id,
+        user_id: store.credentials.id,
+        provider_id: null,
+        address_id: null // store.userAddresses.id1,
+    });
+
+    useEffect(() => {
+        if (store.userAddresses) {
+            setNewServiceRequest({...newSerViceRequest, address_id: store.userAddresses.id1})
+        }
+    } , [store.userAddresses]);
 
     const getExtendedDateString = (dateString) => {
         const date = new Date(dateString);
@@ -91,10 +111,7 @@ export const CalendarModal = (props) => {
     return (
         <>
             <dialog data-modal id={"dialog" + id} className="">
-            
-                <div className="menuLabel d-flex justify-content-center align-items-center">
-                    book {service.toLowerCase()}
-                    <span>
+                <span>
                     <form method="dialog">
                         <button onClick={(handleClickCancel)}>
                             <span className="cancelModal">
@@ -103,12 +120,19 @@ export const CalendarModal = (props) => {
                         </button>
                     </form>
                 </span>
+                <div>
+                    {/* {store.user_addresses.id1} */}
+                    Addressid: {newSerViceRequest.address_id}
+                </div>
+                <div className="menuLabel d-flex justify-content-center align-items-center">
+                    book {service.toLowerCase()}
                 </div>
                 <div>
                     <Calendar />
                 </div>
                 <div>
                     Service date: {getExtendedDateString(serviceSelectedDate)}
+
                 </div>
                 <div>
                     <input className="expand-toggle" id={`expand-toggle${id}`} type="checkbox" />

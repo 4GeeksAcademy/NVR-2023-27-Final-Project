@@ -497,7 +497,7 @@ dialog {
   margin-top: 7.48rem;
   width: 30%;
   background: var(--modalBackground);
-  border: none;
+  border: 0.5px solid black;
   transform: scale(0);
   animation: modal-appear 0.35s ease-in-out forwards;
 }
@@ -575,12 +575,15 @@ dialog::backdrop {
   color: var(--background);
 }
 
+.calendarDays.currentDay {
+  position: relative; 
 
+}
 
 .calendarDays.currentDay::before {
-  content: "→";
+  content: "_";
   position: absolute;
-  left: 2.61rem;
+  bottom: -10px;
 
 }
 
