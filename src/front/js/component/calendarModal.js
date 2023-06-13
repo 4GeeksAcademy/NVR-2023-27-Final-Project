@@ -5,18 +5,16 @@ export const CalendarModal = (props) => {
     const { store, actions } = useContext(Context);
     const { id, service, price } = props
 
-    const [ serviceSelectedDate , setServiceSelectedDate] = useState("");
-
     const [ newSerViceRequest , setNewServiceRequest ] = useState({
         status: 1,
         date: "",
-        time: "",
+        time: "09:00",
         recurrence: 1,
         quantity: 1,
         service_description_id: id,
         user_id: store.credentials.id,
         provider_id: null,
-        address_id: null // store.userAddresses.id1,
+        address_id: null,
     });
 
     useEffect(() => {
@@ -36,35 +34,19 @@ export const CalendarModal = (props) => {
     }
 
     const Calendar = () => {
-        const cellStyle = {
-            textAlign: 'center',
-            height: '1.4rrem',
-            width: '1.8rem',
-            margin: '0px',
-            padding: '0px',
-            fontSize: '.675rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-        };
-
-        const containerStyle = {
-            display: 'flex',
-            flexDirection: 'row',
-        };
 
         const currentDate = new Date();
         const startDate = new Date(
             currentDate.getFullYear(),
             currentDate.getMonth(),
             currentDate.getDate() - currentDate.getDay());
-        const weekdayAbbreviations = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
+        const weekdayAbbreviations = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
         const weeks = [];
         weeks.push(
             <div key="weekdays" className="calendarContainer">
                 {weekdayAbbreviations.map((day, index) => (
-                    <div key={index} className="weekDaysAbbreviations" style={cellStyle}>
+                    <div key={index} className="weekDaysAbbreviations calendarCell">
                         {day}
                     </div>
                 ))}
@@ -83,15 +65,14 @@ export const CalendarModal = (props) => {
 
                 const isUnviableDay = (day < previousDate) || (i === 4 && j > currentDate.getDay());
                 const isCurrentDay = day.getDate() === currentDate.getDate() && day.getMonth() === currentDate.getMonth() && day.getFullYear() === currentDate.getFullYear();
-                const buttonClassName = `calendarDays ${isUnviableDay ? "unviableDay" : "viableDay"} ${isCurrentDay ? "currentDay" : ""}`;
+                const buttonClassName = `calendarCell ${isUnviableDay ? "unviableDay" : "viableDay"} ${isCurrentDay ? "currentDay" : ""}`;
 
                 const cell = (
                     <button
                         key={`${i}-${j}`}
-                        style={cellStyle}
-                        className={buttonClassName}
+                        className={`${buttonClassName} calendarCell`}
                         onClick={() => {
-                            setServiceSelectedDate(new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1).toISOString().split('T')[0])
+                            setNewServiceRequest({...newSerViceRequest, date: new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1).toISOString().split('T')[0]})
                         }
                         }
                         disabled={buttonClassName.includes("unviableDay")}
@@ -101,7 +82,7 @@ export const CalendarModal = (props) => {
                 );
                 week.push(cell);
             }
-            weeks.push(<div key={i} style={containerStyle}>{week}</div>);
+            weeks.push(<div key={i} className="weekContainer">{week}</div>);
         }
 
         return <div className="calendarWrapper">{weeks}</div>;
@@ -131,8 +112,7 @@ export const CalendarModal = (props) => {
                     <Calendar />
                 </div>
                 <div>
-                    Service date: {getExtendedDateString(serviceSelectedDate)}
-
+                    Service date: {newSerViceRequest.date}
                 </div>
                 <div>
                     <input className="expand-toggle" id={`expand-toggle${id}`} type="checkbox" />
