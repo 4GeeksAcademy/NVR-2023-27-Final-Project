@@ -581,11 +581,12 @@ dialog::backdrop {
   color: var(--background);
 }
 
-.calendarCell.currentDay::before {
-  content: "_";
-  position: absolute;
-  bottom: -10px;
+.calendarCell.currentDay {
+color: blue;
+}
 
+.calendarCell.selectedRequestDay {
+  color: red;
 }
 
 .unviableDay {
@@ -593,10 +594,7 @@ dialog::backdrop {
   color: black;
 }
 
-.calendarSelectedDate {
-  font-variant: small-caps;
-  font-size: .7rem;
-}
+
 
 
 button.calendarCell {

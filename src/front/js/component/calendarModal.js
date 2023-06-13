@@ -2,12 +2,24 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
 export const CalendarModal = (props) => {
+
     const { store, actions } = useContext(Context);
     const { id, service, price } = props
 
-    const [ newSerViceRequest , setNewServiceRequest ] = useState({
+    // Stes default Request day to the day after teh current day
+    const currentDate = new Date();
+    const nextDay = new Date();
+    nextDay.setDate(currentDate.getDate() + 1);
+
+    // Generates dateString
+    const year = nextDay.getFullYear();
+    const month = String(nextDay.getMonth() + 1).padStart(2, '0');
+    const day = String(nextDay.getDate()).padStart(2, '0');
+    const dateString = `${year}-${month}-${day}`;
+
+    const [newServiceRequest, setNewServiceRequest] = useState({
         status: 1,
-        date: "",
+        date: dateString,
         time: "09:00",
         recurrence: 1,
         quantity: 1,
@@ -19,15 +31,9 @@ export const CalendarModal = (props) => {
 
     useEffect(() => {
         if (store.userAddresses) {
-            setNewServiceRequest({...newSerViceRequest, address_id: store.userAddresses.id1})
+            setNewServiceRequest({ ...newServiceRequest, address_id: store.userAddresses.id1 })
         }
-    } , [store.userAddresses]);
-
-    const getExtendedDateString = (dateString) => {
-        const date = new Date(dateString);
-        const options = { weekday: 'long', month: 'long', day: 'numeric' };
-        return date.toLocaleDateString('en-US', options);
-    };
+    }, [store.userAddresses]);
 
     const handleClickCancel = () => {
         return true;
@@ -35,6 +41,14 @@ export const CalendarModal = (props) => {
 
     const Calendar = () => {
 
+        const handleDateClick = (newDate) => {
+            setNewServiceRequest((prevState) => ({
+              ...prevState,
+              date: newDate,
+            }));
+        };
+          
+        
         const currentDate = new Date();
         const startDate = new Date(
             currentDate.getFullYear(),
@@ -63,18 +77,22 @@ export const CalendarModal = (props) => {
                 const previousDate = new Date(currentDate);
                 previousDate.setDate(currentDate.getDate() - 1);
 
+                const newDateString = new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1).toISOString().split('T')[0];
                 const isUnviableDay = (day < previousDate) || (i === 4 && j > currentDate.getDay());
                 const isCurrentDay = day.getDate() === currentDate.getDate() && day.getMonth() === currentDate.getMonth() && day.getFullYear() === currentDate.getFullYear();
-                const buttonClassName = `calendarCell ${isUnviableDay ? "unviableDay" : "viableDay"} ${isCurrentDay ? "currentDay" : ""}`;
+                
+                const isSelectedServiceDay = (newServiceRequest.date === newDateString);
 
+                const buttonClassName = `calendarCell ${
+                    isUnviableDay ? "unviableDay" : isCurrentDay ? "currentDay" : ""
+                  } ${isSelectedServiceDay ? "selectedRequestDay" : ""}`;
+                  
                 const cell = (
                     <button
                         key={`${i}-${j}`}
-                        className={`${buttonClassName} calendarCell`}
-                        onClick={() => {
-                            setNewServiceRequest({...newSerViceRequest, date: new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1).toISOString().split('T')[0]})
-                        }
-                        }
+                        id={`cell${i}-${j}`}
+                        className={buttonClassName}
+                        onClick={() => handleDateClick(newDateString)}
                         disabled={buttonClassName.includes("unviableDay")}
                     >
                         {dayOfMonth}
@@ -102,8 +120,7 @@ export const CalendarModal = (props) => {
                     </form>
                 </span>
                 <div>
-                    {/* {store.user_addresses.id1} */}
-                    Addressid: {newSerViceRequest.address_id}
+                    Addressid: {newServiceRequest.address_id}
                 </div>
                 <div className="menuLabel d-flex justify-content-center align-items-center">
                     book {service.toLowerCase()}
@@ -112,7 +129,7 @@ export const CalendarModal = (props) => {
                     <Calendar />
                 </div>
                 <div>
-                    Service date: {newSerViceRequest.date}
+                    Service date: {newServiceRequest.date}
                 </div>
                 <div>
                     <input className="expand-toggle" id={`expand-toggle${id}`} type="checkbox" />
@@ -131,8 +148,6 @@ export const CalendarModal = (props) => {
                     {price}
                 </p>
             </dialog>
-
         </>
-
     );
 }
