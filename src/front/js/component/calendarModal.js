@@ -130,18 +130,33 @@ export const CalendarModal = (props) => {
               halfHours = 0;
               hours++;
             }
+                      const hourString = hours.toString().padStart(2, "0") + ":" + halfHours.toString().padEnd(2, "0");
+            setNewServiceRequest({ ...newServiceRequest, time: hourString });
+          };
+          
+          
+          const handleDecreseHour = () => {
+            const serviceHour = newServiceRequest.time;
+            if (serviceHour === "07:00") {
+              return true;
+            }
+          
+            let hours = parseInt(serviceHour.charAt(0) + serviceHour.charAt(1));
+            let halfHours = parseInt(serviceHour.charAt(3) + serviceHour.charAt(4));
+          
+            if (!halfHours) {
+              halfHours = 30;
+            } else {
+              halfHours = 0;
+              hours--;
+            }
           
             const hourString = hours.toString().padStart(2, "0") + ":" + halfHours.toString().padEnd(2, "0");
             setNewServiceRequest({ ...newServiceRequest, time: hourString });
           };
           
-          
+
         
-
-        const handleDecreseHour = () => {
-            return true;
-        };
-
         return (
             <>
                 <div className="hourPickerWrapper">
