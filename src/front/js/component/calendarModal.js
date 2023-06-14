@@ -44,7 +44,10 @@ export const CalendarModal = (props) => {
 
     // SendRequest function functions
     const handleSendRequest = () => {
-        actions.createRequest(newServiceRequest);
+        actions.createServiceRequest(newServiceRequest);
+        const dialog = document.querySelector(`#dialog${id}`)
+        dialog.close()
+        actions.alertUser("service requested", "yellow", "black");
     }
 
     // Calendar Subcomponent

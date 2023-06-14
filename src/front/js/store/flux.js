@@ -54,7 +54,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				document.body.appendChild(modalElement);
 			},
 
-
 			// SIGIN functions
 			signinUser: async (email, password) => {
 				const response = await fetch(process.env.BACKEND_URL + "api/signinuser", {
@@ -277,12 +276,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			//Create service Request
-			createRequest: async (serviceRequest) => {
+			createServiceRequest: async (serviceRequest) => {
 				try {
 				  const response = await fetch(process.env.BACKEND_URL + "api/createrequest", {
 					method: "POST",
 					headers: {
-					  "Content-Type": "application/json", // Added because of error
+					  "Content-Type": "application/json",
 					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
 					},
 					body: JSON.stringify(serviceRequest),
