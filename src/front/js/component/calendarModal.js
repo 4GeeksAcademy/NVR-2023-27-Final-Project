@@ -118,57 +118,87 @@ export const CalendarModal = (props) => {
         const handleIncreaseHour = () => {
             const serviceHour = newServiceRequest.time;
             if (serviceHour === "22:00") {
-              return true;
+                return true;
             }
-          
+
             let hours = parseInt(serviceHour.charAt(0) + serviceHour.charAt(1));
             let halfHours = parseInt(serviceHour.charAt(3) + serviceHour.charAt(4));
-          
+
             if (!halfHours) {
-              halfHours = 30;
+                halfHours = 30;
             } else {
-              halfHours = 0;
-              hours++;
+                halfHours = 0;
+                hours++;
             }
-                      const hourString = hours.toString().padStart(2, "0") + ":" + halfHours.toString().padEnd(2, "0");
-            setNewServiceRequest({ ...newServiceRequest, time: hourString });
-          };
-          
-          
-          const handleDecreseHour = () => {
-            const serviceHour = newServiceRequest.time;
-            if (serviceHour === "07:00") {
-              return true;
-            }
-          
-            let hours = parseInt(serviceHour.charAt(0) + serviceHour.charAt(1));
-            let halfHours = parseInt(serviceHour.charAt(3) + serviceHour.charAt(4));
-          
-            if (!halfHours) {
-              halfHours = 30;
-            } else {
-              halfHours = 0;
-              hours--;
-            }
-          
             const hourString = hours.toString().padStart(2, "0") + ":" + halfHours.toString().padEnd(2, "0");
             setNewServiceRequest({ ...newServiceRequest, time: hourString });
-          };
-          
+        };
 
-        
+        const handleDecreseHour = () => {
+            const serviceHour = newServiceRequest.time;
+            if (serviceHour === "07:00") {
+                return true;
+            }
+
+            let hours = parseInt(serviceHour.charAt(0) + serviceHour.charAt(1));
+            let halfHours = parseInt(serviceHour.charAt(3) + serviceHour.charAt(4));
+
+            if (!halfHours) {
+                halfHours = 30;
+            } else {
+                halfHours = 0;
+                hours--;
+            }
+
+            const hourString = hours.toString().padStart(2, "0") + ":" + halfHours.toString().padEnd(2, "0");
+            setNewServiceRequest({ ...newServiceRequest, time: hourString });
+        };
+
         return (
             <>
                 <div className="hourPickerWrapper">
                     <span className="hourValue">{newServiceRequest.time}</span>
-                    <span><button onClick={(handleIncreaseHour)}>+</button></span>
-                    <span><button onClick={(handleDecreseHour)}>-</button></span>
+                    <span><button onClick={handleIncreaseHour}>+</button></span>
+                    <span><button onClick={handleDecreseHour}>-</button></span>
                 </div>
-         
+
+            </>
+        );
+    }
+
+    //quantityPIcker subcomponent
+
+    const QuantityPicker = () => {
+
+        const handleIncreaseQuantity = () => {
+            if (newServiceRequest.quantity === 5) { return false }
+
+            let temporaryVariable = newServiceRequest.quantity + 1;
+            setNewServiceRequest({ ...newServiceRequest, quantity: temporaryVariable });
+            return true;
+        }
+
+        const handleDecreaseQuantity = () => {
+            if (newServiceRequest.quantity === 1) { return false }
+
+            let temporaryVariable = newServiceRequest.quantity - 1;
+            setNewServiceRequest({ ...newServiceRequest, quantity: temporaryVariable });
+            return true;
+        }
+
+        return (
+            <>
+                <div className="quantityPicker">
+                    <span className="quantityValue">{newServiceRequest.quantity}</span>
+                    <span><button onClick={handleIncreaseQuantity}>+</button></span>
+                    <span><button onClick={handleDecreaseQuantity}>-</button></span>
+                </div>
             </>
         );
 
-    }
+    };
+
+
     //CalendarModal JSX
     return (
         <>
@@ -191,7 +221,10 @@ export const CalendarModal = (props) => {
                 <div className="calendarContainer">
                     <HourPicker />
                 </div>
-               
+                <div className="calendarContainer">
+                    <QuantityPicker />
+                </div>
+
                 <div>
                     Service date: {newServiceRequest.date}
                 </div>
