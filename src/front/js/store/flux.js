@@ -277,27 +277,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			//Create service Request
-			careateRequest: async (serviceRequest) => {
+			createRequest: async (serviceRequest) => {
 				try {
-					const response = await fetch(process.env.BACKEND_URL + "api/createrequest", {
-						method: "POST",
-						headers: {
-							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
-						},
-						body: JSON.stringify(serviceRequest),
-					});
-
-					if (response.ok) {
-						const data = await response.json();
-						return data.id;
-					}
+				  const response = await fetch(process.env.BACKEND_URL + "api/createrequest", {
+					method: "POST",
+					headers: {
+					  "Content-Type": "application/json", // Added because of error
+					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+					},
+					body: JSON.stringify(serviceRequest),
+				  });
+			  
+				  if (response.ok) {
+					const data = await response.json();
+					return data.id;
+				  }
 				} catch (error) {
-					console.error("Error creating request", error);
-					return false;
+				  console.error("Error creating request", error);
+				  return false;
 				}
-			},
-
-
+			  },
+			  
 		}
 	};
 };

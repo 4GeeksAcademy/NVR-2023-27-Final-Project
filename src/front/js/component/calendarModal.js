@@ -36,10 +36,16 @@ export const CalendarModal = (props) => {
         }
     }, [store.userAddresses]);
 
+    
+    // General functions
     const handleClickCancel = () => {
         return true;
     }
 
+    // SendRequest function functions
+    const handleSendRequest = () => {
+        actions.createRequest(newServiceRequest);
+    }
 
     // Calendar Subcomponent
     const Calendar = () => {
@@ -288,8 +294,7 @@ export const CalendarModal = (props) => {
             </>
         );
     };
-    
-    
+        
 
     //CalendarModal JSX
     return (
@@ -323,7 +328,7 @@ export const CalendarModal = (props) => {
                     <AddressPicker />
                 </div>
 
-                <span>
+             {/*    <span>
                     * 1: {newServiceRequest.status} *
                 </span>
                 <span>
@@ -349,7 +354,8 @@ export const CalendarModal = (props) => {
                 </span>
                 <span>
                     * 9: {newServiceRequest.address_id} *
-                </span>
+                </span> */}
+                <button onClick={handleSendRequest}>SEND REQUEST</button>
                 <div>
                     <input className="expand-toggle" id={`expand-toggle${id}`} type="checkbox" />
                     <label htmlFor={`expand-toggle${id}`} className="expand-label">review and confirm</label>

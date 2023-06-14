@@ -313,7 +313,7 @@ def create_service_request():
                 recurrence=body["recurrence"],
                 quantity=body["quantity"],
                 service_description_id=body["service_description_id"],
-                user_id=body["user_id"],
+                user_id=user.id,
                 provider_id=body["provider_id"],
                 address_id=body["address_id"]
             )
