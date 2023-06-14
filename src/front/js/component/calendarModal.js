@@ -192,6 +192,7 @@ export const CalendarModal = (props) => {
                     <span className="quantityValue">{newServiceRequest.quantity}</span>
                     <span><button onClick={handleIncreaseQuantity}>+</button></span>
                     <span><button onClick={handleDecreaseQuantity}>-</button></span>
+                    <span>subtotal price:</span><span>{price*newServiceRequest.quantity }</span>
                 </div>
             </>
         );
