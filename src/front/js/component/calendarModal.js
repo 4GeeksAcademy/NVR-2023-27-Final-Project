@@ -111,7 +111,7 @@ export const CalendarModal = (props) => {
         );
     };
 
-    // Hourpicjer Subcomponent
+    // Hourpicker Subcomponent
 
     const HourPicker = () => {
 
@@ -192,11 +192,61 @@ export const CalendarModal = (props) => {
                     <span className="quantityValue">{newServiceRequest.quantity}</span>
                     <span><button onClick={handleIncreaseQuantity}>+</button></span>
                     <span><button onClick={handleDecreaseQuantity}>-</button></span>
-                    <span>subtotal price:</span><span>{price*newServiceRequest.quantity }</span>
+                    <span>subtotal price:</span><span>{price * newServiceRequest.quantity}</span>
                 </div>
             </>
         );
 
+    };
+
+    //Recurrence picker
+
+    const RecurrencePicker = () => {
+        const handleOptionChange = (event) => {
+            const newRecurrence = parseInt(event.target.value);
+            setNewServiceRequest((prevState) => ({
+                ...prevState,
+                recurrence: newRecurrence,
+            }));
+        };
+
+        return (
+            <>
+                <div className="recurrence-buttons">
+                    <button
+                        className={`recurrence-button ${newServiceRequest.recurrence === 1 ? 'activeRecurrence' : ''}`}
+                        onClick={handleOptionChange}
+                        value={1}
+                    >
+                        one-time only
+                    </button>
+                    <button
+                        className={`recurrence-button ${newServiceRequest.recurrence === 2 ? 'activeRecurrence' : ''}`}
+                        onClick={handleOptionChange}
+                        value={2}
+                    >
+                        monthly
+                    </button>
+                    <button
+                        className={`recurrence-button ${newServiceRequest.recurrence === 3 ? 'activeRecurrence' : ''}`}
+                        onClick={handleOptionChange}
+                        value={3}
+                    >
+                        weekly
+                    </button>
+                    <button
+                        className={`recurrence-button ${newServiceRequest.recurrence === 4 ? 'activeRecurrence' : ''}`}
+                        onClick={handleOptionChange}
+                        value={4}
+                    >
+                        daily
+                    </button>
+                    <div>
+                    Selected: {newServiceRequest.recurrence}
+                    </div>
+                </div>
+            </>
+        );
     };
 
 
@@ -225,6 +275,10 @@ export const CalendarModal = (props) => {
                 <div className="calendarContainer">
                     <QuantityPicker />
                 </div>
+                <div className="calendarContainer">
+                    <RecurrencePicker />
+                </div>
+
 
                 <div>
                     Service date: {newServiceRequest.date}
