@@ -29,6 +29,7 @@ export const CalendarModal = (props) => {
         address_id: null,
     });
 
+    // initialzies newServiceRequest wuth main address ID
     useEffect(() => {
         if (store.userAddresses) {
             setNewServiceRequest({ ...newServiceRequest, address_id: store.userAddresses.id1 })
@@ -242,13 +243,53 @@ export const CalendarModal = (props) => {
                         daily
                     </button>
                     <div>
-                    Selected: {newServiceRequest.recurrence}
+                        Selected: {newServiceRequest.recurrence}
                     </div>
                 </div>
             </>
         );
     };
 
+    //address picker
+
+    const AddressPicker = () => {
+        const handleAddressChange = (addressId) => {
+            setNewServiceRequest((prevState) => ({
+                ...prevState,
+                address_id: addressId,
+            }));
+        };
+        return (
+            <>
+                <div className="address-buttons">
+                    {store.userAddresses && store.userAddresses.id1 && (
+                        <button
+                            className={`address-button ${newServiceRequest.address_id === store.userAddresses.id1 ? 'activeAddressButton' : 'inactiveAddressButton'}`}
+                            onClick={() => handleAddressChange(store.userAddresses.id1)}
+                        >
+                            Main address
+                        </button>
+                    )}
+                        {store.userAddresses && store.userAddresses.id2 && (
+                        <button
+                            className={`address-button ${newServiceRequest.address_id === store.userAddresses.id2 ? 'activeAddressButton' : 'inactiveAddressButton'}`}
+                            onClick={() => handleAddressChange(store.userAddresses.id2)}
+                        >
+                            Secondary address
+                        </button>
+                    )}
+                </div>
+    
+                {store.userAddresses && (
+                    <div>
+                        Selected address: {newServiceRequest.address_id}
+                    </div>
+                )}
+            </>
+        );
+    };
+    
+    
 
     //CalendarModal JSX
     return (
@@ -278,14 +319,37 @@ export const CalendarModal = (props) => {
                 <div className="calendarContainer">
                     <RecurrencePicker />
                 </div>
-
-
-                <div>
-                    Service date: {newServiceRequest.date}
+                <div className="calendarContainer">
+                    <AddressPicker />
                 </div>
-                <p>
-                    {id} {newServiceRequest.address_id} {service} {price}
-                </p>
+
+                <span>
+                    * 1: {newServiceRequest.status} *
+                </span>
+                <span>
+                    * 2: {newServiceRequest.date} *
+                </span>
+                <span>
+                    * 3: {newServiceRequest.time} *
+                </span>
+                <span>
+                    * 4: {newServiceRequest.recurrence} *
+                </span>
+                <span>
+                    * 5: {newServiceRequest.quantity} *
+                </span>
+                <span>
+                    * 6: {newServiceRequest.service_description_id} *
+                </span>
+                <span>
+                    * 7: {newServiceRequest.user_id} *
+                </span>
+                <span>
+                    * 8: {newServiceRequest.provider_id} *
+                </span>
+                <span>
+                    * 9: {newServiceRequest.address_id} *
+                </span>
                 <div>
                     <input className="expand-toggle" id={`expand-toggle${id}`} type="checkbox" />
                     <label htmlFor={`expand-toggle${id}`} className="expand-label">review and confirm</label>

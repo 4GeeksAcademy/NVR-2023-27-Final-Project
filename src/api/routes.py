@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, UserProfile, ProviderProfile, Address, Exclusion, ServiceRequest, Notification,ServiceDescription
+from api.models import db, UserProfile, ProviderProfile, Address, Exclusion, ServiceRequest, Notification, ServiceDescription
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -221,7 +221,8 @@ def get_user_exclusions():
         user_email = get_jwt_identity()
         user = UserProfile.query.filter_by(email=user_email).first()
         if user:
-            exclusions = Exclusion.query.filter_by(user_id=user.id).limit(5).all()
+            exclusions = Exclusion.query.filter_by(
+                user_id=user.id).limit(5).all()
             user_exclusions = {}
 
             for i in range(1, 6):
@@ -248,7 +249,6 @@ def get_user_exclusions():
         }), 500
 
 
-
 @api.route("/getuserservicerequests", methods=["GET"])
 @jwt_required()
 def get_user_service_requests():
@@ -256,8 +256,10 @@ def get_user_service_requests():
         user_email = get_jwt_identity()
         user = UserProfile.query.filter_by(email=user_email).first()
         if user:
-            service_requests = ServiceRequest.query.filter_by(user_id=user.id).all()
-            serialized_service_requests = [request.serialize() for request in service_requests]
+            service_requests = ServiceRequest.query.filter_by(
+                user_id=user.id).all()
+            serialized_service_requests = [
+                request.serialize() for request in service_requests]
             return jsonify({
                 "message": "Service requests successfully retrieved",
                 "user_requests": serialized_service_requests
@@ -271,7 +273,6 @@ def get_user_service_requests():
         }), 500
 
 
-
 @api.route("/getusernotifications", methods=["GET"])
 @jwt_required()
 def get_user_notifications():
@@ -280,7 +281,8 @@ def get_user_notifications():
         user = UserProfile.query.filter_by(email=user_email).first()
         if user:
             notifications = Notification.query.filter_by(user_id=user.id).all()
-            serialized_notifications = [notification.serialize() for notification in notifications]
+            serialized_notifications = [
+                notification.serialize() for notification in notifications]
             return jsonify({
                 "message": "Notifications successfully retrieved",
                 "notifications": serialized_notifications
@@ -292,4 +294,36 @@ def get_user_notifications():
             "message": "An error occurred",
             "error": str(e)
         }), 500
- 
+
+ # PRIVATE USER endpoints - create SERVICE REQUEST
+
+
+@api.route("/createrequest", methods=["POST"])
+@jwt_required()
+def create_service_request():
+    try:
+        user_email = get_jwt_identity()
+        user = UserProfile.query.filter_by(email=user_email).first()
+        if user:
+            body = request.json
+            new_request = ServiceRequest(
+                status=body["status"],
+                date=body["date"],
+                time=body["time"],
+                recurrence=body["recurrence"],
+                quantity=body["quantity"],
+                service_description_id=body["service_description_id"],
+                user_id=body["user_id"],
+                provider_id=body["provider_id"],
+                address_id=body["address_id"]
+            )
+            db.session.add(new_request)
+            db.session.commit()
+            return jsonify({"message": "Request successfully created"}), 200
+        else:
+            return jsonify({"message": "User not found"}), 404
+    except Exception as e:
+        return jsonify({
+            "message": "An error occurred",
+            "error": str(e)
+        }), 500

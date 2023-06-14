@@ -15,9 +15,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userRequests: null,
 			userNotifications: null,
 			serviceDescriptions: null,
-	
 
-		
+
+
 		},
 		actions: {
 
@@ -37,23 +37,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 			calendarModal: (message, backgroundColor, color) => {
 				const modalElement = document.createElement("div");
 				modalElement.classList.add("calendarModal");
-			  
+
 				const closeButton = document.createElement("button");
 				closeButton.textContent = "Close";
 				closeButton.addEventListener("click", () => {
-				  modalElement.remove();
+					modalElement.remove();
 				});
 				modalElement.appendChild(closeButton);
-			  
+
 				const contentElement = document.createElement("div");
 				contentElement.textContent = message;
 				contentElement.style.backgroundColor = backgroundColor;
 				contentElement.style.color = color;
 				modalElement.appendChild(contentElement);
-			  
+
 				document.body.appendChild(modalElement);
-			  },
-			  
+			},
+
 
 			// SIGIN functions
 			signinUser: async (email, password) => {
@@ -273,6 +273,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ userNotifications: data.notifications });
 				} else {
 					console.log("Error:", response.status);
+				}
+			},
+
+			//Create service Request
+			careateRequest: async (serviceRequest) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/createrequest", {
+						method: "POST",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+						},
+						body: JSON.stringify(serviceRequest),
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						return data.id;
+					}
+				} catch (error) {
+					console.error("Error creating request", error);
+					return false;
 				}
 			},
 
