@@ -12,8 +12,9 @@
   --standOutGreen: rgb(0, 70, 0);
 }
 
-* {
+body , body * {
   background: var(--background);
+  user-select: none;
 }
 
 body {
@@ -512,6 +513,7 @@ form input[type=search] {
 button .bookButton, button .bookButto:focus , button .bookButto:active    {
   outline: none;
   border: none;
+  border-radius: 0;
 }
 
 /* Calendar Modal */
@@ -523,8 +525,8 @@ dialog {
   background: var(--modalBackground);
   border: 0.5px solid black;
   transform: scale(0);
-  animation: modal-appear 0.35s ease-in-out forwards;
-  overflow: hidden;
+  animation: modal-appear 0.5s ease-in-out forwards;
+  /* overflow: hidden; */
 }
 
 @keyframes modal-appear {
@@ -579,6 +581,16 @@ dialog::backdrop {
   transform: scale(1.2); /* Keep the same */
   }
 
+  .modalSubTitle {
+    display: flex;
+    align-items: baseline;
+  }
+  .modalOptionTiltle {
+    font-size: .675rem;
+    font-style: italic;
+    letter-spacing: .1rem;
+    
+  }
 
 /* Calendar */
 
@@ -648,10 +660,88 @@ button.calendarCell {
 
 /* Hour picker */
 
+.horPickerWrapper {
+  display: flex;
+  justify-content: center;
 
+}
+.pickerValue {
+  font-size: .7rem;
+  font-weight: 300;
 
+}
 
+.pickerControls button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.3s ease;
 
+}
+
+.pickerControls button:hover {
+  transform: scale(1.8);
+}
+
+.pickerControls button:focus {
+  outline: none;
+  background-color: transparent; 
+}
+
+.hourPickerControls button:active {
+  outline: none;
+  background-color: transparent; 
+}
+
+/* Recurrence picker */
+.recurrence-button {
+  height: 1.2rem;
+  width: 3rem;
+}
+.recurrence-button.activeRecurrence {
+  border: none;
+  background:rgb(78, 78, 159);
+  color: var(--background);
+  font-size: .7rem;
+  font-variant: small-caps;
+}
+
+.recurrence-button.inactiveRecurrence {
+  border: .5px solid black;
+  font-size: .7rem;
+  font-variant: small-caps;
+}
+
+.recurrence-buttons {
+  border-collapse: collapse;
+}
+
+/* Address picker */
+
+.address-button {
+  height: 1.2rem;
+  width: 3rem;
+}
+
+.address-button.activeAddressButton {
+  border: none;
+  background:rgb(78, 78, 159);
+  color: var(--background);
+  font-size: .7rem;
+  font-variant: small-caps;
+}
+
+.address-button.inactiveAddressButton {
+  border: .5px solid black;
+  font-size: .7rem;
+  font-variant: small-caps;
+}
+
+.address-buttons {
+  border-collapse: collapse;
+}
 /* Expandable */
 
 .expand-toggle {

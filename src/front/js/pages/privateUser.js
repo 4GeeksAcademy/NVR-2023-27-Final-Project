@@ -10,7 +10,7 @@ export const PrivateUser = () => {
     const navigate = useNavigate();
     const [selectedSection, setSelectedSection] = useState("requestService");
 
-    // SERVICE REQUEST variables
+    // Filter service variables
     const [selectedCategory, setSelectedCategory] = useState("Any category");
     const [selectedPrice, setSelectedPrice] = useState("Any price");
     const [serviceSearchBar, setServiceSearchBar] = useState("");
@@ -19,7 +19,8 @@ export const PrivateUser = () => {
     const [prices, setPrices] = useState({});
     let filteredServices = null;
 
-    // 
+    // UseEffects
+
     useEffect(() => {
         const checkCredentials = () => {
             if (!localStorage.getItem("credentials")) {
@@ -153,6 +154,7 @@ export const PrivateUser = () => {
         <>
             <div className="container-fluid mx-0 px-0 gx-0">
                 <header>
+                    {/* first Navbar */}
                     <nav className="navbar fixed-top px-3 firstBavBar">
                         <button onClick={() => handleSectionClick("home")}>Home</button>
                         <button
@@ -177,8 +179,7 @@ export const PrivateUser = () => {
                         >
                             Avatar
                         </button>
-                        {/* test */}
-                   
+                                       
                                     {/* Offcanvas */}
                                     <div className="offcanvas offcanvas-end sideBanner"
                                         data-bs-scroll="true"
@@ -277,6 +278,7 @@ export const PrivateUser = () => {
                                         className="dimissBanner ps-3 pt-3"
                                     ></span>
                                 </nav>
+                                {/* Second Navbar */}
                                 {selectedSection === "requestService" && (
                                     <nav className="navbar fixed-top secondNavBar d-flex justify-content-center align-items-center ">
                                         <div className="d-flex justify-content-center align-items-center">
