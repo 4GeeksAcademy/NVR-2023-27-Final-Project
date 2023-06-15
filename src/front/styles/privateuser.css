@@ -43,6 +43,19 @@ html::-webkit-scrollbar-track {
   background: var(--background);
 }
 
+/* Straight corners */
+
+button,
+button:hover,
+button:focus,
+button:active,
+button:disabled {
+  border-radius: 0;
+  outline: none;
+  border: none;
+}
+
+
 /* Alert User pop up */
 
 .alertUser {
@@ -509,6 +522,7 @@ form input[type=search] {
   padding-inline: .63rem;
 }
 
+
 /* BOOK Button  */
 button .bookButton, button .bookButto:focus , button .bookButto:active    {
   outline: none;
@@ -521,7 +535,7 @@ button .bookButton, button .bookButto:focus , button .bookButto:active    {
 dialog {
   position: fixed;
   margin-top: 7.48rem;
-  width: 27%;
+  width: 30%;
   background: var(--modalBackground);
   border: 0.5px solid black;
   transform: scale(0);
@@ -624,7 +638,7 @@ dialog::backdrop {
 
 .calendarCell {
   text-align: center;
-  height: 1.4rem;
+  height: 1.2rem;
   width: 1.8rem;
   margin: 0;
   padding: 0;
