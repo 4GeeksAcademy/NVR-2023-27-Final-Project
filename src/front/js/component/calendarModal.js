@@ -42,13 +42,16 @@ export const CalendarModal = (props) => {
         return true;
     }
 
+    const closeCalendarModal = () => {
+        const dialog = document.querySelector(`#dialog${id}`);
+        dialog.close();
+    }
     // SendRequest function functions
     const handleSendRequest = () => {
         actions.createServiceRequest(newServiceRequest);
-        const dialog = document.querySelector(`#dialog${id}`)
-        dialog.close()
-        actions.alertUser("service requested", "yellow", "black");
-    }
+        closeCalendarModal();
+        actions.alertUser("service requested", "#fcf75e", "black");
+    };
 
     // Calendar Subcomponent
     const Calendar = () => {
