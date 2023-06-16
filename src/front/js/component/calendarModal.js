@@ -23,7 +23,7 @@ export const CalendarModal = (props) => {
         ["multiple", "white"],
     ]);
     let categoryColor = "transparent";
-    
+
     // General variables
     const { store, actions } = useContext(Context);
     const { id, service, price } = props
@@ -131,6 +131,7 @@ export const CalendarModal = (props) => {
                     const booking = store.userBookedDays.find((booking) => booking.date === newDateString);
                     categoryColor = categoryColorMap.get(booking.category);
                 }
+
 
                 const buttonClassName = `calendarCell ${isUnviableDay ? "unviableDay" : "viableDay"
                     } ${isCurrentDay ? "currentDay" : ""} ${isBookedDay ? "bookedDay" : ""} ${isSelectedServiceDay ? "selectedRequestDay" : ""}`;
