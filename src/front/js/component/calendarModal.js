@@ -3,11 +3,6 @@ import { Context } from "../store/appContext";
 
 export const CalendarModal = (props) => {
     const { store, actions } = useContext(Context);
-   
-   useEffect(() => {
-    actions.getUserBookedDays();
-   }, []);
-   
     const { id, service, price } = props
 
     // Stes default Request day to the day after teh current day
@@ -33,12 +28,20 @@ export const CalendarModal = (props) => {
         address_id: null,
     });
 
+    //***************************************************/
+    // Gets use's booked days to display 
+    useEffect(() => {
+        actions.getUserBookedDays();
+    }, []);
+
     // initialzies newServiceRequest wuth main address ID
     useEffect(() => {
         if (store.userAddresses) {
             setNewServiceRequest({ ...newServiceRequest, address_id: store.userAddresses.id1 })
         }
     }, [store.userAddresses]);
+
+
 
 
     // General functions
@@ -61,6 +64,8 @@ export const CalendarModal = (props) => {
 
     // Calendar Subcomponent
     const Calendar = () => {
+
+
 
         const handleDateClick = (newDate) => {
             setNewServiceRequest((prevState) => ({
@@ -100,11 +105,21 @@ export const CalendarModal = (props) => {
                 const newDateString = new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1).toISOString().split('T')[0];
                 const isUnviableDay = (day < previousDate) || (i === 4 && j > currentDate.getDay());
                 const isCurrentDay = day.getDate() === currentDate.getDate() && day.getMonth() === currentDate.getMonth() && day.getFullYear() === currentDate.getFullYear();
-
                 const isSelectedServiceDay = (newServiceRequest.date === newDateString);
+                let isBookedDay = null;
+
+                // Checks if day of calendar is booked already with some otehr service
+                if (
+                    store.userBookedDays &&
+                    store.userBookedDays.some((booking) => booking.date === newDateString)
+                ) {
+                    isBookedDay = true;
+                }
+
+                // *******************************************************************
 
                 const buttonClassName = `calendarCell ${isUnviableDay ? "unviableDay" : "viableDay"
-                    } ${isCurrentDay ? "currentDay" : ""} ${isSelectedServiceDay ? "selectedRequestDay" : ""}`;
+                    } ${isCurrentDay ? "currentDay" : ""} ${isBookedDay ? "bookedDay" : ""} ${isSelectedServiceDay ? "selectedRequestDay" : ""}`;
 
 
                 const cell = (
@@ -217,14 +232,14 @@ export const CalendarModal = (props) => {
 
     //repeatPicker subcomponent
 
-    const RepeatPicker= () => {
+    const RepeatPicker = () => {
 
         const recurrenceMap = new Map([
             [1, "No"],
             [2, "Monthly"],
             [3, "Weekly"],
             [4, "Daily"]
-          ]);
+        ]);
 
         const handleIncreaseRecurrence = () => {
             if (newServiceRequest.recurrence === 4) { return false }

@@ -668,6 +668,10 @@ color: blue;
   color: black;
 }
 
+.bookedDay {
+  background: yellow;
+}
+
 button.calendarCell {
   border: none;
 }
