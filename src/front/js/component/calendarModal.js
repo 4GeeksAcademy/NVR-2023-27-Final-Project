@@ -22,9 +22,9 @@ export const CalendarModal = (props) => {
         ["wellness", "pink"],
         ["multiple", "white"],
     ]);
-
     let categoryColor = "transparent";
-
+    
+    // General variables
     const { store, actions } = useContext(Context);
     const { id, service, price } = props
 
@@ -113,7 +113,6 @@ export const CalendarModal = (props) => {
             for (let j = 0; j < 7; j++) {
                 const day = new Date(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate() + j);
                 const dayOfMonth = day.getDate();
-
                 const previousDate = new Date(currentDate);
                 previousDate.setDate(currentDate.getDate() - 1);
 
@@ -138,7 +137,7 @@ export const CalendarModal = (props) => {
 
                 const cell = (
                     <>
-                        <span className="adjacentCell" style={{ color: isBookedDay ? categoryColor  : "transparent" }}>■</span>
+                        <span className="adjacentCell" style={{ color: isBookedDay ? categoryColor : "transparent" }}>■</span>
                         <button
                             key={`${i}-${j}`}
                             id={`cell${i}-${j}`}
