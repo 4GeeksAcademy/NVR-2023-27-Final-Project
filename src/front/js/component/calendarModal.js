@@ -2,6 +2,29 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
 export const CalendarModal = (props) => {
+    const categoryColorMap = new Map([
+        ["cleaning", "#32CD32"],
+        ["wardrobe", "red"],
+        ["plumbing", "#AFEEEE"],
+        ["electrical", "yellow"],
+        ["hvac", "purple"],
+        ["security", "#9400D3"],
+        ["handyman", "#EE4B2B"],
+        ["patching", "yellow"],
+        ["gardening", "green"],
+        ["extermination", "teal"],
+        ["eventing", "purple"],
+        ["companionship", "#FF69B5"],
+        ["grooming", "navy"],
+        ["nursing", "green"],
+        ["nannying", "cyan"],
+        ["petcare", "brown"],
+        ["wellness", "pink"],
+        ["multiple", "white"],
+    ]);
+
+    let categoryColor = "transparent";
+
     const { store, actions } = useContext(Context);
     const { id, service, price } = props
 
@@ -28,21 +51,12 @@ export const CalendarModal = (props) => {
         address_id: null,
     });
 
-    //***************************************************/
-    // Gets use's booked days to display 
-    useEffect(() => {
-        actions.getUserBookedDays();
-    }, []);
-
     // initialzies newServiceRequest wuth main address ID
     useEffect(() => {
         if (store.userAddresses) {
             setNewServiceRequest({ ...newServiceRequest, address_id: store.userAddresses.id1 })
         }
     }, [store.userAddresses]);
-
-
-
 
     // General functions
     const handleClickCancel = () => {
@@ -54,18 +68,16 @@ export const CalendarModal = (props) => {
         dialog.close();
     }
 
-    // SERVICE REQUEST function 
+    // Service Request function 
 
     const handleSendRequest = () => {
         actions.createServiceRequest(newServiceRequest);
         closeCalendarModal();
-        actions.alertUser("service requested", "tellow", "black");
+        actions.alertUser("service requested", "yellow", "black");
     };
 
     // Calendar Subcomponent
     const Calendar = () => {
-
-
 
         const handleDateClick = (newDate) => {
             setNewServiceRequest((prevState) => ({
@@ -83,11 +95,14 @@ export const CalendarModal = (props) => {
         const weekdayAbbreviations = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
         const weeks = [];
         weeks.push(
-            <div key="weekdays" className="calendarContainer">
+            <div key="weekdays" className="calendarAbbreviationsContainer">
                 {weekdayAbbreviations.map((day, index) => (
-                    <div key={index} className="weekDaysAbbreviations calendarCell">
-                        {day}
-                    </div>
+                    <>
+                        <span className="adjacentCell">■</span>
+                        <div key={index} className="weekDaysAbbreviations calendarCell">
+                            {day}
+                        </div>
+                    </>
                 ))}
             </div>
         );
@@ -114,24 +129,26 @@ export const CalendarModal = (props) => {
                     store.userBookedDays.some((booking) => booking.date === newDateString)
                 ) {
                     isBookedDay = true;
+                    const booking = store.userBookedDays.find((booking) => booking.date === newDateString);
+                    categoryColor = categoryColorMap.get(booking.category);
                 }
-
-                // *******************************************************************
 
                 const buttonClassName = `calendarCell ${isUnviableDay ? "unviableDay" : "viableDay"
                     } ${isCurrentDay ? "currentDay" : ""} ${isBookedDay ? "bookedDay" : ""} ${isSelectedServiceDay ? "selectedRequestDay" : ""}`;
 
-
                 const cell = (
-                    <button
-                        key={`${i}-${j}`}
-                        id={`cell${i}-${j}`}
-                        className={buttonClassName}
-                        onClick={() => handleDateClick(newDateString)}
-                        disabled={buttonClassName.includes("unviableDay")}
-                    >
-                        {dayOfMonth}
-                    </button>
+                    <>
+                        <span className="adjacentCell" style={{ color: isBookedDay ? categoryColor  : "transparent" }}>■</span>
+                        <button
+                            key={`${i}-${j}`}
+                            id={`cell${i}-${j}`}
+                            className={buttonClassName}
+                            onClick={() => handleDateClick(newDateString)}
+                            disabled={buttonClassName.includes("unviableDay")}
+                        >
+                            {dayOfMonth}
+                        </button>
+                    </>
                 );
                 week.push(cell);
             }
@@ -187,6 +204,7 @@ export const CalendarModal = (props) => {
             const hourString = hours.toString().padStart(2, "0") + ":" + halfHours.toString().padEnd(2, "0");
             setNewServiceRequest({ ...newServiceRequest, time: hourString });
         };
+
         return (
             <>
                 <div className="hourPickerWrapper">

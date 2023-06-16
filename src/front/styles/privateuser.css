@@ -614,6 +614,14 @@ dialog::backdrop {
   flex-direction: row;
 }
 
+.calendarAbbreviationsContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  border-top: .7px solid black;
+
+}
+
 .weekContainer {
   display: flex;
   flex-direction: row;
@@ -631,9 +639,7 @@ dialog::backdrop {
   font-size: .675rem;
   font-variant: small-caps;
   background: var(--modalBackground);
-  border-top: .7px black solid;
-  border-bottom: .7px black solid;
-  margin-bottom: .3rem;
+   margin-bottom: .3rem;
 }
 
 .calendarCell {
@@ -646,12 +652,12 @@ dialog::backdrop {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 .calendarCell.viableDay:hover {
   background: rgb(78, 78, 159);
   color: var(--background);
+  z-index: 10000;
 }
 
 .calendarCell.currentDay {
@@ -661,6 +667,7 @@ color: blue;
 .calendarCell.selectedRequestDay {
   background:  var(--standOutGreen);
   color: var(--background);
+  z-index: 100;
 }
 
 .unviableDay {
@@ -668,12 +675,20 @@ color: blue;
   color: black;
 }
 
-.bookedDay {
+/* .bookedDay {
   background: yellow;
-}
+} */
 
-button.calendarCell {
-  border: none;
+.adjacentCell {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  gap: m0;
+  font-size: .7rem;
+  transform: translateX(.54rem) translateY(.1rem);
+  z-index: 1;
+    color: transparent;
+
 }
 
 /* Hour picker */

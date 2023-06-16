@@ -368,6 +368,7 @@ def get_user_booked_days():
                 unique_dates[request.date].add(request.service_description.category)
 
             # Create a list of dictionaries containing the unique dates and categories
+            
             result = []
             for unique_date, categories in unique_dates.items():
                 if len(categories) > 1:
