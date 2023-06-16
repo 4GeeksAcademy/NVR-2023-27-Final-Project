@@ -43,7 +43,7 @@ html::-webkit-scrollbar-track {
   background: var(--background);
 }
 
-/* Straight corners */
+/* Straight corners for all buttons */
 
 button,
 button:hover,
@@ -638,7 +638,7 @@ dialog::backdrop {
 
 .calendarCell {
   text-align: center;
-  height: 1.2rem;
+  height: 1.4rem;
   width: 1.8rem;
   margin: 0;
   padding: 0;
@@ -712,7 +712,7 @@ button.calendarCell {
 /* Recurrence picker */
 .recurrence-button {
   height: 1.2rem;
-  width: 3rem;
+  width: 2.8rem;
 }
 .recurrence-button.activeRecurrence {
   border: none;

@@ -8,6 +8,12 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 
+#*************************************
+# Added because of get_user_booked_days
+from datetime import date , timedelta  
+#*************************************
+
+
 api = Blueprint('api', __name__)
 
 
@@ -327,3 +333,58 @@ def create_service_request():
             "message": "An error occurred",
             "error": str(e)
         }), 500
+    
+
+
+ # CALENDAR - get Booked days
+
+@api.route("/getuserbookeddays", methods=["GET"])
+@jwt_required()
+def get_user_booked_days():
+    try:
+        user_email = get_jwt_identity()
+        user = UserProfile.query.filter_by(email=user_email).first()
+        if user:
+            # Get the current date
+            current_date = date.today()
+
+            # Calculate the end date (current date + 28 days)
+            end_date = current_date + timedelta(days=28)
+
+            # Query the ServiceRequests for the user within the date range
+            service_requests = ServiceRequest.query \
+                .join(ServiceDescription) \
+                .filter(ServiceRequest.user_id == user.id) \
+                .filter(ServiceRequest.date.between(current_date, end_date)) \
+                .all()
+
+            # Create a dictionary to store unique dates and their categories
+            unique_dates = {}
+
+            # Iterate over the service requests and extract the unique dates and categories
+            for request in service_requests:
+                if request.date not in unique_dates:
+                    unique_dates[request.date] = set()
+                unique_dates[request.date].add(request.service_description.category)
+
+            # Create a list of dictionaries containing the unique dates and categories
+            result = []
+            for unique_date, categories in unique_dates.items():
+                if len(categories) > 1:
+                    category = "multiple"
+                else:
+                    category = categories.pop()
+                result.append({
+                    "date": unique_date.strftime("%Y-%m-%d"),
+                    "category": category
+                })
+
+            return jsonify(result), 200
+        else:
+            return jsonify({"message": "User not found"}), 404
+    except Exception as e:
+        return jsonify({
+            "message": "An error occurred",
+            "error": str(e)
+        }), 500
+

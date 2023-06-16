@@ -14,6 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userExclusions: null,
 			userRequests: null,
 			userNotifications: null,
+			userBookedDays: null,
+
 			serviceDescriptions: null,
 
 
@@ -296,6 +298,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  return false;
 				}
 			  },
+
+ 			// Get user's booked days
+
+			  getUserBookedDays: async () => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/getuserbookeddays", {
+						method: "GET",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+						}
+					});
+			
+					if (response.ok) {
+						const data = await response.json();
+						setStore({ userBookedDays: data }); // Update the userBookedDays variable in the store
+						console.log(data);
+					} else {
+						console.log("Error:", response.status);
+					}
+				} catch (error) {
+					console.log("Error:", error);
+				}
+			},
+			
 			  
 		}
 	};
