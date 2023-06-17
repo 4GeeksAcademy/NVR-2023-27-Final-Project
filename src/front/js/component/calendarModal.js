@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
 export const CalendarModal = (props) => {
+    
     const categoryColorMap = new Map([
         ["cleaning", "#32CD32"],
         ["wardrobe", "red"],

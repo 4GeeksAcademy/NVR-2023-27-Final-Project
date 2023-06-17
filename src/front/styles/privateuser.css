@@ -12,7 +12,8 @@
   --standOutGreen: rgb(0, 70, 0);
 }
 
-body , body * {
+body,
+body * {
   background: var(--background);
   user-select: none;
 }
@@ -25,7 +26,7 @@ body {
   padding: 0;
   overflow-x: hidden;
 
-  
+
 }
 
 /* Scrollbar */
@@ -33,7 +34,7 @@ body {
 
 html::-webkit-scrollbar {
   width: .9vw;
-  }
+}
 
 html::-webkit-scrollbar-thumb {
   background: var(--scrollBar);
@@ -79,19 +80,19 @@ button:disabled {
 
 @keyframes fade-in-out {
   0% {
-      transform: translate(-50%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0);
   }
 
   10% {
-      transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
   }
 
   90% {
-      transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
   }
 
   100% {
-      transform: translate(-50%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0);
   }
 }
 
@@ -137,8 +138,11 @@ button:disabled {
   color: green;
 }
 
-.dropDownIcon1 , .dropDownIcon2, .menuIcon3 {
-  padding-right: .5rem;;
+.dropDownIcon1,
+.dropDownIcon2,
+.menuIcon3 {
+  padding-right: .5rem;
+  ;
 }
 
 /* OFFCANVAS */
@@ -185,6 +189,7 @@ hr {
 .accordion-button::after {
   transform: scale(0.5);
 }
+
 .accordion-button.collapsed::after {
   transform: scale(0.5);
 }
@@ -206,7 +211,7 @@ input[type="search"] {
   outline: none;
   background: transparent;
   position: relative;
-  border-bottom: 0.5px solid black; 
+  border-bottom: 0.5px solid black;
 }
 
 input[type="search"]::-webkit-search-cancel-button,
@@ -217,10 +222,10 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 input[type="search"] {
-padding-bottom: 0;
-margin-bottom: 0;
-line-height: 1rem;
-border-bottom: .7px solid;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  line-height: 1rem;
+  border-bottom: .7px solid;
 }
 
 input::placeholder {
@@ -249,7 +254,7 @@ input::placeholder {
 
 /* Ribbon elements  */
 
- .ribbonElement1 {
+.ribbonElement1 {
   position: absolute !important;
   left: 12% !important;
 }
@@ -281,6 +286,7 @@ ul.dropdown-menu.rounded-0 {
     max-height: 0;
     opacity: 0;
   }
+
   to {
     max-height: 100vh;
     opacity: 1;
@@ -290,12 +296,12 @@ ul.dropdown-menu.rounded-0 {
 /* Ribbon elements  */
 li.list-item {
   font-size: .7rem;
-  font-style:italic;
+  font-style: italic;
   color: black;
   border-block: .7px solid transparent;
 }
 
- li.list-item::before {
+li.list-item::before {
   content: " ";
   display: inline-block;
   width: .35rem;
@@ -313,7 +319,7 @@ form input[type=search] {
 
 /* serviceRollUp  */
 .serviceRollUpBanner {
-  background-color:  var(--elementBackground);
+  background-color: var(--elementBackground);
   height: 1.8rem;
   width: 36rem;
   padding-inline: 1rem;
@@ -322,10 +328,10 @@ form input[type=search] {
 }
 
 .serviceRollUpBanner * {
-  background-color:  var(--elementBackground);
- }
+  background-color: var(--elementBackground);
+}
 
-.serviceRollUpBanner:hover ~ .expandableWrapper {
+.serviceRollUpBanner:hover~.expandableWrapper {
   grid-template-rows: 1fr;
 }
 
@@ -333,8 +339,7 @@ form input[type=search] {
 
 .bannerLabels {
   align-items: baseline;
-  background:  var(--elementBackground)
-  ;
+  background: var(--elementBackground);
 }
 
 .bannerCategoryColorWrapper {
@@ -385,6 +390,7 @@ form input[type=search] {
   display: flex;
   align-items: center;
 }
+
 .bannerLabel1 {
   display: flex;
   position: absolute;
@@ -400,7 +406,7 @@ form input[type=search] {
 .bannerLabel3 {
   display: flex;
   position: absolute;
-  left: 63.3%; 
+  left: 63.3%;
 }
 
 .priceString {
@@ -408,6 +414,7 @@ form input[type=search] {
   justify-content: right;
   text-align: right;
 }
+
 .bannerLabel4 {
   display: flex;
   position: absolute;
@@ -418,7 +425,7 @@ form input[type=search] {
   display: flex;
   align-items: baseline;
   font-size: .7rem;
-  background:  var(--elementBackground);
+  background: var(--elementBackground);
   font-variant: small-caps;
 }
 
@@ -426,7 +433,7 @@ form input[type=search] {
   display: flex;
   align-items: baseline;
   font-size: .7rem;
-  background:  var(--elementBackground);
+  background: var(--elementBackground);
   padding-left: .27rem;
 }
 
@@ -446,7 +453,7 @@ form input[type=search] {
 
 }
 
-.expandableWrapper > div {
+.expandableWrapper>div {
   overflow: hidden;
 }
 
@@ -484,7 +491,7 @@ form input[type=search] {
   line-height: .7rem;
   justify-content: right;
   text-align: right;
- 
+
 }
 
 .expandableColumn3 {
@@ -503,7 +510,7 @@ form input[type=search] {
 
 .expandableValue {
   font-size: .6rem;
- }
+}
 
 /* book Button  */
 .bookButtonWrapper {
@@ -514,7 +521,7 @@ form input[type=search] {
 
 .bookButton {
   background: var(--standOutGreen);
-  color:  var(--background);
+  color: var(--background);
   border: none;
   font-variant: small-caps;
   font-size: .63rem;
@@ -524,7 +531,9 @@ form input[type=search] {
 
 
 /* BOOK Button  */
-button .bookButton, button .bookButto:focus , button .bookButto:active    {
+button .bookButton,
+button .bookButto:focus,
+button .bookButto:active {
   outline: none;
   border: none;
   border-radius: 0;
@@ -547,6 +556,7 @@ dialog {
   0% {
     transform: scale(0);
   }
+
   100% {
     transform: scale(1);
   }
@@ -557,10 +567,12 @@ dialog {
     transform: scale(1);
     opacity: 1;
   }
+
   90% {
     transform: scale(0.8);
     opacity: 0.5;
   }
+
   100% {
     transform: scale(0);
     opacity: 0;
@@ -574,6 +586,7 @@ dialog * {
 dialog::backdrop {
   background-color: transparent !important;
 }
+
 /* Modal */
 
 .modalTitle {
@@ -588,23 +601,26 @@ dialog::backdrop {
   outline: none;
   padding: none;
   margin: none;
-  transition: transform 0.5s ease-in-out; /* Changed "scale" to "transform" */
-  }
-  
-  .dismissModalButton:hover {
-  transform: scale(1.2); /* Keep the same */
-  }
+  transition: transform 0.5s ease-in-out;
+  /* Changed "scale" to "transform" */
+}
 
-  .modalSubTitle {
-    display: flex;
-    align-items: baseline;
-  }
-  .modalOptionTiltle {
-    font-size: .675rem;
-    font-style: italic;
-    letter-spacing: .1rem;
-    
-  }
+.dismissModalButton:hover {
+  transform: scale(1.2);
+  /* Keep the same */
+}
+
+.modalSubTitle {
+  display: flex;
+  align-items: baseline;
+}
+
+.modalOptionTiltle {
+  font-size: .675rem;
+  font-style: italic;
+  letter-spacing: .1rem;
+
+}
 
 /* Calendar */
 
@@ -639,13 +655,13 @@ dialog::backdrop {
   font-size: .7rem;
   font-variant: small-caps;
   background: var(--modalBackground);
-   margin-bottom: .3rem;
+  margin-bottom: .3rem;
 }
 
 .calendarCell {
   text-align: center;
   height: 1.4rem;
-  width: 1.9rem;
+  width: 2rem;
   margin: 0;
   padding: 0;
   font-size: 0.7rem;
@@ -661,11 +677,11 @@ dialog::backdrop {
 }
 
 .calendarCell.currentDay {
-color: blue;
+  color: blue;
 }
 
 .calendarCell.selectedRequestDay {
-  background:  var(--standOutGreen);
+  background: var(--standOutGreen);
   color: var(--background);
   z-index: 100;
 }
@@ -675,20 +691,12 @@ color: blue;
   color: black;
 }
 
-/* .bookedDay {
-  background: yellow;
-} */
 
 .adjacentCell {
-  display: inline-block;
-  margin: 0;
-  padding: 0;
-  gap: m0;
-  font-size: .81rem;
-  transform: translateX(.5rem) translateY(.05rem);
+  font-size: .9rem;
+  transform: translateX(.5rem) translateY(.021rem);
   z-index: 1;
-    color: transparent;
-
+  color: transparent;
 }
 
 /* Hour picker */
@@ -698,6 +706,7 @@ color: blue;
   justify-content: center;
 
 }
+
 .pickerValue {
   font-size: .7rem;
   font-weight: 300;
@@ -720,12 +729,12 @@ color: blue;
 
 .pickerControls button:focus {
   outline: none;
-  background-color: transparent; 
+  background-color: transparent;
 }
 
 .hourPickerControls button:active {
   outline: none;
-  background-color: transparent; 
+  background-color: transparent;
 }
 
 /* Recurrence picker */
@@ -733,9 +742,10 @@ color: blue;
   height: 1.2rem;
   width: 2.8rem;
 }
+
 .recurrence-button.activeRecurrence {
   border: none;
-  background:rgb(78, 78, 159);
+  background: rgb(78, 78, 159);
   color: var(--background);
   font-size: .7rem;
   font-variant: small-caps;
@@ -760,7 +770,7 @@ color: blue;
 
 .address-button.activeAddressButton {
   border: none;
-  background:rgb(78, 78, 159);
+  background: rgb(78, 78, 159);
   color: var(--background);
   font-size: .7rem;
   font-variant: small-caps;
@@ -775,12 +785,14 @@ color: blue;
 .address-buttons {
   border-collapse: collapse;
 }
+
 /* Expandable */
 
 .expand-toggle {
   display: none;
   visibility: hidden;
 }
+
 .expand-label {
   display: block;
   padding: 0.5em;
@@ -792,8 +804,97 @@ color: blue;
   transition: height 0.5s;
 }
 
-.expand-toggle:checked ~ .expand-content {
+.expand-toggle:checked~.expand-content {
   height: 50px;
 }
 
+/* requestRollUp  */
+.rollUpBanner {
+  background-color: var(--elementBackground);
+  height: 1.8rem;
+  width: 36rem;
+  padding-inline: 1rem;
+  padding-block: .3rem;
+  display: flex;
+}
 
+.rollUpBanner * {
+  background-color: var(--elementBackground);
+}
+
+.rollUpWrapper {
+  padding-top: .2rem;
+}
+
+.label2Wrapper {
+  display: flex;
+  align-items: center
+}
+
+.rollUpLabel2Color {
+  width: .5rem;
+  font-size: .6rem;
+  padding-block: .12rem;
+
+}
+
+.rollUpLabel2 {
+  font-variant: small-caps;
+  font-size: .6rem;
+  letter-spacing: .1rem;
+  background: var(--categoryLabelBackground);
+  color: var(--elementBackground);
+  padding-inline: .36rem;
+  padding-block: .12rem;
+}
+
+.rollUpDescription {
+  display: flex;
+  margin-inline: 0;
+  padding-inline: 0;
+  justify-content: right;
+  align-items: baseline;
+  font-size: .7rem;
+  background: var(--elementBackground);
+  font-variant: small-caps;
+}
+
+.rollUpValue {
+  display: flex;
+  margin-inline: 0;
+  padding-inline: 0;
+  gap: 0;
+  justify-content: left;
+  align-items: baseline;
+  font-size: .7rem;
+  background: var(--elementBackground);
+  padding-left: .3rem;
+}
+
+.rollUpColumn1 {
+  width: 11.7rem;
+}
+
+.rollUpColumn2 {
+  width: 6.5rem;
+}
+
+.rollUpColumn3 {
+  width: 5rem;
+}
+
+.rollUpColumn4 {
+  width: 1.5rem;
+}
+
+.rollUpColumn5 {
+  width: 5rem;
+}
+
+.rollUpColumn6 {
+  width: 2.5rem;
+}
+
+.rollUpColumn7 {
+  width: 2.5rem;
+}

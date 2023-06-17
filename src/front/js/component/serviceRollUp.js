@@ -51,8 +51,8 @@ export const ServiceRollUp = (props) => {
     // Main JSX
     return (
         <>
-            <div className="serviceRollUp my-1">
-                <div className="serviceRollUpBanner" id={id}>
+            <div className="serviceRollUp my-1" id={id}>
+                <div className="serviceRollUpBanner">
                     <div className="bannerCategoryColorWrapper" style={{ backgroundColor: categoryColor }}>
                         <span className="bannerCategoryColor" style={{ backgroundColor: categoryColor }}>&nbsp;</span>
                     </div>
