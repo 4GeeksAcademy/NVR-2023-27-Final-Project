@@ -92,48 +92,48 @@ export const RequestRollUp = (props) => {
     // Main JSX
     return (
         <>
-            <div className="rollUp container-fluid my-1">
-            <div className="serviceRollUp my-1" id={id}>
-    <div className="serviceRollUpBanner">
-        <div className="rollUpColumns d-flex mx-0 px-0 g-0 vw-100">
-            <div className="rollUpColumn1 label2Wrapper">
-                <span className="rollUpLabel2Color" style={{ background: `${categoryColorMap.get(serviceCategory)}` }}>&nbsp;</span>
-                <span className="rollUpLabel2">{servideString}</span>
-            </div>
-            <div className="rollUpColunn2">
-                <span className="rollUpDescription">status:</span>
-            </div>
-            <div className="rollUpColumn3">
-                <span className="rollUpValue">{statusString}</span>
-            </div>
-            <div className="rollUpColumn4">
-                <span className="rollUpDescription">date:</span>
-            </div>
-            <div className="rollUpColumn5">
-                <span className="rollUpValue">{dateString}</span>
-            </div>
-            <div className="rollUpColumn6">
-                <span className="rollUpDescription">time:</span>
-            </div>
-            <div className="rollUpColumn7">
-                <span className="rollUpValue">{timeString}</span>
-            </div>
-            <div className="rollUpColumn8">
-                <span className="rollUpDescription">details</span>
-            </div>
-        </div>
-    </div>
-    <div className="expandableWrapper" id={"expandableWrapperId" + id}>
-        <div className="expandable">
-            <div className="expandableContent">
-                <p>
-                    dksjgdkfjgkdfjgkdfgkdflgdfjkghçdflkj
-                    12345668767876876876876
-                </p>
-            </div>
-        </div>
-    </div>
-</div >
+            <div className="container-fluid my-1">
+                <div className="requestRollUp my-1" id={id}>
+                    <div className="requestRollUpBanner">
+                        <div className="rollUpColumns d-flex mx-0 px-0 g-0 vw-100">
+                            <div className="rollUpColumn1 label2Wrapper">
+                                <span className="rollUpLabel2Color" style={{ background: `${categoryColorMap.get(serviceCategory)}` }}>&nbsp;</span>
+                                <span className="rollUpLabel2">{servideString}</span>
+                            </div>
+                            <div className="rollUpColunn2">
+                                <span className="rollUpDescription">status:</span>
+                            </div>
+                            <div className="rollUpColumn3">
+                                <span className="rollUpValue">{statusString}</span>
+                            </div>
+                            <div className="rollUpColumn4">
+                                <span className="rollUpDescription">date:</span>
+                            </div>
+                            <div className="rollUpColumn5">
+                                <span className="rollUpValue">{dateString}</span>
+                            </div>
+                            <div className="rollUpColumn6">
+                                <span className="rollUpDescription">time:</span>
+                            </div>
+                            <div className="rollUpColumn7">
+                                <span className="rollUpValue">{timeString}</span>
+                            </div>
+                            <div className="rollUpColumn8">
+                                <span className="rollUpDescription">details</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="requestExpandableWrapper" id={"requestExpandableWrapperId" + id}>
+                        <div className="requestExpandable">
+                            <div className="requestExpandableContent">
+                                <p>
+                                    dksjgdkfjgkdfjgkdfgkdflgdfjkghçdflkj
+                                    12345668767876876876876
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div >
             </div>
         </>
 

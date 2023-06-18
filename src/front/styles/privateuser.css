@@ -5,7 +5,8 @@
 
 :root {
   --background: #fffae7;
-  --elementBackground: #f3eedb;
+  --serviceRollUpBackground: #f3eedb;
+  --requestRollUpBackground: rgb(214, 233, 214);
   --scrollBar: #bdb07b;
   --modalBackground: #fffae7;
   --categoryLabelBackground: rgb(173, 173, 173);
@@ -319,7 +320,7 @@ form input[type=search] {
 
 /* serviceRollUp  */
 .serviceRollUpBanner {
-  background-color: var(--elementBackground);
+  background-color: var(--serviceRollUpBackground);
   height: 1.8rem;
   width: 36rem;
   padding-inline: 1rem;
@@ -328,7 +329,7 @@ form input[type=search] {
 }
 
 .serviceRollUpBanner * {
-  background-color: var(--elementBackground);
+  background-color: var(--serviceRollUpBackground);
 }
 
 .serviceRollUpBanner:hover~.expandableWrapper {
@@ -339,7 +340,7 @@ form input[type=search] {
 
 .bannerLabels {
   align-items: baseline;
-  background: var(--elementBackground);
+  background: var(--serviceRollUpBackground);
 }
 
 .bannerCategoryColorWrapper {
@@ -425,7 +426,7 @@ form input[type=search] {
   display: flex;
   align-items: baseline;
   font-size: .7rem;
-  background: var(--elementBackground);
+  background: var(--serviceRollUpBackground);
   font-variant: small-caps;
 }
 
@@ -433,7 +434,7 @@ form input[type=search] {
   display: flex;
   align-items: baseline;
   font-size: .7rem;
-  background: var(--elementBackground);
+  background: var(--serviceRollUpBackground);
   padding-left: .27rem;
 }
 
@@ -458,7 +459,7 @@ form input[type=search] {
 }
 
 .expandable {
-  background-color: var(--elementBackground);
+  background-color: var(--serviceRollUpBackground);
   padding-inline: .7rem;
 }
 
@@ -469,7 +470,7 @@ form input[type=search] {
 
 .expandableContent {
   border-top: .5px solid rgb(111, 111, 111);
-  background-color: var(--elementBackground);
+  background-color: var(--serviceRollUpBackground);
   padding: .3rem;
 }
 
@@ -602,12 +603,10 @@ dialog::backdrop {
   padding: none;
   margin: none;
   transition: transform 0.5s ease-in-out;
-  /* Changed "scale" to "transform" */
 }
 
 .dismissModalButton:hover {
   transform: scale(1.2);
-  /* Keep the same */
 }
 
 .modalSubTitle {
@@ -809,8 +808,9 @@ dialog::backdrop {
 }
 
 /* requestRollUp  */
-.rollUpBanner {
-  background-color: var(--elementBackground);
+
+.requestRollUpBanner {
+  background-color: var(--requestRollUpBackground);
   height: 1.8rem;
   width: 36rem;
   padding-inline: 1rem;
@@ -818,35 +818,53 @@ dialog::backdrop {
   display: flex;
 }
 
-.rollUpBanner * {
-  background-color: var(--elementBackground);
+.requestRollUpBanner * {
+  background-color: var(--requestRollUpBackground);
 }
 
-.rollUpWrapper {
-  padding-top: .2rem;
+.requestRollUpBanner:hover~.requestExpandableWrapper {
+  grid-template-rows: 1fr;
 }
 
-.label2Wrapper {
-  display: flex;
-  align-items: center
+
+/* requestRollUp expandale */
+
+.requestExpandableWrapper {
+  width: 36rem;
+  margin: .001rem;
+  padding: .001rem;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 500ms;
 }
 
-.rollUpLabel2Color {
-  width: .5rem;
-  font-size: .6rem;
-  padding-block: .12rem;
+.requestExpandableWrapper:hover {
+  grid-template-rows: 1fr;
 
 }
 
-.rollUpLabel2 {
-  font-variant: small-caps;
-  font-size: .6rem;
-  letter-spacing: .1rem;
-  background: var(--categoryLabelBackground);
-  color: var(--elementBackground);
-  padding-inline: .36rem;
-  padding-block: .12rem;
+.requestExpandableWrapper>div {
+  overflow: hidden;
 }
+
+.requestExpandable {
+  background-color: var(--requestRollUpBackground);
+  padding-inline: .7rem;
+}
+
+.requestExpandable * {
+  background-color: inherit;
+}
+
+
+.requestExpandableContent {
+  border-top: .5px solid rgb(111, 111, 111);
+  background-color: var(--requestRollUpBackground);
+  padding: .3rem;
+}
+
+/* requestRollUp content */
+
 
 .rollUpDescription {
   display: flex;
@@ -855,7 +873,7 @@ dialog::backdrop {
   justify-content: right;
   align-items: baseline;
   font-size: .7rem;
-  background: var(--elementBackground);
+  background: var(--requestRollUpBackground);
   font-variant: small-caps;
 }
 
@@ -867,7 +885,7 @@ dialog::backdrop {
   justify-content: left;
   align-items: baseline;
   font-size: .7rem;
-  background: var(--elementBackground);
+  background: var(--requestRollUpBackground);
   padding-left: .3rem;
 }
 
