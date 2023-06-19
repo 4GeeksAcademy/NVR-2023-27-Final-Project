@@ -213,28 +213,14 @@ export const CalendarModal = (props) => {
             setNewServiceRequest({ ...newServiceRequest, time: hourString });
         };
 
-        <span>
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg>
-        </span>
-
         return (
             <>
-                <div className="hourPickerWrapper">
+                <div className="">
                     <span className="pickerControls">
-                        <button onClick={handleIncreaseHour}>
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16" transform="rotate(180)">
-                                    <path d="M480-384 288-576h384L480-384Z" />
-                                </svg>
-                            </span>
-                        </button>
+                        <button className="pickerControls" onClick={handleIncreaseHour}>+</button>
                     </span>
                     <span className="pickerControls">
-                        <button onClick={handleDecreseHour}>
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg>
-                            </span>
-                        </button>
+                        <button className="pickerControls" onClick={handleDecreseHour}>-</button>
                     </span>
                 </div>
             </>
@@ -263,22 +249,12 @@ export const CalendarModal = (props) => {
 
         return (
             <>
-                <div className="quantityPicker">
-                    <span className="pickerControls me-1">
-                        <button onClick={handleIncreaseRecurrence}>
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16" transform="rotate(180)">
-                                    <path d="M480-384 288-576h384L480-384Z" />
-                                </svg>
-                            </span>
-                        </button>
+                <div className="">
+                    <span className="pickerControls">
+                        <button onClick={handleIncreaseRecurrence}>+</button>
                     </span>
                     <span className="pickerControls">
-                        <button onClick={handleDecreaseRecurrence}>
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg>
-                            </span>
-                        </button>
+                        <button onClick={handleDecreaseRecurrence}>-</button>
                     </span>
                 </div>
             </>
@@ -286,9 +262,9 @@ export const CalendarModal = (props) => {
 
     };
 
-    //repeatPicker subcomponent
+    //recurrencePicker subcomponent
 
-    const RepeatPicker = () => {
+    const RecurrencePicker = () => {
 
         const handleIncreaseRecurrence = () => {
             if (newServiceRequest.recurrence === 4) { return false }
@@ -301,112 +277,45 @@ export const CalendarModal = (props) => {
         const handleDecreaseRecurrence = () => {
             if (newServiceRequest.recurrence === 1) { return false }
 
-            let temporaryVariable = newServiceRequest.recurrence - 1;
+            const temporaryVariable = newServiceRequest.recurrence - 1;
             setNewServiceRequest({ ...newServiceRequest, recurrence: temporaryVariable });
             return true;
         }
 
         return (
             <>
-                <div className="repeatPicker">
-                    <span className="pickerControls me-1">
-                        <button onClick={handleIncreaseRecurrence}>
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16" transform="rotate(180)">
-                                    <path d="M480-384 288-576h384L480-384Z" />
-                                </svg>
-                            </span>
-                        </button>
+                <div className="">
+                    <span className="pickerControls">
+                        <button onClick={handleIncreaseRecurrence}>+</button>
                     </span>
                     <span className="pickerControls">
-                        <button onClick={handleDecreaseRecurrence}>
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg>
-                            </span>
-                        </button>
+                        <button onClick={handleDecreaseRecurrence}>-</button>
                     </span>
                 </div>
             </>
         );
 
-    };
-
-
-    //Recurrence picker
-    const RecurrencePicker = () => {
-        const handleOptionChange = (event) => {
-            const newRecurrence = parseInt(event.target.value);
-            setNewServiceRequest((prevState) => ({
-                ...prevState,
-                recurrence: newRecurrence,
-            }));
-        };
-
-        return (
-            <>
-                <div className="recurrence-buttons">
-                    <button
-                        className={`recurrence-button ${newServiceRequest.recurrence === 1 ? 'activeRecurrence' : 'inactiveRecurrence'}`}
-                        onClick={handleOptionChange}
-                        value={1}
-                    >
-                        once
-                    </button>
-                    <button
-                        className={`recurrence-button ${newServiceRequest.recurrence === 2 ? 'activeRecurrence' : 'inactiveRecurrence'}`}
-                        onClick={handleOptionChange}
-                        value={2}
-                    >
-                        monthly
-                    </button>
-                    <button
-                        className={`recurrence-button ${newServiceRequest.recurrence === 3 ? 'activeRecurrence' : 'inactiveRecurrence'}`}
-                        onClick={handleOptionChange}
-                        value={3}
-                    >
-                        weekly
-                    </button>
-                    <button
-                        className={`recurrence-button ${newServiceRequest.recurrence === 4 ? 'activeRecurrence' : 'inactiveRecurrence'}`}
-                        onClick={handleOptionChange}
-                        value={4}
-                    >
-                        daily
-                    </button>
-                </div>
-            </>
-        );
     };
 
     // Address picker
 
     const AddressPicker = () => {
-        const handleAddressChange = (addressId) => {
+        const hasSecondaryAddress = store.userAddresses && store.userAddresses.id2;
+
+        const handleAddressToggle = () => {
+            const addressId = (hasSecondaryAddress) ? ( newServiceRequest.address_id === store.userAddresses.id1 ? store.userAddresses.id2 : store.userAddresses.id1) : store.userAddresses.id1;
             setNewServiceRequest((prevState) => ({
                 ...prevState,
                 address_id: addressId,
             }));
         };
-        return (
-            <>
-                <div className="address-buttons">
 
-                    {store.userAddresses && store.userAddresses.id1 && (
-                        <button
-                            className={`address-button ${newServiceRequest.address_id === store.userAddresses.id1 ? 'activeAddressButton' : 'inactiveAddressButton'}`}
-                            onClick={() => handleAddressChange(store.userAddresses.id1)}
-                        >
-                            main
-                        </button>
-                    )}
-                    {store.userAddresses && store.userAddresses.id2 && (
-                        <button
-                            className={`address-button ${newServiceRequest.address_id === store.userAddresses.id2 ? 'activeAddressButton' : 'inactiveAddressButton'}`}
-                            onClick={() => handleAddressChange(store.userAddresses.id2)}
-                        >
-                            second
-                        </button>
-                    )}
+        return hasSecondaryAddress && (
+            <>
+                <div className="">
+                    <span className="pickerControls">
+                        <button onClick={handleAddressToggle}>↕</button>
+                    </span>
                 </div>
             </>
         );
@@ -420,114 +329,59 @@ export const CalendarModal = (props) => {
         return "";
     }
 
-
+    const DismissIcon = <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="m336-294 144-144 144 144 42-42-144-144 144-144-42-42-144 144-144-144-42 42 144 144-144 144 42 42ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm0-600v600-600Z"/></svg>
     //CalendarModal JSX
+
     return (
         <>
             <dialog data-modal id={"dialog" + id} className="">
                 <div className="calendarModalWrapper">
                     <div className=" d-flex justify-content-center align-items-center my-0 py-0">
                         <span className="modalTitle">book: {service.toLowerCase()}</span>
+                        <span className="dismissIcon" onClick={closeCalendarModal}>{DismissIcon}</span>
                     </div>
                     <div>
                         <div className="calendarContainer">
                             <Calendar />
                         </div>
                     </div>
-
                     <div className="container-fluid">
-                        <div className="mt-1">
+                        <div className="">
                             <div className="cardBody ">
-                                <div className="cardLabels pb-1">
+                                <div className="cardLabels">
                                     <div>date:</div>
                                     <div>time:</div>
                                     <div>quantity:</div>
                                     <div>book:</div>
                                     <div>address:</div>
                                 </div>
-                                <div className="cardInfo pb-1">
+                                <div className="cardInfo">
                                     <div className="">{newServiceRequest.date}</div>
                                     <div className="">{newServiceRequest.time}</div>
-                                    <div className="">{newServiceRequest.quantity}</div>
+                                    <div className="">
+                                        <span className="">{newServiceRequest.quantity}</span>
+                                        <span className="modalPriceTag">{price * newServiceRequest.quantity}</span>
+                                    </div>
                                     <div className="">{recurrenceMap.get(newServiceRequest.recurrence)}</div>
                                     <div className="">{getTypeOfAddress()}</div>
                                 </div>
-                                <div className="cardInfo pb-1">
-                                    <div className="">&nbsp;</div>
-                                    <div className="">+-</div>
-                                    <div className="">+-</div>
-                                    <div className="">+-</div>
-                                    <div className="">+-</div>
+                                <div className="cardInfo">
+                                    <div className="">123456</div>
+                                    <div className=""> <HourPicker /></div>
+                                    <div className=""> <QuantityPicker /></div>
+                                    <div className=""> <RecurrencePicker /></div>
+                                    <div className=""><AddressPicker /></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
                     <div className="container-fluid row mt-1 justify-content-end">
-                        <div className="container-fluid row d-flex justify-content-center">
-                            <div className="col d-flex justify-content-start">
-                                <div className="text-end">
-                                    <div className="text-end">
-                                        <span className="calendarModalLabel me-1 float-end">
-                                            date:
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span className="calendarModalLabel me-1 float-end">
-                                            time:
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span className="calendarModalLabel me-1 float-end">
-                                            quantity:
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span className="calendarModalLabel me-1 float-end">
-                                            book:
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span className="calendarModalLabel me-1 float-end">
-                                            address:
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className="">
-                                    <div className="calendarModalLabel">
-                                        {newServiceRequest.date}
-                                    </div>
-                                    <div>
-                                        <span className="calendarModalLabel">
-                                            <HourPicker />
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span className="calendarModalLabel">
-                                            <QuantityPicker />
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span className="calendarModalLabel">
-                                            <RepeatPicker />
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span className="calendarModalLabel">
-                                            <AddressPicker />
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <button onClick={handleSendRequest}>SEND REQUEST</button>
                         <div>
                             <input className="expand-toggle" id={`expand-toggle${id}`} type="checkbox" />
                             <label htmlFor={`expand-toggle${id}`} className="expand-label">review and confirm</label>
                             <div className="expand-content">
                                 <div>Order summary</div>
+                                <button onClick={handleSendRequest}>SEND REQUEST</button>
                             </div>
                         </div>
                     </div>
@@ -588,3 +442,84 @@ export const CalendarModal = (props) => {
                                     Book:
                                 </span>
                             </div> */}
+
+
+                            // Address picker
+
+/*     const AddressPicker = () => {
+        const handleAddressChange = (addressId) => {
+            setNewServiceRequest((prevState) => ({
+                ...prevState,
+                address_id: addressId,
+            }));
+        };
+        return (
+            <>
+                <div className="address-buttons">
+
+                    {store.userAddresses && store.userAddresses.id1 && (
+                        <button
+                            className={`address-button ${newServiceRequest.address_id === store.userAddresses.id1 ? 'activeAddressButton' : 'inactiveAddressButton'}`}
+                            onClick={() => handleAddressChange(store.userAddresses.id1)}
+                        >
+                            main
+                        </button>
+                    )}
+                    {store.userAddresses && store.userAddresses.id2 && (
+                        <button
+                            className={`address-button ${newServiceRequest.address_id === store.userAddresses.id2 ? 'activeAddressButton' : 'inactiveAddressButton'}`}
+                            onClick={() => handleAddressChange(store.userAddresses.id2)}
+                        >
+                            second
+                        </button>
+                    )}
+                </div>
+            </>
+        );
+    }; */
+
+//Recurrence picker
+/* const RecurrencePicker = () => {
+    const handleOptionChange = (event) => {
+        const newRecurrence = parseInt(event.target.value);
+        setNewServiceRequest((prevState) => ({
+            ...prevState,
+            recurrence: newRecurrence,
+        }));
+    };
+
+    return (
+        <>
+            <div className="recurrence-buttons">
+                <button
+                    className={`recurrence-button ${newServiceRequest.recurrence === 1 ? 'activeRecurrence' : 'inactiveRecurrence'}`}
+                    onClick={handleOptionChange}
+                    value={1}
+                >
+                    once
+                </button>
+                <button
+                    className={`recurrence-button ${newServiceRequest.recurrence === 2 ? 'activeRecurrence' : 'inactiveRecurrence'}`}
+                    onClick={handleOptionChange}
+                    value={2}
+                >
+                    monthly
+                </button>
+                <button
+                    className={`recurrence-button ${newServiceRequest.recurrence === 3 ? 'activeRecurrence' : 'inactiveRecurrence'}`}
+                    onClick={handleOptionChange}
+                    value={3}
+                >
+                    weekly
+                </button>
+                <button
+                    className={`recurrence-button ${newServiceRequest.recurrence === 4 ? 'activeRecurrence' : 'inactiveRecurrence'}`}
+                    onClick={handleOptionChange}
+                    value={4}
+                >
+                    daily
+                </button>
+            </div>
+        </>
+    );
+}; */

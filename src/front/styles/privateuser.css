@@ -4,11 +4,12 @@
 /* Base CSS */
 
 :root {
-  --background: #fffae7;
-  --serviceRollUpBackground: #f3eedb;
-  --requestRollUpBackground: rgb(217, 237, 217);
-  --scrollBar: #bdb07b;
-  --modalBackground: #fffae7;
+  --background: #e7e7e7;
+  --serviceRollUpBackground: #d7d7d7;
+  --requestRollUpBackground: #6747C7;
+  --scrollBar: #767676;
+  --modalBackground: rgb(152, 152, 152);
+  --modalCOlor: white;
   --categoryLabelBackground: rgb(173, 173, 173);
   --standOutGreen: rgb(0, 70, 0);
 }
@@ -543,13 +544,15 @@ button .bookButto:active {
 
 dialog {
   position: fixed;
+  border: none;
   margin-top: 7.48rem;
   width: 30%;
   background: var(--modalBackground);
-  border: 0.5px solid black;
   transform: scale(0);
   animation: modal-appear 0.5s ease-in-out forwards;
-  /* overflow: hidden; */
+  overflow: hidden;
+  padding: 0;
+  gap: 0;
 }
 
 @keyframes modal-appear {
@@ -593,7 +596,15 @@ dialog::backdrop {
   font-size: .7rem;
   font-variant: small-caps;
   letter-spacing: .1rem;
-  margin-bottom: .7rem;
+  padding-block: .5rem;
+  color: var(--modalCOlor);
+}
+
+.dismissIcon {
+  margin-left: .36rem;
+}
+.dismissIcon path {
+  fill: var(--modalCOlor);
 }
 
 .dismissModalButton {
@@ -611,6 +622,7 @@ dialog::backdrop {
 .modalSubTitle {
   display: flex;
   align-items: baseline;
+  font-style: bold;
 }
 
 .modalOptionTiltle {
@@ -646,7 +658,6 @@ dialog::backdrop {
   display: flex;
   justify-content: center;
   flex-direction: row;
-  border-top: .7px solid black;
 
 }
 
@@ -670,9 +681,10 @@ dialog::backdrop {
 
 .calendarCell {
   text-align: center;
-  height: 1.4rem;
+  height: 1.2rem;
   width: 2.1rem;
   font-size: 0.6rem;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -696,7 +708,7 @@ dialog::backdrop {
 
 .unviableDay {
   font-size: .35rem;
-  color: black;
+  color: white;
 }
 
 
@@ -739,29 +751,19 @@ dialog::backdrop {
   margin-right: .3rem;
 }
 
-
-
-/* Hour picker */
-
-.horPickerWrapper {
-  display: flex;
-  justify-content: center;
-}
-
-.pickerValue {
-  font-size: .7rem;
-  font-weight: 300;
-}
-
 .pickerControls button {
-  background: none;
-  border: none;
+  border: .7px solid black;
+  display: row;
+  text-align: center;
+  text-justify: center;
+  width: 1rem;
+  height: 1rem;
   outline: none;
   cursor: pointer;
-  font-size: .9rem;
-  font-weight: 300;
+  font-weight: 400;
+  margin-left: .7rem;
   transition: transform 0.3s ease;
-  color: blue;
+
 }
 
 .pickerControls button:hover {
@@ -773,59 +775,6 @@ dialog::backdrop {
   background-color: transparent;
 }
 
-.hourPickerControls button:active {
-  outline: none;
-  background-color: transparent;
-}
-
-/* Recurrence picker */
-.recurrence-button {
-  height: 1.2rem;
-  width: 2.8rem;
-}
-
-.recurrence-button.activeRecurrence {
-  border: none;
-  background: rgb(78, 78, 159);
-  color: var(--background);
-  font-size: .7rem;
-  font-variant: small-caps;
-}
-
-.recurrence-button.inactiveRecurrence {
-  border: .5px solid black;
-  font-size: .7rem;
-  font-variant: small-caps;
-}
-
-.recurrence-buttons {
-  border-collapse: collapse;
-}
-
-/* Address picker */
-
-.address-button {
-  height: 1.2rem;
-  width: 3rem;
-}
-
-.address-button.activeAddressButton {
-  border: none;
-  background: rgb(78, 78, 159);
-  color: var(--background);
-  font-size: .7rem;
-  font-variant: small-caps;
-}
-
-.address-button.inactiveAddressButton {
-  border: .5px solid black;
-  font-size: .7rem;
-  font-variant: small-caps;
-}
-
-.address-buttons {
-  border-collapse: collapse;
-}
 
 /* Expandable */
 
@@ -910,7 +859,6 @@ dialog::backdrop {
 .requestRollUpTitleWrapper {
   display: inline-block;
   padding: 3px;
-  border: 1px soplid b
 }
 
 
@@ -964,3 +912,27 @@ dialog::backdrop {
 .trquestRollUpColumn7 {
   width: 2.5rem;
 }
+
+/* status Bar */
+
+.statusBarContainer {
+  display: grid;
+  place-items: center;
+}
+
+.statusBarRow {
+  display: flex;
+  background: transaprent;
+  justify-content: center;
+  gap: .09rem;
+}
+
+.statusCircle {
+  width: .675rem;
+  height: .675rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

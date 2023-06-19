@@ -23,7 +23,7 @@ const injectContext = PassedComponent => {
 
 		useEffect(() => {
 
-			state.actions.getUserBookedDays();
+			// state.actions.getUserBookedDays();
 
 			/**
 			 * EDIT THIS!

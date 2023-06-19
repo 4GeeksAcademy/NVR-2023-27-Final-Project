@@ -47,7 +47,6 @@ export const ServiceRollUp = (props) => {
     else { durationString = `${parseInt(duration)} hours` }
     const priceString = price + ".00€"
 
-
     // Main JSX
     return (
         <>
