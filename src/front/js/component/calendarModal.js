@@ -83,7 +83,7 @@ export const CalendarModal = (props) => {
 
     // Service Request function 
 
-    const handleSendRequest = () => {
+    const handleCewateServiceRequest = () => {
         actions.createServiceRequest(newServiceRequest);
         handleCloseCalendarModal();
         actions.alertUser("service requested", "yellow", "black");
@@ -219,7 +219,7 @@ export const CalendarModal = (props) => {
     // Quantity handle functions
 
     const handleIncreaseQuantity = () => {
-        if (newServiceRequest.quantity === 3) { 
+        if (newServiceRequest.quantity === 3) {
 
             setNewServiceRequest({ ...newServiceRequest, quantity: 1 });
             return true;
@@ -234,9 +234,10 @@ export const CalendarModal = (props) => {
     // Recurrence handle functions
 
     const handleIncreaseRecurrence = () => {
-        if (newServiceRequest.recurrence === 4) { 
+        if (newServiceRequest.recurrence === 4) {
             setNewServiceRequest({ ...newServiceRequest, recurrence: 1 });
-            return true }
+            return true
+        }
 
         let temporaryVariable = newServiceRequest.recurrence + 1;
         setNewServiceRequest({ ...newServiceRequest, recurrence: temporaryVariable });
@@ -264,24 +265,21 @@ export const CalendarModal = (props) => {
 
     const DismissIcon = <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="m336-294 144-144 144 144 42-42-144-144 144-144-42-42-144 144-144-144-42 42 144 144-144 144 42 42ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm0-600v600-600Z" /></svg>
 
+
     //CalendarModal JSX
 
     return (
         <>
             <dialog data-modal id={"dialog" + id} className="">
-                <div className="calendarModalWrapper">
-                    <div className=" d-flex justify-content-center align-items-center">
-                        <span className="modalTitle">book: {service.toLowerCase()}</span>
-                        <span className="dismissIcon" onClick={handleCloseCalendarModal}>{DismissIcon}</span>
-                    </div>
+                <div className="calendarModalWrapper my-3">
                     <div>
                         <div className="calendarContainer">
                             <Calendar />
                         </div>
                     </div>
-                    <div className="container-fluid">
+                    <div className="container-fluid mt-3">
                         <div className="justify-content-center">
-                            <table className="calendarModalTable mt-3">
+                            <table className="calendarModalTable">
                                 <tbody>
                                     <tr>
                                         <td className="calendarModalTableLabel">date:</td>
@@ -295,19 +293,6 @@ export const CalendarModal = (props) => {
                                         <td className="pickerButton"><button onClick={handleDecreseHour}>-</button></td>
                                     </tr>
                                     <tr>
-                                        <td className="calendarModalTableLabel">quantity:</td>
-                                        <td className="calendarModalTableValue">{newServiceRequest.quantity}</td>
-                                        <td className="pickerButton"><button onClick={handleIncreaseQuantity}>+</button></td>
-                                        <td className="pickerButton"></td>
-                                        <td>&nbsp;</td>
-                                        <td className="calendarModalTableLabel">price:</td>
-                                        <td className="calendarModalTableValue">
-                                            {newServiceRequest.quantity * price}.00€
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
                                         <td className="calendarModalTableLabel">book:</td>
                                         <td className="calendarModalTableValue">{recurrenceMap.get(newServiceRequest.recurrence)}</td>
                                         <td className="pickerButton"><button onClick={handleIncreaseRecurrence}>+</button></td>
@@ -318,27 +303,32 @@ export const CalendarModal = (props) => {
                                         <td className="pickerButton"><button onClick={handleAddressToggle}>+</button></td>
                                         <td></td>
                                     </tr>
+                                    <tr>
+                                        <td className="calendarModalTableLabel">quantity:</td>
+                                        <td className="calendarModalTableValue">{newServiceRequest.quantity}</td>
+                                        <td className="pickerButton"><button onClick={handleIncreaseQuantity}>+</button></td>
+                                        <td className="pickerButton"></td>
+                                        <td>&nbsp;</td>
+                                        <td className="calendarModalTableLabel">subtotal:</td>
+                                        <td className="calendarModalTableValue priceTag">
+                                            {newServiceRequest.quantity * price}.00€
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
                                 </tbody>
                             </table>
-                            <div>
 
-                            </div>
-
-                        </div>
-                    </div>
-                    <div className="container-fluid row mt-1 justify-content-center">
-                        <div className="justify-conetnt-center">
-                            <input className="expand-toggle text-center" id={`expand-toggle${id}`} type="checkbox" />
-                            <label htmlFor={`expand-toggle${id}`} className="expand-label reviewButton">review order</label>
-                            <div className="expand-content">
-                                <div>Order summary</div>
-                                <div className="d-flex justify-content-center">
-                                    <button className="cancelButton me-1" onClick={handleCloseCalendarModal}>cancel</button>
-                                    <button className="modalBookButton" onClick={handleSendRequest}>book</button>
+                            <div className="container-fluid mt-4 mb-2">
+                                <div className="row d-flex justify-content-center">
+                                    <button onClick={handleCloseCalendarModal} className="cancelButton me-2 ">cancel</button>
+                                    <button onClick={handleCewateServiceRequest} className="modalBookButton">book {service.toLowerCase()}</button>
                                 </div>
                             </div>
+
                         </div>
                     </div>
+
                 </div>
             </dialog >
         </>
@@ -506,3 +496,5 @@ export const CalendarModal = (props) => {
                                     <div className=""><AddressPicker /></div>
                                 </div>
                             </div> */}
+
+                            // <button onClick={handleCloseCalendarModal} className="me-2 cancelButton">cancel</button>

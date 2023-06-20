@@ -602,7 +602,7 @@ dialog::backdrop {
 }
 
 .dismissIcon {
-  transform: translateX(.5rem) translateY(-.3rem);
+  transform: translateX(9.3rem) translateY(-.18rem);
 }
 
 .dismissIcon path {
@@ -744,8 +744,14 @@ table.calendarModalTable td {
 
 .pickerButton button {
   font-size: .9rem;
-  color: var(--standOutGreen);
+  color: var(--modalCOlor);
+  transition: transform 0.3s ease-in-out; 
 }
+
+.pickerButton button:hover {
+  transform: scale(1.5);
+}
+
 
 
 .calendarModalTable {
@@ -769,12 +775,12 @@ table.calendarModalTable td {
 }
 
 .calendarModalTable td:nth-child(1) {
-  width: 3rem;
+  width: 2.3rem;
   text-align: left;
 }
 
 .calendarModalTable td:nth-child(2) {
-  width: 3.6rem;
+  width: 2.7rem;
   text-align: right;
 }
 
@@ -801,7 +807,7 @@ table.calendarModalTable td {
 }
 
 .calendarModalTable td:nth-child(7) {
-  width: 3.2rem;
+  width: 2.7rem;
   text-align: right;
 }
 
@@ -814,6 +820,7 @@ table.calendarModalTable td {
   width: 1rem;
   text-align: left;
 }
+
 
 
 .reviewButton {
@@ -853,9 +860,10 @@ table.calendarModalTable td {
   border: var(--standOutGreen);
   font-variant: small-caps;
   font-size: .63rem;
-  width: 3.6rem;
+  width: 10rem;
   letter-spacing: .1rem;
   padding-inline: .63rem;
+  padding-block: .3rem;
 
 
 }
