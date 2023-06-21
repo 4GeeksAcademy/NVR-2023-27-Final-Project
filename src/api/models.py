@@ -138,6 +138,10 @@ class ServiceRequest(db.Model):
         'provider_profile.id'), nullable=True)
     address_id = db.Column(db.Integer, db.ForeignKey(
         'address.id'), nullable=False)
+    verbal_password = db.Column(db.String(50), nullable=True )
+    qr_password = db.Column(db.String(50), nullable=True )
+    notifications = db.relationship('Notification', backref='service_request')
+    
 
     def __repr__(self):
         return f'<ServiceRequest {self.id}>'
@@ -154,6 +158,8 @@ class ServiceRequest(db.Model):
             "user_id": self.user_id,
             "provider_id": self.provider_id,
             "address_id": self.address_id,
+            "verbal_password": self.verbal_password,
+            "qr_password": self.qr_password,
         }
 
 class Notification(db.Model):
@@ -166,6 +172,8 @@ class Notification(db.Model):
         'user_profile.id'), nullable=True)
     provider_id = db.Column(db.Integer, db.ForeignKey(
         'provider_profile.id'), nullable=True)
+    service_request_id = db.Column(db.Integer, db.ForeignKey(
+    'service_request.id'), nullable=True)
 
     def __repr__(self):
         return f'<Notification {self.id}>'
@@ -179,6 +187,8 @@ class Notification(db.Model):
             "message": self.message,
             "user_id": self.user_id,
             "provider_id": self.provider_id,
+            "service_request_id": self.service_request_id,
+
         }
 
 
