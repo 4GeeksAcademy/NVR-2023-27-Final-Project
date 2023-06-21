@@ -292,6 +292,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  if (response.ok) {
 					const data = await response.json();
 					await getActions().getUserBookedDays();
+					await getActions().getUserRequests();
 					return data.id;
 				  }
 				} catch (error) {
