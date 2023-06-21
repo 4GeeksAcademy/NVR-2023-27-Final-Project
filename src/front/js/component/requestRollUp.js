@@ -50,6 +50,15 @@ export const RequestRollUp = (props) => {
 
     ]);
 
+    // Handle Functions
+
+    const handleClickCancel = (service_request_id) => {
+        actions.deleteServiceRequest(service_request_id);
+    }
+
+
+    // Subcomponents
+
     const IconBar = () => {
         const HomeIcon = (
             <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12" style={{ fill: "var(--requestRollUpColor)" }}>
@@ -168,30 +177,19 @@ export const RequestRollUp = (props) => {
                             <div className="requestRollUpColumn7">
                                 <span className="rollUpValue">{timeString}</span>
                             </div>
-                            <div>
-                                <IconBar />
+                          
+                            <div className="">
+                                <button 
+                                onClick={() => {handleClickCancel(id)}}
+                                className="btn btn-sm btn-danger">CANCEL</button>
                             </div>
-                            <div>
-                                <RequestStatusBar />
-                            </div>
-                            <div className="bookButtonWrapper">
-                                <div className="bannerLabel4 d-flex align-items-center">
-                                    <button
-                                        className="bookButton mt-1"
-                                    // onClick={handleBookClick}
-                                    >
-                                        book
-                                    </button>
-                                </div>
-                            </div>
+                       
                         </div>
                     </div>
                     <div className="requestExpandableWrapper" id={"requestExpandableWrapperId" + id}>
                         <div className="requestExpandable">
                             <div className="requestExpandableContent">
                                 <p>
-                                    dksjgdkfjgkdfjgkdfgkdflgdfjkghçdflkj
-                                    12345668767876876876876
                                 </p>
                             </div>
                         </div>
@@ -204,3 +202,15 @@ export const RequestRollUp = (props) => {
 };
 
 
+/* 
+
+<div className="bookButtonWrapper">
+<div className="bannerLabel4 d-flex align-items-center">
+    <button
+        className="bookButton mt-1"
+    // onClick={handleBookClick}
+    >
+        book
+    </button>
+</div>
+</div> */

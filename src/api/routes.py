@@ -10,7 +10,7 @@ from flask_jwt_extended import jwt_required
 
 #*************************************
 # Added because of get_user_booked_days
-from datetime import date , timedelta  
+from datetime import date , datetime, timedelta
 #*************************************
 
 
@@ -345,30 +345,24 @@ def get_user_booked_days():
         user_email = get_jwt_identity()
         user = UserProfile.query.filter_by(email=user_email).first()
         if user:
-            # Get the current date
             current_date = date.today()
 
             # Calculate the end date (current date + 28 days)
             end_date = current_date + timedelta(days=28)
 
-            # Query the ServiceRequests for the user within the date range
             service_requests = ServiceRequest.query \
                 .join(ServiceDescription) \
                 .filter(ServiceRequest.user_id == user.id) \
                 .filter(ServiceRequest.date.between(current_date, end_date)) \
                 .all()
-
-            # Create a dictionary to store unique dates and their categories
+            
             unique_dates = {}
 
-            # Iterate over the service requests and extract the unique dates and categories
             for request in service_requests:
                 if request.date not in unique_dates:
                     unique_dates[request.date] = set()
                 unique_dates[request.date].add(request.service_description.category)
 
-            # Create a list of dictionaries containing the unique dates and categories
-            
             result = []
             for unique_date, categories in unique_dates.items():
                 if len(categories) > 1:
@@ -388,4 +382,49 @@ def get_user_booked_days():
             "message": "An error occurred",
             "error": str(e)
         }), 500
+
+ # PRIVATE USER endpoints - DELETE service request
+
+@api.route("/deleteservicerequest/<int:service_request_id>", methods=["DELETE"])
+@jwt_required()
+def delete_service_request(service_request_id):
+    try:
+        user_email = get_jwt_identity()
+        user = UserProfile.query.filter_by(email=user_email).first()
+        
+        if user:
+            service_request = ServiceRequest.query.get(service_request_id)
+            
+            if service_request:
+                provider_id = service_request.provider_id
+                
+                # Creates a notification for the provider, if provider_id exists
+                if provider_id is not None:
+                    notification = Notification(
+                        type_of_notification=0, 
+                        status=1,
+                        publishing_date_time=datetime.now(),
+                        # use {} to include vars from serviceRequest
+                        message= f"Service cancelled.",
+                        provider_id=provider_id,
+                        service_request_id=service_request_id
+                    )
+                    
+                    db.session.add(notification)
+                
+                db.session.delete(service_request)
+                db.session.commit()
+                
+                return jsonify({"message": "Service request deleted successfully"}), 200
+            else:
+                return jsonify({"message": "Service request not found"}), 404
+        else:
+            return jsonify({"message": "User not found"}), 404
+    except Exception as e:
+        return jsonify({
+            "message": "An error occurred",
+            "error": str(e)
+        }), 500
+
+
 

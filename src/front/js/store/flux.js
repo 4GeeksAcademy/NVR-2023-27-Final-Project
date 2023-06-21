@@ -314,8 +314,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 					if (response.ok) {
 						const data = await response.json();
-						setStore({ userBookedDays: data }); // Update the userBookedDays variable in the store
-						console.log(data);
+						setStore({ userBookedDays: data }); 
 					} else {
 						console.log("Error:", response.status);
 					}
@@ -323,6 +322,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error:", error);
 				}
 			},
+
+			
+			// DELETE Service Request
+
+			deleteServiceRequest: async (serviceRequestId) => {
+				try {
+
+				  const response = await fetch(process.env.BACKEND_URL + "api/deleteservicerequest/" + serviceRequestId
+				  , {											
+					method: "DELETE",
+					headers: {
+					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
+					  "Content-Type": "application/json"
+					}
+				  });
+			  
+				  if (response.ok) {
+					const data = await response.json();
+					console.log(data.message);
+					await getActions().getUserBookedDays();
+					await getActions().getUserRequests();
+				  } else {
+					console.log('Error:', response.status);
+				  }
+				} catch (error) {
+				  console.log('Error:', error);
+				}
+			  },
+			  
 			
 			  
 		}
