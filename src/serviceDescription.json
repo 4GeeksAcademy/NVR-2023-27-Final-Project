@@ -2,7 +2,7 @@
     "category": "cleaning",
     "service": "regular cleaning",
     "description": "performing routine cleaning tasks such as dusting, vacuuming, mopping, and bathroom cleaning",
-    "unit": "1 area up to 100 m²",
+    "unit": "1 area of up to 100 m²",
     "duration": 3,
     "personnel": 1,
     "included": "cleaning products",
@@ -12,7 +12,7 @@
     "category": "cleaning",
     "service": "deep cleaning",
     "description": "conducting a thorough cleaning of the entire living space, including deep cleaning of surfaces, appliances, and furniture.",
-    "unit": "1 area up to 100 m²",
+    "unit": "1 area of up to 100 m²",
     "duration": 7,
     "personnel": 2,
     "included": "cleaning products",
@@ -20,19 +20,9 @@
 },
 {
     "category": "cleaning",
-    "service": "one-time cleaning",
-    "description": "providing intensive cleaning services to address specific cleaning needs or areas of the living space",
-    "unit": "1 area up to 100 m²",
-    "duration": 6,
-    "personnel": 1,
-    "included": "cleaning products",
-    "price": 90
-},
-{
-    "category": "cleaning",
     "service": "move-in/out cleaning",
     "description": "performing comprehensive cleaning services specifically designed for move-in or move-out situations",
-    "unit": "1 area up to 100 m²",
+    "unit": "1 area of up to 100 m²",
     "duration": 7,
     "personnel": 1,
     "included": "cleaning products",
@@ -75,7 +65,7 @@
     "unit": "up to 5 pairs of shoes",
     "duration": 0.5,
     "personnel": 1,
-    "included": "utensils and consumables",
+    "included": "tools and consumables",
     "price": 60
 },
 {
@@ -115,7 +105,7 @@
     "unit": "1 fixture",
     "duration": 1,
     "personnel": 1,
-    "included": "ffxture provided by client, all other necessay utensils and consumables provided",
+    "included": "ffxture provided by client, all else included",
     "price": 60
 },
 {
@@ -125,7 +115,7 @@
     "unit": "1 HVAC unit",
     "duration": 2,
     "personnel": 1,
-    "included": "tools and consumables included, eventual required spare parts not included",
+    "included": "eventual required spare parts not included, all else included",
     "price": 70
 },
 {
@@ -145,7 +135,7 @@
     "unit": "Up to 2 surveillance cameras",
     "duration": 2,
     "personnel": 1,
-    "included": "tools and consumables included, eventual requried spare parts not included",
+    "included": "eventual requried spare parts not included, all else included",
     "price": 60
 },
 {
@@ -155,7 +145,7 @@
     "unit": "Up to 5 shelves",
     "duration": 1,
     "personnel": 1,
-    "included": "tools and consumables provided, shelves provided by client",
+    "included": " shelves and brackets provided by client, all else included",
     "price": 40
 },
 {
@@ -196,7 +186,7 @@
     "unit": "1 blind",
     "duration": 2,
     "personnel": 1,
-    "included": "spare blind slats provided by client, tools and spare cord included",
+    "included": "spare blind slats provided by client, all else included",
     "price": 70
 },
 {
@@ -206,7 +196,7 @@
     "unit": "1 small appliance",
     "duration": 2,
     "personnel": 1,
-    "included": "tools and consumables, eventual required spare parts not included",
+    "included": "eventual required spare parts not included, all else included",
     "price": 70
 },
 {
@@ -226,7 +216,7 @@
     "unit": "1 wall of up to 25 square meters",
     "duration": 3,
     "personnel": 1,
-    "included": "paint provided by client",
+    "included": "paint provided by client, all else included",
     "price": 80
 },
 {
@@ -236,7 +226,7 @@
     "unit": "1 wall of up to 25 m²s",
     "duration": 3,
     "personnel": 1,
-    "included": "paint provided by client",
+    "included": "paint provided by client, all else included",
     "price": 80
 },
 {
@@ -246,7 +236,7 @@
     "unit": "1 ground floor exterior wall of up to 40 m²",
     "duration": 4,
     "personnel": 1,
-    "included": "paint provided by client",
+    "included": "paint provided by client, all else included",
     "price": 80
 },
 {
@@ -256,7 +246,7 @@
     "unit": "1 ground floor exterior wall of up to 150 m²",
     "duration": 4,
     "personnel": 1,
-    "included": "paint provided by client, all other tools and consummables provided",
+    "included": "paint provided by client, all else included",
     "price": 60
 },
 {
@@ -266,7 +256,7 @@
     "unit": "1 wall of up to 30 m²",
     "duration": 3,
     "personnel": 1,
-    "included": "tools and consummabels provided",
+    "included": "tools and consummabels",
     "price": 60
 },
 {
@@ -276,7 +266,7 @@
     "unit": "1 interior wall of up to 25 m²",
     "duration": 4,
     "personnel": 1,
-    "included": "paint provided by client, all otehr tools and consummables provided",
+    "included": "paint provided by client, all else included",
     "price": 90
 },
 {
@@ -286,7 +276,7 @@
     "unit": "1 lawn of up to 250 m²",
     "duration": 1,
     "personnel": 1,
-    "included": "lawnmower povided for session",
+    "included": "lawnmower",
     "price": 50
 },
 {
@@ -296,7 +286,7 @@
     "unit": "Up to 40 m",
     "duration": 2,
     "personnel": 1,
-    "included": "trimming tools for session",
+    "included": "trimming tools",
     "price": 50
 },
 {
@@ -316,7 +306,7 @@
     "unit": "1 area of up to 500 m²",
     "duration": 2,
     "personnel": 1,
-    "included": " tools included, fertilizer provided by client",
+    "included": "fertilizer provided by client, all else included",
     "price": 60
 },
 {
@@ -461,6 +451,18 @@
     "included": "gauge and thermometer provided for the session",
     "price": 35
 },
+
+{
+    "category": "nursing",
+    "service": "personal Hygiene assistance",
+    "description": "providing specialized personal hygiene assistance for individuals with disabilities, the elderly, or those with special needs, in activiities such as bathing, grooming, oral care, dressing, and toileting.",
+    "unit": "1 session for 1 client",
+    "duration": 1.5,
+    "personnel": 1,
+    "included": "hygene products provided by cleint",
+    "price": 90
+    },
+
 {
     "category": "wellness",
     "service": "fitness training",
@@ -474,12 +476,34 @@
 
 {
     "category": "wellness",
+    "service": "Chen Tai Chi",
+    "description": "providing guiided one-on-one training in Chen Tai Chi, a traditional Chinese relaxing martial art.",
+    "unit": "1 session for 1 client",
+    "duration": 1,
+    "personnel": 1,
+    "included": "no consummables required",
+    "price": 70
+},
+
+{
+    "category": "wellness",
+    "service": "soto Zen meditation",
+    "description": "providing guided Soto Zen meditation practice, a traditional form of seated meditation that focuses on breathing and stillness.",
+    "unit": "1 session for 1 client",
+    "duration": 0.75,
+    "personnel": 1,
+    "included": "cushions and meditation mats",
+    "price": 40
+},
+
+{
+    "category": "wellness",
     "service": "ayurvedic massage",
     "description": "providing ayurvedic massage techniques, tailored to individual needs, to promote relaxation, relieve muscle tension, and enhance overall well-being",
     "unit": "1 massage for 1 person",
     "duration": 0.75,
     "personnel": 1,
-    "included": "oils included, towels provided by client",
+    "included": "towels provided by client, all else included",
     "price": 40
 },
 
@@ -510,7 +534,7 @@
     "unit": "1 session of card or board games with 1 client",
     "duration": 1,
     "personnel": 1,
-    "included": "1 card game and 1 board game provided for the session only",
+    "included": "1 card game and 1 board game",
     "price": 60
 },
 {
@@ -520,7 +544,7 @@
     "unit": "1 DJ set featuring contemporary House and Techno music",
     "duration": 3,
     "personnel": 1,
-    "included": "sound system setup provided by client, DJ equipment and music playlist customization included",
+    "included": "sound system setup provided by client, all else includedd",
     "price": 180
 }
 
