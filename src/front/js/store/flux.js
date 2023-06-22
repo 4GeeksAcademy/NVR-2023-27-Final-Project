@@ -280,30 +280,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//Create service Request
 			createServiceRequest: async (serviceRequest) => {
 				try {
-				  const response = await fetch(process.env.BACKEND_URL + "api/createrequest", {
-					method: "POST",
-					headers: {
-					  "Content-Type": "application/json",
-					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
-					},
-					body: JSON.stringify(serviceRequest),
-				  });
-			  
-				  if (response.ok) {
-					const data = await response.json();
-					await getActions().getUserBookedDays();
-					await getActions().getUserRequests();
-					return data.id;
-				  }
+					const response = await fetch(process.env.BACKEND_URL + "api/createrequest", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+						},
+						body: JSON.stringify(serviceRequest),
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						await getActions().getUserBookedDays();
+						await getActions().getUserRequests();
+						return data.id;
+					}
 				} catch (error) {
-				  console.error("Error creating request", error);
-				  return false;
+					console.error("Error creating request", error);
+					return false;
 				}
-			  },
+			},
 
- 			// Get user's booked days
+			// Get user's booked days
 
-			  getUserBookedDays: async () => {
+			getUserBookedDays: async () => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "api/getuserbookeddays", {
 						method: "GET",
@@ -311,10 +311,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
 						}
 					});
-			
+
 					if (response.ok) {
 						const data = await response.json();
-						setStore({ userBookedDays: data }); 
+						setStore({ userBookedDays: data });
 					} else {
 						console.log("Error:", response.status);
 					}
@@ -323,36 +323,65 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			
+
 			// DELETE Service Request
 
 			deleteServiceRequest: async (serviceRequestId) => {
 				try {
 
-				  const response = await fetch(process.env.BACKEND_URL + "api/deleteservicerequest/" + serviceRequestId
-				  , {											
-					method: "DELETE",
-					headers: {
-					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
-					  "Content-Type": "application/json"
+					const response = await fetch(process.env.BACKEND_URL + "api/deleteservicerequest/" + serviceRequestId
+						, {
+							method: "DELETE",
+							headers: {
+								"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
+								"Content-Type": "application/json"
+							}
+						});
+
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data.message);
+						await getActions().getUserBookedDays();
+						await getActions().getUserRequests();
+					} else {
+						console.log('Error:', response.status);
 					}
-				  });
-			  
-				  if (response.ok) {
-					const data = await response.json();
-					console.log(data.message);
-					await getActions().getUserBookedDays();
-					await getActions().getUserRequests();
-				  } else {
-					console.log('Error:', response.status);
-				  }
 				} catch (error) {
-				  console.log('Error:', error);
+					console.log('Error:', error);
 				}
-			  },
-			  
-			
-			  
+			},
+
+			// UPDATE and RENEW Service Request
+
+			updateAndRenewServiceRequest: async (serviceRequestId) => {
+				try {
+
+					const response = await fetch(process.env.BACKEND_URL + "api/updateandrenewservicerequest/" + serviceRequestId
+						, {
+							method: "PUT",
+							headers: {
+								"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
+								"Content-Type": "application/json"
+							}
+						});
+
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data.message);
+						await getActions().getUserBookedDays();
+						await getActions().getUserRequests();
+					} else {
+						console.log('Error:', response.status);
+					}
+				} catch (error) {
+					console.log('Error:', error);
+				}
+			},
+
+
+
+
+
 		}
 	};
 };

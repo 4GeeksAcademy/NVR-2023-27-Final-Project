@@ -336,7 +336,7 @@ def create_service_request():
     
 
 
- # CALENDAR - get Booked days
+ #  PRIVATE USER endpoints - CALENDAR - get Booked days
 
 @api.route("/getuserbookeddays", methods=["GET"])
 @jwt_required()
@@ -398,7 +398,7 @@ def delete_service_request(service_request_id):
             if service_request:
                 provider_id = service_request.provider_id
                 
-                # Creates a notification for the provider, if provider_id exists
+                # Creates a notification for the provider, if it already has a provider_id
                 if provider_id is not None:
                     notification = Notification(
                         type_of_notification=0, 
@@ -426,5 +426,57 @@ def delete_service_request(service_request_id):
             "error": str(e)
         }), 500
 
+ # PRIVATE USER endpoints - update and renew service request
 
+@api.route("/updateandrenewservicerequest/<int:service_request_id>", methods=["PUT"])
+@jwt_required()
+def updateandrenew_service_request(service_request_id):
+    try:
+        user_email = get_jwt_identity()
+        user = UserProfile.query.filter_by(email=user_email).first()
+        
+        # Updates service status to 4, "provided"
+        if user:
+            service_request = ServiceRequest.query.get(service_request_id)
+            
+            if service_request:
+                service_request.status = 4
+                
+                # Renews service if recurrence if higher than 1
+                if service_request.recurrence > 1:
+                    renewed_service_request = ServiceRequest()
+                    renewed_service_request.status = 1
+                    renewed_service_request.time = service_request.time
+                    renewed_service_request.recurrence = service_request.recurrence
+                    renewed_service_request.quantity = service_request.quantity
+                    renewed_service_request.service_description_id = service_request.service_description_id
+                    renewed_service_request.user_id = service_request.user_id
+                    renewed_service_request.provider_id = None
+                    renewed_service_request.address_id = service_request.address_id
+                    renewed_service_request.verbal_password = service_request.verbal_password
+                    renewed_service_request.qr_password = service_request.qr_password
 
+                    renewed_date= service_request.date
+                    if service_request.recurrence == 2:
+                        renewed_date += timedelta(days=30)
+                    elif service_request.recurrence == 3:
+                        renewed_date += timedelta(days=7)
+                    else:
+                        renewed_date += timedelta(days=1)
+                    
+                    renewed_service_request.date = renewed_date
+                    
+                    db.session.add(renewed_service_request)
+                
+                db.session.commit()
+                
+                return jsonify({"message": "Service request updated successfully"}), 200
+            else:
+                return jsonify({"message": "Service request not found"}), 404
+        else:
+            return jsonify({"message": "User not found"}), 404
+    except Exception as e:
+        return jsonify({
+            "message": "An error occurred",
+            "error": str(e)
+        }), 500

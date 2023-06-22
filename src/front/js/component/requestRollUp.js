@@ -34,7 +34,7 @@ export const RequestRollUp = (props) => {
         [1, ["requested", "green"]],
         [2, ["taken", "blue"]],
         [3, ["safeguarded", "yellow"]],
-        [4, ["fullfilled", "darkblue"]],
+        [4, ["provided", "darkblue"]],
         [5, ["renewed", "grey"]],
         [6, ["reviewed", "black"]],
         [7, ["completed", "white"]],
