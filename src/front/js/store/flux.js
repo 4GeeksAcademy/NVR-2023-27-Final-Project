@@ -378,6 +378,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			// RAte provider
+
+			rateProvider: async (serviceRequestId , rating) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/updateandrenewservicerequest/" + serviceRequestId + "/" + rating
+					
+						, {
+							method: "PUT",
+							headers: {
+								"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
+								"Content-Type": "application/json"
+							}
+						});
+
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data.message);
+						await getActions().getUserBookedDays();
+						await getActions().getUserRequests();
+					} else {
+						console.log('Error:', response.status);
+					}
+				} catch (error) {
+					console.log('Error:', error);
+				}
+			},
+
 
 
 

@@ -191,6 +191,11 @@ export const RequestRollUp = (props) => {
                                 onClick={() => {handleUpdateAndRenewServiceRequest(id)}}
                                 className="btn btn-sm btn-success">Update</button>
                             </div>
+                            <div className="">
+                                <button 
+                                // onClick={() => {handleUpdateAndRenewServiceRequest(id)}}
+                                className="btn btn-sm">Rate</button>
+                            </div>
                        
                         </div>
                     </div>
