@@ -10,7 +10,9 @@ from flask_jwt_extended import jwt_required
 
 # *************************************
 # Added because of get_user_booked_days
-from datetime import date, datetime, timedelta , calendar
+from datetime import date, datetime, timedelta
+import calendar
+
 # *************************************
 
 
@@ -153,6 +155,7 @@ def get_service_descriptions():
         return jsonify({"error": str(e)}), 500
 
 # PRIVATE USER endpoints - All USER DATA
+
 
 @api.route("/getusersettings", methods=["GET"])
 @jwt_required()
@@ -458,12 +461,31 @@ def updateandrenew_service_request(service_request_id):
                     renewed_service_request.qr_password = service_request.qr_password
 
                     renewed_date = service_request.date
-                    if service_request.recurrence == 2:
-                        renewed_date += timedelta(days=30)
-                    elif service_request.recurrence == 3:
-                        renewed_date += timedelta(days=7)
+
+                if service_request.recurrence == 2:
+                    year = service_request.date.year
+                    month = service_request.date.month
+                    day = service_request.date.day
+
+                    # Check if month is January and day is 29, 30, or 31
+                    if month == 1 and day >= 29:
+                        if calendar.isleap(year):
+                            renewed_date = date(year, 2, 29)
+                        else:
+                            renewed_date = date(year, 2, 28)
                     else:
-                        renewed_date += timedelta(days=1)
+                        next_month = month + 1
+                        if next_month > 12:
+                            next_month = 1
+                            year += 1
+                        renewed_date = date(year, next_month, day)
+
+                    renewed_service_request.date = renewed_date
+
+                elif service_request.recurrence == 3:
+                    renewed_date += timedelta(days=7)
+                else:
+                    renewed_date += timedelta(days=1)
 
                     renewed_service_request.date = renewed_date
 
@@ -482,8 +504,8 @@ def updateandrenew_service_request(service_request_id):
             "error": str(e)
         }), 500
 
-
  # PRIVATE USER endpoints - rate Provider
+
 
 @api.route("/rateprovider/<int:service_request_id>/<float:rating>", methods=["PUT"])
 @jwt_required()
