@@ -52,10 +52,13 @@ export const RequestRollUp = (props) => {
 
     // Handle Functions
 
-    const handleClickCancel = (service_request_id) => {
-        actions.deleteServiceRequest(service_request_id);
+    const handleClickCancel = (serviceRequestId) => {
+        actions.deleteServiceRequest(serviceRequestId);
     }
 
+    const handleUpdateAndRenewServiceRequest = (serviceRequestId) => {
+        actions.updateAndRenewServiceRequest(serviceRequestId);
+    }
 
     // Subcomponents
 
@@ -182,6 +185,11 @@ export const RequestRollUp = (props) => {
                                 <button 
                                 onClick={() => {handleClickCancel(id)}}
                                 className="btn btn-sm btn-danger">CANCEL</button>
+                            </div>
+                            <div className="">
+                                <button 
+                                onClick={() => {handleUpdateAndRenewServiceRequest(id)}}
+                                className="btn btn-sm btn-success">Update</button>
                             </div>
                        
                         </div>
