@@ -1,8 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 
-
 export const RequestRollUp = (props) => {
+    
+    useEffect(()=> {
+        window.scrollTo(0, 0);
+
+    }, [])
 
     const { store, actions } = useContext(Context);
     let { id, status, date, time, recurrence, quantity, provider_id, address_id, service_description_id, } = props.requestObject;
@@ -74,10 +78,10 @@ export const RequestRollUp = (props) => {
                 <path d="M480-80q-75 0-140.5-28T225-185q-49-49-77-114.5T120-440h60q0 125 87.5 212.5T480-140q125 0 212.5-87.5T780-440q0-125-85-212.5T485-740h-23l73 73-41 42-147-147 147-147 41 41-78 78h23q75 0 140.5 28T735-695q49 49 77 114.5T840-440q0 75-28 140.5T735-185q-49 49-114.5 77T480-80Z" />
             </svg>
         );
-        
+
         const PasswordIcon = (
-            <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12" style={{ fill: "var(--requestRollUpColor)" }}><path d="M237.694-100.001q-23.596 0-40.645-17.048-17.048-17.049-17.048-40.645v-400.151q0-23.894 17.048-40.793 17.049-16.899 40.645-16.899h69.615v-91.769q0-71.89 50.439-122.29 50.439-50.401 122.384-50.401 71.944 0 122.252 50.401 50.307 50.4 50.307 122.29v91.769h69.615q23.596 0 40.645 16.899 17.048 16.899 17.048 40.793v400.151q0 23.596-17.048 40.645-17.049 17.048-40.645 17.048H237.694Zm0-45.384h484.612q5.385 0 8.847-3.462 3.462-3.462 3.462-8.847v-400.151q0-5.385-3.462-8.847-3.462-3.462-8.847-3.462H237.694q-5.385 0-8.847 3.462-3.462 3.462-3.462 8.847v400.151q0 5.385 3.462 8.847 3.462 3.462 8.847 3.462Zm242.474-144.616q27.986 0 47.793-19.531 19.808-19.531 19.808-47.007 0-26.538-19.976-47.768-19.976-21.231-47.961-21.231-27.986 0-47.793 21.231-19.808 21.23-19.808 48.268 0 27.039 19.976 46.538 19.976 19.5 47.961 19.5ZM352.693-615.537h254.614v-91.769q0-53.045-37.09-90.176-37.09-37.132-90.077-37.132-52.986 0-90.217 37.132-37.23 37.131-37.23 90.176v91.769ZM225.385-145.385v-424.769 424.769Z"/></svg>
-            )
+            <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12" style={{ fill: "var(--requestRollUpColor)" }}><path d="M237.694-100.001q-23.596 0-40.645-17.048-17.048-17.049-17.048-40.645v-400.151q0-23.894 17.048-40.793 17.049-16.899 40.645-16.899h69.615v-91.769q0-71.89 50.439-122.29 50.439-50.401 122.384-50.401 71.944 0 122.252 50.401 50.307 50.4 50.307 122.29v91.769h69.615q23.596 0 40.645 16.899 17.048 16.899 17.048 40.793v400.151q0 23.596-17.048 40.645-17.049 17.048-40.645 17.048H237.694Zm0-45.384h484.612q5.385 0 8.847-3.462 3.462-3.462 3.462-8.847v-400.151q0-5.385-3.462-8.847-3.462-3.462-8.847-3.462H237.694q-5.385 0-8.847 3.462-3.462 3.462-3.462 8.847v400.151q0 5.385 3.462 8.847 3.462 3.462 8.847 3.462Zm242.474-144.616q27.986 0 47.793-19.531 19.808-19.531 19.808-47.007 0-26.538-19.976-47.768-19.976-21.231-47.961-21.231-27.986 0-47.793 21.231-19.808 21.23-19.808 48.268 0 27.039 19.976 46.538 19.976 19.5 47.961 19.5ZM352.693-615.537h254.614v-91.769q0-53.045-37.09-90.176-37.09-37.132-90.077-37.132-52.986 0-90.217 37.132-37.23 37.131-37.23 90.176v91.769ZM225.385-145.385v-424.769 424.769Z" /></svg>
+        )
 
         const QuantityIcon = (
             <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12" style={{ fill: "var(--requestRollUpColor)" }}>
@@ -137,6 +141,7 @@ export const RequestRollUp = (props) => {
     };
 
     const providerString = "details";
+    let typeOfaddressString = null;
     let addressString = null;
     let servideString = null;
 
@@ -144,10 +149,18 @@ export const RequestRollUp = (props) => {
     const dateString = convertDateFormat(date);
     const timeString = shortenTimeFormat(time);
     const recurrenceString = recurrenceMap.get(recurrence)[0];
-
+    const priceString = store.serviceDescriptions && store.serviceDescriptions.find(service => service.id === service_description_id)
+    ? `${store.serviceDescriptions.find(service => service.id === service_description_id).price * quantity}.00€`
+    : "";
+  
     if (store.userAddresses) {
-        addressString = (store.userAddresses.id1 === address_id) ? "main address" : "secondary address"
+        typeOfaddressString = (store.userAddresses.id1 === address_id) ? "main" : "second";
+        addressString = (store.userAddresses.id1 === address_id)
+            ? `${store.userAddresses.street1}${store.userAddresses.apartment1 ? ` ${store.userAddresses.apartment1},` : ''}${store.userAddresses.city1 ? ` ${store.userAddresses.city1},` : ''}${store.userAddresses.state1 ? ` ${store.userAddresses.state1},` : ''}${store.userAddresses.postalcode1 ? ` ${store.userAddresses.postalcode1},` : ''}${store.userAddresses.country1 ? ` ${store.userAddresses.country1}` : ''}`
+            : `${store.userAddresses.street2}${store.userAddresses.apartment2 ? ` ${store.userAddresses.apartment2},` : ''}${store.userAddresses.city2 ? ` ${store.userAddresses.city2},` : ''}${store.userAddresses.state2 ? ` ${store.userAddresses.state2},` : ''}${store.userAddresses.postalcode2 ? ` ${store.userAddresses.postalcode2},` : ''}${store.userAddresses.country2 ? ` ${store.userAddresses.country2}` : ''}`;
+
     }
+
 
     if (store.serviceDescriptions) {
         const temporaryObject = store.serviceDescriptions.find(object => object.id === service_description_id);
@@ -167,7 +180,7 @@ export const RequestRollUp = (props) => {
                                     <span className="requestRollUpTitleLabel">{servideString}</span>
                                 </div>
                             </div>
-                           
+
                             <div className="requestRollUpColumn4">
                                 <span className="rollUpDescription">date:</span>
                             </div>
@@ -180,30 +193,57 @@ export const RequestRollUp = (props) => {
                             <div className="requestRollUpColumn7">
                                 <span className="rollUpValue">{timeString}</span>
                             </div>
-                          
                             <div className="">
-                                <button 
-                                onClick={() => {handleClickCancel(id)}}
-                                className="btn btn-sm btn-danger">CANCEL</button>
+                                <button
+                                    onClick={() => { handleClickCancel(id) }}
+                                    className="btn btn-sm btn-danger">CANCEL</button>
                             </div>
                             <div className="">
-                                <button 
-                                onClick={() => {handleUpdateAndRenewServiceRequest(id)}}
-                                className="btn btn-sm btn-success">Update</button>
+                                <button
+                                    onClick={() => { handleUpdateAndRenewServiceRequest(id) }}
+                                    className="btn btn-sm btn-success">Update</button>
                             </div>
                             <div className="">
-                                <button 
-                                // onClick={() => {handleUpdateAndRenewServiceRequest(id)}}
-                                className="btn btn-sm">Rate</button>
+                                <button
+                                    // onClick={() => {handleUpdateAndRenewServiceRequest(id)}}
+                                    className="btn btn-sm">Rate</button>
                             </div>
-                       
                         </div>
                     </div>
                     <div className="requestExpandableWrapper" id={"requestExpandableWrapperId" + id}>
                         <div className="requestExpandable">
                             <div className="requestExpandableContent">
-                                <p>
-                                </p>
+                                <div className="expandableColumns">
+                                    <div className="expandableColumn1">
+                                        <div>
+                                            <span className="expandableDescription me-1">address:</span>
+                                            <span className="typeOfAddressValue">{typeOfaddressString}</span>
+                                            <div className="expandableValue mt-2">{addressString}</div>
+                                        </div>
+                                    </div>
+                                    <div className="expandableColumn2">
+                                        <div>
+                                            <span className="expandableDescription me-1">price:</span>
+                                        </div>
+                                        <div>
+                                            <span className="expandableDescription me-1">quantity:</span>
+                                        </div>
+                                        <div>
+                                            <span className="expandableDescription me-1">book:</span>
+                                        </div>
+                                    </div>
+                                    <div className="expandableColumn3">
+                                        <div>
+                                            <span className="priceValueLTag">{priceString}</span>
+                                        </div>
+                                        <div>
+                                            <span className="expandableValue">{quantity}</span>
+                                        </div>
+                                        <div>
+                                            <span className="expandableValue">{recurrenceString}</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -214,16 +254,3 @@ export const RequestRollUp = (props) => {
     );
 };
 
-
-/* 
-
-<div className="bookButtonWrapper">
-<div className="bannerLabel4 d-flex align-items-center">
-    <button
-        className="bookButton mt-1"
-    // onClick={handleBookClick}
-    >
-        book
-    </button>
-</div>
-</div> */

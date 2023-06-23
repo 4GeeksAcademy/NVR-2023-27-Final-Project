@@ -12,25 +12,45 @@ export const PrivateUser = () => {
     const navigate = useNavigate();
     const [selectedSection, setSelectedSection] = useState("requestService");
 
+    // Generate initials for Avatar
+
+    const getAvatarInitials = (name) => {
+        let avatarInitials = "";
+
+        if (name) {
+            const words = name.split(" ");
+            const firstWord = words[0];
+            const secondWord = words[1];
+
+            avatarInitials += firstWord ? firstWord.charAt(0) : "";
+
+            avatarInitials += secondWord ? secondWord.charAt(0) : (firstWord && firstWord.length > 1) ? firstWord.charAt(1) : "";
+        }
+
+        return avatarInitials.toLowerCase();
+    };
+
+
+    const avatarInitials = getAvatarInitials(JSON.parse(localStorage.getItem("credentials")).name);
     // Filter variables
-        // Srevices
-        const [selectedServiceCategory, setSelectedServiceCategory] = useState("Any category");
-        const [selectedServicePrice, setSelectedServicePrice] = useState("Any price");
-        const [serviceSearchBar, setServiceSearchBar] = useState("");
+    // Srevices
+    const [selectedServiceCategory, setSelectedServiceCategory] = useState("Any category");
+    const [selectedServicePrice, setSelectedServicePrice] = useState("Any price");
+    const [serviceSearchBar, setServiceSearchBar] = useState("");
 
-        const [serviceCategories, setServiceCategories] = useState([]);
-        const [servicePrices, setServicePrices] = useState({});
-        
-        let filteredServices = null;
-        let filteredRequests = null;
-        let filteredNotifications = null;
+    const [serviceCategories, setServiceCategories] = useState([]);
+    const [servicePrices, setServicePrices] = useState({});
 
-        // Requests
-        const [selectedRequestSortBy , setSelectedRequestSortBy] = useState("Newest")
-        const [requestSearchBar, setRequestSearchBar] = useState("");
+    let filteredServices = null;
+    let filteredRequests = null;
+    let filteredNotifications = null;
+
+    // Requests
+    const [selectedRequestSortBy, setSelectedRequestSortBy] = useState("Newest")
+    const [requestSearchBar, setRequestSearchBar] = useState("");
 
 
-        // Notifications
+    // Notifications
 
 
     // UseEffects
@@ -91,8 +111,6 @@ export const PrivateUser = () => {
 
     }, [store.serviceDescriptions]);
 
- 
-
     // UI handle functions
 
     const handleClickHome = () => {
@@ -107,33 +125,33 @@ export const PrivateUser = () => {
         setSelectedSection(section)
     }
 
-        // Services
-        const handleServiceCategorySelect = (category) => {
-            setSelectedServiceCategory(category);
-            setServiceSearchBar("");
-        };
+    // Services
+    const handleServiceCategorySelect = (category) => {
+        setSelectedServiceCategory(category);
+        setServiceSearchBar("");
+    };
 
-        const handleServicePriceSelect = (price) => {
-            setSelectedServicePrice(price);
-            setServiceSearchBar("");
-        };
+    const handleServicePriceSelect = (price) => {
+        setSelectedServicePrice(price);
+        setServiceSearchBar("");
+    };
 
-        const handleChangeServiceSearchBar = (event) => {
-            setServiceSearchBar(event.target.value);
-        };
+    const handleChangeServiceSearchBar = (event) => {
+        setServiceSearchBar(event.target.value);
+    };
 
-        //Requests
+    //Requests
 
-        const handleRequestSortBy = (sortBy) => {
-            setSelectedRequestSortBy(sortBy);
-        }
-   
-        const handleChangeRequestSearchBar = (event) => {
-            setRequestSearchBar(event.target.value);
-        };
+    const handleRequestSortBy = (sortBy) => {
+        setSelectedRequestSortBy(sortBy);
+    }
+
+    const handleChangeRequestSearchBar = (event) => {
+        setRequestSearchBar(event.target.value);
+    };
 
 
-        //Notifications
+    //Notifications
 
     // Section initialization
     if (selectedSection === "requestService") {
@@ -219,6 +237,9 @@ export const PrivateUser = () => {
                             onClick={() => handleSectionClick("notifications")}
                         ><span className="">notifications</span></button>
                         <button onClick={handleSignout}>Sign Out</button>
+
+                        {/* Avatar Initials */}
+
                         <button
                             className="avatarButton"
                             type="button"
@@ -226,9 +247,8 @@ export const PrivateUser = () => {
                             data-bs-target="#offcanvasScrolling"
                             aria-controls="offcanvasScrolling"
                         >
-                            Avatar
+                            {avatarInitials}
                         </button>
-
                         {/* Offcanvas */}
                         <div className="offcanvas offcanvas-end sideBanner"
                             data-bs-scroll="true"
@@ -412,28 +432,28 @@ export const PrivateUser = () => {
                     {/* SECOND NAVBAR */}
                     {/* My Requests */}
                     {selectedSection === "myRequests" && (
-                         <nav className="navbar fixed-top secondNavBar d-flex justify-content-center align-items-center ">
-                         <div className="d-flex justify-content-center align-items-center">
-                             
-                             {/* Search Bar*/}
-                             <div className="ribbonElement3">
-                                 <form role="search">
-                                     <span className="menuIcon3">
-                                         <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M765-144 526-383q-30 22-65.792 34.5T384.035-336Q284-336 214-406t-70-170q0-100 70-170t170-70q100 0 170 70t70 170.035q0 40.381-12.5 76.173T577-434l239 239-51 51ZM384-408q70 0 119-49t49-119q0-70-49-119t-119-49q-70 0-119 49t-49 119q0 70 49 119t119 49Z" /></svg>
-                                     </span>
-                                     <label htmlFor="requestSearchField" className="pullDownLabel me-1">Find:</label>
-                                     <input
-                                         id="requestSearchField"
-                                         type="search"
-                                         placeholder="Type…"
-                                         aria-label="Search"
-                                         value={requestSearchBar}
-                                         onChange={handleChangeRequestSearchBar}
-                                     />
-                                 </form>
-                             </div>
-                         </div>
-                     </nav>
+                        <nav className="navbar fixed-top secondNavBar d-flex justify-content-center align-items-center ">
+                            <div className="d-flex justify-content-center align-items-center">
+
+                                {/* Search Bar*/}
+                                <div className="ribbonElement3">
+                                    <form role="search">
+                                        <span className="menuIcon3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M765-144 526-383q-30 22-65.792 34.5T384.035-336Q284-336 214-406t-70-170q0-100 70-170t170-70q100 0 170 70t70 170.035q0 40.381-12.5 76.173T577-434l239 239-51 51ZM384-408q70 0 119-49t49-119q0-70-49-119t-119-49q-70 0-119 49t-49 119q0 70 49 119t119 49Z" /></svg>
+                                        </span>
+                                        <label htmlFor="requestSearchField" className="pullDownLabel me-1">Find:</label>
+                                        <input
+                                            id="requestSearchField"
+                                            type="search"
+                                            placeholder="Type…"
+                                            aria-label="Search"
+                                            value={requestSearchBar}
+                                            onChange={handleChangeRequestSearchBar}
+                                        />
+                                    </form>
+                                </div>
+                            </div>
+                        </nav>
 
                     )}
                     {/* SECIOD NAVBAR */}

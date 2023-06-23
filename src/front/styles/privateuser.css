@@ -6,7 +6,7 @@
 :root {
   --background: #e7e7e7;
   --serviceRollUpBackground: #d7d7d7;
-  --requestRollUpBackground: #bebebe;
+  --requestRollUpBackground: #afafaf;
   --requestRollUpColor: black;
   --scrollBar: #767676;
   --modalBackground: rgb(152, 152, 152);
@@ -30,12 +30,39 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-
-
 }
 
-/* Scrollbar */
+/* Avater Initials */
 
+.avatarButton {
+  height: 2.7rem;
+  width: 2.7rem;
+  font-variant: small-caps;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.09rem;
+  background: yellow;
+  color: black;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatarButton:active,
+.avatarButton:focus  {
+  background-color: yellow;
+  border-radius: 50%;
+}
+
+.avatarButton:hover {
+  background-color: yellow;
+  border-radius: 50%;
+}
+
+
+/* Scrollbar */
 
 html::-webkit-scrollbar {
   width: .9vw;
@@ -49,7 +76,7 @@ html::-webkit-scrollbar-track {
   background: var(--background);
 }
 
-/* Straight corners for all buttons */
+/* Straight buttons */
 
 button,
 button:hover,
@@ -516,6 +543,32 @@ form input[type=search] {
   font-size: .6rem;
 }
 
+.typeOfAddressValue {
+  font-size: .6rem;
+  font-variant: small-caps;
+  padding-inline: .3rem;
+  padding-block: .1rem;
+  background: rgb(26, 13, 68) !important;
+  color: white !important;
+  letter-spacing: .09rem;
+
+}
+
+
+.priceValueLTag {
+  font-size: .6rem;
+  font-variant: small-caps;
+  padding-inline: .3rem;
+  padding-block: .1rem;
+  background: gold !important;
+  color: black;
+  letter-spacing: .09rem;
+
+
+}
+
+
+
 /* book Button  */
 .bookButtonWrapper {
   display: flex;
@@ -544,7 +597,7 @@ button .bookButto:active {
 
 /* Calendar Modal */
 
-dialog {
+.largeDialogElement {
   position: fixed;
   border: none;
   margin-top: 7.48rem;
@@ -583,11 +636,11 @@ dialog {
   }
 }
 
-dialog * {
+.largeDialogElement * {
   background: inherit;
 }
 
-dialog::backdrop {
+.largeDialogElement::backdrop {
   background-color: transparent !important;
 }
 
@@ -821,8 +874,6 @@ table.calendarModalTable td {
   text-align: left;
 }
 
-
-
 .reviewButton {
   background: var(--standOutGreen);
   color: var(--background);
@@ -1002,7 +1053,7 @@ table.calendarModalTable td {
   width: 2.5rem;
 }
 
-.trquestRollUpColumn7 {
+.rquestRollUpColumn7 {
   width: 2.5rem;
 }
 

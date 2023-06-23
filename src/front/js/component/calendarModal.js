@@ -270,7 +270,7 @@ export const CalendarModal = (props) => {
 
     return (
         <>
-            <dialog data-modal id={"dialog" + id} className="">
+            <dialog data-modal id={"dialog" + id} className="largeDialogElement">
                 <div className="calendarModalWrapper my-3">
                     <div>
                         <div className="calendarContainer">

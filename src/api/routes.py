@@ -9,10 +9,8 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 
 # *************************************
-# Added because of get_user_booked_days
 from datetime import date, datetime, timedelta
 import calendar
-
 # *************************************
 
 
@@ -104,7 +102,7 @@ def signin_provider():
     provider = ProviderProfile.query.filter_by(
         email=body["email"], password=body["password"]).first()
     if provider:
-        token = create_access_token(identity=provider.email)
+        token = create_access_token(identity=provider.email , expires_delta=timedelta(hours=1))
         return jsonify({"token": token}), 200
     return jsonify({"error": "error login"}), 401
 
@@ -115,7 +113,7 @@ def signin_user():
     user = UserProfile.query.filter_by(
         email=body["email"], password=body["password"]).first()
     if user:
-        access_token = create_access_token(identity=user.email)
+        access_token = create_access_token(identity=user.email , expires_delta=timedelta(hours=1))
         return jsonify({"token": access_token}), 200
     return jsonify({"error": "error login"}), 401
 
@@ -338,7 +336,6 @@ def create_service_request():
 
  #  PRIVATE USER endpoints - CALENDAR - get Booked days
 
-
 @api.route("/getuserbookeddays", methods=["GET"])
 @jwt_required()
 def get_user_booked_days():
@@ -408,9 +405,8 @@ def delete_service_request(service_request_id):
                         status=1,
                         publishing_date_time=datetime.now(),
                         # use {} to include vars from serviceRequest
-                        message=f"Service cancelled.",
+                        message="Service cancelled.",
                         provider_id=provider_id,
-                        service_request_id=service_request_id
                     )
 
                     db.session.add(notification)
@@ -424,10 +420,12 @@ def delete_service_request(service_request_id):
         else:
             return jsonify({"message": "User not found"}), 404
     except Exception as e:
+        print(e)
         return jsonify({
             "message": "An error occurred",
             "error": str(e)
         }), 500
+
 
  # PRIVATE USER endpoints - update and renew service request
 
@@ -435,7 +433,9 @@ def delete_service_request(service_request_id):
 @api.route("/updateandrenewservicerequest/<int:service_request_id>", methods=["PUT"])
 @jwt_required()
 def updateandrenew_service_request(service_request_id):
+    print("outside Try ******************************************")
     try:
+        print("inside Try ******************************************")
         user_email = get_jwt_identity()
         user = UserProfile.query.filter_by(email=user_email).first()
 
@@ -462,36 +462,39 @@ def updateandrenew_service_request(service_request_id):
 
                     renewed_date = service_request.date
 
-                if service_request.recurrence == 2:
-                    year = service_request.date.year
-                    month = service_request.date.month
-                    day = service_request.date.day
+                    if service_request.recurrence == 2:
+                        year = service_request.date.year
+                        month = service_request.date.month
+                        day = service_request.date.day
 
-                    # Check if month is January and day is 29, 30, or 31
-                    if month == 1 and day >= 29:
-                        if calendar.isleap(year):
-                            renewed_date = date(year, 2, 29)
+                        # Check if month is January and day is 29, 30, or 31
+                        if month == 1 and day >= 29:
+                            if calendar.isleap(year):
+                                renewed_date = date(year, 2, 29)
+                            else:
+                                renewed_date = date(year, 2, 28)
                         else:
-                            renewed_date = date(year, 2, 28)
+                            next_month = month + 1
+
+                            if next_month in [4, 6, 9, 11] and day == 31: 
+                                day = 30
+                            
+                            if next_month > 12:
+                                next_month = 1
+                                year += 1
+                            renewed_date = date(year, next_month, day)
+
+                        renewed_service_request.date = renewed_date
+
+                    elif service_request.recurrence == 3:
+                        renewed_date += timedelta(days=7)
                     else:
-                        next_month = month + 1
-                        if next_month > 12:
-                            next_month = 1
-                            year += 1
-                        renewed_date = date(year, next_month, day)
-
-                    renewed_service_request.date = renewed_date
-
-                elif service_request.recurrence == 3:
-                    renewed_date += timedelta(days=7)
-                else:
-                    renewed_date += timedelta(days=1)
+                        renewed_date += timedelta(days=1)
 
                     renewed_service_request.date = renewed_date
 
                     db.session.add(renewed_service_request)
-
-                db.session.commit()
+                    db.session.commit()
 
                 return jsonify({"message": "Service request updated successfully"}), 200
             else:
@@ -499,13 +502,14 @@ def updateandrenew_service_request(service_request_id):
         else:
             return jsonify({"message": "User not found"}), 404
     except Exception as e:
+        print(e)
         return jsonify({
             "message": "An error occurred",
             "error": str(e)
         }), 500
 
- # PRIVATE USER endpoints - rate Provider
 
+# PRIVATE USER endpoints - rate Provider
 
 @api.route("/rateprovider/<int:service_request_id>/<float:rating>", methods=["PUT"])
 @jwt_required()
