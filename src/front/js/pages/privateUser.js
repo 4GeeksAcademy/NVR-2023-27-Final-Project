@@ -21,9 +21,7 @@ export const PrivateUser = () => {
             const words = name.split(" ");
             const firstWord = words[0];
             const secondWord = words[1];
-
             avatarInitials += firstWord ? firstWord.charAt(0) : "";
-
             avatarInitials += secondWord ? secondWord.charAt(0) : (firstWord && firstWord.length > 1) ? firstWord.charAt(1) : "";
         }
 
@@ -32,6 +30,7 @@ export const PrivateUser = () => {
 
 
     const avatarInitials = getAvatarInitials(JSON.parse(localStorage.getItem("credentials")).name);
+
     // Filter variables
     // Srevices
     const [selectedServiceCategory, setSelectedServiceCategory] = useState("Any category");
@@ -46,7 +45,8 @@ export const PrivateUser = () => {
     let filteredNotifications = null;
 
     // Requests
-    const [selectedRequestSortBy, setSelectedRequestSortBy] = useState("Newest")
+    const [selectedSortRequestsBy, setSelectedSorRequeststBy] = useState("Newest to oldest")
+    const [selectedFilterRequestsBy, setSelectedFilterRequestsBy] = useState("All requests")
     const [requestSearchBar, setRequestSearchBar] = useState("");
 
 
@@ -142,8 +142,8 @@ export const PrivateUser = () => {
 
     //Requests
 
-    const handleRequestSortBy = (sortBy) => {
-        setSelectedRequestSortBy(sortBy);
+    const handleClickSortRequestsBy = (sortBy) => {
+        setSelectedSorRequeststBy(sortBy);
     }
 
     const handleChangeRequestSearchBar = (event) => {
@@ -434,6 +434,72 @@ export const PrivateUser = () => {
                     {selectedSection === "myRequests" && (
                         <nav className="navbar fixed-top secondNavBar d-flex justify-content-center align-items-center ">
                             <div className="d-flex justify-content-center align-items-center">
+                                {/* Sort by Dropdown*/}
+                                <div className="dropdown ribbonElement1">
+                                    <button
+                                        className="border-0"
+                                        type="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        <span className="dropDownIcon1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M120-240v-60h240v60H120Zm0-210v-60h480v60H120Zm0-210v-60h720v60H120Z" /></svg>
+                                        </span>
+                                        <span className="pullDownLabel me-1">Sort by</span>
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg>
+                                        </span>
+                                        <span className="pullDownLabel italic ms-1">{selectedSortRequestsBy}</span>
+                                    </button>
+                                    <ul className="dropdown-menu rounded-0" key="sortByList">
+                                        <li className="list-item" onClick={() => { handleClickSortRequestsBy("Newest to oldest") }}>
+                                            Newest to oldest
+                                        </li>
+                                        <li className="list-item" onClick={() => { handleClickSortRequestsBy("Oldest to newest") }}>
+                                            Oldest to newest
+                                        </li>
+                                        <li className="list-item" onClick={() => { handleClickSortRequestsBy("More to less affordable") }}>
+                                            More to less affordable
+                                        </li>
+                                        <li className="list-item" onClick={() => { handleClickSortRequestsBy("Less to more affordable") }}>
+                                            Less to more affordable
+                                        </li>
+                                 
+
+                                    </ul>
+                                </div>
+                                {/* Filter by Dropdown*/}
+                                <div className="dropdown ribbonElement2">
+                                    <button
+                                        className="border-0"
+                                        type="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        <span className="dropDownIcon2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M440-160q-17 0-28.5-11.5T400-200v-240L161-745q-14-17-4-36t31-19h584q21 0 31 19t-4 36L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-276 240-304H240l240 304Zm0 0Z" /></svg>
+                                        </span>
+                                        <span className="pullDownLabel me-1">Filter by</span>
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg>
+                                        </span>
+                                        <span className="pullDownLabel italic ms-1">{selectedFilterRequestsBy}</span>
+                                    </button>
+                                    <ul className="dropdown-menu rounded-0">
+                                        <li className="list-item" key={0} onClick={() => handleServicePriceSelect("Any price")}>
+                                            Any price
+                                        </li>
+                                        <li className="list-item" key={1} onClick={() => handleServicePriceSelect(`${servicePrices.interval1Min}€ - ${servicePrices.interval1Max}€`)}>
+                                            {servicePrices.interval1Min}€ - {servicePrices.interval1Max}€
+                                        </li>
+                                        <li className="list-item" key={2} onClick={() => handleServicePriceSelect(`${servicePrices.interval2Min}€ - ${servicePrices.interval2Max}€`)}>
+                                            {servicePrices.interval2Min}€ - {servicePrices.interval2Max}€
+                                        </li>
+                                        <li className="list-item" key={3} onClick={() => handleServicePriceSelect(`${servicePrices.interval3Min}€ - ${servicePrices.interval3Max}€`)}>
+                                            {servicePrices.interval3Min}€ - {servicePrices.interval3Max}€
+                                        </li>
+                                    </ul>
+                                </div>
 
                                 {/* Search Bar*/}
                                 <div className="ribbonElement3">

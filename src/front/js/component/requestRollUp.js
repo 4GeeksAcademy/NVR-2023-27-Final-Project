@@ -3,10 +3,11 @@ import { Context } from "../store/appContext";
 
 export const RequestRollUp = (props) => {
     
-    useEffect(()=> {
-        window.scrollTo(0, 0);
+    // Makes sure the scroll bar is on top 
 
-    }, [])
+  /*   useEffect(()=> {
+        window.scrollTo(0, 0);
+    }, []) */
 
     const { store, actions } = useContext(Context);
     let { id, status, date, time, recurrence, quantity, provider_id, address_id, service_description_id, } = props.requestObject;
