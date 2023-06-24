@@ -45,6 +45,19 @@ export const PrivateUser = () => {
     let filteredNotifications = null;
 
     // Requests
+
+    const statusMap = new Map([
+        ["Expired", 0],
+        ["Requested", 1],
+        ["Taken", 2],
+        ["Safeguarded", 3],
+        ["Provided", 4],
+        ["Renewed", 5],
+        ["Reviewed", 6],
+        ["Completed", 7],
+        ["Sanctioned", 8]
+      ]);
+    
     const [selectedSortRequestsBy, setSelectedSorRequeststBy] = useState("Newest")
     const [selectedFilterRequestsBy, setSelectedFilterRequestsBy] = useState("All requests")
     const [requestSearchBar, setRequestSearchBar] = useState("");
@@ -211,10 +224,16 @@ export const PrivateUser = () => {
         };
     }
 
-    // My requets diletring and sorting
+    // My requets filetring and sorting
+
     else if (selectedSection === "myRequests") {
         if (store.userRequests) {
             filteredRequests = store.userRequests.filter((request) => {
+
+                // Filter by status
+                if (selectedFilterRequestsBy !== "All requests" && request.status !== statusMap.get(selectedFilterRequestsBy) ) {
+                    return false;
+                }
 
                 // Filter by search bar content
                 if (requestSearchBar.trim() !== "") {
@@ -463,7 +482,7 @@ export const PrivateUser = () => {
                                         aria-expanded="false"
                                     >
                                         <span className="dropDownIcon1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M120-240v-60h240v60H120Zm0-210v-60h480v60H120Zm0-210v-60h720v60H120Z" /></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M531-338h60v-405H448v60h83v345ZM260-200q-24 0-42-18t-18-42v-560q0-24 18-42t42-18h560q24 0 42 18t18 42v560q0 24-18 42t-42 18H260Zm0-60h560v-560H260v560ZM140-80q-24 0-42-18t-18-42v-620h60v620h620v60H140Zm120-740v560-560Z"/></svg>
                                         </span>
                                         <span className="pullDownLabel me-1">Sort by</span>
                                         <span>
@@ -482,7 +501,7 @@ export const PrivateUser = () => {
                                             More affordable
                                         </li>
                                         <li className="list-item" onClick={() => { handleClickSortRequestsBy("Less affordable") }}>
-                                            Less affordable
+                                            More expensive
                                         </li>
 
 
@@ -499,7 +518,7 @@ export const PrivateUser = () => {
                                         <span className="dropDownIcon2">
                                             <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M440-160q-17 0-28.5-11.5T400-200v-240L161-745q-14-17-4-36t31-19h584q21 0 31 19t-4 36L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-276 240-304H240l240 304Zm0 0Z" /></svg>
                                         </span>
-                                        <span className="pullDownLabel me-1">Filter by</span>
+                                        <span className="pullDownLabel me-1">Show</span>
                                         <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg>
                                         </span>
@@ -509,8 +528,8 @@ export const PrivateUser = () => {
                                         <li className="list-item" key={0} onClick={() => handleClickFilterRequestsBy("All requests")}>
                                             All requests
                                         </li>
-                                        <li className="list-item" key={1} onClick={() => handleClickFilterRequestsBy("Pending")}>
-                                            Pending
+                                        <li className="list-item" key={1} onClick={() => handleClickFilterRequestsBy("Requested")}>
+                                            Requested
                                         </li>
                                         <li className="list-item" key={2} onClick={() => handleClickFilterRequestsBy("Provided")}>
                                             Provided
