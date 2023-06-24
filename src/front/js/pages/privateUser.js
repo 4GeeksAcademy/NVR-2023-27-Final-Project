@@ -125,7 +125,7 @@ export const PrivateUser = () => {
 
     }, [store.serviceDescriptions]);
 
-
+    //*************************
     // Requests Sort and Filter
 
     useEffect(() => {
@@ -156,7 +156,7 @@ export const PrivateUser = () => {
              
         // Sort by specified method
         switch (selectedSortRequestsBy) {
-          case "Newest":
+          case "Oldest":
             filteredRequests.sort(function (firstRequest, secondRequest) {
               const dateFirstRequest = new Date(firstRequest.date);
               const dateSecondRequest = new Date(secondRequest.date);
@@ -164,7 +164,7 @@ export const PrivateUser = () => {
             });
             break;
       
-          case "Oldest":
+          case "Newest":
             filteredRequests.sort(function (firstRequest, secondRequest) {
               const dateFirstRequest = new Date(firstRequest.date);
               const dateSecondRequest = new Date(secondRequest.date);
@@ -172,7 +172,7 @@ export const PrivateUser = () => {
             });
             break;
       
-          case "More affordable":
+          case "More expensive":
             if (store.serviceDescriptions && store.userRequests) {
               filteredRequests.sort((firstRequest, secondRequest) => {
                 const serviceDescriptionId = firstRequest.service_description_id;
@@ -188,7 +188,7 @@ export const PrivateUser = () => {
             }
             break;
       
-          case "More expensive":
+          case "More affordable":
             if (store.serviceDescriptions && store.userRequests) {
               filteredRequests.sort((firstRequest, secondRequest) => {
                 const serviceDescriptionId = firstRequest.service_description_id;
@@ -208,9 +208,6 @@ export const PrivateUser = () => {
       
         setFilteredRequests(filteredRequests);
       }, [selectedSortRequestsBy, selectedFilterRequestsBy, requestSearchBar, selectedSection, store.userRequests, store.serviceDescriptions]);
-    
-    
-    
     
     
     // UI handle functions
@@ -311,91 +308,7 @@ export const PrivateUser = () => {
             });
         };
     }
-
-    // My requets filetring and sorting
-
-    /* else if (selectedSection === "myRequests") {
-        if (store.userRequests) {
-
-            // Filter userRequests
-            filteredRequests = store.userRequests.filter((request) => {
-
-                // Filter by status
-                if (selectedFilterRequestsBy !== "All requests" && request.status !== statusMap.get(selectedFilterRequestsBy)) {
-                    return false;
-                }
-
-                // Filter by search bar content
-                if (requestSearchBar.trim() !== "") {
-                    const searchTerm = requestSearchBar.toLowerCase();
-                    const requestedServiceName = store.serviceDescriptions && store.serviceDescriptions.find((item) => item.id === request.service_description_id).service;
-
-                    if (requestedServiceName && !requestedServiceName.toLowerCase().includes(searchTerm)) {
-                        return false;
-                    }
-                }
-                return true;
-            });
-
-            //Sort userRequests (in the form of filteredRequests)
-
-            // Defualt Sort. ASK MATTIA: THIS ISN?R WORKING / WHEREAS THE SORT IN SERVICE DESCRIPTIONS IS:
-            store.userRequests && store.userRequests.sort(function (firstRequest, secondRequest) {
-                const dateFirstRequest = new Date(firstRequest.date);
-                const dateSecondRequest = new Date(secondRequest.date);
-                return dateSecondRequest - dateFirstRequest;
-            });
-
-            // Sort by specified method
-
-            switch (selectedSortRequestsBy) {
-                case "Newest":
-                    store.userRequests && store.userRequests.sort(function (firstRequest, secondRequest) {
-                        const dateFirstRequest = new Date(firstRequest.date);
-                        const dateSecondRequest = new Date(secondRequest.date);
-                        return dateFirstRequest - dateSecondRequest;
-                    });
-                    break;
-
-                case "Oldest":
-                    store.userRequests && store.userRequests.sort(function (firstRequest, secondRequest) {
-                        const dateFirstRequest = new Date(firstRequest.date);
-                        const dateSecondRequest = new Date(secondRequest.date);
-                        return dateSecondRequest - dateFirstRequest; // Sort in ascending order (oldest to newest)
-                    });
-                    break;
-
-                case "More affordable":
-                    if (store.serviceDescriptions && store.userRequests) {
-                        store.userRequests.sort((firstRequest, secondRequest) => {
-                            const serviceDescriptionId = firstRequest.service_description_id;
-                            const priceFirstRequest = store.serviceDescriptions.find(service => service.id === serviceDescriptionId).price * firstRequest.quantity;
-
-                            const serviceDescriptionId2 = secondRequest.service_description_id;
-                            const priceSecondRequest = store.serviceDescriptions.find(service => service.id === serviceDescriptionId2).price * secondRequest.quantity;
-
-                            return priceSecondRequest - priceFirstRequest;
-                        });
-                    }
-                    break;
-
-                case "More expensive":
-                    if (store.serviceDescriptions && store.userRequests) {
-                        store.userRequests.sort((firstRequest, secondRequest) => {
-                            const serviceDescriptionId = firstRequest.service_description_id;
-                            const priceFirstRequest = store.serviceDescriptions.find(service => service.id === serviceDescriptionId).price * firstRequest.quantity;
-
-                            const serviceDescriptionId2 = secondRequest.service_description_id;
-                            const priceSecondRequest = store.serviceDescriptions.find(service => service.id === serviceDescriptionId2).price * secondRequest.quantity;
-
-                            return priceFirstRequest - priceSecondRequest; // Reverse the order of subtraction
-                        });
-                    }
-                    break;
-            }
-        };
-
-    } */
+    
     else {
     }
 
