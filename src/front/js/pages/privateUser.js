@@ -32,7 +32,9 @@ export const PrivateUser = () => {
     const avatarInitials = getAvatarInitials(JSON.parse(localStorage.getItem("credentials")).name);
 
     // Filter variables
+
     // Srevices
+
     const [selectedServiceCategory, setSelectedServiceCategory] = useState("Any category");
     const [selectedServicePrice, setSelectedServicePrice] = useState("Any price");
     const [serviceSearchBar, setServiceSearchBar] = useState("");
@@ -56,8 +58,8 @@ export const PrivateUser = () => {
         ["Reviewed", 6],
         ["Completed", 7],
         ["Sanctioned", 8]
-      ]);
-    
+    ]);
+
     const [selectedSortRequestsBy, setSelectedSorRequeststBy] = useState("Newest")
     const [selectedFilterRequestsBy, setSelectedFilterRequestsBy] = useState("All requests")
     const [requestSearchBar, setRequestSearchBar] = useState("");
@@ -228,10 +230,12 @@ export const PrivateUser = () => {
 
     else if (selectedSection === "myRequests") {
         if (store.userRequests) {
+
+            // Filter userRequests
             filteredRequests = store.userRequests.filter((request) => {
 
                 // Filter by status
-                if (selectedFilterRequestsBy !== "All requests" && request.status !== statusMap.get(selectedFilterRequestsBy) ) {
+                if (selectedFilterRequestsBy !== "All requests" && request.status !== statusMap.get(selectedFilterRequestsBy)) {
                     return false;
                 }
 
@@ -246,13 +250,47 @@ export const PrivateUser = () => {
                 }
                 return true;
             });
-        }
+
+            //Sort userRequests (in the form of filteredRequests)
+            
+            // Defualt Sort. ASK MATTIA: THIS ISN?R WORKING / WHEREAS THE SORT IN SERVICE DESCRIPTIONS IS:
+            store.userRequests && store.userRequests.sort(function (firstRequest, secondRequest) {
+                const dateFirstRequest = new Date(firstRequest.date);
+                const dateSecondRequest = new Date(secondRequest.date);
+                return dateSecondRequest - dateFirstRequest;
+            });
+
+            // Sort by specified method
+
+            switch (selectedSortRequestsBy) {
+                case "Newest":
+                    store.userRequests && store.userRequests.sort(function (firstRequest, secondRequest) {
+                        const dateFirstRequest = new Date(firstRequest.date);
+                        const dateSecondRequest = new Date(secondRequest.date);
+                        return dateFirstRequest - dateSecondRequest; // Sort in descending order (newest to oldest)
+                    });
+                    break;
+
+                case "Oldest":
+                    store.userRequests && store.userRequests.sort(function (firstRequest, secondRequest) {
+                        const dateA = new Date(firstRequest.date);
+                        const dateB = new Date(secondRequest.date);
+                        return dateB - dateA; // Sort in ascending order (oldest to newest)
+                    });
+                    break;
+
+                case "More affordable":
+                    // Code to sort requests by more affordable
+                    break;
+
+                case "More expensive":
+                    // Code to sort requests by more expensive
+                    break;
+            }
+        };
+
     }
-
-
     else {
-
-
     }
 
     // Main JSX
@@ -482,7 +520,7 @@ export const PrivateUser = () => {
                                         aria-expanded="false"
                                     >
                                         <span className="dropDownIcon1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M531-338h60v-405H448v60h83v345ZM260-200q-24 0-42-18t-18-42v-560q0-24 18-42t42-18h560q24 0 42 18t18 42v560q0 24-18 42t-42 18H260Zm0-60h560v-560H260v560ZM140-80q-24 0-42-18t-18-42v-620h60v620h620v60H140Zm120-740v560-560Z"/></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M531-338h60v-405H448v60h83v345ZM260-200q-24 0-42-18t-18-42v-560q0-24 18-42t42-18h560q24 0 42 18t18 42v560q0 24-18 42t-42 18H260Zm0-60h560v-560H260v560ZM140-80q-24 0-42-18t-18-42v-620h60v620h620v60H140Zm120-740v560-560Z" /></svg>
                                         </span>
                                         <span className="pullDownLabel me-1">Sort by</span>
                                         <span>
