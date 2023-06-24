@@ -218,8 +218,8 @@ export const RequestRollUp = (props) => {
                                     <div className="expandableColumn1">
                                         <div>
                                             <span className="expandableDescription me-1">address:</span>
-                                            <span className="typeOfAddressValue">{typeOfaddressString}</span>
-                                            <div className="expandableValue mt-2">{addressString}</div>
+                                            <span className="typeOfAddressValue" style={{ background: typeOfaddressString === 'main' ? 'var(--scrollBar)' : 'white', color: typeOfaddressString === 'main' ? 'white' : 'black' }}>{typeOfaddressString}</span>
+                                            <div className="expandableValue mt-2" >{addressString}</div>
                                         </div>
                                     </div>
                                     <div className="expandableColumn2">
@@ -230,7 +230,7 @@ export const RequestRollUp = (props) => {
                                             <span className="expandableDescription me-1">quantity:</span>
                                         </div>
                                         <div>
-                                            <span className="expandableDescription me-1">book:</span>
+                                            <span className="expandableDescription me-1">booked:</span>
                                         </div>
                                     </div>
                                     <div className="expandableColumn3">

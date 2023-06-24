@@ -9,7 +9,7 @@
   --requestRollUpBackground: #afafaf;
   --requestRollUpColor: black;
   --scrollBar: #767676;
-  --modalBackground: rgb(152, 152, 152);
+  --modalBackground: rgb(127, 127, 127);
   --modalCOlor: white;
   --categoryLabelBackground: rgb(173, 173, 173);
   --standOutGreen: rgb(0, 70, 0);
@@ -570,8 +570,6 @@ form input[type=search] {
   font-variant: small-caps;
   padding-inline: .3rem;
   padding-block: .1rem;
-  background: rgb(26, 13, 68) !important;
-  color: white !important;
   letter-spacing: .09rem;
 
 }
@@ -769,6 +767,14 @@ button .bookButto:active {
   background: var(--strikingBlue);
   color: var(--background);
   z-index: 100;
+
+  animation: blinker 2.1s ease-out infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: .12;
+  }
 }
 
 .unviableDay {
@@ -785,8 +791,8 @@ button .bookButto:active {
   margin: 0rem;
   gap: 0rem;
 }
-/* calendarModal Content */
 
+/* calendarModal Content */
 /* Table */
 
 * td {
@@ -798,11 +804,13 @@ button .bookButto:active {
   font-variant: small-caps;
   font-size: .7rem;
   color: var(--modalCOlor);
+  font-weight: 300;
 }
 
 .calendarModalTableValue {
   font-size: .7rem;
   color: var(--modalCOlor);
+  font-weight: 300;
 }
 
 table.calendarModalTable {
@@ -814,7 +822,6 @@ table.calendarModalTable {
 table.calendarModalTable td {
   border-block: .5px solid var(--modalCOlor);
   overflow: hidden;
-
 }
 
 .pickerButton button {
@@ -826,7 +833,6 @@ table.calendarModalTable td {
 .pickerButton button:hover {
   transform: scale(1.5);
 }
-
 
 
 .calendarModalTable {
@@ -850,7 +856,7 @@ table.calendarModalTable td {
 }
 
 .calendarModalTable td:nth-child(1) {
-  width: 2.3rem;
+  width: 2.1rem;
   text-align: left;
 }
 
@@ -866,23 +872,23 @@ table.calendarModalTable td {
 }
 
 .calendarModalTable td:nth-child(4) {
-  width: 1rem;
+  width: .9rem;
   text-align: left;
 }
 
 .calendarModalTable td:nth-child(5) {
-  width: 0;
+  width: .63rem;
   text-align: left;
 
 }
 
 .calendarModalTable td:nth-child(6) {
-  width: 2.7rem;
+  width: 2.3rem;
   text-align: left;
 }
 
 .calendarModalTable td:nth-child(7) {
-  width: 2.7rem;
+  width: 2.5rem;
   text-align: right;
 }
 
@@ -896,19 +902,9 @@ table.calendarModalTable td {
   text-align: left;
 }
 
-.reviewButton {
-  background: var(--standOutGreen);
-  color: var(--background);
-  border: none;
-  font-variant: small-caps;
-  font-size: .63rem;
-  letter-spacing: .1rem;
-  padding-inline: .63rem;
-}
-
 .cancelButton {
-  border: 1px solid white;
-  color: white;
+  background: white;
+  color: var(--requestRollUpBackground);
   font-variant: small-caps;
   font-size: 0.63rem;
   width: 3.6rem;
@@ -917,11 +913,10 @@ table.calendarModalTable td {
 }
 
 .cancelButton:hover {
-  border: 1px solid white;
-  color: white;
+  background: white;
+  color: var(--requestRollUpBackground);
   font-variant: small-caps;
   font-size: 0.63rem;
-  font-weight: 400;
   width: 3.6rem;
   letter-spacing: 0.1rem;
   padding-inline: 0.63rem;
@@ -933,7 +928,7 @@ table.calendarModalTable td {
   border: var(--standOutGreen);
   font-variant: small-caps;
   font-size: .63rem;
-  width: 10rem;
+  width: 10.2rem;
   letter-spacing: .1rem;
   padding-inline: .63rem;
   padding-block: .3rem;

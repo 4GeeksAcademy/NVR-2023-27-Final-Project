@@ -310,7 +310,7 @@ export const CalendarModal = (props) => {
                                         <td className="pickerButton"></td>
                                         <td>&nbsp;</td>
                                         <td className="calendarModalTableLabel">subtotal:</td>
-                                        <td className="calendarModalTableValue priceTag">
+                                        <td className="calendarModalTableValue">
                                             {newServiceRequest.quantity * price}.00€
                                         </td>
                                         <td></td>
