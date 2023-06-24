@@ -45,7 +45,7 @@ export const PrivateUser = () => {
     let filteredNotifications = null;
 
     // Requests
-    const [selectedSortRequestsBy, setSelectedSorRequeststBy] = useState("Newest to oldest")
+    const [selectedSortRequestsBy, setSelectedSorRequeststBy] = useState("Newest")
     const [selectedFilterRequestsBy, setSelectedFilterRequestsBy] = useState("All requests")
     const [requestSearchBar, setRequestSearchBar] = useState("");
 
@@ -144,6 +144,11 @@ export const PrivateUser = () => {
 
     const handleClickSortRequestsBy = (sortBy) => {
         setSelectedSorRequeststBy(sortBy);
+    }
+
+    const handleClickFilterRequestsBy = (filterBy) => {
+        setSelectedFilterRequestsBy(filterBy);
+
     }
 
     const handleChangeRequestSearchBar = (event) => {
@@ -452,17 +457,17 @@ export const PrivateUser = () => {
                                         <span className="pullDownLabel italic ms-1">{selectedSortRequestsBy}</span>
                                     </button>
                                     <ul className="dropdown-menu rounded-0" key="sortByList">
-                                        <li className="list-item" onClick={() => { handleClickSortRequestsBy("Newest to oldest") }}>
-                                            Newest to oldest
+                                        <li className="list-item" onClick={() => { handleClickSortRequestsBy("Newest") }}>
+                                            Newest
                                         </li>
-                                        <li className="list-item" onClick={() => { handleClickSortRequestsBy("Oldest to newest") }}>
-                                            Oldest to newest
+                                        <li className="list-item" onClick={() => { handleClickSortRequestsBy("Oldest") }}>
+                                            Oldest
                                         </li>
-                                        <li className="list-item" onClick={() => { handleClickSortRequestsBy("More to less affordable") }}>
-                                            More to less affordable
+                                        <li className="list-item" onClick={() => { handleClickSortRequestsBy("More affordable") }}>
+                                            More affordable
                                         </li>
-                                        <li className="list-item" onClick={() => { handleClickSortRequestsBy("Less to more affordable") }}>
-                                            Less to more affordable
+                                        <li className="list-item" onClick={() => { handleClickSortRequestsBy("Less affordable") }}>
+                                            Less affordable
                                         </li>
                                  
 
@@ -486,17 +491,26 @@ export const PrivateUser = () => {
                                         <span className="pullDownLabel italic ms-1">{selectedFilterRequestsBy}</span>
                                     </button>
                                     <ul className="dropdown-menu rounded-0">
-                                        <li className="list-item" key={0} onClick={() => handleServicePriceSelect("Any price")}>
-                                            Any price
+                                        <li className="list-item" key={0} onClick={() => handleClickFilterRequestsBy("All requests")}>
+                                            All requests
                                         </li>
-                                        <li className="list-item" key={1} onClick={() => handleServicePriceSelect(`${servicePrices.interval1Min}€ - ${servicePrices.interval1Max}€`)}>
-                                            {servicePrices.interval1Min}€ - {servicePrices.interval1Max}€
+                                        <li className="list-item" key={1} onClick={() => handleClickFilterRequestsBy("Pending")}>
+                                            Pending
                                         </li>
-                                        <li className="list-item" key={2} onClick={() => handleServicePriceSelect(`${servicePrices.interval2Min}€ - ${servicePrices.interval2Max}€`)}>
-                                            {servicePrices.interval2Min}€ - {servicePrices.interval2Max}€
+                                        <li className="list-item" key={2} onClick={() => handleClickFilterRequestsBy("Provided")}>
+                                            Provided 
                                         </li>
-                                        <li className="list-item" key={3} onClick={() => handleServicePriceSelect(`${servicePrices.interval3Min}€ - ${servicePrices.interval3Max}€`)}>
-                                            {servicePrices.interval3Min}€ - {servicePrices.interval3Max}€
+                                        <li className="list-item" key={3} onClick={() => handleClickFilterRequestsBy("Renewed")}>
+                                            Renewed 
+                                        </li>
+                                        <li className="list-item" key={4} onClick={() => handleClickFilterRequestsBy("Reviewed")}>
+                                            Reviewed 
+                                        </li>
+                                        <li className="list-item" key={5} onClick={() => handleClickFilterRequestsBy("Completed")}>
+                                            Completed 
+                                        </li>
+                                        <li className="list-item" key={6} onClick={() => handleClickFilterRequestsBy("Expired")}>
+                                            Expired
                                         </li>
                                     </ul>
                                 </div>
