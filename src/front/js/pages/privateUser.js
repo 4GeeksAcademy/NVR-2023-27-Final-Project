@@ -158,7 +158,11 @@ export const PrivateUser = () => {
 
     //Notifications
 
+
+    //////////////////////////
     // Section initialization
+
+    // Requst Service filtering and sorting
     if (selectedSection === "requestService") {
 
         if (store.serviceDescriptions) {
@@ -207,14 +211,25 @@ export const PrivateUser = () => {
         };
     }
 
+    // My requets diletring and sorting
     else if (selectedSection === "myRequests") {
         if (store.userRequests) {
-            filteredRequests = store.userRequests;
+            filteredRequests = store.userRequests.filter((request) => {
 
+                // Filter by search bar content
+                if (requestSearchBar.trim() !== "") {
+                    const searchTerm = requestSearchBar.toLowerCase();
+                    const requestedServiceName = store.serviceDescriptions && store.serviceDescriptions.find((item) => item.id === request.service_description_id).service;
 
-
-        };
+                    if (requestedServiceName && !requestedServiceName.toLowerCase().includes(searchTerm)) {
+                        return false;
+                    }
+                }
+                return true;
+            });
+        }
     }
+
 
     else {
 
@@ -469,7 +484,7 @@ export const PrivateUser = () => {
                                         <li className="list-item" onClick={() => { handleClickSortRequestsBy("Less affordable") }}>
                                             Less affordable
                                         </li>
-                                 
+
 
                                     </ul>
                                 </div>
@@ -498,16 +513,16 @@ export const PrivateUser = () => {
                                             Pending
                                         </li>
                                         <li className="list-item" key={2} onClick={() => handleClickFilterRequestsBy("Provided")}>
-                                            Provided 
+                                            Provided
                                         </li>
                                         <li className="list-item" key={3} onClick={() => handleClickFilterRequestsBy("Renewed")}>
-                                            Renewed 
+                                            Renewed
                                         </li>
                                         <li className="list-item" key={4} onClick={() => handleClickFilterRequestsBy("Reviewed")}>
-                                            Reviewed 
+                                            Reviewed
                                         </li>
                                         <li className="list-item" key={5} onClick={() => handleClickFilterRequestsBy("Completed")}>
-                                            Completed 
+                                            Completed
                                         </li>
                                         <li className="list-item" key={6} onClick={() => handleClickFilterRequestsBy("Expired")}>
                                             Expired

@@ -382,8 +382,8 @@ def get_user_booked_days():
             "error": str(e)
         }), 500
 
- # PRIVATE USER endpoints - DELETE service request
 
+ # PRIVATE USER endpoints - DELETE service request
 
 @api.route("/deleteservicerequest/<int:service_request_id>", methods=["DELETE"])
 @jwt_required()
@@ -427,8 +427,8 @@ def delete_service_request(service_request_id):
         }), 500
 
 
- # PRIVATE USER endpoints - update and renew service request
 
+ # PRIVATE USER endpoints - update and renew service request
 
 @api.route("/updateandrenewservicerequest/<int:service_request_id>", methods=["PUT"])
 @jwt_required()
