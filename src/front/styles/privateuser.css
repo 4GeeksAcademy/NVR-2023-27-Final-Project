@@ -30,9 +30,12 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  overflow-y: scroll;
+
 }
 
 /* Avater Initials */
+
 .avatarButton {
   height: 3rem;
   width: 3rem;
@@ -47,7 +50,6 @@ body {
   border-radius: 50%;
   position: relative;
   overflow: hidden;
-  transition: background-color 0.3s, border-radius 0.3s; /* Added transition properties */
 }
 
 .avatarInitialsInnerWrapper {
@@ -55,6 +57,7 @@ body {
   color: black;
   position: relative;
   z-index: 1;
+  transition: opacity 0.5s;
 }
 
 .avatarButton::after {
@@ -80,7 +83,11 @@ body {
 
 .avatarButton:hover .avatarInitialsInnerWrapper {
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+}
+
+.avatarButton:not(:hover) .avatarInitialsInnerWrapper {
+  opacity: 1;
+  transition: opacity .9s;
 }
 
 .avatarButton:hover::after,
@@ -98,6 +105,7 @@ body {
   background-color: yellow;
   border-radius: 50%;
 }
+
 
 /* Scrollbar */
 
@@ -192,20 +200,19 @@ button:disabled {
   height: 1px;
   background-color: black;
   transform: translateX(-100%);
-  transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 0.5s ease-in-out;
+}
+
+.menuLabel:hover {
+  padding-bottom: 0.27rem;
+  border-bottom: 1px solid transparent;
 }
 
 .selectedSectionButton::before {
   transform: translateX(0);
 }
 
-.menuLabel span {
-  transition: color 0.5s ease-in-out;
-}
-
-.menuLabel:hover span {
-  color: green;
-}
+/* dropdown icons */
 
 .dropDownIcon1,
 .dropDownIcon2,

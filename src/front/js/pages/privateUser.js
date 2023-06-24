@@ -332,10 +332,8 @@ export const PrivateUser = () => {
                             className={`menuLabel ${selectedSection === "notifications" ? "selectedSectionButton active" : ""}`}
                             onClick={() => handleSectionClick("notifications")}
                         ><span className="">notifications</span></button>
-                        <button onClick={handleSignout}>Sign Out</button>
 
                         {/* Avatar Initials */}
-
                         <button
                             className="avatarButton"
                             type="button"
@@ -353,28 +351,41 @@ export const PrivateUser = () => {
                             id="offcanvasScrolling"
                             aria-labelledby="offcanvasScrollingLabel"
                         >
+                        <div>
                             <span
-                                className="btn-close"
+                                className=""
                                 data-bs-dismiss="offcanvas"
                                 aria-label="Close"
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M400-280v-400l200 200-200 200Z" /></svg>
+                                <span className="ps-1 pt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="m336-294 144-144 144 144 42-42-144-144 144-144-42-42-144 144-144-144-42 42 144 144-144 144 42 42ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm0-600v600-600Z"/></svg>
+                                </span>
+                                <span> close </span>
                             </span>
-
+                        </div>
                             {/* Offcanvas ACCORDION */}
+                            {/* SIGN-OUT */}
+                            <div>
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16  "><path d="M450-438v-406h60v406h-60Zm30 320q-74 0-139.5-28.5T226-224q-49-49-77.5-114.5T120-478q0-80 34-149.5T250-751l42 42q-53 43-82.5 102.5T180-478.022Q180-353 267.5-265.5 355-178 480-178q125.357 0 212.679-87.5Q780-353 780-478.022 780-547 750.5-607.5 721-668 670-709l43-42q60 51 93.5 122T840-478q0 74-28.5 139.5t-77 114.5q-48.5 49-114 77.5T480-118Z"/></svg>
+                                </span>
+                                <button onClick={handleSignout}>
+                                    Sign Out
+                                </button>
+                            </div>
                             <div className="offcanvas-body">
                                 <div className="accordion accordion-flush" id="accordionFlushExample">
                                     <div className="accordion-item">
                                         <h2 className="accordion-header">
                                             <span
-                                                className="accordion-button collapsed settingsLabel"
+                                                className="collapsed settingsLabel"
                                                 type="button"
                                                 data-bs-toggle="collapse"
                                                 data-bs-target="#flush-collapseOne"
                                                 aria-expanded="false"
                                                 aria-controls="flush-collapseOne"
                                             >
-                                                service preferences
+                                                request settings
                                             </span>
                                         </h2>
                                         <div
@@ -391,7 +402,7 @@ export const PrivateUser = () => {
                                     <div className="accordion-item">
                                         <h2 className="accordion-header">
                                             <span
-                                                className="accordion-button collapsed settingsLabel"
+                                                className="collapsed settingsLabel"
                                                 type="button"
                                                 data-bs-toggle="collapse"
                                                 data-bs-target="#flush-collapseTwo"
@@ -415,7 +426,7 @@ export const PrivateUser = () => {
                                     <div className="accordion-item">
                                         <h2 className="accordion-header">
                                             <span
-                                                className="accordion-button collapsed settingsLabel"
+                                                className="collapsed settingsLabel"
                                                 type="button"
                                                 data-bs-toggle="collapse"
                                                 data-bs-target="#flush-collapseThree"
