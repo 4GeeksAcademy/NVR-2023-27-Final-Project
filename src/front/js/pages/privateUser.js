@@ -343,7 +343,7 @@ export const PrivateUser = () => {
                             data-bs-target="#offcanvasScrolling"
                             aria-controls="offcanvasScrolling"
                         >
-                            {avatarInitials}
+                            <span className="avatarInitialsInnerWrapper">{avatarInitials}</span>
                         </button>
                         {/* Offcanvas */}
                         <div className="offcanvas offcanvas-end sideBanner"

@@ -235,7 +235,7 @@ export const RequestRollUp = (props) => {
                                     </div>
                                     <div className="expandableColumn3">
                                         <div>
-                                            <span className="priceValueLTag">{priceString}</span>
+                                            <span className="expandableValue">{priceString}</span>
                                         </div>
                                         <div>
                                             <span className="expandableValue">{quantity}</span>

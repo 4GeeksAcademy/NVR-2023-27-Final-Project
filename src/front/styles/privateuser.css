@@ -33,7 +33,6 @@ body {
 }
 
 /* Avater Initials */
-
 .avatarButton {
   height: 3rem;
   width: 3rem;
@@ -51,6 +50,13 @@ body {
   transition: background-color 0.3s, border-radius 0.3s; /* Added transition properties */
 }
 
+.avatarInitialsInnerWrapper {
+  background: yellow;
+  color: black;
+  position: relative;
+  z-index: 1;
+}
+
 .avatarButton::after {
   content: "";
   opacity: 0;
@@ -64,12 +70,22 @@ body {
   align-items: center;
   font-size: .6rem;
   font-variant: small-caps;
-  transition: opacity 0.5s;
+  transition: opacity 0.5s, content 0.5s;
 }
 
 .avatarButton:hover::after {
   content: "settings";
   opacity: 1;
+}
+
+.avatarButton:hover .avatarInitialsInnerWrapper {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.avatarButton:hover::after,
+.avatarButton:hover .avatarInitialsInnerWrapper {
+  transition-delay: 0.5s ease-in-out;
 }
 
 .avatarButton:active,
@@ -82,7 +98,6 @@ body {
   background-color: yellow;
   border-radius: 50%;
 }
-
 
 /* Scrollbar */
 
@@ -573,20 +588,6 @@ form input[type=search] {
   letter-spacing: .09rem;
 
 }
-
-
-.priceValueLTag {
-  font-size: .6rem;
-  font-variant: small-caps;
-  padding-inline: .3rem;
-  padding-block: .1rem;
-  background: gold !important;
-  color: black;
-  letter-spacing: .09rem;
-
-
-}
-
 
 
 /* book Button  */

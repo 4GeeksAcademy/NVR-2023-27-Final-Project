@@ -318,7 +318,6 @@ export const CalendarModal = (props) => {
                                     </tr>
                                 </tbody>
                             </table>
-
                             <div className="container-fluid mt-4 mb-2">
                                 <div className="row d-flex justify-content-center">
                                     <button onClick={handleCloseCalendarModal} className="cancelButton me-2 ">cancel</button>
