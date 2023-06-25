@@ -6,7 +6,7 @@
 :root {
   --background: #e7e7e7;
   --serviceRollUpBackground: #d7d7d7;
-  --requestRollUpBackground: #b7b7b7;
+  --requestRollUpBackground: #d7d7d7;
   --requestRollUpColor: black;
   --scrollBar: #767676;
   --modalBackground: rgb(127, 127, 127);
@@ -576,6 +576,13 @@ form input[type=search] {
   line-height: .7rem;
 }
 
+.expandableColumn4 {
+  flex: 1.7;
+  display: flex;
+  flex-direction: column;
+  line-height: .7rem;
+}
+
 .expandableDescription {
   font-size: .675rem;
   width: 11.1rem;
@@ -1023,12 +1030,13 @@ table.calendarModalTable td {
 /* requestRollUp content */
 
 .requestRollUpTitleWrapper {
-  border: 0.6px solid black;
+  background: var(--categoryLabelBackground);
   transform: skewx(-18deg);
   padding-inline: .5rem;
 }
 
 .requestRollUpColorSquare {
+  background: var(--categoryLabelBackground);
   display: flex;
   margin-inline: 0;
   padding-inline: 0;
@@ -1038,13 +1046,23 @@ table.calendarModalTable td {
   font-variant: small-caps;
   letter-spacing: .1rem;
   transform: skewx(18deg);
+  margin-right: .3rem;
+}
+
+.requestRollUpTitleInnerWrapper {
+  background: var(--categoryLabelBackground);
+
 }
 
 .requestRollUpTitleLabel {
+  align-items: center;
+  padding-inline: .1rem;
+  padding-top: .12rem;
+  font-size: .6rem;
+  letter-spacing: .1rem;
+  color: white;
+  background: var(--categoryLabelBackground);
   display: flex;
-  margin-inline: 0;
-  padding-inline: 0;
-  justify-content: left;
   align-items: baseline;
   font-size: .7rem;
   font-variant: small-caps;
@@ -1054,7 +1072,7 @@ table.calendarModalTable td {
 
 .rollUpDescription {
   display: flex;
-  margin-inline: 0;
+  margin-top: .1rem;
   padding-inline: 0;
   justify-content: right;
   align-items: baseline;
@@ -1066,7 +1084,7 @@ table.calendarModalTable td {
 
 .rollUpValue {
   display: flex;
-  margin-inline: 0;
+  margin-top: .1rem;
   padding-inline: 0;
   gap: 0;
   justify-content: left;
@@ -1079,58 +1097,69 @@ table.calendarModalTable td {
 }
 
 .requestRollUpColumn1 {
-  width: 10rem;
+  width: 10.6rem;
   display: flex;
 
 }
 
 .requestRollUpColumn2 {
-  width: 6.5rem;
+  width: 20rem;
+  display: flex;
+
 }
 
 .requestRollUpColumn3 {
-  width: 5rem;
+  width: 4.5rem;
+  display: flex;
+
 }
 
 .requestRollUpColumn4 {
   width: 1.5rem;
+  display: flex;
+
 }
 
 .requestRollUpColumn5 {
-  width: 5rem;
+  width: 5.4rem;
+  display: flex;
+
 }
 
 .requestRollUpColumn6 {
-  width: 2.5rem;
+  width: 1.5rem;
+  display: flex;
+
 }
 
 .rquestRollUpColumn7 {
   width: 2.5rem;
-}
+  display: flex;
 
-
-/* icon Bar */
-
-.IconBar svg {
-  fill: yelllow;
 }
 
 
 /* status Bar */
 
+.requestRollUpStatusLabel {
+  font-variant: small-caps;
+  font-size: .7rem;
+}
+
 .statusBarRow {
   display: flex;
+  margin-top: .3rem;
+  margin-left: .7rem;
   background: transaprent;
   justify-content: center;
-  gap: .09rem;
+  gap: .07rem;
 }
 
 .statusCircle {
-  width: .675rem;
-  height: .675rem;
+  width: .5rem;
+  height: .5rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-

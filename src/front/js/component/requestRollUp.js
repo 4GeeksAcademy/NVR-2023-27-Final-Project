@@ -2,18 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 
 export const RequestRollUp = (props) => {
-    
+
     // Makes sure the scroll bar is on top 
 
-  /*   useEffect(()=> {
-        window.scrollTo(0, 0);
-    }, []) */
+    /*   useEffect(()=> {
+          window.scrollTo(0, 0);
+      }, []) */
 
     const { store, actions } = useContext(Context);
     let { id, status, date, time, recurrence, quantity, provider_id, address_id, service_description_id, } = props.requestObject;
     let serviceCategory = null;
 
-    const categoryColorMap = new Map([
+    const serviceColorMap = new Map([
         ["cleaning", "#32CD32"],
         ["wardrobe", "red"],
         ["plumbing", "#AFEEEE"],
@@ -31,20 +31,24 @@ export const RequestRollUp = (props) => {
         ["nannying", "cyan"],
         ["petcare", "brown"],
         ["wellness", "pink"],
-        ["multiple", "white"],
     ]);
+
+    const getColorOfServiceCategory = (string) => {
+        const category = store.serviceDescriptions && store.serviceDescriptions.find(service => service.service === string)?.category;
+        return (serviceColorMap.get(category));
+    };
 
     const statusMap = new Map([
         [0, ["expired", "orange"]],
         [1, ["requested", "green"]],
-        [2, ["taken", "blue"]],
+        [2, ["accepted", "blue"]],
         [3, ["safeguarded", "yellow"]],
         [4, ["provided", "darkblue"]],
         [5, ["renewed", "grey"]],
         [6, ["reviewed", "black"]],
         [7, ["completed", "white"]],
         [8, ["sanctioned", "black"]],
-        [9, ["default", "#e8e9eb"]],
+        [9, ["default", "#f0f1f3"]],
 
     ]);
 
@@ -100,13 +104,14 @@ export const RequestRollUp = (props) => {
         );
     };
 
+    // Status Bar
 
     const RequestStatusBar = () => {
         const circleCount = 9;
         const circleElements = [];
         let circleStyle = {};
         for (let i = 0; i < circleCount; i++) {
-            circleStyle = i === status ? { background: statusMap.get(i)[1] } : { background: statusMap.get(9)[1]};
+            circleStyle = i === status ? { background: statusMap.get(i)[1] } : { background: statusMap.get(9)[1] };
             circleElements.push(
                 <div className="statusCircle" style={circleStyle} key={i}></div>
             );
@@ -143,16 +148,16 @@ export const RequestRollUp = (props) => {
     const providerString = "details";
     let typeOfaddressString = null;
     let addressString = null;
-    let servideString = null;
+    let serviceString = null;
 
     const statusString = statusMap.get(status)[0].charAt(0).toUpperCase() + statusMap.get(status)[0].slice(1);
     const dateString = convertDateFormat(date);
     const timeString = shortenTimeFormat(time);
     const recurrenceString = recurrenceMap.get(recurrence)[0];
     const priceString = store.serviceDescriptions && store.serviceDescriptions.find(service => service.id === service_description_id)
-    ? `${store.serviceDescriptions.find(service => service.id === service_description_id).price * quantity}.00€`
-    : "";
-  
+        ? `${store.serviceDescriptions.find(service => service.id === service_description_id).price * quantity}.00€`
+        : "";
+
     if (store.userAddresses) {
         typeOfaddressString = (store.userAddresses.id1 === address_id) ? "main" : "second";
         addressString = (store.userAddresses.id1 === address_id)
@@ -165,7 +170,7 @@ export const RequestRollUp = (props) => {
     if (store.serviceDescriptions) {
         const temporaryObject = store.serviceDescriptions.find(object => object.id === service_description_id);
         serviceCategory = temporaryObject ? temporaryObject.category : null;
-        servideString = temporaryObject ? temporaryObject.service : "None";
+        serviceString = temporaryObject ? temporaryObject.service : "None";
     }
 
     // Main JSX
@@ -177,9 +182,9 @@ export const RequestRollUp = (props) => {
                         <div className="requestRollUpColumns d-flex mx-0 px-0 g-0">
                             <div className="requestRollUpColumn1 d-flex justify-content-start">
                                 <div className="requestRollUpTitleWrapper">
-                                    <span className="d-flex ">
-                                        <span className="requestRollUpColorSquare">■</span>
-                                        <span className="requestRollUpTitleLabel">{servideString}</span>
+                                    <span className="d-flex requestRollUpTitleInnerWrapper">
+                                        <span style={{ color: getColorOfServiceCategory(serviceString) }} className="requestRollUpColorSquare">■</span>
+                                        <span className="requestRollUpTitleLabel">{serviceString}</span>
                                     </span>
                                 </div>
                             </div>
@@ -195,25 +200,36 @@ export const RequestRollUp = (props) => {
                             <div className="requestRollUpColumn7">
                                 <span className="rollUpValue">{timeString}</span>
                             </div>
-                            <div className="">
-                                <button
-                                    onClick={() => { handleClickCancel(id) }}
-                                    className="">cancel
-                                    </button>
-                            </div>
-                            <div className="">
-                                <button
-                                    onClick={() => { handleUpdateAndRenewServiceRequest(id) }}
-                                    className="btn btn-sm btn-success">Update</button>
-                            </div>
-                            <div className="">
-                                <button
-                                    // onClick={() => {handleUpdateAndRenewServiceRequest(id)}}
-                                    className="btn btn-sm">Rate</button>
-                            </div>
                             <div>
                                 <RequestStatusBar />
                             </div>
+                            <div className="ms-1 requestRollUpStatusLabel" style={{ color: statusMap.get(status)[1] }}>
+                                {statusString.toLowerCase()}
+                            </div>
+                            <div>
+                                {(() => {
+                                    switch (status) {
+                                        case 0:
+                                            return (
+                                                <button onClick={() => { handleUpdateAndRenewServiceRequest(id) }} className="actionButton">Update</button>
+                                            );
+                                        case 1:
+                                            return (
+                                                <button className="actionButton">Rate</button>
+                                            );
+                                        case 2:
+                                            // handle other cases...
+                                            break;
+                                        // add cases for other status values
+                                        default:
+                                            // handle default case...
+                                            break;
+                                    }
+                                })()}
+                            </div>
+
+
+
                         </div>
                     </div>
                     <div className="requestExpandableWrapper" id={"requestExpandableWrapperId" + id}>
@@ -247,7 +263,13 @@ export const RequestRollUp = (props) => {
                                         </div>
                                         <div>
                                             <span className="expandableValue">{recurrenceString}</span>
-                                        </div>  
+                                        </div>
+                                    </div>
+                                    <div className="expandableColumn4">
+                                        <button
+                                            onClick={() => { handleClickCancel(id) }}
+                                            className="">cancel
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -260,3 +282,12 @@ export const RequestRollUp = (props) => {
     );
 };
 
+{/* <div className="ps-3">
+<button
+    onClick={() => { handleUpdateAndRenewServiceRequest(id) }}
+    className="actionButton">Update</button>
+</div>
+<div className="">
+<button
+    className="actionButton">Rate</button>
+</div> */}

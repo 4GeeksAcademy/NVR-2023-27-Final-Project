@@ -6,7 +6,7 @@ export const ServiceRollUp = (props) => {
     const { store, actions } = useContext(Context);
     let { id, category, service, description, unit, duration, personnel, included, price } = props.serviceObject;
 
-    const serviceColoMMap = new Map([
+    const serviceColorMMap = new Map([
         ["cleaning", "#32CD32"],
         ["wardrobe", "red"],
         ["plumbing", "#AFEEEE"],
@@ -38,7 +38,7 @@ export const ServiceRollUp = (props) => {
     unit = unit.charAt(0).toUpperCase() + unit.slice(1);
     included = included.charAt(0).toUpperCase() + included.slice(1);
 
-    const categoryColor = serviceColoMMap.get(category);
+    const categoryColor = serviceColorMMap.get(category);
     let durationString = "";
     if (duration < 1) {
         durationString = `${parseInt(duration * 60)} minutes`
