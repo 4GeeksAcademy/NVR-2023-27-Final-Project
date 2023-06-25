@@ -6,7 +6,7 @@
 :root {
   --background: #e7e7e7;
   --serviceRollUpBackground: #d7d7d7;
-  --requestRollUpBackground: #afafaf;
+  --requestRollUpBackground: #b7b7b7;
   --requestRollUpColor: black;
   --scrollBar: #767676;
   --modalBackground: rgb(127, 127, 127);
@@ -77,7 +77,7 @@ body {
 }
 
 .avatarButton:hover::after {
-  content: "settings";
+  content: "accouunt";
   opacity: 1;
 }
 
@@ -1023,10 +1023,34 @@ table.calendarModalTable td {
 /* requestRollUp content */
 
 .requestRollUpTitleWrapper {
-  display: inline-block;
-  padding: 3px;
+  border: 0.6px solid black;
+  transform: skewx(-18deg);
+  padding-inline: .5rem;
 }
 
+.requestRollUpColorSquare {
+  display: flex;
+  margin-inline: 0;
+  padding-inline: 0;
+  justify-content: left;
+  align-items: baseline;
+  font-size: .7rem;
+  font-variant: small-caps;
+  letter-spacing: .1rem;
+  transform: skewx(18deg);
+}
+
+.requestRollUpTitleLabel {
+  display: flex;
+  margin-inline: 0;
+  padding-inline: 0;
+  justify-content: left;
+  align-items: baseline;
+  font-size: .7rem;
+  font-variant: small-caps;
+  letter-spacing: .1rem;
+  transform: skewx(18deg);
+}
 
 .rollUpDescription {
   display: flex;
@@ -1055,7 +1079,9 @@ table.calendarModalTable td {
 }
 
 .requestRollUpColumn1 {
-  width: 11.7rem;
+  width: 10rem;
+  display: flex;
+
 }
 
 .requestRollUpColumn2 {
