@@ -42,12 +42,12 @@ export const RequestRollUp = (props) => {
         [0, ["expired", "orange"]],
         [1, ["requested", "green"]],
         [2, ["accepted", "blue"]],
-        [3, ["safeguarded", "yellow"]],
+        [3, ["safeguarded", "purple"]],
         [4, ["provided", "darkblue"]],
         [5, ["renewed", "grey"]],
         [6, ["reviewed", "black"]],
-        [7, ["completed", "white"]],
-        [8, ["sanctioned", "black"]],
+        [7, ["closed", "white"]],
+        [8, ["disputed", "black"]],
         [9, ["default", "#f0f1f3"]],
 
     ]);
@@ -166,7 +166,6 @@ export const RequestRollUp = (props) => {
 
     }
 
-
     if (store.serviceDescriptions) {
         const temporaryObject = store.serviceDescriptions.find(object => object.id === service_description_id);
         serviceCategory = temporaryObject ? temporaryObject.category : null;
@@ -200,36 +199,47 @@ export const RequestRollUp = (props) => {
                             <div className="requestRollUpColumn7">
                                 <span className="rollUpValue">{timeString}</span>
                             </div>
-                            <div>
-                                <RequestStatusBar />
+                            <div className="requestRollUpColumn8">
+                                <div>
+                                    <RequestStatusBar />
+                                </div>
                             </div>
-                            <div className="ms-1 requestRollUpStatusLabel" style={{ color: statusMap.get(status)[1] }}>
-                                {statusString.toLowerCase()}
+                            <div className="requestRollUpColumn9">
+                                <div className="ms-1 requestRollUpStatusLabel" style={{ color: statusMap.get(status)[1] }}>
+                                    {statusString.toLowerCase()}
+                                </div>
                             </div>
-                            <div>
+                            <div className="requestRollUpColumn10">
                                 {(() => {
                                     switch (status) {
                                         case 0:
                                             return (
-                                                <button onClick={() => { handleUpdateAndRenewServiceRequest(id) }} className="actionButton">Update</button>
-                                            );
+                                                <></>
+                                            )
                                         case 1:
                                             return (
-                                                <button className="actionButton">Rate</button>
-                                            );
+                                                <></>
+                                            )
                                         case 2:
-                                            // handle other cases...
-                                            break;
-                                        // add cases for other status values
-                                        default:
-                                            // handle default case...
-                                            break;
+                                            return (
+                                                <button className="requestActionButton">safeguard</button>
+                                            );
+                                        case 3:
+                                            return (
+                                                <button className="requestActionButton">verify</button>
+                                            );
+                                        case 4:
+                                            return (
+                                                <button className="requestActionButton">review</button>
+                                            );
+                                        case 5:
+                                            return (
+                                                <button className="requestActionButton">review</button>
+                                            );
+
                                     }
                                 })()}
                             </div>
-
-
-
                         </div>
                     </div>
                     <div className="requestExpandableWrapper" id={"requestExpandableWrapperId" + id}>
@@ -266,10 +276,14 @@ export const RequestRollUp = (props) => {
                                         </div>
                                     </div>
                                     <div className="expandableColumn4">
-                                        <button
-                                            onClick={() => { handleClickCancel(id) }}
-                                            className="">cancel
-                                        </button>
+                                        {status < 4 && status > 0 && (
+                                            <button
+                                                onClick={() => { handleClickCancel(id) }}
+                                                className="rollUpCancelButton"
+                                            >
+                                                cancel
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             </div>

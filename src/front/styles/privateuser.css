@@ -579,8 +579,11 @@ form input[type=search] {
 .expandableColumn4 {
   flex: 1.7;
   display: flex;
+  justify-content: right;
+  text-align: right;
   flex-direction: column;
   line-height: .7rem;
+  background: yellow !important;
 }
 
 .expandableDescription {
@@ -948,8 +951,8 @@ table.calendarModalTable td {
   padding-inline: .63rem;
   padding-block: .3rem;
 
-
 }
+
 /* Expandable */
 
 .expand-toggle {
@@ -1019,7 +1022,6 @@ table.calendarModalTable td {
 .requestExpandable * {
   background-color: inherit;
 }
-
 
 .requestExpandableContent {
   border-top: .5px solid rgb(111, 111, 111);
@@ -1097,7 +1099,7 @@ table.calendarModalTable td {
 }
 
 .requestRollUpColumn1 {
-  width: 10.6rem;
+  width: 9.6rem;
   display: flex;
 
 }
@@ -1115,7 +1117,7 @@ table.calendarModalTable td {
 }
 
 .requestRollUpColumn4 {
-  width: 1.5rem;
+  width: 1.2rem;
   display: flex;
 
 }
@@ -1127,7 +1129,7 @@ table.calendarModalTable td {
 }
 
 .requestRollUpColumn6 {
-  width: 1.5rem;
+  width: 1.4rem;
   display: flex;
 
 }
@@ -1135,9 +1137,22 @@ table.calendarModalTable td {
 .rquestRollUpColumn7 {
   width: 2.5rem;
   display: flex;
-
 }
 
+.rquestRollUpColumn8 {
+  width: 2.5rem;
+  display: flex;
+}
+
+.rquestRollUpColumn9 {
+  width: 2.5rem;
+  display: flex;
+}
+
+.rquestRollUpColumn10 {
+  width: 2.5rem;
+  display: flex;
+}
 
 /* status Bar */
 
@@ -1148,7 +1163,7 @@ table.calendarModalTable td {
 
 .statusBarRow {
   display: flex;
-  margin-top: .3rem;
+  margin-top: .4rem;
   margin-left: .7rem;
   background: transaprent;
   justify-content: center;
@@ -1162,4 +1177,26 @@ table.calendarModalTable td {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.requestActionButton {
+  background: var(--standOutGreen);
+  color: var(--background);
+  font-variant: small-caps;
+  font-size: .63rem;
+  width: 5rem;
+  letter-spacing: .1rem;
+  padding-inline: .63rem;
+  margin-bottom: 10rem;
+}
+
+
+.rollUpCancelButton {
+  background: white;
+  color: black;
+  font-variant: small-caps;
+  font-size: 0.63rem;
+  width: 5rem;
+  letter-spacing: 0.1rem;
+  padding-inline: 0.63rem;
 }
