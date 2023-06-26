@@ -30,8 +30,8 @@
 },
 {
     "category": "cleaning",
-    "service": "deep carpet cleaning",
-    "description": "conducting a thorough cleaning of carpets using specialized techniques and equipment for deep stain and odor removal",
+    "service": "carpet cleaning",
+    "description": "conducting a deep and thorough cleaning of carpets using specialized techniques and equipment for deep stain and odor removal",
     "unit": "1 carpet of up to 12 m²",
     "duration": 2,
     "personnel": 1,
@@ -90,7 +90,7 @@
 },
 {
     "category": "plumbing",
-    "service": "exterior faucet maintenance",
+    "service": "faucet maintenance",
     "description": "inspecting and maintaining exterior faucets to ensure their proper functioning and prevent leaks or other issues.",
     "unit": "1 exterior faucet in a block of up to 20 flats",
     "duration": 6,
@@ -211,7 +211,7 @@
 },
 {
     "category": "patching",
-    "service": "single painting of partition",
+    "service": "partition single painting",
     "description": "applying a single coat of paint to interior walls, refreshing the appearance or changing the color",
     "unit": "1 wall of up to 25 square meters",
     "duration": 3,
@@ -221,7 +221,7 @@
 },
 {
     "category": "patching",
-    "service": "double painting of partition",
+    "service": "partition double painting",
     "description": "applying a double coat of paint to interior walls, ensuring full coverage and a smooth finish",
     "unit": "1 wall of up to 25 m²s",
     "duration": 3,
@@ -231,7 +231,7 @@
 },
 {
     "category": "patching",
-    "service": "single painting of facade",
+    "service": "facade single painting",
     "description": "applying a single coat of paint to the ground floor exterior walls, enhancing the visual appeal and protection against weather elements",
     "unit": "1 ground floor exterior wall of up to 40 m²",
     "duration": 4,
@@ -241,7 +241,7 @@
 },
 {
     "category": "patching",
-    "service": "double painting of facade",
+    "service": "façade double painting",
     "description": "applying a double coat of paint to the ground floor exterior walls, providing added durability and an even finish",
     "unit": "1 ground floor exterior wall of up to 150 m²",
     "duration": 4,
@@ -381,8 +381,8 @@
 },
 {
     "category": "petcare",
-    "service": "pet transportation to vet",
-    "description": "transporting pets to veterinary appointments, ensuring their safe and comfortable travel to receive necessary medical care.",
+    "service": "transportation to vet",
+    "description": "transporting cat, dog or otehr pets to veterinary appointments, ensuring their safe and comfortable travel to receive necessary medical care.",
     "duration": 2,
     "unit": "1 transportation of 1 pet to the designated vet within 5 km of client's address",
     "personnel": 1,
@@ -401,8 +401,8 @@
 },
 {
     "category": "grooming",
-    "service": "nail care",
-    "description": "offering comprehensive nail care services for either hands or feet, including trimming, shaping, and polishing nails for a neat and well-maintained look",
+    "service": "fingernail care",
+    "description": "offering comprehensive nail care services for hands, including trimming, shaping, and polishing nails for a neat and well-maintained look",
     "unit": "1 manicure session for both hands",
     "duration": 1,
     "personnel": 1,
@@ -411,8 +411,8 @@
 },
 {
     "category": "grooming",
-    "service": "nail care",
-    "description": "offering comprehensive nail care services for either hands or feet, including trimming, shaping, and polishing nails for a neat and well-maintained look",
+    "service": "toenail care",
+    "description": "offering comprehensive nail care services for feet, including trimming, shaping, and polishing nails for a neat and well-maintained look",
     "unit": "1 pedicure session for both feet",
     "duration": 1.5,
     "personnel": 1,
@@ -454,7 +454,7 @@
 
 {
     "category": "nursing",
-    "service": "personal Hygiene assistance",
+    "service": "Hygiene assistance",
     "description": "providing specialized personal hygiene assistance for individuals with disabilities, the elderly, or those with special needs, in activiities such as bathing, grooming, oral care, dressing, and toileting.",
     "unit": "1 session for 1 client",
     "duration": 1.5,
@@ -519,7 +519,7 @@
 },
 {
     "category": "companionship",
-    "service": "accompaniment to events",
+    "service": "event accompaniment",
     "description": "accompanying clients to social events, ensuring their participation and enjoyment, while aiding and supporting as needed",
     "unit": "1 social event",
     "duration": 2,
