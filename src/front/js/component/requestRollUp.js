@@ -226,7 +226,10 @@ export const RequestRollUp = (props) => {
                                             );
                                         case 3:
                                             return (
-                                                <button className="requestActionButton">verify</button>
+                                                <button 
+                                                onClick={() => { handleUpdateAndRenewServiceRequest(id) }}
+                                                className="requestActionButton">
+                                                verify</button>
                                             );
                                         case 4:
                                             return (

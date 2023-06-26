@@ -433,21 +433,19 @@ def delete_service_request(service_request_id):
 @api.route("/updateandrenewservicerequest/<int:service_request_id>", methods=["PUT"])
 @jwt_required()
 def updateandrenew_service_request(service_request_id):
-    print("outside Try ******************************************")
     try:
-        print("inside Try ******************************************")
         user_email = get_jwt_identity()
         user = UserProfile.query.filter_by(email=user_email).first()
 
-        # Updates service status to 4, "provided"
         if user:
             service_request = ServiceRequest.query.get(service_request_id)
 
             if service_request:
-                service_request.status = 4
+                if service_request.recurrence == 1:
+                    service_request.status = 4
+                else:
+                    service_request.status = 5
 
-                # Renews service if recurrence if higher than 1
-                if service_request.recurrence > 1:
                     renewed_service_request = ServiceRequest()
                     renewed_service_request.status = 1
                     renewed_service_request.time = service_request.time
@@ -467,7 +465,6 @@ def updateandrenew_service_request(service_request_id):
                         month = service_request.date.month
                         day = service_request.date.day
 
-                        # Check if month is January and day is 29, 30, or 31
                         if month == 1 and day >= 29:
                             if calendar.isleap(year):
                                 renewed_date = date(year, 2, 29)
@@ -476,9 +473,9 @@ def updateandrenew_service_request(service_request_id):
                         else:
                             next_month = month + 1
 
-                            if next_month in [4, 6, 9, 11] and day == 31: 
+                            if next_month in [4, 6, 9, 11] and day == 31:
                                 day = 30
-                            
+
                             if next_month > 12:
                                 next_month = 1
                                 year += 1
@@ -494,7 +491,8 @@ def updateandrenew_service_request(service_request_id):
                     renewed_service_request.date = renewed_date
 
                     db.session.add(renewed_service_request)
-                    db.session.commit()
+
+                db.session.commit()
 
                 return jsonify({"message": "Service request updated successfully"}), 200
             else:
@@ -507,6 +505,7 @@ def updateandrenew_service_request(service_request_id):
             "message": "An error occurred",
             "error": str(e)
         }), 500
+
 
 
 # PRIVATE USER endpoints - rate Provider

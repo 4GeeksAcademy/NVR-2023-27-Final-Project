@@ -583,7 +583,6 @@ form input[type=search] {
   text-align: right;
   flex-direction: column;
   line-height: .7rem;
-  background: yellow !important;
 }
 
 .expandableDescription {
@@ -1099,59 +1098,70 @@ table.calendarModalTable td {
 }
 
 .requestRollUpColumn1 {
-  width: 9.6rem;
   display: flex;
+  width: 9.6rem;
+  min-width: 9.6rem;
 
 }
 
 .requestRollUpColumn2 {
-  width: 20rem;
   display: flex;
+  width: 20rem;
+  min-width: 20rem;
 
 }
 
 .requestRollUpColumn3 {
-  width: 4.5rem;
   display: flex;
+  width: 4.5rem;
+  min-width: 4.5rem;
 
 }
 
 .requestRollUpColumn4 {
-  width: 1.2rem;
   display: flex;
+  width: 1.2rem;
+  min-width: 1.2rem;
 
 }
 
 .requestRollUpColumn5 {
-  width: 5.4rem;
   display: flex;
+  width: 5.4rem;
+  min-width: 5.4rem;
 
 }
 
 .requestRollUpColumn6 {
-  width: 1.4rem;
   display: flex;
+  width: 1.4rem;
+  min-width: 1.4rem;
 
 }
 
 .rquestRollUpColumn7 {
-  width: 2.5rem;
   display: flex;
+  width: 2.5rem;
+  min-width: 2.5rem;
 }
 
 .rquestRollUpColumn8 {
-  width: 2.5rem;
   display: flex;
+  width: 2.5rem;
+  min-width: 2.5rem;
+
 }
 
 .rquestRollUpColumn9 {
-  width: 2.5rem;
   display: flex;
+  width: 6rem;
+  min-width: 6rem;
 }
 
 .rquestRollUpColumn10 {
-  width: 2.5rem;
   display: flex;
+  width: 5%;
+  min-width: 5%;
 }
 
 /* status Bar */
@@ -1196,6 +1206,7 @@ table.calendarModalTable td {
   color: black;
   font-variant: small-caps;
   font-size: 0.63rem;
+  font-weight: 400;
   width: 5rem;
   letter-spacing: 0.1rem;
   padding-inline: 0.63rem;
