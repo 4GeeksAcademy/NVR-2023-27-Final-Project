@@ -293,6 +293,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const data = await response.json();
 						await getActions().getUserBookedDays();
 						await getActions().getUserRequests();
+						getActions().alertUser("service requested", "yellow", "black");
 						return data.id;
 					}
 				} catch (error) {

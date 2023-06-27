@@ -271,5 +271,4 @@ class ServiceProvided(db.Model):
         return {
             "id": self.id,
             "provider_id": self.provider_id,
-            "service_id": self.service_id,
         }

@@ -8,11 +8,18 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 
-# *************************************
+# Imports for CalendarModal component
+
 from datetime import date, datetime, timedelta
 import calendar
-# *************************************
 
+# Imports for Google Distance MAtrix API calls
+import requests
+
+#*********************************************
+
+
+# Bilerplate code 
 
 api = Blueprint('api', __name__)
 
@@ -27,7 +34,6 @@ def handle_hello():
     return jsonify(response_body), 200
 
 # REGISTER endpoints
-
 
 @api.route("/users", methods=["POST"])
 def create_user():
@@ -93,8 +99,8 @@ def create_address():
     db.session.commit()
     return jsonify({"Message": "Address created"}), 200
 
-# SIGN IN endpoints
 
+# SIGN IN endpoints
 
 @api.route("/signinprovider", methods=["POST"])
 def signin_provider():
@@ -301,8 +307,8 @@ def get_user_notifications():
             "error": str(e)
         }), 500
 
- # PRIVATE USER endpoints - create SERVICE REQUEST
 
+ # PRIVATE USER endpoints - create SERVICE REQUEST
 
 @api.route("/createrequest", methods=["POST"])
 @jwt_required()
@@ -427,7 +433,6 @@ def delete_service_request(service_request_id):
         }), 500
 
 
-
  # PRIVATE USER endpoints - update and renew service request
 
 @api.route("/updateandrenewservicerequest/<int:service_request_id>", methods=["PUT"])
@@ -507,7 +512,6 @@ def updateandrenew_service_request(service_request_id):
         }), 500
 
 
-
 # PRIVATE USER endpoints - rate Provider
 
 @api.route("/rateprovider/<int:service_request_id>/<float:rating>", methods=["PUT"])
@@ -543,3 +547,68 @@ def rate_provider(service_request_id, rating):
             "message": "An error occurred",
             "error": str(e)
         }), 500
+
+
+# Google API distane matrix call
+
+def get_distance_and_time(latitude1, longitude1, latitude2, longitude2):
+    api_key = "AIzaSyA0Wq3nAEPCtgSku9z8_bcRM7-NTyGKRVk"
+    origin = f"{latitude1},{longitude1}"
+    destination = f"{latitude2},{longitude2}"
+    url = f"https://maps.googleapis.com/maps/api/distancematrix/json?origins={origin}&destinations={destination}&units=metric&key={api_key}"
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+
+        if data['status'] == 'OK':
+            distance_text = data['rows'][0]['elements'][0]['distance']['text']
+            distance_value = data['rows'][0]['elements'][0]['distance']['value']
+            time_text = data['rows'][0]['elements'][0]['duration']['text']
+            time_value = data['rows'][0]['elements'][0]['duration']['value']
+
+            return {'distance': distance_text, 'distance_value': distance_value,
+                    'time': time_text, 'time_value': time_value}
+        else:
+            return None
+    except requests.exceptions.RequestException as e:
+        print(f"Error with requesting data from Google API: {e}")
+        return None
+    except KeyError:
+        print("Error with parsing Google API response: Invalid response format")
+        return None
+
+""" def get_distance_time_between_providers():
+    provider_profiles = ProviderProfile.query.all()
+
+    result = []
+
+    for i in range(len(provider_profiles) - 1):
+        current_provider = provider_profiles[i]
+        next_provider = provider_profiles[i + 1]
+
+        current_address = current_provider.address
+        next_address = next_provider.address
+
+        if current_address and next_address:
+            latitude1, longitude1 = current_address.latitude, current_address.longitude
+            latitude2, longitude2 = next_address.latitude, next_address.longitude
+
+            distance_time = get_distance_and_time(latitude1, longitude1, latitude2, longitude2)
+
+            if distance_time:
+                current_provider_id = current_provider.id
+                next_provider_id = next_provider.id
+                distance = distance_time['distance']
+                travel_time = distance_time['time']
+
+                result.append({
+                    'current_provider_id': current_provider_id,
+                    'next_provider_id': next_provider_id,
+                    'distance': distance,
+                    'travel_time': travel_time
+                })
+
+    return result
+ """

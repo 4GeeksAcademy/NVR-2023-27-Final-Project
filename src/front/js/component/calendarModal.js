@@ -86,7 +86,6 @@ export const CalendarModal = (props) => {
     const handleCewateServiceRequest = () => {
         actions.createServiceRequest(newServiceRequest);
         handleCloseCalendarModal();
-        actions.alertUser("service requested", "yellow", "black");
     };
 
     // Calendar Subcomponent

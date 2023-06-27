@@ -76,6 +76,8 @@ export const PrivateUser = () => {
             }
         };
 
+        //scrolltoTop
+        
         checkCredentials();
 
         if (localStorage.getItem("credentials")) {

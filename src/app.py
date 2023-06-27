@@ -12,8 +12,11 @@ from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 import json
-from api.models import ServiceDescription
+from api.models import ServiceDescription , ProviderProfile
+import requests
 from flask_jwt_extended import JWTManager
+
+
 
 #from models import Person
 
@@ -68,6 +71,7 @@ def load_service_description():
 
 
 
+
 # generate sitemap with all your endpoints
 @app.route('/')
 def sitemap():
@@ -75,6 +79,7 @@ def sitemap():
         load_service_description()
         return generate_sitemap(app)
     return send_from_directory(static_file_dir, 'index.html')
+
 
 # any other endpoint will try to serve it like a static file
 @app.route('/<path:path>', methods=['GET'])
@@ -91,6 +96,4 @@ def serve_any_other_file(path):
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3001))
     app.run(host='0.0.0.0', port=PORT, debug=True)
-
-
-
+   
