@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 
-import { ratebanproviderModal } from "./ratebanproviderModal"
+import { RateBanrModal } from "./ratebanproviderModal"
 import { SafeguardrModal } from "./safeguardModal";
 
 export const RequestRollUp = (props) => {
@@ -10,6 +10,7 @@ export const RequestRollUp = (props) => {
     /*   useEffect(()=> {
           window.scrollTo(0, 0);
       }, []) */
+
 
     const { store, actions } = useContext(Context);
     let { id, status, date, time, recurrence, quantity, provider_id, address_id, service_description_id, } = props.requestObject;
@@ -76,6 +77,11 @@ export const RequestRollUp = (props) => {
         const dialog = document.querySelector(`#dialogSafeguard${id}`)
         dialog.showModal()
     }
+    const handleClickRateBan = () => {
+        const dialog = document.querySelector(`#dialogRateBan${id}`)
+        dialog.showModal()
+    }
+
 
     // Subcomponents
 
@@ -245,11 +251,17 @@ export const RequestRollUp = (props) => {
                                             );
                                         case 4:
                                             return (
-                                                <button className="requestActionButton">review</button>
+                                                <button 
+                                                    className="requestActionButton"
+                                                    onClick={handleClickRateBan}>
+                                                    review</button>
                                             );
                                         case 5:
                                             return (
-                                                <button className="requestActionButton">review</button>
+                                                <button 
+                                                    className="requestActionButton"
+                                                    onClick={handleClickRateBan}>
+                                                    review</button>
                                             );
                                     }
                                 })()}
@@ -309,6 +321,9 @@ export const RequestRollUp = (props) => {
                 <div>
                     <SafeguardrModal id={id} provider_id={provider_id} />
                 </div>
+                <div>
+                    <RateBanrModal id={id} provider_id={provider_id} />
+                </div>
             </div>
         </>
 
@@ -317,14 +332,3 @@ export const RequestRollUp = (props) => {
 
 
 
-
-
-{/* <div className="ps-3">
-<button
-    onClick={() => { handleUpdateAndRenewServiceRequest(id) }}
-    className="actionButton">Update</button>
-</div>
-<div className="">
-<button
-    className="actionButton">Rate</button>
-</div> */}
