@@ -32,13 +32,12 @@ export const CalendarModal = (props) => {
         [4, "Daily"]
     ]);
 
-    // General variables
+    // General variables, props destructuirng
+    
     const { store, actions } = useContext(Context);
     const { id, service, price } = props
 
-
-
-    // Stes default Request day to the day after teh current day
+    // Sets default Request day to the day after teh current day
     const currentDate = new Date();
     const nextDay = new Date();
     nextDay.setDate(currentDate.getDate() + 1);

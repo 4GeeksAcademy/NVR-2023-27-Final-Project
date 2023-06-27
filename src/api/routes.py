@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, UserProfile, ProviderProfile, Address, Exclusion, ServiceRequest, Notification, ServiceDescription
+from api.models import db, UserProfile, ProviderProfile, Address, Exclusion, ServiceRequest, Notification, ServiceProvided, ServiceDescription
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -331,6 +331,14 @@ def create_service_request():
             )
             db.session.add(new_request)
             db.session.commit()
+            print("STEP 1: ********************** service request create - launching main algorithm **********************")
+            # Launch ñotify_viable_providers 
+            new_request_id = new_request.id
+            notify_viable_providers(new_request_id)
+
+        
+
+
             return jsonify({"message": "Request successfully created"}), 200
         else:
             return jsonify({"message": "User not found"}), 404
@@ -339,6 +347,7 @@ def create_service_request():
             "message": "An error occurred",
             "error": str(e)
         }), 500
+
 
  #  PRIVATE USER endpoints - CALENDAR - get Booked days
 
@@ -499,6 +508,12 @@ def updateandrenew_service_request(service_request_id):
 
                 db.session.commit()
 
+                # Launch Notify VIABLE PROVIDERS 
+                service_request_id = renewed_service_request.id
+
+
+
+
                 return jsonify({"message": "Service request updated successfully"}), 200
             else:
                 return jsonify({"message": "Service request not found"}), 404
@@ -548,6 +563,8 @@ def rate_provider(service_request_id, rating):
             "error": str(e)
         }), 500
 
+#*************************
+# Main Algorytm functions
 
 # Google API distane matrix call
 
@@ -578,6 +595,46 @@ def get_distance_and_time(latitude1, longitude1, latitude2, longitude2):
     except KeyError:
         print("Error with parsing Google API response: Invalid response format")
         return None
+    
+
+# Pass 1: get all providers that provide service
+
+def get_viable_providers_by_service_description(service_description_id):
+    print("STEP 3: inside get_viable_providers **********************")
+    provider_ids = (
+        db.session.query(ProviderProfile.id)
+        .join(ServiceProvided)
+        .filter(ServiceProvided.services_descriptions.has(id=service_description_id))
+        .all()
+    )
+    provider_ids = [provider_id for (provider_id,) in provider_ids]
+    return provider_ids
+
+
+def notify_viable_providers(service_request_id):
+    print("STEP 2: inside notify viable_providers")
+    requested_service_description_id = ServiceRequest.query.get(service_request_id).service_description_id
+    
+    # Step 1: Get Max set of viable providers
+    viable_providers = get_viable_providers_by_service_description(requested_service_description_id)
+    for provider_id in viable_providers:
+        provider = ProviderProfile.query.get(provider_id)
+        print(provider.name)
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 """ def get_distance_time_between_providers():
     provider_profiles = ProviderProfile.query.all()
