@@ -280,7 +280,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+
 			//Create service Request
+
 			createServiceRequest: async (serviceRequest) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "api/createrequest", {
@@ -304,6 +306,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false;
 				}
 			},
+
 
 			// Get user's booked days
 
@@ -355,6 +358,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+
 			// UPDATE and RENEW Service Request
 
 			updateAndRenewServiceRequest: async (serviceRequestId) => {
@@ -405,7 +409,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  console.log("Error:", error);
 				}
 			  },
+			
+
+			// PRIVATE USER : Get service request passwords
+
+			getServiceRequestPasswords: async (serviceRequestId) => {
+				try {							
+				  	const response = await fetch(process.env.BACKEND_URL + "api/getservicerequestpasswords/" + serviceRequestId, {
+					method: "GET",
+					headers: {
+					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+					}
+				  });
 			  
+				  if (response.ok) {
+					const data = await response.json();
+					setStore({ serviceRequestPasswords: data.service_request_passwords });
+					console.log(data.message);
+				  } else {
+					console.log("Error:", response.status);
+				  }
+				} catch (error) {
+				  console.log("Error:", error);
+				}
+			  },
+
 
 			// PRIVATE USER : Rate provider
 

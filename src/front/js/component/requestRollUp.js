@@ -75,12 +75,14 @@ export const RequestRollUp = (props) => {
 
     const handleClickSafeGuard = () => {
         actions.getProviderDetails(provider_id);
-        const dialog = document.querySelector(`#dialogSafeguard${id}`)
-        dialog.showModal()
+        actions.getServiceRequestPasswords(id);
+        console.log("************************" , store.serviceRequestPasswords);
+        const dialog = document.querySelector(`#dialogSafeguard${id}`);
+        dialog.showModal();
     }
     const handleClickRateBan = () => {
-        const dialog = document.querySelector(`#dialogRateBan${id}`)
-        dialog.showModal()
+        const dialog = document.querySelector(`#dialogRateBan${id}`);
+        dialog.showModal();
     }
 
 
@@ -252,14 +254,14 @@ export const RequestRollUp = (props) => {
                                             );
                                         case 4:
                                             return (
-                                                <button 
+                                                <button
                                                     className="requestActionButton"
                                                     onClick={handleClickRateBan}>
                                                     review</button>
                                             );
                                         case 5:
                                             return (
-                                                <button 
+                                                <button
                                                     className="requestActionButton"
                                                     onClick={handleClickRateBan}>
                                                     review</button>
