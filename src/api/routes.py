@@ -331,6 +331,7 @@ def create_service_request():
             )
             db.session.add(new_request)
             db.session.commit()
+            
             print("STEP 1: ********************** service request create - launching main algorithm **********************")
             # Launch ñotify_viable_providers 
             new_request_id = new_request.id

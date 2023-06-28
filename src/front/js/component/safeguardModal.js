@@ -13,10 +13,12 @@ export const SafeguardrModal = (props) => {
         <>
             <dialog data-modal id={"dialogSafeguard" + id} className="servieRequestPasswordModal">
                 <div className="passwordImagesWrapper">
-                        { store.providerDetails &&  
+                        { store.providerDetails ?  
                             (<div className="providerAvatarImageWrapper" key={`providerAvatarImage${id}`}>
                                 <img className="providerAvatarImage" src={store.providerDetails.avatar_image}>
                                 </img>
+                            </div>) : (<div className="providerAvatarImageWrapper" key={`providerAvatarReplaement${id}`}>
+                                <div className="providerAvatarReplacement"></div>
                             </div>)
                         }
                         <p>provider_id: {provider_id}</p>

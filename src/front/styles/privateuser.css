@@ -1293,3 +1293,11 @@ table.calendarModalTable td {
   }
 }
 
+.providerAvatarReplacement {
+  width: 160px;
+  height: 300px;
+  min-width: 160px;
+  min-height: 300px;
+  display: inline-block;
+}
+
