@@ -26,6 +26,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 
+			// resets providerDetails
+
+			resetProviderDetails: () => {
+				setStore({providerDetails: null});
+			},
+
 			// Displays Alerts, available to every other method 
 			alertUser: (message, backgroundColor, color) => {
 				const alertElement = document.createElement("div");

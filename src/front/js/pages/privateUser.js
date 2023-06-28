@@ -127,7 +127,6 @@ export const PrivateUser = () => {
 
     }, [store.serviceDescriptions]);
 
-    //*************************
     // Requests Sort and Filter
 
     useEffect(() => {

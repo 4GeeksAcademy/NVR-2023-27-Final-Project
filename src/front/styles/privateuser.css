@@ -672,6 +672,13 @@ button .bookButto:active {
   }
 }
 
+dialog:active,
+dialog:focus {
+  border: noen;
+  outline: none;
+  border-radius: 0;
+}
+
 .largeDialogElement * {
   background: inherit;
 }
@@ -1202,3 +1209,87 @@ table.calendarModalTable td {
   letter-spacing: 0.1rem;
   padding-inline: 0.63rem;
 }
+
+/* Service Request PASSWORD modal */
+
+.servieRequestPasswordModal {
+  position: fixed;
+  border: none;
+  margin-top: 7.48rem;
+  width: 33.3%;
+  background: var(--modalBackground);
+  transform: scale(0);
+  animation: modal-appear 0.5s ease-in-out forwards;
+  overflow: hidden;
+  
+}
+
+@keyframes modal-appear {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes modal-disappear {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  90% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+
+.servieRequestPasswordModal * {
+  background: inherit;
+}
+
+.servieRequestPasswordModal::backdrop {
+  background-color: transparent !important;
+}
+
+
+/* Service Request password modal IMAGES */
+
+.providerAvatarImageWrapper {
+  width: 160px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  border: noen;
+  padding: none;
+  margin: none;
+}
+
+.providerAvatarImageWrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  animation: fade-in 0.5s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
