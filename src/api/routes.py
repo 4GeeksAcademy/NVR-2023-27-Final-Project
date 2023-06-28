@@ -601,7 +601,7 @@ def get_service_request_passwords(service_request_id):
                 "verbal_password": service_request.verbal_password,
                 "qr_password": service_request.qr_password
             }
-            return jsonify({"message": "Service request passwords successfully retrieved", "passwords": service_request_passwords})
+            return jsonify({"message": "Service request passwords successfully retrieved", "service_request_passwords": service_request_passwords})
         else:
             return jsonify({"message": "Service request not found"}), 404
     except Exception as e:
