@@ -74,6 +74,7 @@ export const RequestRollUp = (props) => {
     }
 
     const handleClickSafeGuard = () => {
+        actions.getProviderDetails(provider_id);
         const dialog = document.querySelector(`#dialogSafeguard${id}`)
         dialog.showModal()
     }

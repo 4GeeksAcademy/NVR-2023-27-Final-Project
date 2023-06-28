@@ -2,9 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
 export const SafeguardrModal = (props) => {
-    
+
+    const { store, actions } = useContext(Context);
+   
     // prop destructuring
     const { id, provider_id } = props;
+
+
+  
 
     return (
         <>

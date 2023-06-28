@@ -442,7 +442,7 @@ def delete_service_request(service_request_id):
         }), 500
 
 
- # PRIVATE USER endpoints - update and renew service request
+ # PRIVATE USER endpoints - UPDATE and RENEW service request
 
 @api.route("/updateandrenewservicerequest/<int:service_request_id>", methods=["PUT"])
 @jwt_required()
@@ -562,6 +562,55 @@ def rate_provider(service_request_id, rating):
             "message": "An error occurred",
             "error": str(e)
         }), 500
+
+
+# PRIVATE USER endpoints - GET Provider details
+
+@api.route("/getproviderdetails/<int:provider_id>", methods=["GET"])
+@jwt_required()
+def get_provider_details(provider_id):
+    try:
+        provider = ProviderProfile.query.get(provider_id)
+
+        if provider:
+            provider_details = {
+                "name": provider.name,
+                "has_certificate": provider.has_certificate,
+                "experience": provider.experience,
+                "average_rating": provider.average_rating,
+                "ratings_counter": provider.ratings_counter,
+                "avatar_image": provider.avatar_image,
+            }
+            print(provider.avatar_image)
+            return jsonify({"message": "Provider details successfully retrieved", "provider_details": provider_details})
+        else:
+            return jsonify({"message": "Provider not found"}), 404
+    except Exception as e:
+        print("exception:",e)
+        return jsonify({"message": "An error occurred", "error": str(e)}), 500
+
+
+# PRIVATE USER endpoints - GET service request passwords
+
+@api.route("/getservicerequestpasswords/<int:service_request_id>", methods=["GET"])
+@jwt_required()
+def get_service_request_passwords(service_request_id):
+    try:
+        service_request = ServiceRequest.query.get(service_request_id)
+
+        if service_request:
+            passwords = {
+                "verbal_password": service_request.verbal_password,
+                "qr_password": service_request.qr_password
+            }
+            return jsonify({"message": "Service request passwords successfully retrieved", "passwords": passwords})
+        else:
+            return jsonify({"message": "Service request not found"}), 404
+    except Exception as e:
+        return jsonify({"message": "An error occurred", "error": str(e)}), 500
+
+
+
 
 #*************************
 # Main Algorytm functions

@@ -18,6 +18,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			serviceDescriptions: null,
 
+			providerDetails: null,
+			serviceRequestPasswords: null,
+
 
 
 		},
@@ -379,12 +382,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// RAte provider
 
-			rateProvider: async (serviceRequestId , rating) => {
+			//  Get provider details - for each SERVICE REQUEST
+
+			getProviderDetails: async (providerId) => {
+				try {							
+				  	const response = await fetch(process.env.BACKEND_URL + "api/getproviderdetails/" + providerId, {
+					method: "GET",
+					headers: {
+					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+					}
+				  });
+			  
+				  if (response.ok) {
+					const data = await response.json();
+					setStore({ providerDetails: data.provider_details });
+					console.log(data.message);
+				  } else {
+					console.log("Error:", response.status);
+				  }
+				} catch (error) {
+				  console.log("Error:", error);
+				}
+			  },
+			  
+
+			// PRIVATE USER : Rate provider
+
+			rateProvider: async (serviceRequestId, rating) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "api/updateandrenewservicerequest/" + serviceRequestId + "/" + rating
-					
+
 						, {
 							method: "PUT",
 							headers: {
