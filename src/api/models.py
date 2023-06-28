@@ -261,8 +261,9 @@ class ServiceProvided(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     provider_id = db.Column(db.Integer, db.ForeignKey(
         'provider_profile.id'), nullable=False)
+    
     services_descriptions = db.relationship(
-        'ServiceDescription', backref='service_provider', uselist=False)
+        'ServiceDescription', backref='service_provider')
 
     def __repr__(self):
         return f'<ServiceProvided {self.id}>'

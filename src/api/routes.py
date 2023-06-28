@@ -335,9 +335,7 @@ def create_service_request():
             print("STEP 1: ********************** service request create - launching main algorithm **********************")
             # Launch ñotify_viable_providers 
             new_request_id = new_request.id
-            notify_viable_providers(new_request_id)
-
-        
+     
 
 
             return jsonify({"message": "Request successfully created"}), 200
