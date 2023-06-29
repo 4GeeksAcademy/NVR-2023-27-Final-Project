@@ -780,10 +780,11 @@ dialog:focus {
   background: var(--strikingBlue);
   color: var(--background);
   z-index: 10000;
+  cursor: crosshair;
 }
 
 .calendarCell.currentDay {
-  text-decoration: underline;
+color: yellow;
 }
 
 .calendarCell.selectedRequestDay {
@@ -791,7 +792,7 @@ dialog:focus {
   color: var(--background);
   z-index: 100;
 
-  animation: blinker 2.1s ease-out infinite;
+  animation: blinker 1.8s ease-out infinite;
 }
 
 @keyframes blinker {
