@@ -333,14 +333,24 @@ def create_service_request():
             db.session.commit()
             
             # Main Algorithm
-            # Step1
-            print("********************** STEP 1 of Main Algoruthm ")
+            # Step1.1
+            print("********************** STEP 1.1 of Main Algoruthm ")
             new_request_id = new_request.id
-            max_set = get_viable_providers_max_set(new_request_id)
-            for provider in max_set:
+            viable_providers = get_viable_providers_max_set(new_request_id)
+            for i, provider in enumerate(viable_providers, start=1):
                 provider_profile = ProviderProfile.query.get(provider)
                 provider_name = provider_profile.name
-                print("********* Provider: ", provider_name)
+                print(f"********* Provider number {i}: {provider_name}")
+
+            # Step 1.2: Remove excluded providers
+            print("********************** STEP 1.2 of Main Algoruthm ")
+            viable_providers = [provider for provider in viable_providers if not Exclusion.query.filter_by(user_id=user.id, provider_id=provider).first()]
+            for i, provider in enumerate(viable_providers, start=1):
+                provider_profile = ProviderProfile.query.get(provider)
+                provider_name = provider_profile.name
+                print(f"********* Provider number {i}: {provider_name}")
+
+
 
 
             # End of MAin Algorithm
