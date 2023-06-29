@@ -361,10 +361,10 @@
 },
 {
     "category": "petcare",
-    "service": "dog walk",
+    "service": "dog walking",
     "description": "taking dogs for a walk, providing exercise and stimulation for their well-being",
     "unit": "1 30-minute dog walk",
-    "duration": 0.66,
+    "duration": 0.67,
     "personnel": 1,
     "included": "no consumables required",
     "price": 30
