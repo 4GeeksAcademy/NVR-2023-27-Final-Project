@@ -13,13 +13,13 @@ export const SafeguardrModal = (props) => {
     return (
         <>
             <dialog data-modal id={"dialogSafeguard" + id} className="servieRequestPasswordModal">
-                <div className="passwordImagesWrapper">
+                <div className="passwordImagesWrapper d-flex align-items-top ">
                     {store.providerDetails ? (
-                        <div className="providerAvatarImageWrapper" key={`providerAvatarImage${id}`}>
+                        <div className="providerAvatarImageWrapper p-0 m-0" key={`providerAvatarImage${id}`}>
                             <img className="providerAvatarImage" src={store.providerDetails.avatar_image} />
                         </div>
                     ) : (
-                        <div className="providerAvatarImageWrapper" key={`providerAvatarReplacement${id}`}>
+                        <div className="providerAvatarImageWrapper m-0 p-0" key={`providerAvatarReplacement${id}`}>
                             <div className="providerAvatarReplacement"></div>
                         </div>
                     )}
@@ -36,6 +36,7 @@ export const SafeguardrModal = (props) => {
                 <div>
                     {store.providerDetails ? (
                         <div>
+                            <span>{store.providerDetails.name}</span>
                             <span>Average rating: {store.providerDetails.average_rating}</span>
                             <span>Ratings: {store.providerDetails.ratings_counter}</span>
                             <span>Level of Experience: {store.providerDetails.experience}</span>

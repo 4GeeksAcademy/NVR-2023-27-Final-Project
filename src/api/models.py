@@ -236,8 +236,6 @@ class ServiceDescription(db.Model):
     personnel = db.Column(db.Integer, nullable= True)
     included = db.Column(db.String(100), nullable= True)
     price = db.Column(db.Float, nullable= True)
-    # service_provided = db.Column(db.Integer, db.ForeignKey(
-    #     'service_provided.id'), nullable=True)
     service_provided = db.relationship('ServiceProvided', backref='service_description')
     service_request = db.relationship('ServiceRequest', backref='service_description')
    
@@ -262,8 +260,6 @@ class ServiceProvided(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     provider_id = db.Column(db.Integer, db.ForeignKey(
         'provider_profile.id'), nullable=False)
-    # service_description = db.relationship(
-    #     'ServiceDescription', backref='service_provider', uselist=False)
     service_description_id = db.Column(db.Integer, db.ForeignKey('service_description.id'), nullable=True)
 
     def __repr__(self):

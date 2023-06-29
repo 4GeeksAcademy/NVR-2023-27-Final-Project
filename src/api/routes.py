@@ -332,12 +332,18 @@ def create_service_request():
             db.session.add(new_request)
             db.session.commit()
             
-            print("STEP 1: ********************** service request create - launching main algorithm **********************")
-            # Launch ñotify_viable_providers 
+            # Main Algorithm
+            # Step1
+            print("********************** STEP 1 of Main Algoruthm ")
             new_request_id = new_request.id
-     
+            max_set = get_viable_providers_max_set(new_request_id)
+            for provider in max_set:
+                provider_profile = ProviderProfile.query.get(provider)
+                provider_name = provider_profile.name
+                print("********* Provider: ", provider_name)
 
 
+            # End of MAin Algorithm
             return jsonify({"message": "Request successfully created"}), 200
         else:
             return jsonify({"message": "User not found"}), 404
@@ -639,33 +645,13 @@ def get_distance_and_time(latitude1, longitude1, latitude2, longitude2):
     except KeyError:
         print("Error with parsing Google API response: Invalid response format")
         return None
-    
 
-# Pass 1: get all providers that provide service
-
-def get_viable_providers_by_service_description(service_description_id):
-    print("STEP 3: inside get_viable_providers **********************")
-    provider_ids = (
-        db.session.query(ProviderProfile.id)
-        .join(ServiceProvided)
-        .filter(ServiceProvided.services_descriptions.has(id=service_description_id))
-        .all()
-    )
-    provider_ids = [provider_id for (provider_id,) in provider_ids]
-    return provider_ids
-
-
-def notify_viable_providers(service_request_id):
-    print("STEP 2: inside notify viable_providers")
+# Main Alorithm, STEP 1: Get max set, all providers who provided requested service
+def get_viable_providers_max_set(service_request_id):
     requested_service_description_id = ServiceRequest.query.get(service_request_id).service_description_id
-    
-    # Step 1: Get Max set of viable providers
-    viable_providers = get_viable_providers_by_service_description(requested_service_description_id)
-    for provider_id in viable_providers:
-        provider = ProviderProfile.query.get(provider_id)
-        print(provider.name)
-   
-
+    providers = ServiceProvided.query.filter_by(service_description_id=requested_service_description_id).all()
+    provider_ids = [provider.provider_id for provider in providers]
+    return provider_ids
 
 
 

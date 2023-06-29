@@ -1274,7 +1274,7 @@ table.calendarModalTable td {
   width: 160px;
   height: 300px;
   display: flex;
-  align-items: flex-start; /* Vertically align to the top */
+  align-items: flex-start;
   justify-content: center;
   overflow: hidden;
   border: none;
@@ -1287,6 +1287,8 @@ table.calendarModalTable td {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  display: flex;
+  align-items: flex-start !important;
   opacity: 0;
   animation: fade-in 0.5s ease-in-out forwards;
 }
