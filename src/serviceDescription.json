@@ -100,7 +100,7 @@
 },
 {
     "category": "electrical",
-    "service": "light fixture installation",
+    "service": "fixture installation",
     "description": "installing or replacing light fixtures, including wiring and connection",
     "unit": "1 fixture",
     "duration": 1,
@@ -120,7 +120,7 @@
 },
 {
     "category": "security",
-    "service": "alarm system repair",
+    "service": "alarm repair",
     "description": "performing basic repairs on alarm systems, including alarms, sensors, or keypad malfunctions", 
     "unit": "1 alarm system",
     "duration": 2,
@@ -130,7 +130,7 @@
 },
 {
     "category": "security",
-    "service": "surveillance camera repair",
+    "service": "camera repair",
     "description": "performing basic repairs on surveillance cameras, addressing issues such as connectivity problems, image quality, or positioning",
     "unit": "Up to 2 surveillance cameras",
     "duration": 2,
@@ -150,7 +150,7 @@
 },
 {
     "category": "handyman",
-    "service": "door hinge adjustment",
+    "service": "hinge adjustment",
     "description": "adjusting door hinges to ensure proper alignment, smooth operation, and eliminate squeaking or sticking",
     "unit": "1 door",
     "duration": 1,
@@ -191,7 +191,7 @@
 },
 {
     "category": "handyman",
-    "service": "small appliance repair",
+    "service": "appliance repair",
      "description": "performing basic repairs on small appliances such as toasters, blenders, coffee makers, irons, electric fans, and food processors whose fix does not require any spare aprts",
     "unit": "1 small appliance",
     "duration": 2,
@@ -211,7 +211,7 @@
 },
 {
     "category": "patching",
-    "service": "partition single painting",
+    "service": "single painting",
     "description": "applying a single coat of paint to interior walls, refreshing the appearance or changing the color",
     "unit": "1 wall of up to 25 square meters",
     "duration": 3,
@@ -221,7 +221,7 @@
 },
 {
     "category": "patching",
-    "service": "partition double painting",
+    "service": "double painting",
     "description": "applying a double coat of paint to interior walls, ensuring full coverage and a smooth finish",
     "unit": "1 wall of up to 25 m²s",
     "duration": 3,
@@ -229,26 +229,30 @@
     "included": "paint provided by client, all else included",
     "price": 80
 },
+
+
 {
     "category": "patching",
-    "service": "facade single painting",
-    "description": "applying a single coat of paint to the ground floor exterior walls, enhancing the visual appeal and protection against weather elements",
+    "service": "ceiling painting",
+    "description": "applying a fresh coat of paint to the ceiling, improving the overall appearance and brightness of the room",
+    "unit": "1 ceiling of up to 25 m²",
+    "duration": 3,
+    "personnel": 1,
+    "included": "paint provided by client, all else included",
+    "price": 70
+    },
+
+{
+    "category": "patching",
+    "service": "facade painting",
+    "description": "applying a double coat of paint to a ground floor exterior wall, enhancing the visual appeal and protection against weather elements",
     "unit": "1 ground floor exterior wall of up to 40 m²",
     "duration": 4,
     "personnel": 1,
     "included": "paint provided by client, all else included",
     "price": 80
 },
-{
-    "category": "patching",
-    "service": "façade double painting",
-    "description": "applying a double coat of paint to the ground floor exterior walls, providing added durability and an even finish",
-    "unit": "1 ground floor exterior wall of up to 150 m²",
-    "duration": 4,
-    "personnel": 1,
-    "included": "paint provided by client, all else included",
-    "price": 60
-},
+
 {
     "category": "patching",
     "service": "wall repair",
@@ -321,7 +325,7 @@
 },
 {
     "category": "extermination",
-    "service": "insect extermination",
+    "service": "insect control",
     "description": "exterminating common household insects, such as ants, cockroaches, and spiders, using safe and effective methods to eliminate infestations and prevent future occurrences.",
     "unit": "1 area of up to 150 m²",
     "duration": 2,
@@ -361,7 +365,7 @@
 },
 {
     "category": "petcare",
-    "service": "dog walk",
+    "service": "dog walking",
     "description": "taking dogs for a walk, providing exercise and stimulation for their well-being",
     "unit": "1 30-minute dog walk",
     "duration": 0.66,
@@ -476,7 +480,7 @@
 
 {
     "category": "wellness",
-    "service": "Chen Tai Chi",
+    "service": "tai chi training",
     "description": "providing guiided one-on-one training in Chen Tai Chi, a traditional Chinese relaxing martial art.",
     "unit": "1 session for 1 client",
     "duration": 1,
@@ -487,7 +491,7 @@
 
 {
     "category": "wellness",
-    "service": "soto Zen meditation",
+    "service": "zen meditation",
     "description": "providing guided Soto Zen meditation practice, a traditional form of seated meditation that focuses on breathing and stillness.",
     "unit": "1 session for 1 client",
     "duration": 0.75,
@@ -529,7 +533,7 @@
 },
 {
     "category": "companionship",
-    "service": "card and board games",
+    "service": "games",
     "description": "engaging individuals in a variety of board and card games, including popular classics such as chess, scrabble, monopoly, poker, and uno, fostering cognitive skills, strategic thinking, social interaction, and entertainment",
     "unit": "1 session of card or board games with 1 client",
     "duration": 1,
