@@ -46,7 +46,7 @@ export const PrivateUser = () => {
     // Requests
 
     const [filteredRequests, setFilteredRequests] = useState([]);
-    
+
     const statusMap = new Map([
         ["Expired", 0],
         ["Requested", 1],
@@ -77,7 +77,7 @@ export const PrivateUser = () => {
         };
 
         //scrolltoTop
-        
+
         checkCredentials();
 
         if (localStorage.getItem("credentials")) {
@@ -88,7 +88,18 @@ export const PrivateUser = () => {
             actions.getUserBookedDays();
             actions.getUserNotifications();
             actions.getServiceDescriptions();
-            actions.alertUser(`welcome back, ${JSON.parse(localStorage.getItem("credentials")).name.toLowerCase()} `, "yellow", "black");
+
+            let nameString = JSON.parse(localStorage.getItem("credentials")).name.toLowerCase();
+            if (nameString.length > 10) {
+                let auxiliaryNameArray = nameString.split(" ");
+                if (auxiliaryNameArray[0].length > 10) {
+                    nameString = auxiliaryNameArray[0][0] + (auxiliaryNameArray[1] ? auxiliaryNameArray[1][0] : "");
+                }
+                else {nameString = auxiliaryNameArray[0]}
+            }
+
+            nameString = "welcome back, " + nameString;
+            actions.alertUser(nameString, "yellow", "black");
 
         }
     }, []);
@@ -131,86 +142,86 @@ export const PrivateUser = () => {
 
     useEffect(() => {
         if (selectedSection !== "myRequests") {
-          return;
+            return;
         }
-      
+
         // Filter userRequests
         let filteredRequests = store.userRequests.filter((request) => {
-          // Filter by status
-          if (selectedFilterRequestsBy !== "All requests" && request.status !== statusMap.get(selectedFilterRequestsBy)) {
-            return false;
-          }
-      
-          // Filter by search bar content
-          if (requestSearchBar.trim() !== "") {
-            const searchTerm = requestSearchBar.toLowerCase();
-            const requestedServiceName =
-              store.serviceDescriptions && store.serviceDescriptions.find((item) => item.id === request.service_description_id).service;
-      
-            if (requestedServiceName && !requestedServiceName.toLowerCase().includes(searchTerm)) {
-              return false;
+            // Filter by status
+            if (selectedFilterRequestsBy !== "All requests" && request.status !== statusMap.get(selectedFilterRequestsBy)) {
+                return false;
             }
-          }
-          return true;
+
+            // Filter by search bar content
+            if (requestSearchBar.trim() !== "") {
+                const searchTerm = requestSearchBar.toLowerCase();
+                const requestedServiceName =
+                    store.serviceDescriptions && store.serviceDescriptions.find((item) => item.id === request.service_description_id).service;
+
+                if (requestedServiceName && !requestedServiceName.toLowerCase().includes(searchTerm)) {
+                    return false;
+                }
+            }
+            return true;
         });
-      
-             
+
+
         // Sort by specified method
         switch (selectedSortRequestsBy) {
-          case "Oldest":
-            filteredRequests.sort(function (firstRequest, secondRequest) {
-              const dateFirstRequest = new Date(firstRequest.date);
-              const dateSecondRequest = new Date(secondRequest.date);
-              return dateFirstRequest - dateSecondRequest;
-            });
-            break;
-      
-          case "Newest":
-            filteredRequests.sort(function (firstRequest, secondRequest) {
-              const dateFirstRequest = new Date(firstRequest.date);
-              const dateSecondRequest = new Date(secondRequest.date);
-              return dateSecondRequest - dateFirstRequest;
-            });
-            break;
-      
-          case "More expensive":
-            if (store.serviceDescriptions && store.userRequests) {
-              filteredRequests.sort((firstRequest, secondRequest) => {
-                const serviceDescriptionId = firstRequest.service_description_id;
-                const priceFirstRequest =
-                  store.serviceDescriptions.find((service) => service.id === serviceDescriptionId).price * firstRequest.quantity;
-      
-                const serviceDescriptionId2 = secondRequest.service_description_id;
-                const priceSecondRequest =
-                  store.serviceDescriptions.find((service) => service.id === serviceDescriptionId2).price * secondRequest.quantity;
-      
-                return priceSecondRequest - priceFirstRequest;
-              });
-            }
-            break;
-      
-          case "More affordable":
-            if (store.serviceDescriptions && store.userRequests) {
-              filteredRequests.sort((firstRequest, secondRequest) => {
-                const serviceDescriptionId = firstRequest.service_description_id;
-                const priceFirstRequest =
-                  store.serviceDescriptions.find((service) => service.id === serviceDescriptionId).price * firstRequest.quantity;
-      
-                const serviceDescriptionId2 = secondRequest.service_description_id;
-                const priceSecondRequest =
-                  store.serviceDescriptions.find((service) => service.id === serviceDescriptionId2).price * secondRequest.quantity;
-      
-                return priceFirstRequest - priceSecondRequest;
-              });
-            }
-            break;
-              
+            case "Oldest":
+                filteredRequests.sort(function (firstRequest, secondRequest) {
+                    const dateFirstRequest = new Date(firstRequest.date);
+                    const dateSecondRequest = new Date(secondRequest.date);
+                    return dateFirstRequest - dateSecondRequest;
+                });
+                break;
+
+            case "Newest":
+                filteredRequests.sort(function (firstRequest, secondRequest) {
+                    const dateFirstRequest = new Date(firstRequest.date);
+                    const dateSecondRequest = new Date(secondRequest.date);
+                    return dateSecondRequest - dateFirstRequest;
+                });
+                break;
+
+            case "More expensive":
+                if (store.serviceDescriptions && store.userRequests) {
+                    filteredRequests.sort((firstRequest, secondRequest) => {
+                        const serviceDescriptionId = firstRequest.service_description_id;
+                        const priceFirstRequest =
+                            store.serviceDescriptions.find((service) => service.id === serviceDescriptionId).price * firstRequest.quantity;
+
+                        const serviceDescriptionId2 = secondRequest.service_description_id;
+                        const priceSecondRequest =
+                            store.serviceDescriptions.find((service) => service.id === serviceDescriptionId2).price * secondRequest.quantity;
+
+                        return priceSecondRequest - priceFirstRequest;
+                    });
+                }
+                break;
+
+            case "More affordable":
+                if (store.serviceDescriptions && store.userRequests) {
+                    filteredRequests.sort((firstRequest, secondRequest) => {
+                        const serviceDescriptionId = firstRequest.service_description_id;
+                        const priceFirstRequest =
+                            store.serviceDescriptions.find((service) => service.id === serviceDescriptionId).price * firstRequest.quantity;
+
+                        const serviceDescriptionId2 = secondRequest.service_description_id;
+                        const priceSecondRequest =
+                            store.serviceDescriptions.find((service) => service.id === serviceDescriptionId2).price * secondRequest.quantity;
+
+                        return priceFirstRequest - priceSecondRequest;
+                    });
+                }
+                break;
+
         }
-      
+
         setFilteredRequests(filteredRequests);
-      }, [selectedSortRequestsBy, selectedFilterRequestsBy, requestSearchBar, selectedSection, store.userRequests, store.serviceDescriptions]);
-    
-    
+    }, [selectedSortRequestsBy, selectedFilterRequestsBy, requestSearchBar, selectedSection, store.userRequests, store.serviceDescriptions]);
+
+
     // UI handle functions
 
     const handleClickHome = () => {
@@ -309,7 +320,7 @@ export const PrivateUser = () => {
             });
         };
     }
-    
+
     else {
     }
 
@@ -352,23 +363,23 @@ export const PrivateUser = () => {
                             id="offcanvasScrolling"
                             aria-labelledby="offcanvasScrollingLabel"
                         >
-                        <div>
-                            <span
-                                className=""
-                                data-bs-dismiss="offcanvas"
-                                aria-label="Close"
-                            >
-                                <span className="ps-1 pt-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="m336-294 144-144 144 144 42-42-144-144 144-144-42-42-144 144-144-144-42 42 144 144-144 144 42 42ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm0-600v600-600Z"/></svg>
+                            <div>
+                                <span
+                                    className=""
+                                    data-bs-dismiss="offcanvas"
+                                    aria-label="Close"
+                                >
+                                    <span className="ps-1 pt-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="m336-294 144-144 144 144 42-42-144-144 144-144-42-42-144 144-144-144-42 42 144 144-144 144 42 42ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm0-600v600-600Z" /></svg>
+                                    </span>
+                                    <span> close </span>
                                 </span>
-                                <span> close </span>
-                            </span>
-                        </div>
+                            </div>
                             {/* Offcanvas ACCORDION */}
                             {/* SIGN-OUT */}
                             <div>
                                 <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16  "><path d="M450-438v-406h60v406h-60Zm30 320q-74 0-139.5-28.5T226-224q-49-49-77.5-114.5T120-478q0-80 34-149.5T250-751l42 42q-53 43-82.5 102.5T180-478.022Q180-353 267.5-265.5 355-178 480-178q125.357 0 212.679-87.5Q780-353 780-478.022 780-547 750.5-607.5 721-668 670-709l43-42q60 51 93.5 122T840-478q0 74-28.5 139.5t-77 114.5q-48.5 49-114 77.5T480-118Z"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16  "><path d="M450-438v-406h60v406h-60Zm30 320q-74 0-139.5-28.5T226-224q-49-49-77.5-114.5T120-478q0-80 34-149.5T250-751l42 42q-53 43-82.5 102.5T180-478.022Q180-353 267.5-265.5 355-178 480-178q125.357 0 212.679-87.5Q780-353 780-478.022 780-547 750.5-607.5 721-668 670-709l43-42q60 51 93.5 122T840-478q0 74-28.5 139.5t-77 114.5q-48.5 49-114 77.5T480-118Z" /></svg>
                                 </span>
                                 <button onClick={handleSignout}>
                                     Sign Out

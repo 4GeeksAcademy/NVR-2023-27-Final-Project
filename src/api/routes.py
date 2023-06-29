@@ -310,8 +310,8 @@ def get_user_notifications():
             "error": str(e)
         }), 500
 
- # PRIVATE USER endpoints - create SERVICE REQUEST
 
+ # PRIVATE USER endpoints - create SERVICE REQUEST
 
 @api.route("/createrequest", methods=["POST"])
 @jwt_required()
@@ -338,6 +338,14 @@ def create_service_request():
             # Main Algorithm
             # Step1.1
             print("********************** STEP 1.1 of Main Algoruthm ")
+            def get_viable_providers_max_set(service_request_id):
+                requested_service_description_id = ServiceRequest.query.get(
+                    service_request_id).service_description_id
+                providers = ServiceProvided.query.filter_by(
+                    service_description_id=requested_service_description_id).all()
+                provider_ids = [provider.provider_id for provider in providers]
+                return provider_ids
+
             new_request_id = new_request.id
             viable_providers = get_viable_providers_max_set(new_request_id)
             for i, provider in enumerate(viable_providers, start=1):
@@ -353,7 +361,6 @@ def create_service_request():
                 provider_profile = ProviderProfile.query.get(provider)
                 provider_name = provider_profile.name
                 print(f"** Provider number {i}: {provider_name}")
-            
             
             # Step 1.3: Remove providers who do not meet criteria
             print("********************** STEP 1.3 of Main Algorithm ")
@@ -383,6 +390,22 @@ def create_service_request():
                 provider_profile = ProviderProfile.query.get(provider)
                 provider_name = provider_profile.name
                 print(f"** Provider number {i}: {provider_name}")
+
+            # Step 1.4: Remove providers who are not avaiable in the respective time slot
+
+            def get_day_of_week(date):
+                return date.weekday()
+
+            def get_time_slot(time_str):
+                time = datetime.strptime(time_str, '%H:%M')
+                
+                if time < datetime.strptime('13:00', '%H:%M'):
+                    return 1
+                elif time < datetime.strptime('19:00', '%H:%M'):
+                    return 2
+                else:
+                    return 3
+
 
 
 
@@ -688,16 +711,6 @@ def get_distance_and_time(latitude1, longitude1, latitude2, longitude2):
         print("Error with parsing Google API response: Invalid response format")
         return None
 
-# Main Alorithm, STEP 1: Get max set, all providers who provided requested service
-
-
-def get_viable_providers_max_set(service_request_id):
-    requested_service_description_id = ServiceRequest.query.get(
-        service_request_id).service_description_id
-    providers = ServiceProvided.query.filter_by(
-        service_description_id=requested_service_description_id).all()
-    provider_ids = [provider.provider_id for provider in providers]
-    return provider_ids
 
 
 """ def get_distance_time_between_providers():
