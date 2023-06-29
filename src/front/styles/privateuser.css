@@ -249,17 +249,15 @@ hr {
   height: 0.35px !important;
 }
 
-/* end of OFFCANVAS */
+/* OFFCANVAS content */
 
 .settingsLabel {
+  font-weight: 400;
   font-variant: small-caps;
-  font-size: 0.875rem;
-  letter-spacing: 0.23rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1rem;
 }
 
-.settingsLabel::after {
-  font-size: 3rem;
-}
 
 .accordion-button::after {
   transform: scale(0.5);
@@ -268,6 +266,13 @@ hr {
 .accordion-button.collapsed::after {
   transform: scale(0.5);
 }
+
+.offCanvasDropDownIcon {
+  position: absolute;
+  left: 9rem;
+}
+
+/* Second Navbar */
 
 .searchRibbon {
   border-top: .7px solid;
