@@ -16,10 +16,10 @@ import calendar
 # Imports for Google Distance MAtrix API calls
 import requests
 
-#*********************************************
+# *********************************************
 
 
-# Bilerplate code 
+# Bilerplate code
 
 api = Blueprint('api', __name__)
 
@@ -34,6 +34,7 @@ def handle_hello():
     return jsonify(response_body), 200
 
 # REGISTER endpoints
+
 
 @api.route("/users", methods=["POST"])
 def create_user():
@@ -108,7 +109,8 @@ def signin_provider():
     provider = ProviderProfile.query.filter_by(
         email=body["email"], password=body["password"]).first()
     if provider:
-        token = create_access_token(identity=provider.email , expires_delta=timedelta(hours=1))
+        token = create_access_token(
+            identity=provider.email, expires_delta=timedelta(hours=1))
         return jsonify({"token": token}), 200
     return jsonify({"error": "error login"}), 401
 
@@ -119,7 +121,8 @@ def signin_user():
     user = UserProfile.query.filter_by(
         email=body["email"], password=body["password"]).first()
     if user:
-        access_token = create_access_token(identity=user.email , expires_delta=timedelta(hours=1))
+        access_token = create_access_token(
+            identity=user.email, expires_delta=timedelta(hours=1))
         return jsonify({"token": access_token}), 200
     return jsonify({"error": "error login"}), 401
 
@@ -307,8 +310,8 @@ def get_user_notifications():
             "error": str(e)
         }), 500
 
-
  # PRIVATE USER endpoints - create SERVICE REQUEST
+
 
 @api.route("/createrequest", methods=["POST"])
 @jwt_required()
@@ -331,7 +334,7 @@ def create_service_request():
             )
             db.session.add(new_request)
             db.session.commit()
-            
+
             # Main Algorithm
             # Step1.1
             print("********************** STEP 1.1 of Main Algoruthm ")
@@ -340,15 +343,46 @@ def create_service_request():
             for i, provider in enumerate(viable_providers, start=1):
                 provider_profile = ProviderProfile.query.get(provider)
                 provider_name = provider_profile.name
-                print(f"********* Provider number {i}: {provider_name}")
+                print(f"*** Provider number {i}: {provider_name}")
 
             # Step 1.2: Remove excluded providers
             print("********************** STEP 1.2 of Main Algoruthm ")
-            viable_providers = [provider for provider in viable_providers if not Exclusion.query.filter_by(user_id=user.id, provider_id=provider).first()]
+            viable_providers = [provider for provider in viable_providers if not Exclusion.query.filter_by(
+                user_id=user.id, provider_id=provider).first()]
             for i, provider in enumerate(viable_providers, start=1):
                 provider_profile = ProviderProfile.query.get(provider)
                 provider_name = provider_profile.name
-                print(f"********* Provider number {i}: {provider_name}")
+                print(f"** Provider number {i}: {provider_name}")
+            
+            
+            # Step 1.3: Remove providers who do not meet criteria
+            print("********************** STEP 1.3 of Main Algorithm ")
+
+            def meets_criteria(provider):
+                provider_profile = ProviderProfile.query.get(provider)
+
+                # Check if provider has the required certificate
+                if user.must_have_certificate and not provider_profile.has_certificate:
+                    print("Exclusion over lack of certificate")
+                    return False
+
+                # Check if provider meets the required experience
+                if provider_profile.experience < user.required_experience:
+                    print("Exclusion over insufficient experience")
+                    return False
+
+                # Check if provider meets the required rating
+                if user.required_rating is not None and (provider_profile.average_rating is None or provider_profile.average_rating < user.required_rating):
+                    print("Exclusion over insufficient rating")
+                    return False
+
+                return True
+
+            viable_providers = [provider for provider in viable_providers if meets_criteria(provider)]
+            for i, provider in enumerate(viable_providers, start=1):
+                provider_profile = ProviderProfile.query.get(provider)
+                provider_name = provider_profile.name
+                print(f"** Provider number {i}: {provider_name}")
 
 
 
@@ -358,6 +392,7 @@ def create_service_request():
         else:
             return jsonify({"message": "User not found"}), 404
     except Exception as e:
+        print (e)
         return jsonify({
             "message": "An error occurred",
             "error": str(e)
@@ -412,8 +447,8 @@ def get_user_booked_days():
             "error": str(e)
         }), 500
 
-
  # PRIVATE USER endpoints - DELETE service request
+
 
 @api.route("/deleteservicerequest/<int:service_request_id>", methods=["DELETE"])
 @jwt_required()
@@ -456,8 +491,8 @@ def delete_service_request(service_request_id):
             "error": str(e)
         }), 500
 
-
  # PRIVATE USER endpoints - UPDATE and RENEW service request
+
 
 @api.route("/updateandrenewservicerequest/<int:service_request_id>", methods=["PUT"])
 @jwt_required()
@@ -523,11 +558,8 @@ def updateandrenew_service_request(service_request_id):
 
                 db.session.commit()
 
-                # Launch Notify VIABLE PROVIDERS 
+                # Launch Notify VIABLE PROVIDERS
                 service_request_id = renewed_service_request.id
-
-
-
 
                 return jsonify({"message": "Service request updated successfully"}), 200
             else:
@@ -599,7 +631,7 @@ def get_provider_details(provider_id):
         else:
             return jsonify({"message": "Provider not found"}), 404
     except Exception as e:
-        print("exception:",e)
+        print("exception:", e)
         return jsonify({"message": "An error occurred", "error": str(e)}), 500
 
 
@@ -623,7 +655,7 @@ def get_service_request_passwords(service_request_id):
         return jsonify({"message": "An error occurred", "error": str(e)}), 500
 
 
-#*************************
+# *************************
 # Main Algorytm functions
 
 # Google API distane matrix call
@@ -657,23 +689,15 @@ def get_distance_and_time(latitude1, longitude1, latitude2, longitude2):
         return None
 
 # Main Alorithm, STEP 1: Get max set, all providers who provided requested service
+
+
 def get_viable_providers_max_set(service_request_id):
-    requested_service_description_id = ServiceRequest.query.get(service_request_id).service_description_id
-    providers = ServiceProvided.query.filter_by(service_description_id=requested_service_description_id).all()
+    requested_service_description_id = ServiceRequest.query.get(
+        service_request_id).service_description_id
+    providers = ServiceProvided.query.filter_by(
+        service_description_id=requested_service_description_id).all()
     provider_ids = [provider.provider_id for provider in providers]
     return provider_ids
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 """ def get_distance_time_between_providers():
