@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, UserProfile, ProviderProfile, Address, Exclusion, ServiceRequest, Notification, ServiceProvided, ServiceDescription
+from api.models import db, UserProfile, ProviderProfile, Address, Exclusion, ServiceRequest, Notification, ProviderAvailability, ServiceProvided, ServiceDescription
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -310,8 +310,8 @@ def get_user_notifications():
             "error": str(e)
         }), 500
 
-
  # PRIVATE USER endpoints - create SERVICE REQUEST
+
 
 @api.route("/createrequest", methods=["POST"])
 @jwt_required()
@@ -337,7 +337,8 @@ def create_service_request():
 
             # Main Algorithm
             # Step1.1
-            print("********************** STEP 1.1 of Main Algoruthm ")
+            print("********************** STEP 1.1: Get Max set ")
+
             def get_viable_providers_max_set(service_request_id):
                 requested_service_description_id = ServiceRequest.query.get(
                     service_request_id).service_description_id
@@ -354,16 +355,17 @@ def create_service_request():
                 print(f"*** Provider number {i}: {provider_name}")
 
             # Step 1.2: Remove excluded providers
-            print("********************** STEP 1.2 of Main Algoruthm ")
+            print("********************** STEP 1.2; remove excluded providers")
             viable_providers = [provider for provider in viable_providers if not Exclusion.query.filter_by(
                 user_id=user.id, provider_id=provider).first()]
             for i, provider in enumerate(viable_providers, start=1):
                 provider_profile = ProviderProfile.query.get(provider)
                 provider_name = provider_profile.name
                 print(f"** Provider number {i}: {provider_name}")
-            
+
             # Step 1.3: Remove providers who do not meet criteria
-            print("********************** STEP 1.3 of Main Algorithm ")
+            print(
+                "********************** STEP 1.3: exclude providers who do not meet criteria")
 
             def meets_criteria(provider):
                 provider_profile = ProviderProfile.query.get(provider)
@@ -385,20 +387,21 @@ def create_service_request():
 
                 return True
 
-            viable_providers = [provider for provider in viable_providers if meets_criteria(provider)]
+            viable_providers = [
+                provider for provider in viable_providers if meets_criteria(provider)]
             for i, provider in enumerate(viable_providers, start=1):
                 provider_profile = ProviderProfile.query.get(provider)
                 provider_name = provider_profile.name
                 print(f"** Provider number {i}: {provider_name}")
 
             # Step 1.4: Remove providers who are not avaiable in the respective time slot
+            print("********************** STEP 1.4: exclude unavaiable providers")
 
             def get_day_of_week(date):
                 return date.weekday()
 
-            def get_time_slot(time_str):
-                time = datetime.strptime(time_str, '%H:%M')
-                
+            def get_time_slot(time_string):
+                time = datetime.strptime(time_string, '%H:%M')
                 if time < datetime.strptime('13:00', '%H:%M'):
                     return 1
                 elif time < datetime.strptime('19:00', '%H:%M'):
@@ -406,6 +409,31 @@ def create_service_request():
                 else:
                     return 3
 
+            new_request_day_of_the_week = get_day_of_week(new_request.date)
+            new_request_time_slot = get_time_slot(new_request.time)
+            print("Selected day:", new_request_day_of_the_week,
+                  "Time slot: ", new_request_time_slot)
+
+            def is_provider_available(provider):
+                provider_availability = ProviderAvailability.query.filter_by(
+                    provider_id=provider,
+                    day=new_request_day_of_the_week,
+                    time_slot=new_request_time_slot
+                ).first()
+                isAvaiable = provider_availability is not None
+                print("Avaiability found?" , isAvaiable)
+                return isAvaiable
+
+
+            for provider in viable_providers:
+                print(provider)
+                if not is_provider_available(provider):
+                    viable_providers.remove(provider)
+            
+            for i, provider in enumerate(viable_providers, start=1):
+                provider_profile = ProviderProfile.query.get(provider)
+                provider_name = provider_profile.name
+                print(f"** Provider number {i}: {provider_name}")
 
 
 
@@ -415,7 +443,7 @@ def create_service_request():
         else:
             return jsonify({"message": "User not found"}), 404
     except Exception as e:
-        print (e)
+        print(e)
         return jsonify({
             "message": "An error occurred",
             "error": str(e)
@@ -424,8 +452,8 @@ def create_service_request():
 
  #  PRIVATE USER endpoints - CALENDAR - get Booked days
 
-@api.route("/getuserbookeddays", methods=["GET"])
-@jwt_required()
+@ api.route("/getuserbookeddays", methods=["GET"])
+@ jwt_required()
 def get_user_booked_days():
     try:
         user_email = get_jwt_identity()
@@ -450,12 +478,12 @@ def get_user_booked_days():
                 unique_dates[request.date].add(
                     request.service_description.category)
 
-            result = []
+            result=[]
             for unique_date, categories in unique_dates.items():
                 if len(categories) > 1:
-                    category = "multiple"
+                    category="multiple"
                 else:
-                    category = categories.pop()
+                    category=categories.pop()
                 result.append({
                     "date": unique_date.strftime("%Y-%m-%d"),
                     "category": category
@@ -473,28 +501,28 @@ def get_user_booked_days():
  # PRIVATE USER endpoints - DELETE service request
 
 
-@api.route("/deleteservicerequest/<int:service_request_id>", methods=["DELETE"])
-@jwt_required()
+@ api.route("/deleteservicerequest/<int:service_request_id>", methods = ["DELETE"])
+@ jwt_required()
 def delete_service_request(service_request_id):
     try:
-        user_email = get_jwt_identity()
-        user = UserProfile.query.filter_by(email=user_email).first()
+        user_email=get_jwt_identity()
+        user=UserProfile.query.filter_by(email = user_email).first()
 
         if user:
-            service_request = ServiceRequest.query.get(service_request_id)
+            service_request=ServiceRequest.query.get(service_request_id)
 
             if service_request:
-                provider_id = service_request.provider_id
+                provider_id=service_request.provider_id
 
                 # Creates a notification for the provider, if it already has a provider_id
                 if provider_id is not None:
-                    notification = Notification(
-                        type_of_notification=0,
-                        status=1,
-                        publishing_date_time=datetime.now(),
+                    notification=Notification(
+                        type_of_notification = 0,
+                        status = 1,
+                        publishing_date_time = datetime.now(),
                         # use {} to include vars from serviceRequest
-                        message="Service cancelled.",
-                        provider_id=provider_id,
+                        message = "Service cancelled.",
+                        provider_id = provider_id,
                     )
 
                     db.session.add(notification)
@@ -517,72 +545,73 @@ def delete_service_request(service_request_id):
  # PRIVATE USER endpoints - UPDATE and RENEW service request
 
 
-@api.route("/updateandrenewservicerequest/<int:service_request_id>", methods=["PUT"])
-@jwt_required()
+@ api.route("/updateandrenewservicerequest/<int:service_request_id>", methods = ["PUT"])
+@ jwt_required()
 def updateandrenew_service_request(service_request_id):
     try:
-        user_email = get_jwt_identity()
-        user = UserProfile.query.filter_by(email=user_email).first()
+        user_email=get_jwt_identity()
+        user=UserProfile.query.filter_by(email = user_email).first()
 
         if user:
-            service_request = ServiceRequest.query.get(service_request_id)
+            service_request=ServiceRequest.query.get(service_request_id)
+            renewed_service_request=None
 
             if service_request:
                 if service_request.recurrence == 1:
-                    service_request.status = 4
+                    service_request.status=4
                 else:
-                    service_request.status = 5
+                    service_request.status=5
 
-                    renewed_service_request = ServiceRequest()
-                    renewed_service_request.status = 1
-                    renewed_service_request.time = service_request.time
-                    renewed_service_request.recurrence = service_request.recurrence
-                    renewed_service_request.quantity = service_request.quantity
-                    renewed_service_request.service_description_id = service_request.service_description_id
-                    renewed_service_request.user_id = service_request.user_id
-                    renewed_service_request.provider_id = None
-                    renewed_service_request.address_id = service_request.address_id
-                    renewed_service_request.verbal_password = service_request.verbal_password
-                    renewed_service_request.qr_password = service_request.qr_password
+                    renewed_service_request=ServiceRequest()
+                    renewed_service_request.status=1
+                    renewed_service_request.time=service_request.time
+                    renewed_service_request.recurrence=service_request.recurrence
+                    renewed_service_request.quantity=service_request.quantity
+                    renewed_service_request.service_description_id=service_request.service_description_id
+                    renewed_service_request.user_id=service_request.user_id
+                    renewed_service_request.provider_id=None
+                    renewed_service_request.address_id=service_request.address_id
+                    renewed_service_request.verbal_password=service_request.verbal_password
+                    renewed_service_request.qr_password=service_request.qr_password
 
-                    renewed_date = service_request.date
+                    renewed_date=service_request.date
 
                     if service_request.recurrence == 2:
-                        year = service_request.date.year
-                        month = service_request.date.month
-                        day = service_request.date.day
+                        year=service_request.date.year
+                        month=service_request.date.month
+                        day=service_request.date.day
 
                         if month == 1 and day >= 29:
                             if calendar.isleap(year):
-                                renewed_date = date(year, 2, 29)
+                                renewed_date=date(year, 2, 29)
                             else:
-                                renewed_date = date(year, 2, 28)
+                                renewed_date=date(year, 2, 28)
                         else:
-                            next_month = month + 1
+                            next_month=month + 1
 
                             if next_month in [4, 6, 9, 11] and day == 31:
-                                day = 30
+                                day=30
 
                             if next_month > 12:
-                                next_month = 1
+                                next_month=1
                                 year += 1
-                            renewed_date = date(year, next_month, day)
+                            renewed_date=date(year, next_month, day)
 
-                        renewed_service_request.date = renewed_date
+                        renewed_service_request.date=renewed_date
 
                     elif service_request.recurrence == 3:
-                        renewed_date += timedelta(days=7)
+                        renewed_date += timedelta(days = 7)
                     else:
-                        renewed_date += timedelta(days=1)
+                        renewed_date += timedelta(days = 1)
 
-                    renewed_service_request.date = renewed_date
+                    renewed_service_request.date=renewed_date
 
                     db.session.add(renewed_service_request)
 
                 db.session.commit()
 
                 # Launch Notify VIABLE PROVIDERS
-                service_request_id = renewed_service_request.id
+                # service_request_id = renewed_service_request.id
 
                 return jsonify({"message": "Service request updated successfully"}), 200
             else:
@@ -599,22 +628,22 @@ def updateandrenew_service_request(service_request_id):
 
 # PRIVATE USER endpoints - rate Provider
 
-@api.route("/rateprovider/<int:service_request_id>/<float:rating>", methods=["PUT"])
-@jwt_required()
+@ api.route("/rateprovider/<int:service_request_id>/<float:rating>", methods = ["PUT"])
+@ jwt_required()
 def rate_provider(service_request_id, rating):
     try:
-        user_email = get_jwt_identity()
-        user = UserProfile.query.filter_by(email=user_email).first()
+        user_email=get_jwt_identity()
+        user=UserProfile.query.filter_by(email = user_email).first()
 
         # updates Provider ratings
         if user:
-            service_request = ServiceRequest.query.get(service_request_id)
+            service_request=ServiceRequest.query.get(service_request_id)
 
             if service_request:
-                provider = ProviderProfile.query.get(
+                provider=ProviderProfile.query.get(
                     service_request.provider_id)
                 if provider:
-                    provider.average_rating = (
+                    provider.average_rating=(
                         (provider.average_rating * provider.rating_counter) + rating
                     ) / (provider.rating_counter + 1)
                     provider.rating_counter += 1
@@ -636,13 +665,13 @@ def rate_provider(service_request_id, rating):
 
 # PRIVATE USER endpoints - GET Provider details
 
-@api.route("/getproviderdetails/<int:provider_id>", methods=["GET"])
-@jwt_required()
+@ api.route("/getproviderdetails/<int:provider_id>", methods = ["GET"])
+@ jwt_required()
 def get_provider_details(provider_id):
     try:
-        provider = ProviderProfile.query.get(provider_id)
+        provider=ProviderProfile.query.get(provider_id)
         if provider:
-            provider_details = {
+            provider_details={
                 "name": provider.name,
                 "has_certificate": provider.has_certificate,
                 "experience": provider.experience,
