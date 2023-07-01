@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { ServiceRollUp } from "../component/serviceRollUp";
 import { RequestRollUp } from "../component/requestRollUp"
+import { NotificationRollUp } from "../component/notificationRollUp";
 import "../../styles/privateuser.css";
 
 export const PrivateUser = () => {
@@ -51,15 +52,33 @@ export const PrivateUser = () => {
     const [selectedFilterRequestsBy, setSelectedFilterRequestsBy] = useState("All requests")
     const [requestsSearchBar, setRequestsSearchBar] = useState("");
 
+    const statusMap = new Map([
+        ["Expired", 0],
+        ["Requested", 1],
+        ["Taken", 2],
+        ["Safeguarded", 3],
+        ["Provided", 4],
+        ["Renewed", 5],
+        ["Reviewed", 6],
+        ["Completed", 7],
+        ["Sanctioned", 8]
+    ]);
 
     // Notifications
 
     const [filteredNotifications, setFilteredNotifications] = useState([]);
 
-    const [selectedSortNotificationssBy, setSelectedSortNotificationsBy] = useState("Newest")
-    const [selectedFilterNotificationssBy, setSelectedFilterNotificationsBy] = useState("All notifications")
+    const [selectedSortNotificationsBy, setSelectedSortNotificationsBy] = useState("Newest")
+    const [selectedFilterNotificationsBy, setSelectedFilterNotificationsBy] = useState("All notifications")
     const [notificationsSearchBar, setNotificationsSearchBar] = useState("");
 
+    const typeOfNotificationMap = new Map([
+        ["Acceptances", 1],
+        ["Cancellations", 2],
+        ["Promotional", 3],
+        ["Support", 4],
+
+    ])
 
 
     // UseEffects
@@ -70,8 +89,6 @@ export const PrivateUser = () => {
                 navigate("/");
             }
         };
-
-        //scrolltoTop
 
         checkCredentials();
 
@@ -133,6 +150,7 @@ export const PrivateUser = () => {
         }
 
     }, [store.serviceDescriptions]);
+
 
     // Requests Sort and Filter
 
@@ -218,6 +236,50 @@ export const PrivateUser = () => {
     }, [selectedSortRequestsBy, selectedFilterRequestsBy, requestsSearchBar, selectedSection, store.userRequests, store.serviceDescriptions]);
 
 
+    // Notifications Sort and Filter
+
+    useEffect(() => {
+        if (selectedSection !== "notifications") {
+            return;
+        }
+
+        // Filter userNotifications
+        let filteredNotifications = store.userNotifications.filter((notification) => {
+            // Filter by status
+            if (selectedFilterNotificationsBy !== "All notifications" && notification.type_of_notification !== typeOfNotificationMap.get(selectedFilterNotificationsBy)) {
+                return false;
+            }
+
+            // Filter by search bar content
+            if (notificationsSearchBar.trim() !== "") {
+                const searchTerm = notificationsSearchBar.toLowerCase();
+                if (!notification.message.toLowerCase().includes(searchTerm)) {
+                    return false;
+                }
+            }
+            return true;
+        });
+
+        // Sort by specified method
+        switch (selectedSortNotificationsBy) {
+            case "Oldest":
+                filteredNotifications.sort(function (firstNotification, secondNotification) {
+                    return new Date(firstNotification.publishing_date_time) - new Date(secondNotification.publishing_date_time);
+                });
+                break;
+
+            case "Newest":
+                filteredNotifications.sort(function (firstNotification, secondNotification) {
+                    return new Date(secondNotification.publishing_date_time) - new Date(firstNotification.publishing_date_time);
+                    ;
+                });
+                break;
+        }
+
+        setFilteredNotifications(filteredNotifications);
+    }, [selectedSortNotificationsBy, selectedFilterNotificationsBy, notificationsSearchBar, selectedSection, store.userNotifications]);
+
+
     // UI handle variable and functions
 
     const handleClickHome = () => {
@@ -278,18 +340,6 @@ export const PrivateUser = () => {
         setNotificationsSearchBar(event.target.value);
     };
 
-    const statusMap = new Map([
-        ["Expired", 0],
-        ["Requested", 1],
-        ["Taken", 2],
-        ["Safeguarded", 3],
-        ["Provided", 4],
-        ["Renewed", 5],
-        ["Reviewed", 6],
-        ["Completed", 7],
-        ["Sanctioned", 8]
-    ]);
-
 
     // Section initialization
 
@@ -342,8 +392,6 @@ export const PrivateUser = () => {
         };
     }
 
-    else {
-    }
 
     // Main JSX
     return (
@@ -629,8 +677,6 @@ export const PrivateUser = () => {
                                         <li className="list-item" onClick={() => { handleClickSortRequestsBy("More expensive") }}>
                                             More expensive
                                         </li>
-
-
                                     </ul>
                                 </div>
                                 {/* Filter by Dropdown*/}
@@ -714,7 +760,7 @@ export const PrivateUser = () => {
                                         <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg>
                                         </span>
-                                        <span className="pullDownLabel italic ms-1">{selectedSortNotificationssBy}</span>
+                                        <span className="pullDownLabel italic ms-1">{selectedSortNotificationsBy}</span>
                                     </button>
                                     <ul className="dropdown-menu rounded-0" key="sortByList">
                                         <li className="list-item" onClick={() => { handleClickSortNotificationsBy("Newest") }}>
@@ -740,16 +786,16 @@ export const PrivateUser = () => {
                                         <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg>
                                         </span>
-                                        <span className="pullDownLabel italic ms-1">{selectedFilterNotificationssBy}</span>
+                                        <span className="pullDownLabel italic ms-1">{selectedFilterNotificationsBy}</span>
                                     </button>
                                     <ul className="dropdown-menu rounded-0">
-                                        <li className="list-item" key={0} onClick={() => handleClickFilterNotificationsBy("All requests")}>
+                                        <li className="list-item" key={0} onClick={() => handleClickFilterNotificationsBy("All notifications")}>
                                             All notifications
                                         </li>
                                         <li className="list-item" key={1} onClick={() => handleClickFilterNotificationsBy("Acceptances")}>
                                             Acceptances
                                         </li>
-                                        <li className="list-item" key={2} onClick={() => handleClickFilterNotificationsBy("Cancelations")}>
+                                        <li className="list-item" key={2} onClick={() => handleClickFilterNotificationsBy("Cancellations")}>
                                             Cancellations
                                         </li>
                                         <li className="list-item" key={3} onClick={() => handleClickFilterNotificationsBy("Promotional")}>
@@ -810,12 +856,14 @@ export const PrivateUser = () => {
                     {selectedSection === "notifications" && (
                         <div className="main container-fluid m-0 p-0 g-0">
                             <div className="row d-flex justify content-center ">
-                               <span>{selectedSortNotificationssBy}</span>
-                               <span>{selectedFilterNotificationssBy}</span>
-                               <span>{notificationsSearchBar}</span>
+                                {filteredNotifications && filteredNotifications.map((filteredNotification) => (
+                                    <div className="col-12 d-flex justify-content-center" key={filteredNotification.id}>
+                                        <div><NotificationRollUp notificationObject={filteredNotification} /></div>
+                                    </div>
+                                ))}
                             </div>
                         </div>)
-                    }                   
+                    }
                 </main>
             </div>
         </>

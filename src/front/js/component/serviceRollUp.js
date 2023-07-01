@@ -44,7 +44,7 @@ export const ServiceRollUp = (props) => {
         durationString = `${parseInt(duration * 60)} minutes`
     }
     else if (duration === 1) { durationString = "1 hour" }
-    else { durationString = `${parseInt(duration)} hours` }
+    else { durationString = `${parseFloat(duration)} hours` }
     const priceString = price + ".00€"
 
     // Main JSX
