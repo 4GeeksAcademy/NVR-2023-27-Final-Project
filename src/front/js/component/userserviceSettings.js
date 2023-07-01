@@ -8,7 +8,7 @@ export const UserServiceSettings = () => {
 
   const experienceMap = new Map([
     [1, "1 year"],
-    [2, "1-3 years"],
+    [2, "1 to 3 years"],
     [3, "over 3 years"],
   ]);
 
@@ -34,7 +34,39 @@ export const UserServiceSettings = () => {
     }
     else (setNewUserSettings({...newUserSettings, required_experience: newUserSettings.required_experience +1}))
   }
+
   // Subcomponents
+  
+  const StarRatingPicker = () => {
+    const requiredRating = newUserSettings.required_rating;
+  
+    const renderStar = (indexOfStar) => {
+      if (indexOfStar <= Math.floor(requiredRating)) {
+        return <span className="filled-star">
+          <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12"><path d="m233-80 65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Z"/></svg>
+        </span>;
+      } else if (indexOfStar === Math.floor(requiredRating) + 1 && requiredRating % 1 !== 0) {
+        return <span className="half-filled-star">
+          <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12"><path d="m480-299 157 95-42-178 138-120-182-16-71-168v387ZM233-80l65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Z"/></svg>
+
+        </span>;
+      } else {
+        return <span className="empty-star">
+          <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12"><path d="m323-205 157-94 157 95-42-178 138-120-182-16-71-168-71 167-182 16 138 120-42 178ZM233-80l65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Zm247-355Z"/></svg>
+        </span>;
+      }
+    };
+    
+  
+    return (
+      <div className="star-rating">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <span key={i}>{renderStar(i)}</span>
+        ))}
+      </div>
+    );
+  };
+
 
   // Pre-processing Props
 
@@ -58,7 +90,7 @@ export const UserServiceSettings = () => {
             <span className="settingsTitles">
               experience:
             </span>
-            <span className="settingsValue ms-1">
+            <span className="settingsValue ms-2">
               {experienceMap.get(newUserSettings.required_experience)}
             </span>
             <span>
@@ -66,7 +98,10 @@ export const UserServiceSettings = () => {
               onClick = {handleIncreaseRequiredExperience}>+</button>
             </span>
         </div>
-        <div>{newUserSettings.required_rating}</div>
+          <div className="mt-1 d-flex">
+            <span className="settingsTitles">rating:</span>
+            <span className="ms-2 "><StarRatingPicker /></span>
+          </div>
       </div>
     </>
   );
