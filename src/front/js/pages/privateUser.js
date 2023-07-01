@@ -47,24 +47,19 @@ export const PrivateUser = () => {
 
     const [filteredRequests, setFilteredRequests] = useState([]);
 
-    const statusMap = new Map([
-        ["Expired", 0],
-        ["Requested", 1],
-        ["Taken", 2],
-        ["Safeguarded", 3],
-        ["Provided", 4],
-        ["Renewed", 5],
-        ["Reviewed", 6],
-        ["Completed", 7],
-        ["Sanctioned", 8]
-    ]);
-
-    const [selectedSortRequestsBy, setSelectedSorRequeststBy] = useState("Newest")
+    const [selectedSortRequestsBy, setSelectedSortRequeststBy] = useState("Newest")
     const [selectedFilterRequestsBy, setSelectedFilterRequestsBy] = useState("All requests")
-    const [requestSearchBar, setRequestSearchBar] = useState("");
+    const [requestsSearchBar, setRequestsSearchBar] = useState("");
 
 
     // Notifications
+
+    const [filteredNotifications, setFilteredNotifications] = useState([]);
+
+    const [selectedSortNotificationssBy, setSelectedSortNotificationsBy] = useState("Newest")
+    const [selectedFilterNotificationssBy, setSelectedFilterNotificationsBy] = useState("All notifications")
+    const [notificationsSearchBar, setNotificationsSearchBar] = useState("");
+
 
 
     // UseEffects
@@ -154,8 +149,8 @@ export const PrivateUser = () => {
             }
 
             // Filter by search bar content
-            if (requestSearchBar.trim() !== "") {
-                const searchTerm = requestSearchBar.toLowerCase();
+            if (requestsSearchBar.trim() !== "") {
+                const searchTerm = requestsSearchBar.toLowerCase();
                 const requestedServiceName =
                     store.serviceDescriptions && store.serviceDescriptions.find((item) => item.id === request.service_description_id).service;
 
@@ -220,10 +215,10 @@ export const PrivateUser = () => {
         }
 
         setFilteredRequests(filteredRequests);
-    }, [selectedSortRequestsBy, selectedFilterRequestsBy, requestSearchBar, selectedSection, store.userRequests, store.serviceDescriptions]);
+    }, [selectedSortRequestsBy, selectedFilterRequestsBy, requestsSearchBar, selectedSection, store.userRequests, store.serviceDescriptions]);
 
 
-    // UI handle functions
+    // UI handle variable and functions
 
     const handleClickHome = () => {
         navigate("/");
@@ -255,7 +250,7 @@ export const PrivateUser = () => {
     //Requests
 
     const handleClickSortRequestsBy = (sortBy) => {
-        setSelectedSorRequeststBy(sortBy);
+        setSelectedSortRequeststBy(sortBy);
     }
 
     const handleClickFilterRequestsBy = (filterBy) => {
@@ -263,12 +258,37 @@ export const PrivateUser = () => {
 
     }
 
-    const handleChangeRequestSearchBar = (event) => {
-        setRequestSearchBar(event.target.value);
+    const handleChangeRequestsSearchBar = (event) => {
+        setRequestsSearchBar(event.target.value);
     };
 
 
     //Notifications
+
+    const handleClickSortNotificationsBy = (sortBy) => {
+        setSelectedSortNotificationsBy(sortBy);
+    }
+
+    const handleClickFilterNotificationsBy = (filterBy) => {
+        setSelectedFilterNotificationsBy(filterBy);
+
+    }
+
+    const handleChangeNotificationsSearchBar = (event) => {
+        setNotificationsSearchBar(event.target.value);
+    };
+
+    const statusMap = new Map([
+        ["Expired", 0],
+        ["Requested", 1],
+        ["Taken", 2],
+        ["Safeguarded", 3],
+        ["Provided", 4],
+        ["Renewed", 5],
+        ["Reviewed", 6],
+        ["Completed", 7],
+        ["Sanctioned", 8]
+    ]);
 
 
     // Section initialization
@@ -654,7 +674,6 @@ export const PrivateUser = () => {
                                         </li>
                                     </ul>
                                 </div>
-
                                 {/* Search Bar*/}
                                 <div className="ribbonElement3">
                                     <form role="search">
@@ -667,20 +686,98 @@ export const PrivateUser = () => {
                                             type="search"
                                             placeholder="Type…"
                                             aria-label="Search"
-                                            value={requestSearchBar}
-                                            onChange={handleChangeRequestSearchBar}
+                                            value={requestsSearchBar}
+                                            onChange={handleChangeRequestsSearchBar}
                                         />
                                     </form>
                                 </div>
                             </div>
                         </nav>
-
                     )}
                     {/* SECIOD NAVBAR */}
                     {/* Notifications */}
                     {selectedSection === "notifications" && (
-                        <nav className="navbar fixed-top p-3 secondNavBar">
-                            Notifications
+                        <nav className="navbar fixed-top secondNavBar d-flex justify-content-center align-items-center ">
+                            <div className="d-flex justify-content-center align-items-center">
+                                {/* Sort by Dropdown*/}
+                                <div className="dropdown ribbonElement1">
+                                    <button
+                                        className="border-0"
+                                        type="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        <span className="dropDownIcon1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M531-338h60v-405H448v60h83v345ZM260-200q-24 0-42-18t-18-42v-560q0-24 18-42t42-18h560q24 0 42 18t18 42v560q0 24-18 42t-42 18H260Zm0-60h560v-560H260v560ZM140-80q-24 0-42-18t-18-42v-620h60v620h620v60H140Zm120-740v560-560Z" /></svg>
+                                        </span>
+                                        <span className="pullDownLabel me-1">Sort by</span>
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg>
+                                        </span>
+                                        <span className="pullDownLabel italic ms-1">{selectedSortNotificationssBy}</span>
+                                    </button>
+                                    <ul className="dropdown-menu rounded-0" key="sortByList">
+                                        <li className="list-item" onClick={() => { handleClickSortNotificationsBy("Newest") }}>
+                                            Newest
+                                        </li>
+                                        <li className="list-item" onClick={() => { handleClickSortNotificationsBy("Oldest") }}>
+                                            Oldest
+                                        </li>
+                                    </ul>
+                                </div>
+                                {/* Filter by Dropdown*/}
+                                <div className="dropdown ribbonElement2">
+                                    <button
+                                        className="border-0"
+                                        type="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        <span className="dropDownIcon2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M440-160q-17 0-28.5-11.5T400-200v-240L161-745q-14-17-4-36t31-19h584q21 0 31 19t-4 36L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-276 240-304H240l240 304Zm0 0Z" /></svg>
+                                        </span>
+                                        <span className="pullDownLabel me-1">Show</span>
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg>
+                                        </span>
+                                        <span className="pullDownLabel italic ms-1">{selectedFilterNotificationssBy}</span>
+                                    </button>
+                                    <ul className="dropdown-menu rounded-0">
+                                        <li className="list-item" key={0} onClick={() => handleClickFilterNotificationsBy("All requests")}>
+                                            All notifications
+                                        </li>
+                                        <li className="list-item" key={1} onClick={() => handleClickFilterNotificationsBy("Acceptances")}>
+                                            Acceptances
+                                        </li>
+                                        <li className="list-item" key={2} onClick={() => handleClickFilterNotificationsBy("Cancelations")}>
+                                            Cancellations
+                                        </li>
+                                        <li className="list-item" key={3} onClick={() => handleClickFilterNotificationsBy("Promotional")}>
+                                            Promotional
+                                        </li>
+                                        <li className="list-item" key={4} onClick={() => handleClickFilterNotificationsBy("Support")}>
+                                            Support
+                                        </li>
+                                    </ul>
+                                </div>
+                                {/* Search Bar*/}
+                                <div className="ribbonElement3">
+                                    <form role="search">
+                                        <span className="menuIcon3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M765-144 526-383q-30 22-65.792 34.5T384.035-336Q284-336 214-406t-70-170q0-100 70-170t170-70q100 0 170 70t70 170.035q0 40.381-12.5 76.173T577-434l239 239-51 51ZM384-408q70 0 119-49t49-119q0-70-49-119t-119-49q-70 0-119 49t-49 119q0 70 49 119t119 49Z" /></svg>
+                                        </span>
+                                        <label htmlFor="requestSearchField" className="pullDownLabel me-1">Find:</label>
+                                        <input
+                                            id="requestSearchField"
+                                            type="search"
+                                            placeholder="Type…"
+                                            aria-label="Search"
+                                            value={notificationsSearchBar}
+                                            onChange={handleChangeNotificationsSearchBar}
+                                        />
+                                    </form>
+                                </div>
+                            </div>
                         </nav>
                     )}
                 </header>
@@ -709,13 +806,16 @@ export const PrivateUser = () => {
                             </div>
                         </div>)
                     }
-
-
-
-
-
-
-
+                    {/* Notifications*/}
+                    {selectedSection === "notifications" && (
+                        <div className="main container-fluid m-0 p-0 g-0">
+                            <div className="row d-flex justify content-center ">
+                               <span>{selectedSortNotificationssBy}</span>
+                               <span>{selectedFilterNotificationssBy}</span>
+                               <span>{notificationsSearchBar}</span>
+                            </div>
+                        </div>)
+                    }                   
                 </main>
             </div>
         </>
