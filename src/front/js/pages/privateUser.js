@@ -427,6 +427,7 @@ export const PrivateUser = () => {
                             <span className="avatarInitialsInnerWrapper">{avatarInitials}</span>
                         </button>
                         {/* Offcanvas */}
+                        {/* Offcanvas ACCORDION */}
                         <div className="offcanvas offcanvas-end sideBanner"
                             data-bs-scroll="true"
                             data-bs-backdrop="false"
@@ -434,7 +435,7 @@ export const PrivateUser = () => {
                             id="offcanvasScrolling"
                             aria-labelledby="offcanvasScrollingLabel"
                         >
-                            <div>
+                            <div className="d-flex justify-content-end">
                                 <span
                                     className=""
                                     data-bs-dismiss="offcanvas"
@@ -445,10 +446,6 @@ export const PrivateUser = () => {
                                     </span>
                                     <span> close </span>
                                 </span>
-                            </div>
-                            {/* Offcanvas ACCORDION */}
-                            {/* SIGN-OUT */}
-                            <div>
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16  "><path d="M450-438v-406h60v406h-60Zm30 320q-74 0-139.5-28.5T226-224q-49-49-77.5-114.5T120-478q0-80 34-149.5T250-751l42 42q-53 43-82.5 102.5T180-478.022Q180-353 267.5-265.5 355-178 480-178q125.357 0 212.679-87.5Q780-353 780-478.022 780-547 750.5-607.5 721-668 670-709l43-42q60 51 93.5 122T840-478q0 74-28.5 139.5t-77 114.5q-48.5 49-114 77.5T480-118Z" /></svg>
                                 </span>
@@ -456,7 +453,7 @@ export const PrivateUser = () => {
                                     Sign Out
                                 </button>
                             </div>
-                            <div className="offcanvas-body">
+                            <div className="offcanvas-body mt-5">
                                 <div className="accordion accordion-flush" id="accordionFlushExample">
                                     <div className="accordion-item">
                                         <h2 className="accordion-header d-flex flex-row">
@@ -519,7 +516,9 @@ export const PrivateUser = () => {
                                             data-bs-parent="#accordionFlushExample"
                                         >
                                             <div className="accordion-body">
-                                                Placeholder.
+                                                <div>Addreses</div>
+                                                <div>Addreses</div>
+                                                <div>Addreses</div>
                                             </div>
                                         </div>
                                     </div>
@@ -550,7 +549,7 @@ export const PrivateUser = () => {
                                             data-bs-parent="#accordionFlushExample"
                                         >
                                             <div className="accordion-body">
-                                                Placeholder.
+                                            &nbsp;
                                             </div>
                                         </div>
                                     </div>
