@@ -255,15 +255,26 @@ hr {
   font-weight: 400;
   font-variant: small-caps;
   font-size: 0.875rem;
-  letter-spacing: 0.1rem;
+  letter-spacing: .1rem;
+
 }
 
 .settingsTitles {
   font-size: .7rem;
   font-variant: small-caps;
-  letter-spacing: .1rem;
 }
 
+.settingsValue {
+  font-size: .7rem;
+  font-style: italic;
+}
+
+.settingsControl {
+  position: absolute;
+  left: 9.6rem;
+  white-space: nowrap;
+
+}
 
 .accordion-button::after {
   transform: scale(0.5);
