@@ -254,8 +254,14 @@ hr {
 .settingsLabel {
   font-weight: 400;
   font-variant: small-caps;
-  font-size: 0.7rem;
+  font-size: 0.875rem;
   letter-spacing: 0.1rem;
+}
+
+.settingsTitles {
+  font-size: .7rem;
+  font-variant: small-caps;
+  letter-spacing: .1rem;
 }
 
 
@@ -269,7 +275,7 @@ hr {
 
 .offCanvasDropDownIcon {
   position: absolute;
-  left: 9rem;
+  left: 10rem;
 }
 
 /* Second Navbar */
@@ -1318,3 +1324,6 @@ table.calendarModalTable td {
     opacity: 1;
   }
 }
+
+
+
