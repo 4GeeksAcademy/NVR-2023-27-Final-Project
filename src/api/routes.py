@@ -236,7 +236,8 @@ def get_user_exclusions():
         user_email = get_jwt_identity()
         user = UserProfile.query.filter_by(email=user_email).first()
         if user:
-            exclusions = Exclusion.query.filter_by(user_id=user.id).limit(5).all()
+            exclusions = Exclusion.query.filter_by(
+                user_id=user.id).limit(5).all()
             user_exclusions = []
 
             for i in range(len(exclusions)):
@@ -421,22 +422,18 @@ def create_service_request():
                     time_slot=new_request_time_slot
                 ).first()
                 isAvaiable = provider_availability is not None
-                print("Avaiability found?" , isAvaiable)
+                print("Avaiability found?", isAvaiable)
                 return isAvaiable
-
 
             for provider in viable_providers:
                 print(provider)
                 if not is_provider_available(provider):
                     viable_providers.remove(provider)
-            
+
             for i, provider in enumerate(viable_providers, start=1):
                 provider_profile = ProviderProfile.query.get(provider)
                 provider_name = provider_profile.name
                 print(f"** Provider number {i}: {provider_name}")
-
-
-
 
             # End of MAin Algorithm
             return jsonify({"message": "Request successfully created"}), 200
@@ -478,12 +475,12 @@ def get_user_booked_days():
                 unique_dates[request.date].add(
                     request.service_description.category)
 
-            result=[]
+            result = []
             for unique_date, categories in unique_dates.items():
                 if len(categories) > 1:
-                    category="multiple"
+                    category = "multiple"
                 else:
-                    category=categories.pop()
+                    category = categories.pop()
                 result.append({
                     "date": unique_date.strftime("%Y-%m-%d"),
                     "category": category
@@ -501,28 +498,28 @@ def get_user_booked_days():
  # PRIVATE USER endpoints - DELETE service request
 
 
-@ api.route("/deleteservicerequest/<int:service_request_id>", methods = ["DELETE"])
+@ api.route("/deleteservicerequest/<int:service_request_id>", methods=["DELETE"])
 @ jwt_required()
 def delete_service_request(service_request_id):
     try:
-        user_email=get_jwt_identity()
-        user=UserProfile.query.filter_by(email = user_email).first()
+        user_email = get_jwt_identity()
+        user = UserProfile.query.filter_by(email=user_email).first()
 
         if user:
-            service_request=ServiceRequest.query.get(service_request_id)
+            service_request = ServiceRequest.query.get(service_request_id)
 
             if service_request:
-                provider_id=service_request.provider_id
+                provider_id = service_request.provider_id
 
                 # Creates a notification for the provider, if it already has a provider_id
                 if provider_id is not None:
-                    notification=Notification(
-                        type_of_notification = 0,
-                        status = 1,
-                        publishing_date_time = datetime.now(),
+                    notification = Notification(
+                        type_of_notification=0,
+                        status=1,
+                        publishing_date_time=datetime.now(),
                         # use {} to include vars from serviceRequest
-                        message = "Service cancelled.",
-                        provider_id = provider_id,
+                        message="Service cancelled.",
+                        provider_id=provider_id,
                     )
 
                     db.session.add(notification)
@@ -542,69 +539,69 @@ def delete_service_request(service_request_id):
             "error": str(e)
         }), 500
 
-
  # PRIVATE USER endpoints - UPDATE and RENEW service request
 
-@ api.route("/updateandrenewservicerequest/<int:service_request_id>", methods = ["PUT"])
+
+@ api.route("/updateandrenewservicerequest/<int:service_request_id>", methods=["PUT"])
 @ jwt_required()
 def updateandrenew_service_request(service_request_id):
     try:
-        user_email=get_jwt_identity()
-        user=UserProfile.query.filter_by(email = user_email).first()
+        user_email = get_jwt_identity()
+        user = UserProfile.query.filter_by(email=user_email).first()
 
         if user:
-            service_request=ServiceRequest.query.get(service_request_id)
-            renewed_service_request=None
+            service_request = ServiceRequest.query.get(service_request_id)
+            renewed_service_request = None
 
             if service_request:
                 if service_request.recurrence == 1:
-                    service_request.status=4
+                    service_request.status = 4
                 else:
-                    service_request.status=5
+                    service_request.status = 5
 
-                    renewed_service_request=ServiceRequest()
-                    renewed_service_request.status=1
-                    renewed_service_request.time=service_request.time
-                    renewed_service_request.recurrence=service_request.recurrence
-                    renewed_service_request.quantity=service_request.quantity
-                    renewed_service_request.service_description_id=service_request.service_description_id
-                    renewed_service_request.user_id=service_request.user_id
-                    renewed_service_request.provider_id=None
-                    renewed_service_request.address_id=service_request.address_id
-                    renewed_service_request.verbal_password=service_request.verbal_password
-                    renewed_service_request.qr_password=service_request.qr_password
+                    renewed_service_request = ServiceRequest()
+                    renewed_service_request.status = 1
+                    renewed_service_request.time = service_request.time
+                    renewed_service_request.recurrence = service_request.recurrence
+                    renewed_service_request.quantity = service_request.quantity
+                    renewed_service_request.service_description_id = service_request.service_description_id
+                    renewed_service_request.user_id = service_request.user_id
+                    renewed_service_request.provider_id = None
+                    renewed_service_request.address_id = service_request.address_id
+                    renewed_service_request.verbal_password = service_request.verbal_password
+                    renewed_service_request.qr_password = service_request.qr_password
 
-                    renewed_date=service_request.date
+                    renewed_date = service_request.date
 
                     if service_request.recurrence == 2:
-                        year=service_request.date.year
-                        month=service_request.date.month
-                        day=service_request.date.day
+                        year = service_request.date.year
+                        month = service_request.date.month
+                        day = service_request.date.day
 
                         if month == 1 and day >= 29:
                             if calendar.isleap(year):
-                                renewed_date=date(year, 2, 29)
+                                renewed_date = date(year, 2, 29)
                             else:
-                                renewed_date=date(year, 2, 28)
+                                renewed_date = date(year, 2, 28)
                         else:
-                            next_month=month + 1
+                            next_month = month + 1
 
                             if next_month in [4, 6, 9, 11] and day == 31:
-                                day=30
+                                day = 30
 
                             if next_month > 12:
-                                next_month=1
+                                next_month = 1
                                 year += 1
-                            renewed_date=date(year, next_month, day)
+                            renewed_date = date(year, next_month, day)
 
-                        renewed_service_request.date=renewed_date
+                        renewed_service_request.date = renewed_date
 
                     elif service_request.recurrence == 3:
-                        renewed_date += timedelta(days = 7)
+                        renewed_date += timedelta(days=7)
                     else:
-                        renewed_date += timedelta(days = 1)
+                        renewed_date += timedelta(days=1)
 
-                    renewed_service_request.date=renewed_date
+                    renewed_service_request.date = renewed_date
 
                     db.session.add(renewed_service_request)
 
@@ -628,22 +625,22 @@ def updateandrenew_service_request(service_request_id):
 
 # PRIVATE USER endpoints - rate Provider
 
-@ api.route("/rateprovider/<int:service_request_id>/<float:rating>", methods = ["PUT"])
+@ api.route("/rateprovider/<int:service_request_id>/<float:rating>", methods=["PUT"])
 @ jwt_required()
 def rate_provider(service_request_id, rating):
     try:
-        user_email=get_jwt_identity()
-        user=UserProfile.query.filter_by(email = user_email).first()
+        user_email = get_jwt_identity()
+        user = UserProfile.query.filter_by(email=user_email).first()
 
         # updates Provider ratings
         if user:
-            service_request=ServiceRequest.query.get(service_request_id)
+            service_request = ServiceRequest.query.get(service_request_id)
 
             if service_request:
-                provider=ProviderProfile.query.get(
+                provider = ProviderProfile.query.get(
                     service_request.provider_id)
                 if provider:
-                    provider.average_rating=(
+                    provider.average_rating = (
                         (provider.average_rating * provider.rating_counter) + rating
                     ) / (provider.rating_counter + 1)
                     provider.rating_counter += 1
@@ -665,13 +662,13 @@ def rate_provider(service_request_id, rating):
 
 # PRIVATE USER endpoints - GET Provider details
 
-@ api.route("/getproviderdetails/<int:provider_id>", methods = ["GET"])
+@ api.route("/getproviderdetails/<int:provider_id>", methods=["GET"])
 @ jwt_required()
 def get_provider_details(provider_id):
     try:
-        provider=ProviderProfile.query.get(provider_id)
+        provider = ProviderProfile.query.get(provider_id)
         if provider:
-            provider_details={
+            provider_details = {
                 "name": provider.name,
                 "has_certificate": provider.has_certificate,
                 "experience": provider.experience,
@@ -733,20 +730,6 @@ def update_user_settings():
         return jsonify({"message": "An error occurred", "error": str(e)}), 500
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # *************************
 # Main Algorytm functions
 
@@ -779,7 +762,6 @@ def get_distance_and_time(latitude1, longitude1, latitude2, longitude2):
     except KeyError:
         print("Error with parsing Google API response: Invalid response format")
         return None
-
 
 
 """ def get_distance_time_between_providers():

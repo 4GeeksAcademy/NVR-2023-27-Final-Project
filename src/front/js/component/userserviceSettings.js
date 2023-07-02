@@ -10,9 +10,8 @@ export const UserServiceSettings = () => {
     [3, "over 3 years"],
   ]);
 
-  let exclusionArray = []
   const [exclusionsIndex , setExclusionsIndex ] = useState(0)
-  const [exclusionObject, setExclusionObject] = useState(null);
+  const [exclusionObject, setExclusionObject] = useState({});
 
   // useEffects
 
@@ -29,12 +28,12 @@ export const UserServiceSettings = () => {
 
   useEffect(() => {
     if (store.userExclusions) {
-      
-      
+      setExclusionObject(store.userExclusions[exclusionsIndex])
     }
-  }, [store.userExclusions]);
+   
+  }, [store.userExclusions, exclusionsIndex]);
   
-
+  
 
   // Handle Functions
 
@@ -73,29 +72,27 @@ export const UserServiceSettings = () => {
   // handle Thumbnail gallery
 
   const handleNextExclusion = () => {
-    console.log(exclusionArray)
-    if (exclusionArray) {
-      if(exclusionsIndex === exclusionArray.length-1 ) {
-        setExclusionsIndex(0)
-      }
-      else {
-        setExclusionsIndex((value) => value +1)
-      }
+    if (exclusionsIndex === store.userExclusions.length-1 ) 
+    {
+      setExclusionsIndex(0)
     }
-  
+    else (
+      setExclusionsIndex((value) => value + 1)
+    );
   };
 
   const handlePreviousExclusion = () => {
-    if (exclusionArray) {
-      if(exclusionsIndex === 0 ) {
-        setExclusionsIndex(exclusionArray.length-1)
-      }
-      else {
-        setExclusionsIndex((value) => value - 1)
-      }
+    if (exclusionsIndex === 0 ) 
+    {
+      setExclusionsIndex(store.userExclusions.length-1)
     }
+    else (
+      setExclusionsIndex((value) => value - 1)
+    );
+   
+    };
   
-  };
+  
   
   
 
@@ -178,7 +175,7 @@ export const UserServiceSettings = () => {
             className="updateettingsButton">update</button>
         </div>
         <div className="mt-3">
-          {exclusionObject && (
+          {store.userExclusions&& (
             <>
               <img
                 src={exclusionObject.image}
@@ -200,7 +197,6 @@ export const UserServiceSettings = () => {
         </div>
         <div className="mt-3">
           <button
-            onClick={handleUpdateUserSettings}
             className="updateettingsButton">unban</button>
         </div>
       </div>
