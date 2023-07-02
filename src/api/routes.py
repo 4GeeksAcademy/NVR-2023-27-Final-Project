@@ -244,12 +244,16 @@ def get_user_exclusions():
                 if i <= len(exclusions):
                     exclusion_id = exclusions[i - 1].provider_id
                     exclusion_name = exclusions[i - 1].provider_profile.name
+                    exclusion_image = exclusions[i - 1].provider_profile.avatar_image
+                    
                 else:
                     exclusion_id = ""
                     exclusion_name = ""
+                    exclusion_image = ""
 
                 user_exclusions[f"exclusion{i}_id"] = exclusion_id
                 user_exclusions[f"exclusion{i}_name"] = exclusion_name
+                user_exclusions[f"exclusion{i}_avatar_image"] = exclusion_image
 
             return jsonify({
                 "message": "Exclusions successfully retrieved",

@@ -34,6 +34,21 @@ body {
 
 }
 
+/* Base class , taht can be compounded to any element */
+
+.clickable {
+  transition: transform 0.5s ease-in-out;
+}
+
+.clickable:hover {
+  transform: scale(1.2);
+}
+
+.clickable:not(:hover) {
+  transform: scale(1);
+}
+
+
 /* Avater Initials */
 
 .avatarButton {
@@ -107,7 +122,6 @@ body {
 
 
 /* Scrollbar */
-
 
 html::-webkit-scrollbar {
   width: .9vw;
@@ -233,7 +247,7 @@ button:disabled {
 .sideBanner {
   border-left: 0.5px solid;
   background: var(--background);
-  width: 12rem;
+  width: 14rem;
   display: flex;
   justify-content: left;
   z-index: 99998 !important;
@@ -260,6 +274,8 @@ button:disabled {
   background-color: var(--background) !important;
   border: none;
   color: black !important;
+  margin: 0 !important;
+  padding-block: 0 !important;
 }
 
 .accordion-button:not(.collapsed) {
@@ -267,6 +283,11 @@ button:disabled {
 }
 
 /* OFFCANVAS content */
+
+.offCanvasDropDownIcon {
+  position: absolute;
+  left: 11rem;
+}
 
 .settingsLabel {
   font-weight: 400;
@@ -288,25 +309,34 @@ button:disabled {
 
 .settingsControl1 {
   position: absolute;
-  left: 9.61rem;
+  left: 10.61rem;
   white-space: nowrap;
-
 }
 
 .settingsControl2 {
   position: absolute;
-  left: 9.81rem;
+  left: 10.81rem;
   white-space: nowrap;
 
 }
 
 .settingsControl3 {
   position: absolute;
-  left: 9.81rem;
+  left: 9.9rem;
   white-space: nowrap;
-
 }
 
+.settingsControl4 {
+  position: absolute;
+  left: 10.9rem;
+  white-space: nowrap;
+}
+
+.settingsControl5 {
+  position: absolute;
+  left: 10.9rem;
+  white-space: nowrap;
+}
 
 
 .settingsRatingLabel {
@@ -337,10 +367,6 @@ button:disabled {
   transform: scale(0.5);
 }
 
-.offCanvasDropDownIcon {
-  position: absolute;
-  left: 10rem;
-}
 
 /* Second Navbar */
 
@@ -425,7 +451,7 @@ ul.dropdown-menu.rounded-0 {
   margin-top: 6px;
   animation: slideDown .45s both;
   max-height: 0;
-  overflow: hidden;
+  overflow: hidden !important;
   opacity: .3;
   transition: max-height 0.3s ease-in-out;
 }

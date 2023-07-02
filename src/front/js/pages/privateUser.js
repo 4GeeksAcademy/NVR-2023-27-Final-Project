@@ -6,6 +6,7 @@ import { ServiceRollUp } from "../component/serviceRollUp";
 import { RequestRollUp } from "../component/requestRollUp"
 import { NotificationRollUp } from "../component/notificationRollUp";
 import { UserServiceSettings } from "../component/userserviceSettings";
+import { ReInclusionList } from "../component/reinclusionList";
 
 import "../../styles/privateuser.css";
 
@@ -477,7 +478,9 @@ export const PrivateUser = () => {
                                                 <div>
                                                     <UserServiceSettings />
                                                 </div>
-                                                <div>exclusion list</div>
+                                                <div className="mt-3">
+                                                    <ReInclusionList />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -507,9 +510,9 @@ export const PrivateUser = () => {
                                             data-bs-parent="#accordionFlushExample"
                                         >
                                             <div className="accordion-body">
-                                                <div>Name</div>
-                                                <div>Email</div>
-                                                <div>Addreses</div>
+                                                <div className="settingsTitles">name</div>
+                                                <div className="settingsTitles">email</div>
+                                                <div className="settingsTitles">addreses</div>
                                             </div>
                                         </div>
                                     </div>
@@ -540,7 +543,9 @@ export const PrivateUser = () => {
                                             data-bs-parent="#accordionFlushExample"
                                         >
                                             <div className="accordion-body">
-                                            &nbsp;
+                                                <div className="settingsTitles">type</div>
+                                                <div className="settingsTitles">number</div>
+                                                <div className="settingsTitles">csv</div>
                                             </div>
                                         </div>
                                     </div>

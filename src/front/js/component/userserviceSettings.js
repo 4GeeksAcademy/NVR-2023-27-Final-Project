@@ -78,7 +78,6 @@ export const UserServiceSettings = () => {
       }
     };
 
-
     return (
       <div className="star-rating">
         {[1, 2, 3, 4, 5].map((i) => (
@@ -95,10 +94,10 @@ export const UserServiceSettings = () => {
   return (
     <>
       <div className="container-fluid vw-100  ms-2">
-        <div>
+        <div className="mt-2">
           <span className="settingsTitles">certified-only:</span>
           <span>
-            <button className="settingsControl1" onClick={handleToggleCertified}>
+            <button className="settingsControl1 clickable" onClick={handleToggleCertified}>
               {newUserSettings.must_have_certificate ?
                 (<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="m419-321 289-289-43-43-246 246-119-119-43 43 162 162ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm0-600v600-600Z" /></svg>)
                 :
@@ -107,28 +106,30 @@ export const UserServiceSettings = () => {
             </button>
           </span>
         </div>
-        <div className="mt-3">
+        <div className="mt-1">
           <span className="settingsTitles">
             experience:
           </span>
-          <span className="settingsValue ms-2">
+          <span className="settingsValue ms-1">
             {experienceMap.get(newUserSettings.required_experience)}
           </span>
           <span>
-            <button className="settingsControl2"
+            <button className="settingsControl2 clickable"
               onClick={handleIncreaseRequiredExperience}>+</button>
           </span>
         </div>
-        <div className="mt-3 d-flex">
+        <div className="mt-1 d-flex">
           <span className="settingsTitles settingsRatingLabel">rating:</span>
-          <span className="ms-2 "><StarRatingPicker /></span>
+          <span className="ms-1 "><StarRatingPicker /></span>
           <span>
-            <button className="settingsControl3" onClick={handleIncreaseRating}>+</button>
-          </span>
-          
-          
+            <button className="settingsControl3 clickable" onClick={handleIncreaseRating}>+</button>
+          </span>        
+          <span>
+            <button className="settingsControl4 clickable" onClick={handleDecreaseRating}>-</button>
+          </span>        
+                
         </div>
-        <div className="mt-4">
+        <div className="mt-3">
           <button 
             onClick={handleUpdateUserSettings}
             className="updateettingsButton">update</button>
