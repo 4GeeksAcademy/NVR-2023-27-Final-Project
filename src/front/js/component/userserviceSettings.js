@@ -52,6 +52,9 @@ export const UserServiceSettings = () => {
     }
   };
 
+  const handleUpdateUserSettings = () => {
+    actions.updateUserSettings(newUserSettings);
+  }
 
   // Subcomponents
 
@@ -126,7 +129,9 @@ export const UserServiceSettings = () => {
           
         </div>
         <div className="mt-4">
-          <button className="updateettingsButton">update</button>
+          <button 
+            onClick={handleUpdateUserSettings}
+            className="updateettingsButton">update</button>
         </div>
       </div>
     </>

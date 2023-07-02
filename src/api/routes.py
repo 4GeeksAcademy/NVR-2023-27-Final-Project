@@ -450,7 +450,7 @@ def create_service_request():
         }), 500
 
 
- #  PRIVATE USER endpoints - CALENDAR - get Booked days
+#  PRIVATE USER endpoints - CALENDAR - get Booked days
 
 @ api.route("/getuserbookeddays", methods=["GET"])
 @ jwt_required()
@@ -542,8 +542,8 @@ def delete_service_request(service_request_id):
             "error": str(e)
         }), 500
 
- # PRIVATE USER endpoints - UPDATE and RENEW service request
 
+ # PRIVATE USER endpoints - UPDATE and RENEW service request
 
 @ api.route("/updateandrenewservicerequest/<int:service_request_id>", methods = ["PUT"])
 @ jwt_required()
@@ -705,6 +705,46 @@ def get_service_request_passwords(service_request_id):
             return jsonify({"message": "Service request not found"}), 404
     except Exception as e:
         return jsonify({"message": "An error occurred", "error": str(e)}), 500
+
+
+# PRIVATE USER endpoints - UPDATE user settings
+
+@api.route("/updateusersettings", methods=["PUT"])
+@jwt_required()
+def update_user_settings():
+    try:
+        user_email = get_jwt_identity()
+        user = UserProfile.query.filter_by(email=user_email).first()
+
+        if user:
+            print(" ***************** enterd function")
+            body = request.json
+            user.must_have_certificate = body["newUserSettings"]["must_have_certificate"]
+            user.required_experience = body["newUserSettings"]["required_experience"]
+            user.required_rating = body["newUserSettings"]["required_rating"]
+
+            db.session.commit()
+
+            return jsonify({"message": "User settings successfully updated"})
+        else:
+            return jsonify({"message": "User not found"}), 404
+    except Exception as e:
+        print(e)
+        return jsonify({"message": "An error occurred", "error": str(e)}), 500
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # *************************

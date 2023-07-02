@@ -435,29 +435,22 @@ export const PrivateUser = () => {
                             id="offcanvasScrolling"
                             aria-labelledby="offcanvasScrollingLabel"
                         >
-                            <div className="d-flex justify-content-end">
+                            <div className="d-flex justify-content-end closeSignOutButtonsWrapper">
                                 <span
-                                    className=""
+                                    className="settingsLabel borderRight closeSettingsButton"
                                     data-bs-dismiss="offcanvas"
                                     aria-label="Close"
                                 >
-                                    <span className="ps-1 pt-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="m336-294 144-144 144 144 42-42-144-144 144-144-42-42-144 144-144-144-42 42 144 144-144 144 42 42ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm0-600v600-600Z" /></svg>
-                                    </span>
-                                    <span> close </span>
+                                    close
                                 </span>
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16  "><path d="M450-438v-406h60v406h-60Zm30 320q-74 0-139.5-28.5T226-224q-49-49-77.5-114.5T120-478q0-80 34-149.5T250-751l42 42q-53 43-82.5 102.5T180-478.022Q180-353 267.5-265.5 355-178 480-178q125.357 0 212.679-87.5Q780-353 780-478.022 780-547 750.5-607.5 721-668 670-709l43-42q60 51 93.5 122T840-478q0 74-28.5 139.5t-77 114.5q-48.5 49-114 77.5T480-118Z" /></svg>
-                                </span>
-                                <button onClick={handleSignout}>
-                                    Sign Out
+                                <button className="settingsLabel" onClick={handleSignout}>
+                                    sign out
                                 </button>
                             </div>
-                            <div className="offcanvas-body mt-5">
+                            <div className="offcanvas-body offcanvasBody">
                                 <div className="accordion accordion-flush" id="accordionFlushExample">
                                     <div className="accordion-item">
                                         <h2 className="accordion-header d-flex flex-row">
-
                                             <span
                                                 className="collapsed settingsLabel"
                                                 type="button"
@@ -466,7 +459,6 @@ export const PrivateUser = () => {
                                                 aria-expanded="false"
                                                 aria-controls="flush-collapseOne"
                                             >
-
                                                 <span className="me-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="m388-80-20-126q-19-7-40-19t-37-25l-118 54-93-164 108-79q-2-9-2.5-20.5T185-480q0-9 .5-20.5T188-521L80-600l93-164 118 54q16-13 37-25t40-18l20-127h184l20 126q19 7 40.5 18.5T669-710l118-54 93 164-108 77q2 10 2.5 21.5t.5 21.5q0 10-.5 21t-2.5 21l108 78-93 164-118-54q-16 13-36.5 25.5T592-206L572-80H388Zm92-270q54 0 92-38t38-92q0-54-38-92t-92-38q-54 0-92 38t-38 92q0 54 38 92t92 38Zm0-60q-29 0-49.5-20.5T410-480q0-29 20.5-49.5T480-550q29 0 49.5 20.5T550-480q0 29-20.5 49.5T480-410Zm0-70Zm-44 340h88l14-112q33-8 62.5-25t53.5-41l106 46 40-72-94-69q4-17 6.5-33.5T715-480q0-17-2-33.5t-7-33.5l94-69-40-72-106 46q-23-26-52-43.5T538-708l-14-112h-88l-14 112q-34 7-63.5 24T306-642l-106-46-40 72 94 69q-4 17-6.5 33.5T245-480q0 17 2.5 33.5T254-413l-94 69 40 72 106-46q24 24 53.5 41t62.5 25l14 112Z" /></svg>
                                                 </span>
@@ -500,7 +492,6 @@ export const PrivateUser = () => {
                                                 aria-expanded="false"
                                                 aria-controls="flush-collapseTwo"
                                             >
-
                                                 <span className="me-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18"><path d="M480-481q-66 0-108-42t-42-108q0-66 42-108t108-42q66 0 108 42t42 108q0 66-42 108t-108 42ZM160-160v-94q0-38 19-65t49-41q67-30 128.5-45T480-420q62 0 123 15.5t127.921 44.694q31.301 14.126 50.19 40.966Q800-292 800-254v94H160Zm60-60h520v-34q0-16-9.5-30.5T707-306q-64-31-117-42.5T480-360q-57 0-111 11.5T252-306q-14 7-23 21.5t-9 30.5v34Zm260-321q39 0 64.5-25.5T570-631q0-39-25.5-64.5T480-721q-39 0-64.5 25.5T390-631q0 39 25.5 64.5T480-541Zm0-90Zm0 411Z" /></svg>
                                                 </span>
@@ -516,8 +507,8 @@ export const PrivateUser = () => {
                                             data-bs-parent="#accordionFlushExample"
                                         >
                                             <div className="accordion-body">
-                                                <div>Addreses</div>
-                                                <div>Addreses</div>
+                                                <div>Name</div>
+                                                <div>Email</div>
                                                 <div>Addreses</div>
                                             </div>
                                         </div>

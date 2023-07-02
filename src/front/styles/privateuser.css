@@ -222,6 +222,10 @@ button:disabled {
 
 /* OFFCANVAS */
 
+.offcanvasBody {
+  margin-top: 1.6rem;
+}
+
 .offcanvas * {
   overflow-x: hidden;
 }
@@ -233,6 +237,20 @@ button:disabled {
   display: flex;
   justify-content: left;
   z-index: 99998 !important;
+}
+
+.closeSignOutButtonsWrapper {
+  margin-top: 1.6rem;
+  margin-right: 1rem;
+}
+
+.borderRight {
+  border-right: .7px solid black;
+}
+
+.closeSettingsButton {
+  padding-right: .33rem;
+  cursor: pointer;
 }
 
 .accordion-item,

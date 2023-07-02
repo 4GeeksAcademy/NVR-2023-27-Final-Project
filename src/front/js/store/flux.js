@@ -468,6 +468,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			// PRIVATE USER : update user settings
+
+			updateUserSettings: async (newUserSettings) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/updateusersettings", {
+						method: "PUT",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({ newUserSettings })
+					});
+			
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data.message);
+						await getActions().getUserSettings();
+						getActions().alertUser("settings updated", "#00008B", "white");
+					} else {
+						console.log('Error:', response.status);
+					}
+				} catch (error) {
+					console.log('Error:', error);
+				}
+			},
+			
+
 
 
 
