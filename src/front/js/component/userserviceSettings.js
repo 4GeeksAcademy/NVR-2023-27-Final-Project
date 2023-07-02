@@ -92,9 +92,6 @@ export const UserServiceSettings = () => {
    
     };
   
-  
-  
-  
 
   // Subcomponents
 
@@ -133,7 +130,7 @@ export const UserServiceSettings = () => {
   // Main JSX
   return (
     <>
-      <div className="container-fluid vw-100  ms-2">
+      <div className="container-fluid vw-100  ms-3">
         <div className="mt-2">
           <span className="settingsTitles">certified-only:</span>
           <span>
@@ -174,19 +171,16 @@ export const UserServiceSettings = () => {
             onClick={handleUpdateUserSettings}
             className="updateettingsButton">update</button>
         </div>
-        <div className="mt-3">
+        <div className="mt-5">
           {store.userExclusions&& (
             <>
-              <img
-                src={exclusionObject.image}
-                alt={exclusionObject.name}
-                style={{
-                  width: "3.6rem",
-                  height: "3.6rem",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                }}                               
-              />
+              <span className="providerThumbnailWrapper">
+                <img
+                  src={exclusionObject.image}
+                  alt={exclusionObject.name}
+                  className="providerThumbnail"                               
+                />
+              </span>
               <span>
                 <span>{exclusionsIndex}</span>
                 <button onClick={handleNextExclusion}>+</button>
@@ -197,7 +191,7 @@ export const UserServiceSettings = () => {
         </div>
         <div className="mt-3">
           <button
-            className="updateettingsButton">unban</button>
+            className="updateettingsButton">reinstate</button>
         </div>
       </div>
     </>

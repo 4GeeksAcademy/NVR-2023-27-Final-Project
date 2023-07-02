@@ -134,6 +134,7 @@ html::-webkit-scrollbar-thumb {
 html::-webkit-scrollbar-track {
   background: var(--background);
 }
+
 /* Straight buttons */
 
 button,
@@ -241,7 +242,7 @@ button:disabled {
 }
 
 .offcanvas * {
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .sideBanner {
@@ -254,7 +255,7 @@ button:disabled {
 
 .closeSignOutButtonsWrapper {
   margin-top: 1.6rem;
-  margin-right: 1rem;
+  margin-right: 1.5rem;
 }
 
 .borderRight {
@@ -337,11 +338,9 @@ button:disabled {
   white-space: nowrap;
 }
 
-
 .settingsRatingLabel {
   padding-top: .34rem;
 }
-
 
 .updateettingsButton {
   background: grey;
@@ -349,12 +348,27 @@ button:disabled {
   border: none;
   font-variant: small-caps;
   font-size: .63rem;
-  width: 3.6rem;
+  width: 8.7rem;
   letter-spacing: .1rem;
   padding-inline: .63rem;
 
-  
 }
+
+/* excluded Provider Thumbnail */
+
+.providerThumbnailWrapper {
+    border: none;
+ }
+
+.providerThumbnail {
+  width: 3.6rem;
+  height: 3.6rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+
 
 /* Accordion */
 
@@ -742,7 +756,7 @@ button .bookButto:active {
   transform: scale(0);
   animation: modal-appear 0.5s ease-in-out forwards;
   overflow: hidden;
-  
+
 }
 
 @keyframes modal-appear {
@@ -884,7 +898,7 @@ dialog:focus {
 }
 
 .calendarCell.currentDay {
-color: yellow;
+  color: yellow;
 }
 
 .calendarCell.selectedRequestDay {
@@ -951,7 +965,7 @@ table.calendarModalTable td {
 .pickerButton button {
   font-size: .9rem;
   color: var(--modalCOlor);
-  transition: transform 0.3s ease-in-out; 
+  transition: transform 0.3s ease-in-out;
 }
 
 .pickerButton button:hover {
@@ -976,7 +990,7 @@ table.calendarModalTable td {
 .calendarModalTableValue {
   white-space: nowrap;
   overflow: hidden;
-  text-overflow:clip;
+  text-overflow: clip;
 }
 
 .calendarModalTable td:nth-child(1) {
@@ -1322,7 +1336,7 @@ table.calendarModalTable td {
   transform: scale(0);
   animation: modal-appear 0.5s ease-in-out forwards;
   overflow: hidden;
-  
+
 }
 
 @keyframes modal-appear {
@@ -1366,7 +1380,8 @@ table.calendarModalTable td {
 
 .passwordImagesWrapper {
   display: flex;
-  align-items: flex-start; /* Vertically align to the top */
+  align-items: flex-start;
+  /* Vertically align to the top */
 }
 
 .providerAvatarImageWrapper,
@@ -1409,10 +1424,10 @@ table.calendarModalTable td {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
-
 
 
