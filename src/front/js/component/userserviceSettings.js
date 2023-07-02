@@ -3,14 +3,18 @@ import { Context } from "../store/appContext";
 
 export const UserServiceSettings = () => {
   const { store, actions } = useContext(Context);
-
   const [newUserSettings, setNewUserSettings] = useState({});
-
   const experienceMap = new Map([
     [1, "1 year"],
     [2, "1 to 3 years"],
     [3, "over 3 years"],
   ]);
+
+  let exclusionArray = []
+  const [exclusionsIndex , setExclusionsIndex ] = useState(0)
+  const [exclusionObject, setExclusionObject] = useState(null);
+
+  // useEffects
 
   useEffect(() => {
     if (store.userSettings) {
@@ -21,6 +25,16 @@ export const UserServiceSettings = () => {
       });
     }
   }, [store.userSettings]);
+
+
+  useEffect(() => {
+    if (store.userExclusions) {
+      
+      
+    }
+  }, [store.userExclusions]);
+  
+
 
   // Handle Functions
 
@@ -55,6 +69,35 @@ export const UserServiceSettings = () => {
   const handleUpdateUserSettings = () => {
     actions.updateUserSettings(newUserSettings);
   }
+
+  // handle Thumbnail gallery
+
+  const handleNextExclusion = () => {
+    console.log(exclusionArray)
+    if (exclusionArray) {
+      if(exclusionsIndex === exclusionArray.length-1 ) {
+        setExclusionsIndex(0)
+      }
+      else {
+        setExclusionsIndex((value) => value +1)
+      }
+    }
+  
+  };
+
+  const handlePreviousExclusion = () => {
+    if (exclusionArray) {
+      if(exclusionsIndex === 0 ) {
+        setExclusionsIndex(exclusionArray.length-1)
+      }
+      else {
+        setExclusionsIndex((value) => value - 1)
+      }
+    }
+  
+  };
+  
+  
 
   // Subcomponents
 
@@ -123,16 +166,42 @@ export const UserServiceSettings = () => {
           <span className="ms-1 "><StarRatingPicker /></span>
           <span>
             <button className="settingsControl3 clickable" onClick={handleIncreaseRating}>+</button>
-          </span>        
+          </span>
           <span>
             <button className="settingsControl4 clickable" onClick={handleDecreaseRating}>-</button>
-          </span>        
-                
+          </span>
+
         </div>
         <div className="mt-3">
-          <button 
+          <button
             onClick={handleUpdateUserSettings}
             className="updateettingsButton">update</button>
+        </div>
+        <div className="mt-3">
+          {exclusionObject && (
+            <>
+              <img
+                src={exclusionObject.image}
+                alt={exclusionObject.name}
+                style={{
+                  width: "3.6rem",
+                  height: "3.6rem",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                }}                               
+              />
+              <span>
+                <span>{exclusionsIndex}</span>
+                <button onClick={handleNextExclusion}>+</button>
+                <button onClick={handlePreviousExclusion}>-</button>
+              </span>
+            </>
+          )}
+        </div>
+        <div className="mt-3">
+          <button
+            onClick={handleUpdateUserSettings}
+            className="updateettingsButton">unban</button>
         </div>
       </div>
     </>

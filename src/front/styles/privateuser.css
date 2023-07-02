@@ -249,7 +249,6 @@ button:disabled {
   background: var(--background);
   width: 14rem;
   display: flex;
-  justify-content: left;
   z-index: 99998 !important;
 }
 

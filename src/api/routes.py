@@ -236,24 +236,20 @@ def get_user_exclusions():
         user_email = get_jwt_identity()
         user = UserProfile.query.filter_by(email=user_email).first()
         if user:
-            exclusions = Exclusion.query.filter_by(
-                user_id=user.id).limit(5).all()
-            user_exclusions = {}
+            exclusions = Exclusion.query.filter_by(user_id=user.id).limit(5).all()
+            user_exclusions = []
 
-            for i in range(1, 6):
-                if i <= len(exclusions):
-                    exclusion_id = exclusions[i - 1].provider_id
-                    exclusion_name = exclusions[i - 1].provider_profile.name
-                    exclusion_image = exclusions[i - 1].provider_profile.avatar_image
-                    
-                else:
-                    exclusion_id = ""
-                    exclusion_name = ""
-                    exclusion_image = ""
+            for i in range(len(exclusions)):
+                exclusion_id = exclusions[i].provider_id
+                exclusion_name = exclusions[i].provider_profile.name
+                exclusion_image = exclusions[i].provider_profile.avatar_image
 
-                user_exclusions[f"exclusion{i}_id"] = exclusion_id
-                user_exclusions[f"exclusion{i}_name"] = exclusion_name
-                user_exclusions[f"exclusion{i}_avatar_image"] = exclusion_image
+                if exclusion_name:
+                    user_exclusions.append({
+                        "id": exclusion_id,
+                        "name": exclusion_name,
+                        "image": exclusion_image
+                    })
 
             return jsonify({
                 "message": "Exclusions successfully retrieved",

@@ -457,6 +457,7 @@ export const PrivateUser = () => {
                                                 type="button"
                                                 data-bs-toggle="collapse"
                                                 data-bs-target="#flush-collapseOne"
+
                                                 aria-expanded="false"
                                                 aria-controls="flush-collapseOne"
                                             >
@@ -475,16 +476,10 @@ export const PrivateUser = () => {
                                             data-bs-parent="#accordionFlushExample"
                                         >
                                             <div className="accordion-body mx-auto">
-                                                <div>
-                                                    <UserServiceSettings />
-                                                </div>
-                                                <div className="mt-3">
-                                                    <ReInclusionList />
-                                                </div>
+                                                <UserServiceSettings />
                                             </div>
                                         </div>
                                     </div>
-                                    <hr />
                                     <div className="accordion-item">
                                         <h2 className="accordion-header">
                                             <span
@@ -516,7 +511,6 @@ export const PrivateUser = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <hr />
                                     <div className="accordion-item">
                                         <h2 className="accordion-header">
                                             <span
