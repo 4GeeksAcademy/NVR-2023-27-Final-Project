@@ -90,8 +90,11 @@ export const UserServiceSettings = () => {
 
   };
 
-  const handleReinstate = (exclusionId) => {
-    actions.deleteExclusion(exclusionId)
+  const handleReinstate = async (exclusionId) => {
+    // toggle button off disable = true
+    await actions.deleteExclusion(exclusionId)
+    // toggle button on  disable = false
+
   }
 
 
@@ -193,7 +196,7 @@ export const UserServiceSettings = () => {
                     </div>
                   ))}
                 </div>
-                {store.userExclusions && store.userExclusions.length > 1 && (
+                {store.userExclusions.length > 1 ?  (
                   <>
                     <button
                       className="carousel-control-prev clickable overideBootstarp settingsControl6"
@@ -214,15 +217,17 @@ export const UserServiceSettings = () => {
                       -
                     </button>
                   </>
-                )}
+                ) : null}
                 {(store.userExclusions[exclusionsIndex] && store.userExclusions[exclusionsIndex].name) && (
                   <>
                     <span className="settingsValue mt-3">
+                      <span className="settingsControl8 me-1">{exclusionsIndex+1}/{store.userExclusions.length}
+                      </span>
+
                       {
                         store.userExclusions[exclusionsIndex].name
                           .split(' ')[0]
-                          .concat(' ', store.userExclusions[exclusionsIndex].name.split(' ')[1][0].toUpperCase())
-                          .concat('.')
+                          
                       }
                     </span>
                   </>
