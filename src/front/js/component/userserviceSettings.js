@@ -90,6 +90,11 @@ export const UserServiceSettings = () => {
 
   };
 
+  const handleReinstate = (exclusionId) => {
+    alert("exclusion id:"+exclusionId)
+
+  }
+
 
   // Subcomponents
 
@@ -221,7 +226,10 @@ export const UserServiceSettings = () => {
         </div>
         {store.userExclusions && store.userExclusions.length > 0 && (
           <div className="mt-3">
-            <button className="updateettingsButton">reinstate</button>
+            <button 
+              onClick={() => handleReinstate(store.userExclusions[exclusionsIndex].id)}
+              className="updateettingsButton">
+              reinstate</button>
           </div>
         )}
       </div>
