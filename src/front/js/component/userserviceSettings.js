@@ -10,7 +10,7 @@ export const UserServiceSettings = () => {
     [3, "over 3 years"],
   ]);
 
-  const [exclusionsIndex , setExclusionsIndex ] = useState(0)
+  const [exclusionsIndex, setExclusionsIndex] = useState(0)
   const [exclusionObject, setExclusionObject] = useState({});
 
   // useEffects
@@ -30,10 +30,10 @@ export const UserServiceSettings = () => {
     if (store.userExclusions) {
       setExclusionObject(store.userExclusions[exclusionsIndex])
     }
-   
+
   }, [store.userExclusions, exclusionsIndex]);
-  
-  
+
+
 
   // Handle Functions
 
@@ -72,8 +72,7 @@ export const UserServiceSettings = () => {
   // handle Thumbnail gallery
 
   const handleNextExclusion = () => {
-    if (exclusionsIndex === store.userExclusions.length-1 ) 
-    {
+    if (exclusionsIndex === store.userExclusions.length - 1) {
       setExclusionsIndex(0)
     }
     else (
@@ -82,16 +81,15 @@ export const UserServiceSettings = () => {
   };
 
   const handlePreviousExclusion = () => {
-    if (exclusionsIndex === 0 ) 
-    {
-      setExclusionsIndex(store.userExclusions.length-1)
+    if (exclusionsIndex === 0) {
+      setExclusionsIndex(store.userExclusions.length - 1)
     }
     else (
       setExclusionsIndex((value) => value - 1)
     );
-   
-    };
-  
+
+  };
+
 
   // Subcomponents
 
@@ -130,7 +128,7 @@ export const UserServiceSettings = () => {
   // Main JSX
   return (
     <>
-      <div className="container-fluid vw-100  ms-3">
+      <div className="container-fluid mb-5 ms-3">
         <div className="mt-2">
           <span className="settingsTitles">certified-only:</span>
           <span>
@@ -172,22 +170,50 @@ export const UserServiceSettings = () => {
             className="updateettingsButton">update</button>
         </div>
         <div className="mt-5">
-          {store.userExclusions&& (
-            <>
-              <span className="providerThumbnailWrapper">
-                <img
-                  src={exclusionObject.image}
-                  alt={exclusionObject.name}
-                  className="providerThumbnail"                               
-                />
-              </span>
-              <span>
-                <span>{exclusionsIndex}</span>
-                <button onClick={handleNextExclusion}>+</button>
-                <button onClick={handlePreviousExclusion}>-</button>
-              </span>
-            </>
-          )}
+          <>
+            {store.userExclusions && (
+              <div id="carouselExample" className="carousel slide" data-bs-interval="false">
+                <div className="carousel-inner" style={{ width: "3.6rem" }}>
+                  {store.userExclusions.map((exclusion, index) => (
+                    <div
+                      key={index}
+                      className={`carousel-item ${index === 0 ? 'active' : ''}`}
+                    >
+                      <span className="providerThumbnailWrapper">
+                        <img
+                          src={exclusion.image}
+                          alt={exclusion.name}
+                          className="providerThumbnail"
+                        />
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <button
+                  className="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExample"
+                  data-bs-slide="prev"
+                  onClick={handleNextExclusion}
+                >
+                  +
+                </button>
+                <button
+                  className="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExample"
+                  data-bs-slide="next"
+                  onClick={handlePreviousExclusion}
+                >
+                  -
+                </button>
+                <span>-IX{exclusionsIndex}</span>
+                <span>-ID{store.userExclusions[exclusionsIndex].id}</span>
+                <span>-ID{store.userExclusions[exclusionsIndex].name}</span>
+              </div>
+            )}
+
+          </>
         </div>
         <div className="mt-3">
           <button
