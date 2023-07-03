@@ -332,9 +332,24 @@ button:disabled {
   white-space: nowrap;
 }
 
+
 .settingsControl5 {
   position: absolute;
   left: 10.9rem;
+  white-space: nowrap;
+}
+
+.settingsControl6 {
+  position: absolute;
+  left: 6.5rem;
+  bottom: 1.6rem;
+  white-space: nowrap;
+}
+
+.settingsControl7 {
+  position: absolute;
+  left: 7.5rem;
+  bottom: 1.6rem;
   white-space: nowrap;
 }
 
@@ -382,6 +397,9 @@ button:disabled {
   transform: scale(0.5);
 }
 
+.accordionMarginTopAdjustement {
+  margin-top: 1.3rem;
+}
 
 /* Second Navbar */
 
@@ -1432,4 +1450,10 @@ table.calendarModalTable td {
   }
 }
 
+.carouselWrapper {
+  width: 3.6rem;
+}
 
+.overideBootstarp {
+  color: black !important;
+}

@@ -177,7 +177,7 @@ export const UserServiceSettings = () => {
           <>
             {(store.userExclusions && store.userExclusions.length) ? (
               <div id="carouselExample" className="carousel slide" data-bs-interval="false">
-                <div className="carousel-inner" style={{ width: "3.6rem" }}>
+                <div className="carousel-inner carouselWrapper">
                   {store.userExclusions.map((exclusion, index) => (
                     <div
                       key={index}
@@ -194,38 +194,42 @@ export const UserServiceSettings = () => {
                   ))}
                 </div>
                 <button
-                  className="carousel-control-prev"
+                  className="carousel-control-prev clickable overideBootstarp settingsControl6"
                   type="button"
                   data-bs-target="#carouselExample"
-                  data-bs-slide="prev"
+                  data-bs-slide="next"
                   onClick={handleNextExclusion}
                 >
                   +
                 </button>
                 <button
-                  className="carousel-control-next"
+                  className="carousel-control-next settingsControl7 clickable overideBootstarp"
                   type="button"
                   data-bs-target="#carouselExample"
-                  data-bs-slide="next"
+                  data-bs-slide="prev"
                   onClick={handlePreviousExclusion}
                 >
                   -
                 </button>
-                <span>-IX{exclusionsIndex}</span>
-                {(store.userExclusions[exclusionsIndex] && store.userExclusions[exclusionsIndex].id) && (
-                  <span>-ID{store.userExclusions[exclusionsIndex].id}</span>
-                )}
                 {(store.userExclusions[exclusionsIndex] && store.userExclusions[exclusionsIndex].name) && (
-                  <span>-ID{store.userExclusions[exclusionsIndex].name}</span>
+                  <>
+                    <span className="settingsValue mt-3">
+                      {
+                        store.userExclusions[exclusionsIndex].name 
+                        .split(' ')[0]
+                        .concat(' ', store.userExclusions[exclusionsIndex].name.split(' ')[1][0].toUpperCase())
+                        .concat('.')                        
+                      }
+                    </span>
+                  </>
                 )}
               </div>
             ) : null}
-
           </>
         </div>
         {store.userExclusions && store.userExclusions.length > 0 && (
           <div className="mt-3">
-            <button 
+            <button
               onClick={() => handleReinstate(store.userExclusions[exclusionsIndex].id)}
               className="updateettingsButton">
               reinstate</button>

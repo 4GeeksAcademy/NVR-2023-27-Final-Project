@@ -483,7 +483,7 @@ export const PrivateUser = () => {
                                     <div className="accordion-item">
                                         <h2 className="accordion-header">
                                             <span
-                                                className="collapsed settingsLabel"
+                                                className="collapsed settingsLabel accordionMarginTopAdjustement"
                                                 type="button"
                                                 data-bs-toggle="collapse"
                                                 data-bs-target="#flush-collapseTwo"
