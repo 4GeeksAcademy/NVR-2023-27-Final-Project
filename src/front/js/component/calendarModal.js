@@ -82,7 +82,7 @@ export const CalendarModal = (props) => {
 
     // Service Request function 
 
-    const handleCewateServiceRequest = () => {
+    const handleCreateServiceRequest = () => {
         actions.createServiceRequest(newServiceRequest);
         handleCloseCalendarModal();
     };
@@ -319,7 +319,7 @@ export const CalendarModal = (props) => {
                             <div className="container-fluid mt-4 mb-2">
                                 <div className="row d-flex justify-content-center">
                                     <button onClick={handleCloseCalendarModal} className="cancelButton me-2 ">cancel</button>
-                                    <button onClick={handleCewateServiceRequest} className="modalBookButton">book {service.toLowerCase()}</button>
+                                    <button onClick={handleCreateServiceRequest} className="modalBookButton">book {service.toLowerCase()}</button>
                                 </div>
                             </div>
 

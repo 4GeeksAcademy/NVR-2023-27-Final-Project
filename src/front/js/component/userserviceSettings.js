@@ -193,32 +193,36 @@ export const UserServiceSettings = () => {
                     </div>
                   ))}
                 </div>
-                <button
-                  className="carousel-control-prev clickable overideBootstarp settingsControl6"
-                  type="button"
-                  data-bs-target="#carouselExample"
-                  data-bs-slide="next"
-                  onClick={handleNextExclusion}
-                >
-                  +
-                </button>
-                <button
-                  className="carousel-control-next settingsControl7 clickable overideBootstarp"
-                  type="button"
-                  data-bs-target="#carouselExample"
-                  data-bs-slide="prev"
-                  onClick={handlePreviousExclusion}
-                >
-                  -
-                </button>
+                {store.userExclusions && store.userExclusions.length > 1 && (
+                  <>
+                    <button
+                      className="carousel-control-prev clickable overideBootstarp settingsControl6"
+                      type="button"
+                      data-bs-target="#carouselExample"
+                      data-bs-slide="next"
+                      onClick={handleNextExclusion}
+                    >
+                      +
+                    </button>
+                    <button
+                      className="carousel-control-next settingsControl7 clickable overideBootstarp"
+                      type="button"
+                      data-bs-target="#carouselExample"
+                      data-bs-slide="prev"
+                      onClick={handlePreviousExclusion}
+                    >
+                      -
+                    </button>
+                  </>
+                )}
                 {(store.userExclusions[exclusionsIndex] && store.userExclusions[exclusionsIndex].name) && (
                   <>
                     <span className="settingsValue mt-3">
                       {
-                        store.userExclusions[exclusionsIndex].name 
-                        .split(' ')[0]
-                        .concat(' ', store.userExclusions[exclusionsIndex].name.split(' ')[1][0].toUpperCase())
-                        .concat('.')                        
+                        store.userExclusions[exclusionsIndex].name
+                          .split(' ')[0]
+                          .concat(' ', store.userExclusions[exclusionsIndex].name.split(' ')[1][0].toUpperCase())
+                          .concat('.')
                       }
                     </span>
                   </>

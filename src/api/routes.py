@@ -241,7 +241,6 @@ def get_user_exclusions():
             user_exclusions = []
 
             for i in range(len(exclusions)):
-                # previosuly: exclusion_id = exclusions[i].provider_id
                 exclusion_id = exclusions[i].id
                 exclusion_name = exclusions[i].provider_profile.name
                 exclusion_image = exclusions[i].provider_profile.avatar_image
@@ -338,103 +337,7 @@ def create_service_request():
             db.session.commit()
 
             # Main Algorithm
-            # Step1.1
-            print("********************** STEP 1.1: Get Max set ")
-
-            def get_viable_providers_max_set(service_request_id):
-                requested_service_description_id = ServiceRequest.query.get(
-                    service_request_id).service_description_id
-                providers = ServiceProvided.query.filter_by(
-                    service_description_id=requested_service_description_id).all()
-                provider_ids = [provider.provider_id for provider in providers]
-                return provider_ids
-
-            new_request_id = new_request.id
-            viable_providers = get_viable_providers_max_set(new_request_id)
-            for i, provider in enumerate(viable_providers, start=1):
-                provider_profile = ProviderProfile.query.get(provider)
-                provider_name = provider_profile.name
-                print(f"*** Provider number {i}: {provider_name}")
-
-            # Step 1.2: Remove excluded providers
-            print("********************** STEP 1.2; remove excluded providers")
-            viable_providers = [provider for provider in viable_providers if not Exclusion.query.filter_by(
-                user_id=user.id, provider_id=provider).first()]
-            for i, provider in enumerate(viable_providers, start=1):
-                provider_profile = ProviderProfile.query.get(provider)
-                provider_name = provider_profile.name
-                print(f"** Provider number {i}: {provider_name}")
-
-            # Step 1.3: Remove providers who do not meet criteria
-            print(
-                "********************** STEP 1.3: exclude providers who do not meet criteria")
-
-            def meets_criteria(provider):
-                provider_profile = ProviderProfile.query.get(provider)
-
-                # Check if provider has the required certificate
-                if user.must_have_certificate and not provider_profile.has_certificate:
-                    print("Exclusion over lack of certificate")
-                    return False
-
-                # Check if provider meets the required experience
-                if provider_profile.experience < user.required_experience:
-                    print("Exclusion over insufficient experience")
-                    return False
-
-                # Check if provider meets the required rating
-                if user.required_rating is not None and (provider_profile.average_rating is None or provider_profile.average_rating < user.required_rating):
-                    print("Exclusion over insufficient rating")
-                    return False
-
-                return True
-
-            viable_providers = [
-                provider for provider in viable_providers if meets_criteria(provider)]
-            for i, provider in enumerate(viable_providers, start=1):
-                provider_profile = ProviderProfile.query.get(provider)
-                provider_name = provider_profile.name
-                print(f"** Provider number {i}: {provider_name}")
-
-            # Step 1.4: Remove providers who are not avaiable in the respective time slot
-            print("********************** STEP 1.4: exclude unavaiable providers")
-
-            def get_day_of_week(date):
-                return date.weekday()
-
-            def get_time_slot(time_string):
-                time = datetime.strptime(time_string, '%H:%M')
-                if time < datetime.strptime('13:00', '%H:%M'):
-                    return 1
-                elif time < datetime.strptime('19:00', '%H:%M'):
-                    return 2
-                else:
-                    return 3
-
-            new_request_day_of_the_week = get_day_of_week(new_request.date)
-            new_request_time_slot = get_time_slot(new_request.time)
-            print("Selected day:", new_request_day_of_the_week,
-                  "Time slot: ", new_request_time_slot)
-
-            def is_provider_available(provider):
-                provider_availability = ProviderAvailability.query.filter_by(
-                    provider_id=provider,
-                    day=new_request_day_of_the_week,
-                    time_slot=new_request_time_slot
-                ).first()
-                isAvaiable = provider_availability is not None
-                print("Avaiability found?", isAvaiable)
-                return isAvaiable
-
-            for provider in viable_providers:
-                print(provider)
-                if not is_provider_available(provider):
-                    viable_providers.remove(provider)
-
-            for i, provider in enumerate(viable_providers, start=1):
-                provider_profile = ProviderProfile.query.get(provider)
-                provider_name = provider_profile.name
-                print(f"** Provider number {i}: {provider_name}")
+            notify_viable_providers( user , new_request) 
 
             # End of MAin Algorithm
             return jsonify({"message": "Request successfully created"}), 200
@@ -496,8 +399,8 @@ def get_user_booked_days():
             "error": str(e)
         }), 500
 
- # PRIVATE USER endpoints - DELETE service request
 
+ # PRIVATE USER endpoints - DELETE service request
 
 @ api.route("/deleteservicerequest/<int:service_request_id>", methods=["DELETE"])
 @ jwt_required()
@@ -540,8 +443,8 @@ def delete_service_request(service_request_id):
             "error": str(e)
         }), 500
 
- # PRIVATE USER endpoints - UPDATE and RENEW service request
 
+ # PRIVATE USER endpoints - UPDATE and RENEW service request
 
 @ api.route("/updateandrenewservicerequest/<int:service_request_id>", methods=["PUT"])
 @ jwt_required()
@@ -609,7 +512,6 @@ def updateandrenew_service_request(service_request_id):
                 db.session.commit()
 
                 # Launch Notify VIABLE PROVIDERS
-                # service_request_id = renewed_service_request.id
 
                 return jsonify({"message": "Service request updated successfully"}), 200
             else:
@@ -715,7 +617,6 @@ def update_user_settings():
         user = UserProfile.query.filter_by(email=user_email).first()
 
         if user:
-            print(" ***************** enterd function")
             body = request.json
             user.must_have_certificate = body["newUserSettings"]["must_have_certificate"]
             user.required_experience = body["newUserSettings"]["required_experience"]
@@ -770,7 +671,108 @@ def delete_exclusion(exclusion_id):
 
 
 # *************************
-# Main Algorytm functions
+# Main Algorythm 
+            
+def notify_viable_providers (user , service_request):
+    
+    # Step1.1
+    print("********************** STEP 1.1: Get Max set ")
+
+    def get_viable_providers_max_set(service_request_id):
+        requested_service_description_id = ServiceRequest.query.get(
+            service_request_id).service_description_id
+        providers = ServiceProvided.query.filter_by(
+            service_description_id=requested_service_description_id).all()
+        provider_ids = [provider.provider_id for provider in providers]
+        return provider_ids
+
+    viable_providers = get_viable_providers_max_set(service_request.id)
+    for i, provider in enumerate(viable_providers, start=1):
+        provider_profile = ProviderProfile.query.get(provider)
+        provider_name = provider_profile.name
+        print(f"*** Provider number {i}: {provider_name}")
+
+    # Step 1.2: Remove excluded providers
+    print("********************** STEP 1.2; remove excluded providers")
+    viable_providers = [provider for provider in viable_providers if not Exclusion.query.filter_by(
+        user_id=user.id, provider_id=provider).first()]
+    for i, provider in enumerate(viable_providers, start=1):
+        provider_profile = ProviderProfile.query.get(provider)
+        provider_name = provider_profile.name
+        print(f"** Provider number {i}: {provider_name}")
+
+    # Step 1.3: Remove providers who do not meet criteria
+    print("********************** STEP 1.3: exclude providers who do not meet criteria")
+
+    def meets_criteria(provider):
+        provider_profile = ProviderProfile.query.get(provider)
+
+        # Check if provider has the required certificate
+        if user.must_have_certificate and not provider_profile.has_certificate:
+            print("Exclusion over lack of certificate")
+            return False
+
+        # Check if provider meets the required experience
+        if provider_profile.experience < user.required_experience:
+            print("Exclusion over insufficient experience")
+            return False
+
+        # Check if provider meets the required rating
+        if user.required_rating is not None and (provider_profile.average_rating is None or provider_profile.average_rating < user.required_rating):
+            print("Exclusion over insufficient rating")
+            return False
+
+        return True
+
+    viable_providers = [
+        provider for provider in viable_providers if meets_criteria(provider)]
+    for i, provider in enumerate(viable_providers, start=1):
+        provider_profile = ProviderProfile.query.get(provider)
+        provider_name = provider_profile.name
+        print(f"** Provider number {i}: {provider_name}")
+
+    # Step 1.4: Remove providers who are not avaiable in the respective time slot
+    print("********************** STEP 1.4: exclude unavaiable providers")
+
+    def get_day_of_week(date):
+        return date.weekday()
+
+    def get_time_slot(time_string):
+        time = datetime.strptime(time_string, '%H:%M')
+        if time < datetime.strptime('13:00', '%H:%M'):
+            return 1
+        elif time < datetime.strptime('19:00', '%H:%M'):
+            return 2
+        else:
+            return 3
+
+    new_request_day_of_the_week = get_day_of_week(service_request.date)
+    new_request_time_slot = get_time_slot(service_request.time)
+    print("Selected day:", new_request_day_of_the_week,
+            "Time slot: ", new_request_time_slot)
+
+    def is_provider_available(provider):
+        provider_availability = ProviderAvailability.query.filter_by(
+            provider_id=provider,
+            day=new_request_day_of_the_week,
+            time_slot=new_request_time_slot
+        ).first()
+        isAvaiable = provider_availability is not None
+        print("Avaiability found?", isAvaiable)
+        return isAvaiable
+
+    for provider in viable_providers:
+        print(provider)
+        if not is_provider_available(provider):
+            viable_providers.remove(provider)
+
+    for i, provider in enumerate(viable_providers, start=1):
+        provider_profile = ProviderProfile.query.get(provider)
+        provider_name = provider_profile.name
+        print(f"** Provider number {i}: {provider_name}")
+
+    # End of MAin Algorithm
+
 
 # Google API distane matrix call
 
