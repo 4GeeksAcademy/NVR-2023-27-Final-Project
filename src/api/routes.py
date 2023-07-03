@@ -731,6 +731,44 @@ def update_user_settings():
         return jsonify({"message": "An error occurred", "error": str(e)}), 500
 
 
+# PRIVATE USER endpoints - DELETE exclusion
+
+@ api.route("/deleteexclusion/<int:exclusion_id>", methods=["DELETE"])
+@ jwt_required()
+def delete_exclusion(exclusion_id):
+    try:
+        user_email = get_jwt_identity()
+        user = UserProfile.query.filter_by(email=user_email).first()
+
+        if user:
+            exclusion = Exclusion.query.get(exclusion_id)
+
+            if exclusion:
+                db.session.delete(exclusion)
+                db.session.commit()
+
+                return jsonify({"message": "Exclusion deleted successfully"}), 200
+            else:
+                return jsonify({"message": "Exclusion not found"}), 404
+        else:
+            return jsonify({"message": "User not found"}), 404
+    except Exception as e:
+        print(e)
+        return jsonify({
+            "message": "An error occurred",
+            "error": str(e)
+        }), 500
+
+
+
+
+
+
+
+
+
+
+
 # *************************
 # Main Algorytm functions
 

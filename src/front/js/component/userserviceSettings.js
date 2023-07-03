@@ -91,8 +91,7 @@ export const UserServiceSettings = () => {
   };
 
   const handleReinstate = (exclusionId) => {
-    alert("exclusion id:"+exclusionId)
-
+    actions.deleteExclusion(exclusionId)
   }
 
 

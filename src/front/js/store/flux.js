@@ -493,6 +493,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log('Error:', error);
 				}
 			},
+
+			// DELETE user Exclusion Request
+
+			deleteExclusion: async (exclusionId) => {
+				try {
+
+					const response = await fetch(process.env.BACKEND_URL + "api/deleteexclusion/" + exclusionId
+						, {
+							method: "DELETE",
+							headers: {
+								"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
+								"Content-Type": "application/json"
+							}
+						});
+
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data.message);
+						await getActions().getUserExclusions();
+						getActions().alertUser("provider reinstated", "#00008B", "white");
+					} else {
+						console.log('Error:', response.status);
+					}
+				} catch (error) {
+					console.log('Error:', error);
+				}
+			},
+
 			
 
 
