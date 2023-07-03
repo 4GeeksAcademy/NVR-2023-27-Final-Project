@@ -161,8 +161,8 @@ def get_service_descriptions():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# PRIVATE USER endpoints - All USER DATA
 
+# PRIVATE USER endpoints - All USER DATA
 
 @api.route("/getusersettings", methods=["GET"])
 @jwt_required()
@@ -241,7 +241,8 @@ def get_user_exclusions():
             user_exclusions = []
 
             for i in range(len(exclusions)):
-                exclusion_id = exclusions[i].provider_id
+                # previosuly: exclusion_id = exclusions[i].provider_id
+                exclusion_id = exclusions[i].id
                 exclusion_name = exclusions[i].provider_profile.name
                 exclusion_image = exclusions[i].provider_profile.avatar_image
 

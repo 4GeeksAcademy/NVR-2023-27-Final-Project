@@ -171,7 +171,7 @@ export const UserServiceSettings = () => {
         </div>
         <div className="mt-5">
           <>
-            {store.userExclusions && (
+            {(store.userExclusions && store.userExclusions.length) ? (
               <div id="carouselExample" className="carousel slide" data-bs-interval="false">
                 <div className="carousel-inner" style={{ width: "3.6rem" }}>
                   {store.userExclusions.map((exclusion, index) => (
@@ -208,17 +208,22 @@ export const UserServiceSettings = () => {
                   -
                 </button>
                 <span>-IX{exclusionsIndex}</span>
-                <span>-ID{store.userExclusions[exclusionsIndex].id}</span>
-                <span>-ID{store.userExclusions[exclusionsIndex].name}</span>
+                {(store.userExclusions[exclusionsIndex] && store.userExclusions[exclusionsIndex].id) && (
+                  <span>-ID{store.userExclusions[exclusionsIndex].id}</span>
+                )}
+                {(store.userExclusions[exclusionsIndex] && store.userExclusions[exclusionsIndex].name) && (
+                  <span>-ID{store.userExclusions[exclusionsIndex].name}</span>
+                )}
               </div>
-            )}
+            ) : null}
 
           </>
         </div>
-        <div className="mt-3">
-          <button
-            className="updateettingsButton">reinstate</button>
-        </div>
+        {store.userExclusions && store.userExclusions.length > 0 && (
+          <div className="mt-3">
+            <button className="updateettingsButton">reinstate</button>
+          </div>
+        )}
       </div>
     </>
   );
