@@ -409,10 +409,7 @@ export const PrivateUser = () => {
                                     <span>S</span><span>o</span><span>l</span><span>u</span><span>t</span><span>i</span><span>o</span><span>n</span><span>e</span><span>r</span>
                                 </span>
                             </div>
-                            <span>
-                                
-                            </span>
-                        </button>
+                         </button>
                         <button
                             className={`menuLabel ${selectedSection === "requestService" ? "selectedSectionButton active" : ""}`}
                             onClick={() => handleSectionClick("requestService")}

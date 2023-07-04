@@ -6,9 +6,9 @@ export const UserServiceSettings = () => {
   const [newUserSettings, setNewUserSettings] = useState({});
   const [newUserExclusions, setNewUserExclusions] = useState([]);
 
-  const [ disableReinstateButton , setDisableReinstateButton ] = useState(false);
-  
-    const experienceMap = new Map([
+  const [disableReinstateButton, setDisableReinstateButton] = useState(false);
+
+  const experienceMap = new Map([
     [1, "1 year"],
     [2, "1 to 3 years"],
     [3, "over 3 years"],
@@ -28,13 +28,13 @@ export const UserServiceSettings = () => {
     }
   }, [store.userSettings]);
 
-  useEffect(() => { 
+  useEffect(() => {
     if (store.userExclusions) {
       setNewUserExclusions(store.userExclusions)
     }
-  } , [store.userExclusions])
-  
-  
+  }, [store.userExclusions])
+
+
   // Handle Functions
 
   const handleToggleCertified = () => {
@@ -72,25 +72,25 @@ export const UserServiceSettings = () => {
   // handle Thumbnail gallery
 
   const handleNextExclusion = () => {
-     if(store.userExclusions) {
-       if (exclusionIndex === store.userExclusions.length - 1) {
+    if (store.userExclusions) {
+      if (exclusionIndex === store.userExclusions.length - 1) {
         exclusionIndex = 0;
       }
       else {
         exclusionIndex++
       };
-     }
+    }
   };
 
   const handlePreviousExclusion = () => {
-   if (store.userExclusions) {
+    if (store.userExclusions) {
       if (exclusionIndex === 0) {
-          exclusionIndex = store.userExclusions.length - 1
-        }
-        else {
-          exclusionIndex--
-        };
-   }
+        exclusionIndex = store.userExclusions.length - 1
+      }
+      else {
+        exclusionIndex--
+      };
+    }
   };
 
   const handleReinstate = async (exclusionId) => {
@@ -178,58 +178,54 @@ export const UserServiceSettings = () => {
         </div>
         <div className="mt-5">
           <>
-              {/* carousel */}
-              <div id="carouselExample" className="carousel slide" data-bs-interval="false">
-                <div className="carousel-inner carouselWrapper">
-                  {newUserExclusions.map((exclusion, index) => (
-                    <div
-                      key={index}
-                      className={`carousel-item ${index === 0 ? 'active' : ''}`}
-                    >
-                      <span className="providerThumbnailWrapper">
-                        <img
-                          src={exclusion.image}
-                          alt={exclusion.name}
-                          className="providerThumbnail"
-                        />
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                {newUserExclusions.length > 1 && (
-                  <>
-                    <button
-                      className="carousel-control-prev clickable overideBootstarp settingsControl6"
-                      type="button"
-                      data-bs-target="#carouselExample"
-                      data-bs-slide="next"
-                      onClick={() => { handleNextExclusion() }}
-                    >
-                      +
-                    </button>
-                    <button
-                      className="carousel-control-next settingsControl7 clickable overideBootstarp"
-                      type="button"
-                      data-bs-target="#carouselExample"
-                      data-bs-slide="prev"
-                      onClick={() => { handlePreviousExclusion() }}
-                    >
-                      -
-                    </button>
-                  </>
-                )}
-                {newUserExclusions.length > 0 && (
-                  <>
-                    <span className="settingsValue mt-3">
-                      {
-                        newUserExclusions[exclusionIndex].name
-                          .split(' ')[0]
-                      }
+            {/* carousel */}
+            <div key={`carousel-${newUserExclusions.length}`} id={`carousel-${newUserExclusions.length}`} className="carousel slide" data-bs-interval="false">
+              <div className="carousel-inner carouselWrapper">
+                {newUserExclusions.map((exclusion, index) => (
+                  <div
+                    key={index}
+                    className={`carousel-item ${index === 0 ? 'active' : ''}`}
+                  >
+                    <span className="providerThumbnailWrapper">
+                      <img
+                        src={exclusion.image}
+                        alt={exclusion.name}
+                        className="providerThumbnail"
+                      />
                     </span>
-                  </>
-                )}
+                  </div>
+                ))}
               </div>
-            
+              {newUserExclusions.length > 1 && (
+                <>
+                  <button
+                    className="carousel-control-prev clickable overideBootstarp settingsControl6"
+                    type="button"
+                    data-bs-target={`#carousel-${newUserExclusions.length}`}
+                    data-bs-slide="next"
+                    onClick={() => { handleNextExclusion() }}
+                  >
+                    +
+                  </button>
+                  <button
+                    className="carousel-control-next settingsControl7 clickable overideBootstarp"
+                    type="button"
+                    data-bs-target={`#carousel-${newUserExclusions.length}`}
+                    data-bs-slide="prev"
+                    onClick={() => { handlePreviousExclusion() }}
+                  >
+                    -
+                  </button>
+                </>
+              )}
+              {newUserExclusions.length > 0 && (
+                <>
+                  <span className="settingsValue mt-3">
+                    {newUserExclusions && <>({newUserExclusions.length})</>}
+                  </span>
+                </>
+              )}
+            </div>
           </>
         </div>
         {newUserExclusions && newUserExclusions.length > 0 && (
