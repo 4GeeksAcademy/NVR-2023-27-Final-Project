@@ -391,11 +391,6 @@ button:disabled {
   object-position: center;
 }
 
-
-
-
-
-
 /* Accordion */
 
 .accordion-button::after {
@@ -1472,7 +1467,7 @@ table.calendarModalTable td {
 /*******************/
 /* LOGO Solutioner */
 
-.logoWrapper {
+/* .logoWrapper {
   display: flex;
   align-items: center;
   font-size: 1.8rem;
@@ -1540,4 +1535,4 @@ table.calendarModalTable td {
   }
 }
 
-
+ */

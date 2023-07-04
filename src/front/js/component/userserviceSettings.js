@@ -4,14 +4,17 @@ import { Context } from "../store/appContext";
 export const UserServiceSettings = () => {
   const { store, actions } = useContext(Context);
   const [newUserSettings, setNewUserSettings] = useState({});
-  const experienceMap = new Map([
+  const [newUserExclusions, setNewUserExclusions] = useState([]);
+
+  const [ disableReinstateButton , setDisableReinstateButton ] = useState(false);
+  
+    const experienceMap = new Map([
     [1, "1 year"],
     [2, "1 to 3 years"],
     [3, "over 3 years"],
   ]);
 
-  const [exclusionsIndex, setExclusionsIndex] = useState(0)
-  const [exclusionObject, setExclusionObject] = useState({});
+  let exclusionIndex = 0
 
   // useEffects
 
@@ -25,16 +28,13 @@ export const UserServiceSettings = () => {
     }
   }, [store.userSettings]);
 
-
-  useEffect(() => {
+  useEffect(() => { 
     if (store.userExclusions) {
-      setExclusionObject(store.userExclusions[exclusionsIndex])
+      setNewUserExclusions(store.userExclusions)
     }
-
-  }, [store.userExclusions, exclusionsIndex]);
-
-
-
+  } , [store.userExclusions])
+  
+  
   // Handle Functions
 
   const handleToggleCertified = () => {
@@ -45,7 +45,7 @@ export const UserServiceSettings = () => {
     if (newUserSettings.required_experience === 3) {
       setNewUserSettings({ ...newUserSettings, required_experience: 1 })
     }
-    else (setNewUserSettings({ ...newUserSettings, required_experience: newUserSettings.required_experience + 1 }))
+    else { setNewUserSettings({ ...newUserSettings, required_experience: newUserSettings.required_experience + 1 }) }
   }
 
   const handleIncreaseRating = () => {
@@ -72,31 +72,32 @@ export const UserServiceSettings = () => {
   // handle Thumbnail gallery
 
   const handleNextExclusion = () => {
-    if (exclusionsIndex === store.userExclusions.length - 1) {
-      setExclusionsIndex(0)
-    }
-    else (
-      setExclusionsIndex((value) => value + 1)
-    );
+     if(store.userExclusions) {
+       if (exclusionIndex === store.userExclusions.length - 1) {
+        exclusionIndex = 0;
+      }
+      else {
+        exclusionIndex++
+      };
+     }
   };
 
   const handlePreviousExclusion = () => {
-    if (exclusionsIndex === 0) {
-      setExclusionsIndex(store.userExclusions.length - 1)
-    }
-    else (
-      setExclusionsIndex((value) => value - 1)
-    );
-
+   if (store.userExclusions) {
+      if (exclusionIndex === 0) {
+          exclusionIndex = store.userExclusions.length - 1
+        }
+        else {
+          exclusionIndex--
+        };
+   }
   };
 
   const handleReinstate = async (exclusionId) => {
-    // toggle button off disable = true
-    await actions.deleteExclusion(exclusionId)
-    // toggle button on  disable = false
-
+    setDisableReinstateButton(true);
+    await actions.deleteExclusion(exclusionId);
+    setDisableReinstateButton(false);
   }
-
 
   // Subcomponents
 
@@ -169,7 +170,6 @@ export const UserServiceSettings = () => {
           <span>
             <button className="settingsControl4 clickable" onClick={handleDecreaseRating}>-</button>
           </span>
-
         </div>
         <div className="mt-3">
           <button
@@ -178,10 +178,10 @@ export const UserServiceSettings = () => {
         </div>
         <div className="mt-5">
           <>
-            {(store.userExclusions && store.userExclusions.length) ? (
+              {/* carousel */}
               <div id="carouselExample" className="carousel slide" data-bs-interval="false">
                 <div className="carousel-inner carouselWrapper">
-                  {store.userExclusions.map((exclusion, index) => (
+                  {newUserExclusions.map((exclusion, index) => (
                     <div
                       key={index}
                       className={`carousel-item ${index === 0 ? 'active' : ''}`}
@@ -196,14 +196,14 @@ export const UserServiceSettings = () => {
                     </div>
                   ))}
                 </div>
-                {store.userExclusions.length > 1 ?  (
+                {newUserExclusions.length > 1 && (
                   <>
                     <button
                       className="carousel-control-prev clickable overideBootstarp settingsControl6"
                       type="button"
                       data-bs-target="#carouselExample"
                       data-bs-slide="next"
-                      onClick={handleNextExclusion}
+                      onClick={() => { handleNextExclusion() }}
                     >
                       +
                     </button>
@@ -212,35 +212,32 @@ export const UserServiceSettings = () => {
                       type="button"
                       data-bs-target="#carouselExample"
                       data-bs-slide="prev"
-                      onClick={handlePreviousExclusion}
+                      onClick={() => { handlePreviousExclusion() }}
                     >
                       -
                     </button>
                   </>
-                ) : null}
-                {(store.userExclusions[exclusionsIndex] && store.userExclusions[exclusionsIndex].name) && (
+                )}
+                {newUserExclusions.length > 0 && (
                   <>
                     <span className="settingsValue mt-3">
-                      <span className="settingsControl8 me-1">{exclusionsIndex+1}/{store.userExclusions.length}
-                      </span>
-
                       {
-                        store.userExclusions[exclusionsIndex].name
+                        newUserExclusions[exclusionIndex].name
                           .split(' ')[0]
-                          
                       }
                     </span>
                   </>
                 )}
               </div>
-            ) : null}
+            
           </>
         </div>
-        {store.userExclusions && store.userExclusions.length > 0 && (
+        {newUserExclusions && newUserExclusions.length > 0 && (
           <div className="mt-3">
             <button
-              onClick={() => handleReinstate(store.userExclusions[exclusionsIndex].id)}
-              className="updateettingsButton">
+              onClick={() => handleReinstate(store.userExclusions[exclusionIndex].id)}
+              className="updateettingsButton"
+              disabled={disableReinstateButton}>
               reinstate</button>
           </div>
         )}
