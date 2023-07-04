@@ -6,6 +6,8 @@ export const UserServiceSettings = () => {
   const [newUserSettings, setNewUserSettings] = useState({});
   const [newUserExclusions, setNewUserExclusions] = useState([]);
 
+  const [exclusionIndex, setExclusionIndex] = useState(0)
+
   const [disableReinstateButton, setDisableReinstateButton] = useState(false);
 
   const experienceMap = new Map([
@@ -14,7 +16,6 @@ export const UserServiceSettings = () => {
     [3, "over 3 years"],
   ]);
 
-  let exclusionIndex = 0
 
   // useEffects
 
@@ -31,6 +32,7 @@ export const UserServiceSettings = () => {
   useEffect(() => {
     if (store.userExclusions) {
       setNewUserExclusions(store.userExclusions)
+      setExclusionIndex(0);
     }
   }, [store.userExclusions])
 
@@ -74,10 +76,11 @@ export const UserServiceSettings = () => {
   const handleNextExclusion = () => {
     if (store.userExclusions) {
       if (exclusionIndex === store.userExclusions.length - 1) {
-        exclusionIndex = 0;
+        setExclusionIndex(0);
+
       }
       else {
-        exclusionIndex++
+        setExclusionIndex((value) => value + 1)
       };
     }
   };
@@ -85,7 +88,7 @@ export const UserServiceSettings = () => {
   const handlePreviousExclusion = () => {
     if (store.userExclusions) {
       if (exclusionIndex === 0) {
-        exclusionIndex = store.userExclusions.length - 1
+        setExclusionIndex(() => store.userExclusions.length - 1)
       }
       else {
         exclusionIndex--
@@ -218,10 +221,10 @@ export const UserServiceSettings = () => {
                   </button>
                 </>
               )}
-              {newUserExclusions.length > 0 && (
+              {newUserExclusions && newUserExclusions.length > 0 && newUserExclusions[exclusionIndex] && newUserExclusions[exclusionIndex].name && (
                 <>
                   <span className="settingsValue mt-3">
-                    {newUserExclusions && <>({newUserExclusions.length})</>}
+                    {newUserExclusions[exclusionIndex].name.split(' ')[0]}
                   </span>
                 </>
               )}
