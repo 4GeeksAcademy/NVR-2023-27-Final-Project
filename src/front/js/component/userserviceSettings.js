@@ -223,6 +223,9 @@ export const UserServiceSettings = () => {
               )}
               {newUserExclusions && newUserExclusions.length > 0 && newUserExclusions[exclusionIndex] && newUserExclusions[exclusionIndex].name && (
                 <>
+                  <span className="exclusionCounter">
+                    {exclusionIndex+1}/{newUserExclusions.length}
+                  </span>
                   <span className="settingsValue mt-3">
                     {newUserExclusions[exclusionIndex].name.split(' ')[0]}
                   </span>

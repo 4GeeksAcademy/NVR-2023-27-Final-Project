@@ -1462,7 +1462,14 @@ table.calendarModalTable td {
   color: black !important;
 }
 
+.exclusionCounter {
+  font-size: .6rem;
+  font-variant: small-caps;
+  padding-inline: .1rem;
+  border: .7px solid black;
+  margin-right: .15rem;
 
+}
 
 /*******************/
 /* LOGO Solutioner */
