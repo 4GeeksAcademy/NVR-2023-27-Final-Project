@@ -692,7 +692,7 @@ def notify_viable_providers (user , service_request):
         provider_name = provider_profile.name
         print(f"*** Provider number {i}: {provider_name}")
 
-    # Step 1.2: Remove excluded providers
+    """ # Step 1.2: Remove excluded providers
     print("********************** STEP 1.2; remove excluded providers")
     viable_providers = [provider for provider in viable_providers if not Exclusion.query.filter_by(
         user_id=user.id, provider_id=provider).first()]
@@ -769,10 +769,12 @@ def notify_viable_providers (user , service_request):
     for i, provider in enumerate(viable_providers, start=1):
         provider_profile = ProviderProfile.query.get(provider)
         provider_name = provider_profile.name
-        print(f"** Provider number {i}: {provider_name}")
+        print(f"** Provider number {i}: {provider_name}") """
 
-# Step 1.5: Calculate distance and time from provider address to service_request address
+# Step 1.5: Calculates distance and time from provider address to service_request address 
+# Note: API returns distance in meters by default
     print("********************** STEP 1.5: calculate distance and time")
+    providers_to_remove = []
 
     for i, provider in enumerate(viable_providers, start=1):
         provider_profile = ProviderProfile.query.get(provider)
@@ -793,21 +795,33 @@ def notify_viable_providers (user , service_request):
             if distance_and_time:
                 distance = distance_and_time['distance']
                 time = distance_and_time['time']
-                print(f"** Provider number {i}: {provider_profile.name}")
+                print(f"AAAAAAAAAAAAAAAAAAAAAAA Provider number {i}: {provider_profile.name}")
                 print(f"Distance: {distance}")
                 print(f"Time: {time}")
-            else:
-                print(f"** Provider number {i}: {provider_profile.name}")
-                print("Distance and time not available.")
+
+                # Checks if distance exceeds provider's service_radius
+            if ((distance_and_time['distance_value'] / 1000) > (provider_profile.service_radius)):
+                providers_to_remove.append(provider)
+                print("Provider removed over excessive distance")
+            
         else:
-            print(f"** Provider number {i}: {provider_profile.name}")
+            print(f"ZZZZZZZZZZZZZZZZZZZ Provider number {i}: {provider_profile.name}")
             print("Address information missing.")
 
+    viable_providers = [provider for provider in viable_providers if provider not in providers_to_remove]
 
+    # Print the updated viable_providers list after filtering by distance
+    print("********************** Providers within service_radius ")
+    for i, provider in enumerate(viable_providers, start=1):
+        provider_profile = ProviderProfile.query.get(provider)
+        provider_name = provider_profile.name
+        print(f"** Provider number {i}: {provider_name}")
+
+    # cretae array of notifications based on viable_providers
+    # use bulk commit like in service_descriptions in JSON file
 
 
     # End of Main Algorithm
-
 
 # Google API distane matrix call
 

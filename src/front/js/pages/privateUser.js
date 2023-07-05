@@ -6,7 +6,6 @@ import { ServiceRollUp } from "../component/serviceRollUp";
 import { RequestRollUp } from "../component/requestRollUp"
 import { NotificationRollUp } from "../component/notificationRollUp";
 import { UserServiceSettings } from "../component/userserviceSettings";
-import { ReInclusionList } from "../component/reinclusionList";
 
 import "../../styles/privateuser.css";
 

@@ -91,7 +91,7 @@ export const UserServiceSettings = () => {
         setExclusionIndex(() => store.userExclusions.length - 1)
       }
       else {
-        exclusionIndex--
+        setExclusionIndex((value) => value - 1);
       };
     }
   };
