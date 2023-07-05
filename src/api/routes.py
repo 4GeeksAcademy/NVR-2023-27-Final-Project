@@ -771,7 +771,42 @@ def notify_viable_providers (user , service_request):
         provider_name = provider_profile.name
         print(f"** Provider number {i}: {provider_name}")
 
-    # End of MAin Algorithm
+# Step 1.5: Calculate distance and time from provider address to service_request address
+    print("********************** STEP 1.5: calculate distance and time")
+
+    for i, provider in enumerate(viable_providers, start=1):
+        provider_profile = ProviderProfile.query.get(provider)
+        provider_address = provider_profile.address
+        service_request_address = service_request.address
+
+        if provider_address and service_request_address:
+            provider_latitude = provider_address.latitude
+            provider_longitude = provider_address.longitude
+            service_request_latitude = service_request_address.latitude
+            service_request_longitude = service_request_address.longitude
+
+            distance_and_time = get_distance_and_time(
+                provider_latitude, provider_longitude,
+                service_request_latitude, service_request_longitude
+            )
+
+            if distance_and_time:
+                distance = distance_and_time['distance']
+                time = distance_and_time['time']
+                print(f"** Provider number {i}: {provider_profile.name}")
+                print(f"Distance: {distance}")
+                print(f"Time: {time}")
+            else:
+                print(f"** Provider number {i}: {provider_profile.name}")
+                print("Distance and time not available.")
+        else:
+            print(f"** Provider number {i}: {provider_profile.name}")
+            print("Address information missing.")
+
+
+
+
+    # End of Main Algorithm
 
 
 # Google API distane matrix call
