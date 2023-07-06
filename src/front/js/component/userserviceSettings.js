@@ -201,6 +201,9 @@ export const UserServiceSettings = () => {
               </div>
               {newUserExclusions.length > 1 && (
                 <>
+                  <span className="exclusionCounter">
+                    {exclusionIndex + 1}/{newUserExclusions.length}
+                  </span>
                   <button
                     className="carousel-control-prev clickable overideBootstarp settingsControl6"
                     type="button"
@@ -222,25 +225,24 @@ export const UserServiceSettings = () => {
                 </>
               )}
               {newUserExclusions && newUserExclusions.length > 0 && newUserExclusions[exclusionIndex] && newUserExclusions[exclusionIndex].name && (
-                <>
-                  <span className="exclusionCounter">
-                    {exclusionIndex+1}/{newUserExclusions.length}
-                  </span>
-                  <span className="settingsValue mt-3">
-                    {newUserExclusions[exclusionIndex].name.split(' ')[0]}
-                  </span>
-                </>
+                < span className="pb-3">
+                    <span className="exclusionName">
+                      {newUserExclusions[exclusionIndex].name}
+                    </span>
+                </span>
               )}
             </div>
           </>
         </div>
         {newUserExclusions && newUserExclusions.length > 0 && (
-          <div className="mt-3">
+          <div className="mt-1">
             <button
               onClick={() => handleReinstate(store.userExclusions[exclusionIndex].id)}
-              className="updateettingsButton"
-              disabled={disableReinstateButton}>
-              reinstate</button>
+              className="updateettingsButton mt-3"
+              disabled={disableReinstateButton}
+            >
+              reinstate
+            </button>
           </div>
         )}
       </div>

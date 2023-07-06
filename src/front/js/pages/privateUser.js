@@ -31,7 +31,7 @@ export const PrivateUser = () => {
         return avatarInitials.toLowerCase();
     };
 
-    const avatarInitials = getAvatarInitials(JSON.parse(localStorage.getItem("credentials")).name);
+    const avatarInitials = localStorage.getItem("credentials") ? getAvatarInitials(JSON.parse(localStorage.getItem("credentials")).name) : "";
 
     // Filter variables
 
@@ -87,38 +87,45 @@ export const PrivateUser = () => {
 
     useEffect(() => {
         const checkCredentials = () => {
-            if (!localStorage.getItem("credentials")) {
-                navigate("/");
-            }
+          if (!localStorage.getItem("credentials")) {
+            navigate("/");
+          }
         };
-
+      
         checkCredentials();
-
+      
+        const fetchData = async () => {
+        
         if (localStorage.getItem("credentials")) {
-            actions.getUserSettings();
-            actions.getUserAddresses();
-            actions.getUserExclusions();
-            actions.getUserRequests();
-            actions.getUserBookedDays();
-            actions.getUserNotifications();
-            actions.getServiceDescriptions();
 
             // Generates Welcome message from name
             let nameString = JSON.parse(localStorage.getItem("credentials")).name.toLowerCase();
             if (nameString.length > 10) {
                 let auxiliaryNameArray = nameString.split(" ");
                 if (auxiliaryNameArray[0].length > 10) {
-                    nameString = auxiliaryNameArray[0][0] + (auxiliaryNameArray[1] ? auxiliaryNameArray[1][0] : "");
+                nameString = auxiliaryNameArray[0][0] + (auxiliaryNameArray[1] ? auxiliaryNameArray[1][0] : "");
+                } else {
+                nameString = auxiliaryNameArray[0];
                 }
-                else { nameString = auxiliaryNameArray[0] }
             }
-
-            nameString = "welcome back, " + nameString;
-            actions.alertUser(nameString, "yellow", "black");
-
-        }
-    }, []);
-
+ 
+       nameString = "welcome back, " + nameString;
+       actions.alertUser(nameString, "yellow", "black");
+        
+            await actions.getUserSettings();
+            await actions.getUserAddresses();
+            await actions.getUserExclusions();
+            await actions.getUserRequests();
+            await actions.getUserBookedDays();
+            await actions.getUserNotifications();
+            await actions.getServiceDescriptions();
+     
+          }
+        };
+      
+        fetchData();
+      }, []);
+      
     useEffect(() => {
         const findPriceIntervals = () => {
             if (store.serviceDescriptions.length === 0) {
