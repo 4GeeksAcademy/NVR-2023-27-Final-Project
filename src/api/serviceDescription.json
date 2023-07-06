@@ -20,7 +20,7 @@
 },
 {
     "category": "cleaning",
-    "service": "move-in/out cleaning",
+    "service": "relocation cleaning",
     "description": "performing comprehensive cleaning services specifically designed for move-in or move-out situations",
     "unit": "1 area of up to 100 m²",
     "duration": 7,
@@ -30,7 +30,7 @@
 },
 {
     "category": "cleaning",
-    "service": "deep carpet cleaning",
+    "service": "carpet cleaning",
     "description": "conducting a thorough cleaning of carpets using specialized techniques and equipment for deep stain and odor removal",
     "unit": "1 carpet of up to 12 m²",
     "duration": 2,
@@ -90,7 +90,7 @@
 },
 {
     "category": "plumbing",
-    "service": "exterior faucet maintenance",
+    "service": "faucet maintenance",
     "description": "inspecting and maintaining exterior faucets to ensure their proper functioning and prevent leaks or other issues.",
     "unit": "1 exterior faucet in a block of up to 20 flats",
     "duration": 6,
@@ -100,7 +100,7 @@
 },
 {
     "category": "electrical",
-    "service": "light fixture installation",
+    "service": "light installation",
     "description": "installing or replacing light fixtures, including wiring and connection",
     "unit": "1 fixture",
     "duration": 1,
@@ -120,7 +120,7 @@
 },
 {
     "category": "security",
-    "service": "alarm system repair",
+    "service": "alarm repair",
     "description": "performing basic repairs on alarm systems, including alarms, sensors, or keypad malfunctions", 
     "unit": "1 alarm system",
     "duration": 2,
@@ -130,7 +130,7 @@
 },
 {
     "category": "security",
-    "service": "surveillance camera repair",
+    "service": "cctv repair",
     "description": "performing basic repairs on surveillance cameras, addressing issues such as connectivity problems, image quality, or positioning",
     "unit": "Up to 2 surveillance cameras",
     "duration": 2,
@@ -150,7 +150,7 @@
 },
 {
     "category": "handyman",
-    "service": "door hinge adjustment",
+    "service": "hinge adjustment",
     "description": "adjusting door hinges to ensure proper alignment, smooth operation, and eliminate squeaking or sticking",
     "unit": "1 door",
     "duration": 1,
@@ -191,7 +191,7 @@
 },
 {
     "category": "handyman",
-    "service": "small appliance repair",
+    "service": "appliance repair",
      "description": "performing basic repairs on small appliances such as toasters, blenders, coffee makers, irons, electric fans, and food processors whose fix does not require any spare aprts",
     "unit": "1 small appliance",
     "duration": 2,
@@ -211,7 +211,7 @@
 },
 {
     "category": "patching",
-    "service": "single painting of partition",
+    "service": "one-coat painting",
     "description": "applying a single coat of paint to interior walls, refreshing the appearance or changing the color",
     "unit": "1 wall of up to 25 square meters",
     "duration": 3,
@@ -221,7 +221,7 @@
 },
 {
     "category": "patching",
-    "service": "double painting of partition",
+    "service": "double-coat painting",
     "description": "applying a double coat of paint to interior walls, ensuring full coverage and a smooth finish",
     "unit": "1 wall of up to 25 m²s",
     "duration": 3,
@@ -231,23 +231,23 @@
 },
 {
     "category": "patching",
-    "service": "single painting of facade",
-    "description": "applying a single coat of paint to the ground floor exterior walls, enhancing the visual appeal and protection against weather elements",
-    "unit": "1 ground floor exterior wall of up to 40 m²",
+    "service": "ceiling painting",
+    "description": "applying a single coat of paint to ceiling, refreshing the appearance or changing the color",
+    "unit": "1 ceiling of up to 40 m²",
     "duration": 4,
     "personnel": 1,
     "included": "paint provided by client, all else included",
-    "price": 80
+    "price": 90
 },
 {
     "category": "patching",
-    "service": "double painting of facade",
+    "service": "facade painting",
     "description": "applying a double coat of paint to the ground floor exterior walls, providing added durability and an even finish",
-    "unit": "1 ground floor exterior wall of up to 150 m²",
-    "duration": 4,
+    "unit": "1 ground floor exterior wall of up to 50 m²",
+    "duration": 5,
     "personnel": 1,
     "included": "paint provided by client, all else included",
-    "price": 60
+    "price": 110
 },
 {
     "category": "patching",
@@ -266,7 +266,7 @@
     "unit": "1 interior wall of up to 25 m²",
     "duration": 4,
     "personnel": 1,
-    "included": "paint provided by client, all otehr tools and consummables provided",
+    "included": "paint provided by client, all other tools and consummables provided",
     "price": 90
 },
 {
@@ -321,7 +321,7 @@
 },
 {
     "category": "extermination",
-    "service": "insect extermination",
+    "service": "insect control",
     "description": "exterminating common household insects, such as ants, cockroaches, and spiders, using safe and effective methods to eliminate infestations and prevent future occurrences.",
     "unit": "1 area of up to 150 m²",
     "duration": 2,
@@ -351,7 +351,7 @@
 },
 {
     "category": "extermination",
-    "service": "wasp's nest Removal",
+    "service": "nest removal",
     "description": "professional removal of wasp's or hornet's nests to eliminate the threat and ensure the safety of your property.",
     "unit": "1 nest",
     "duration": 1.5,
@@ -381,7 +381,7 @@
 },
 {
     "category": "petcare",
-    "service": "pet transportation to vet",
+    "service": "pet transport",
     "description": "transporting pets to veterinary appointments, ensuring their safe and comfortable travel to receive necessary medical care.",
     "duration": 2,
     "unit": "1 transportation of 1 pet to the designated vet within 5 km of client's address",
@@ -464,7 +464,7 @@
 
 {
     "category": "wellness",
-    "service": "personal hygiene assistance",
+    "service": "hygiene assistance",
     "description": "Assistance with personal hygiene tasks for disabled, elderly, or individuals with special needs. This includes help with bathing, grooming, toileting, and dressing.",
     "unit": "1 session for 1 client",
     "duration": 1.5,
@@ -475,7 +475,7 @@
 
 {
     "category": "wellness",
-    "service": "soto Zen meditation",
+    "service": "zen meditation",
     "description": "guided meditation practice following the principles of Soto Zen Buddhism. Experience deep relaxation, mindfulness, and self-awareness through seated meditation and focus on breath.",
     "unit": "1 session for 1 client",
     "duration": 1,
@@ -507,7 +507,7 @@
 },
 {
     "category": "companionship",
-    "service": "accompaniment to events",
+    "service": "event accompaniment",
     "description": "accompanying clients to social events, ensuring their participation and enjoyment, while aiding and supporting as needed",
     "unit": "1 social event with 1 client",
     "duration": 2,
