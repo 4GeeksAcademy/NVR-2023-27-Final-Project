@@ -125,7 +125,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (response.ok) {
 						const data = await response.json();
 						localStorage.setItem("token", data.token);
-						await getActions().getProviderDetails();
+						await getActions().getProviderCredentials();
 						return true;
 					}
 					else {
@@ -139,7 +139,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
-			getProviderDetails: async () => {
+			getProviderCredentials: async () => {
 				const response = await fetch(process.env.BACKEND_URL + "api/getprovider", {
 					method: "GET",
 					headers: {

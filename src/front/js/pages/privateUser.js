@@ -96,7 +96,7 @@ export const PrivateUser = () => {
       
         const fetchData = async () => {
         
-        if (localStorage.getItem("credentials")) {
+            if (localStorage.getItem("credentials")) {
 
             // Generates Welcome message from name
             let nameString = JSON.parse(localStorage.getItem("credentials")).name.toLowerCase();

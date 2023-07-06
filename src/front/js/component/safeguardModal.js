@@ -29,7 +29,7 @@ export const SafeguardrModal = (props) => {
                         </div>
                     ) : (
                         <div className="qrCodeImageWrapper">
-                            <div className="replacementQRCode"></div>
+                            <div className="replacementQRCode">enter qr password to generate qr code</div>
                         </div>
                     )}
                 </div>

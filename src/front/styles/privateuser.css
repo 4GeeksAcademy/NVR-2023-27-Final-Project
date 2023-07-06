@@ -1402,16 +1402,12 @@ table.calendarModalTable td {
 
 /* Service Request password modal IMAGES */
 
-.passwordImagesWrapper {
-  display: flex;
-  align-items: flex-start;
-  /* Vertically align to the top */
-}
-
 .providerAvatarImageWrapper,
 .qrCodeImageWrapper {
   width: 160px;
-  height: 300px;
+  height: 250px;
+  min-width: 160px;
+  min-height: 250px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -1435,14 +1431,14 @@ table.calendarModalTable td {
 .providerAvatarReplacement,
 .replacementQRCode {
   width: 160px;
-  height: 300px;
+  height: 250px;
   min-width: 160px;
-  min-height: 300px;
+  min-height: 250px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  background: green;
-}
+  align-items: center;
+  text-align: center;
+} 
 
 @keyframes fade-in {
   from {
