@@ -322,7 +322,7 @@ export const RequestRollUp = (props) => {
                     </div>
                 </div>
                 <div>
-                    <SafeguardrModal id={id} provider_id={provider_id} />
+                    <SafeguardrModal id={id} provider_id={provider_id}  date={dateString}/>
                 </div>
                 <div>
                     <RateBanrModal id={id} provider_id={provider_id} />

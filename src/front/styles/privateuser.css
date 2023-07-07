@@ -1475,7 +1475,55 @@ table.calendarModalTable td {
   font-style: italic;
 }
 
+.passwordLabel {
+  font-size: .7rem;
+  font-variant: small-caps;
+  letter-spacing: .1rem;
+  color: white;
+  font-weight: 300;
+}
 
+#serviceSearchField2 , #serviceSearchField3  {
+  color: white;
+  width: 4.5rem;
+  margin-right: 1.2rem;
+}
+
+#serviceSearchField2::placeholder , 
+#serviceSearchField3::placeholder {
+color: white;
+opacity: .7;
+
+}
+
+.starRatingWrapper {
+  display: inline-flex;
+  color: white;
+  gap: .5px;
+}
+
+.starWhite {
+  fill: white;
+}
+
+.inputFormsWrapper {
+  gap: 0;
+}
+
+.certifiedLabel {
+  justify-content: center;
+  align-items: center;
+  text-align: center;;
+  font-size: .6rem;
+  font-variant: small-caps;
+  color: rgb(132, 206, 132);
+  border: .5px solid rgb(132, 206, 132);
+  padding-block: .1rem;
+  padding-inline: .15rem;
+  letter-spacing: .05rem;
+  
+
+}
 
 /*******************/
 /* LOGO Solutioner */
@@ -1548,4 +1596,4 @@ table.calendarModalTable td {
   }
 }
 
-  */
+   */
