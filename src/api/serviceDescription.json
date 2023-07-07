@@ -382,7 +382,7 @@
 {
     "category": "petcare",
     "service": "pet transport",
-    "description": "transporting pets sych as a cat or a dog to veterinary appointments, ensuring their safe and comfortable travel to receive necessary medical care.",
+    "description": "transporting pets such as a cat or a dog to veterinary appointments, ensuring their safe and comfortable travel to receive necessary medical care.",
     "duration": 2,
     "unit": "1 transportation of 1 pet to the designated vet within 10 km of client's address",
     "personnel": 1,
