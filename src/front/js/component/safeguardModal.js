@@ -31,10 +31,9 @@ export const SafeguardrModal = (props) => {
     useEffect(() => {
         const generateQRCode = async (text, backgroundColor, color, size) => {
             const encodedText = encodeURIComponent(text);
-            const encodedBackgroundColor = encodeURIComponent(backgroundColor);
-            const encodedColor = encodeURIComponent(color);
-            const url = `https://image-charts.com/chart?chs=${size}x${size}&cht=qr&chl=${encodedText}&choe=UTF-8&chf=bg,s,${encodedBackgroundColor}&chco=${encodedColor}`;
-          
+            const url = `https://image-charts.com/chart?chs=${size}x${size}&cht=qr&chl=${encodedText}&choe=UTF-8&icqrb=7F7F7F&icqrf=FFFF00`;
+                      // https://image-charts.com/chart?chl=This%20is%20so%20awesome&choe=UTF-8&chs=200x200&cht=qr&icqrb=7F7F7F&icqrf=FFFF00
+
             try {
               const response = await fetch(url);
               if (!response.ok) {
@@ -48,7 +47,7 @@ export const SafeguardrModal = (props) => {
               return null;
             }
           };
-                
+                          
         const generateQR = async () => {
           if (updatedServiceRequestPasswords && updatedServiceRequestPasswords.qrPassword && updatedServiceRequestPasswords.qrPassword !== "") {
             try {
