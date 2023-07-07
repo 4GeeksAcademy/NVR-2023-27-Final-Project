@@ -4,7 +4,7 @@ import { Context } from "../store/appContext";
 export const SafeguardrModal = (props) => {
 
     const { store, actions } = useContext(Context);
-    const { id, provider_id , date} = props;
+    const { id, provider_id , service, date} = props;
 
     const [updatedServiceRequestPasswords, setUpdatedServiceRequestPasswords] = useState({
         verbalPassword: "",
@@ -31,7 +31,8 @@ export const SafeguardrModal = (props) => {
     useEffect(() => {
         const generateQRCode = async (text, size) => {
             
-            const encodedText = encodeURIComponent(text);
+            const adminText = `Solutioner ID:#${id} ${service}, on ${date}. QR password: `
+            const encodedText = encodeURIComponent(adminText + text);
             const url = `https://image-charts.com/chart?chs=${size}x${size}&cht=qr&chl=${encodedText}&choe=UTF-8&icqrb=7F7F7F&icqrf=FFFF00`;
 
             try {
@@ -170,13 +171,10 @@ export const SafeguardrModal = (props) => {
                   <div>
                     <span className="calendarModalTableLabel me-1">provider:</span>
                     <span className="calendarModalTableValue">{store.providerDetails.name}</span>
-                  </div>
-                  <div>
-                    <span className="calendarModalTableLabel me-1">rating:</span>
+                    <span className="calendarModalTableLabel ms-3 me-1">rating:</span>
                     <StarRating rating={roundToNearestHalf(store.providerDetails.average_rating)} />
                     <span className="ms-1 calendarModalTableValue">{ratingString}</span>
-                    <span className="calendarModalTableLabel ms-2 me-1">based on:</span>
-                    <span className="calendarModalTableValue">{ratingsCounterString}</span>
+                    <span className="calendarModalTableValue ms-1">({ratingsCounterString})</span>
                   </div>
                   <div>
                     <span className="calendarModalTableLabel me-1">experience:</span>
