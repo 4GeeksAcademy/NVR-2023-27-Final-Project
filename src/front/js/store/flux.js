@@ -520,7 +520,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			
+
 			// UPDATE service request passwords
 
 			updateServiceRequestPasswords: async (updatedServiceRequestPasswords , serviceRequestId) => {
@@ -531,13 +531,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
 							"Content-Type": "application/json"
 						},
-						body: JSON.stringify({ updatedServiceRequestPasswords })
+						body: JSON.stringify({ updatedServiceRequestPasswords: updatedServiceRequestPasswords  })
 					});
 			
 					if (response.ok) {
 						const data = await response.json();
 						console.log(data.message);
-						await getActions().getUserSettings();
 						getActions().alertUser("passwords updated", "#00008B", "white");
 					} else {
 						console.log('Error:', response.status);

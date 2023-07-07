@@ -85,6 +85,11 @@ export const SafeguardrModal = (props) => {
       dialog.close();
     }
 
+    const hamdleUpdateServiceRequestPasswords = (id) => {
+      actions.updateServiceRequestPasswords( updatedServiceRequestPasswords , id);
+      handleCloseSafeguardModal(id);
+    }
+
     // Map
 
     const experienceMap = new Map([
@@ -222,7 +227,7 @@ export const SafeguardrModal = (props) => {
               </form>
             </div>
             <span>
-              <button>generate</button>
+              <button onClick={()=> {hamdleUpdateServiceRequestPasswords(id)}} >update</button>
             </span>
             <span onClick={()=> {handleCloseSafeguardModal(id)}}>
               cancel

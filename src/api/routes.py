@@ -667,6 +667,7 @@ def delete_exclusion(exclusion_id):
 @api.route("/updateservicerequestpasswords/<int:service_request_id>", methods=["PUT"])
 @jwt_required()
 def update_service_request_passwords(service_request_id):
+    print("*************************** Inside the Route")
     try:
         user_email = get_jwt_identity()
         user = UserProfile.query.filter_by(email=user_email).first()
@@ -692,12 +693,27 @@ def update_service_request_passwords(service_request_id):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # *************************
 # Main Algorithm 
             
 def notify_viable_providers (user , service_request):
     
-    # Step1.1
+    # Step 1.1: Het max set of Providers
     print("********************** STEP 1.1: Get Max set ")
 
     def get_viable_providers_max_set(service_request_id):
@@ -714,7 +730,7 @@ def notify_viable_providers (user , service_request):
         provider_name = provider_profile.name
         print(f"*** Provider number {i}: {provider_name}")
 
-    """ """ # Step 1.2: Remove excluded providers
+    # Step 1.2: Remove excluded providers
     print("********************** STEP 1.2; remove excluded providers")
     viable_providers = [provider for provider in viable_providers if not Exclusion.query.filter_by(
         user_id=user.id, provider_id=provider).first()]
@@ -840,6 +856,7 @@ def notify_viable_providers (user , service_request):
         print(f"** Provider number {i}: {provider_name}")
 
     # cretae array of notifications based on viable_providers
+    
     # use bulk commit like in service_descriptions in JSON file
 
 
@@ -874,6 +891,7 @@ def get_distance_and_time(latitude1, longitude1, latitude2, longitude2):
     except KeyError:
         print("Error with parsing Google API response: Invalid response format")
         return None
+
 
 
 """ def get_distance_time_between_providers():
