@@ -19,7 +19,7 @@ import requests
 # *********************************************
 
 
-# Bilerplate code
+# Boilerplate code
 
 api = Blueprint('api', __name__)
 
@@ -311,8 +311,8 @@ def get_user_notifications():
             "error": str(e)
         }), 500
 
- # PRIVATE USER endpoints - create SERVICE REQUEST
 
+ # PRIVATE USER endpoints - create SERVICE REQUEST
 
 @api.route("/createrequest", methods=["POST"])
 @jwt_required()
@@ -336,11 +336,11 @@ def create_service_request():
             db.session.add(new_request)
             db.session.commit()
 
-            # Main Algorithm
+            # Main algorithm
             notify_viable_providers( user , new_request) 
 
-            # End of MAin Algorithm
-            return jsonify({"message": "Request successfully created"}), 200
+            # End of MAin algorithm
+            return jsonify({"message": "Request created successfully"}), 200
         else:
             return jsonify({"message": "User not found"}), 404
     except Exception as e:
@@ -662,8 +662,30 @@ def delete_exclusion(exclusion_id):
 
 
 
+# PRIVATE USER endpoints - UPDATE service request passwords
 
+@api.route("/updateservicerequestpasswords/<int:service_request_id>", methods=["PUT"])
+@jwt_required()
+def update_service_request_passwords(service_request_id):
+    try:
+        user_email = get_jwt_identity()
+        user = UserProfile.query.filter_by(email=user_email).first()
 
+        if user:
+            body = request.json
+            service_request = ServiceRequest.query.get(service_request_id)
+            if service_request:
+                service_request.verbal_password = body["updatedServiceRequestPasswords"]["verbalPassword"]
+                service_request.qr_password = body["updatedServiceRequestPasswords"]["qrPassword"]
+                db.session.commit()
+                return jsonify({"message": "Passwords successfully updated"})
+            else:
+                return jsonify({"message": "Service not found"}), 404
+        else:
+            return jsonify({"message": "User not found"}), 404
+    except Exception as e:
+        print(e)
+        return jsonify({"message": "An error occurred", "error": str(e)}), 500
 
 
 
@@ -671,7 +693,7 @@ def delete_exclusion(exclusion_id):
 
 
 # *************************
-# Main Algorythm 
+# Main Algorithm 
             
 def notify_viable_providers (user , service_request):
     
@@ -692,7 +714,7 @@ def notify_viable_providers (user , service_request):
         provider_name = provider_profile.name
         print(f"*** Provider number {i}: {provider_name}")
 
-    """ # Step 1.2: Remove excluded providers
+    """ """ # Step 1.2: Remove excluded providers
     print("********************** STEP 1.2; remove excluded providers")
     viable_providers = [provider for provider in viable_providers if not Exclusion.query.filter_by(
         user_id=user.id, provider_id=provider).first()]
@@ -769,7 +791,7 @@ def notify_viable_providers (user , service_request):
     for i, provider in enumerate(viable_providers, start=1):
         provider_profile = ProviderProfile.query.get(provider)
         provider_name = provider_profile.name
-        print(f"** Provider number {i}: {provider_name}") """
+        print(f"** Provider number {i}: {provider_name}") 
 
 # Step 1.5: Calculates distance and time from provider address to service_request address 
 # Note: API returns distance in meters by default
@@ -795,7 +817,7 @@ def notify_viable_providers (user , service_request):
             if distance_and_time:
                 distance = distance_and_time['distance']
                 time = distance_and_time['time']
-                print(f"AAAAAAAAAAAAAAAAAAAAAAA Provider number {i}: {provider_profile.name}")
+                print(f"Provider number {i}: {provider_profile.name}")
                 print(f"Distance: {distance}")
                 print(f"Time: {time}")
 
@@ -805,13 +827,13 @@ def notify_viable_providers (user , service_request):
                 print("Provider removed over excessive distance")
             
         else:
-            print(f"ZZZZZZZZZZZZZZZZZZZ Provider number {i}: {provider_profile.name}")
+            print(f"Provider number {i}: {provider_profile.name}")
             print("Address information missing.")
 
     viable_providers = [provider for provider in viable_providers if provider not in providers_to_remove]
 
     # Print the updated viable_providers list after filtering by distance
-    print("********************** Providers within service_radius ")
+    print("Providers within service_radius ")
     for i, provider in enumerate(viable_providers, start=1):
         provider_profile = ProviderProfile.query.get(provider)
         provider_name = provider_profile.name

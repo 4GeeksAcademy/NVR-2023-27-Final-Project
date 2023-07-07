@@ -80,6 +80,11 @@ export const SafeguardrModal = (props) => {
         });
     };
 
+    const handleCloseSafeguardModal = (id) => {
+      const dialog = document.querySelector(`#dialogSafeguard${id}`);
+      dialog.close();
+    }
+
     // Map
 
     const experienceMap = new Map([
@@ -216,9 +221,12 @@ export const SafeguardrModal = (props) => {
                 />
               </form>
             </div>
-            <div>
+            <span>
               <button>generate</button>
-            </div>
+            </span>
+            <span onClick={()=> {handleCloseSafeguardModal(id)}}>
+              cancel
+            </span>
           </dialog>
         </>
       );

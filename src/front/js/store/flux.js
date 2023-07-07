@@ -21,9 +21,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			providerDetails: null,
 			serviceRequestPasswords: null,
 
-
-
 		},
+
 		actions: {
 
 			// resets providerDetails
@@ -522,6 +521,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			
+			// UPDATE service request passwords
+
+			updateServiceRequestPasswords: async (updatedServiceRequestPasswords , serviceRequestId) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/updateservicerequestpasswords/" + serviceRequestId, {
+						method: "PUT",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({ updatedServiceRequestPasswords })
+					});
+			
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data.message);
+						await getActions().getUserSettings();
+						getActions().alertUser("passwords updated", "#00008B", "white");
+					} else {
+						console.log('Error:', response.status);
+					}
+				} catch (error) {
+					console.log('Error:', error);
+				}
+			},
 
 
 

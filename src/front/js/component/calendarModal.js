@@ -60,12 +60,15 @@ export const CalendarModal = (props) => {
         address_id: null,
     });
 
+    
     // initialzies newServiceRequest wuth main address ID
+
     useEffect(() => {
         if (store.userAddresses) {
             setNewServiceRequest({ ...newServiceRequest, address_id: store.userAddresses.id1 })
         }
     }, [store.userAddresses]);
+
 
     // General functions
 
