@@ -29,10 +29,10 @@ export const SafeguardrModal = (props) => {
     // useEffect for QR code 
 
     useEffect(() => {
-        const generateQRCode = async (text, backgroundColor, color, size) => {
+        const generateQRCode = async (text, size) => {
+            
             const encodedText = encodeURIComponent(text);
             const url = `https://image-charts.com/chart?chs=${size}x${size}&cht=qr&chl=${encodedText}&choe=UTF-8&icqrb=7F7F7F&icqrf=FFFF00`;
-                      // https://image-charts.com/chart?chl=This%20is%20so%20awesome&choe=UTF-8&chs=200x200&cht=qr&icqrb=7F7F7F&icqrf=FFFF00
 
             try {
               const response = await fetch(url);
@@ -51,7 +51,7 @@ export const SafeguardrModal = (props) => {
         const generateQR = async () => {
           if (updatedServiceRequestPasswords && updatedServiceRequestPasswords.qrPassword && updatedServiceRequestPasswords.qrPassword !== "") {
             try {
-              const qrBlob = await generateQRCode(updatedServiceRequestPasswords.qrPassword, "FFFFFF", "000000", 160);
+              const qrBlob = await generateQRCode(updatedServiceRequestPasswords.qrPassword,160);
               setQrCodeImage(qrBlob);
             } catch (error) {
               console.error(error);
