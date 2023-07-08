@@ -81,6 +81,8 @@ export const RequestRollUp = (props) => {
         dialog.showModal();
     }
     const handleClickRateBan = () => {
+        actions.resetProviderDetails();
+        actions.getProviderDetails(provider_id);
         const dialog = document.querySelector(`#dialogRateBan${id}`);
         dialog.showModal();
     }
@@ -325,7 +327,7 @@ export const RequestRollUp = (props) => {
                     <SafeguardrModal id={id} provider_id={provider_id}  service={serviceString} date={dateString}/>
                 </div>
                 <div>
-                    <RateBanrModal id={id} provider_id={provider_id} />
+                    <RateBanrModal id={id} provider_id={provider_id} service={serviceString} date={dateString}/>
                 </div>
             </div>
         </>

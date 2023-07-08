@@ -922,7 +922,7 @@ dialog:focus {
 }
 
 .calendarCell.currentDay {
-  color: yellow;
+  text-decoration-line: overline;
 }
 
 .calendarCell.selectedRequestDay {
@@ -1527,8 +1527,8 @@ opacity: .7;
 
 /*******************/
 /* LOGO Solutioner */
-
-/* .logoWrapper {
+/* 
+.logoWrapper {
   display: flex;
   align-items: center;
   font-size: 1.8rem;
