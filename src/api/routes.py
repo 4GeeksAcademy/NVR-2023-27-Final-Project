@@ -528,35 +528,33 @@ def updateandrenew_service_request(service_request_id):
 
 # PRIVATE USER endpoints - rate Provider
 
-@ api.route("/rateprovider/<int:service_request_id>/<float:rating>", methods=["PUT"])
-@ jwt_required()
-def rate_provider(service_request_id, rating):
+@api.route("/rateprovider/<int:provider_id>/<string:rating>", methods=["PUT"])
+@jwt_required()
+def rate_provider(provider_id, rating):
+    print("****************** 1. Eetred function")
+    rating = float(request.view_args['rating'])
     try:
         user_email = get_jwt_identity()
         user = UserProfile.query.filter_by(email=user_email).first()
 
-        # updates Provider ratings
+        # Update Provider ratings
         if user:
-            service_request = ServiceRequest.query.get(service_request_id)
-
-            if service_request:
-                provider = ProviderProfile.query.get(
-                    service_request.provider_id)
-                if provider:
-                    provider.average_rating = (
-                        (provider.average_rating * provider.rating_counter) + rating
-                    ) / (provider.rating_counter + 1)
-                    provider.rating_counter += 1
-                    db.session.commit()
-                else:
-                    return jsonify({"message": "Providernot found"}), 404
-
+            print(">>>>>>>>>>>>>>>>> 2. User found")
+            provider = ProviderProfile.query.get(provider_id)
+            if provider:
+                print("^^^^^^^^^^^^^^^^^^^^ 3. Provider found")
+                provider.average_rating = (
+                    (provider.average_rating * provider.ratings_counter) + rating
+                ) / (provider.ratings_counter + 1)
+                provider.ratings_counter += 1
+                db.session.commit()
                 return jsonify({"message": "Provider rating updated successfully"}), 200
             else:
-                return jsonify({"message": "Service request not found"}), 404
+                return jsonify({"message": "Provider not found"}), 404
         else:
             return jsonify({"message": "User not found"}), 404
     except Exception as e:
+        print(e)
         return jsonify({
             "message": "An error occurred",
             "error": str(e)
@@ -689,6 +687,31 @@ def update_service_request_passwords(service_request_id):
         return jsonify({"message": "An error occurred", "error": str(e)}), 500
 
 
+# PRIVATE USER endpoints - EXCLUDE  provider
+
+@api.route("/excludeprovider/<int:provider_id>", methods=["POST"])
+@jwt_required()
+def exclude_provider(provider_id):
+    print("************************** enterd Exclusion ")
+    try:
+        user_email = get_jwt_identity()
+        user = UserProfile.query.filter_by(email=user_email).first()
+        if user:
+            provider = ProviderProfile.query.get(provider_id)
+            if provider:
+                exclusion = Exclusion()
+                exclusion.user_id = user.id
+                exclusion.provider_id = provider_id
+                db.session.add(exclusion)
+                db.session.commit()
+                return jsonify({"message": "Exclusion successfully created"}), 201
+            else:
+                return jsonify({"message": "Provider not found"}), 404
+        else:
+            return jsonify({"message": "User not found"}), 404
+    except Exception as e:
+        print(e)
+        return jsonify({"message": "An error occurred", "error": str(e)}), 500
 
 
 

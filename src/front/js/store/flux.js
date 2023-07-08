@@ -442,30 +442,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			// PRIVATE USER : Rate provider
 
-			rateProvider: async (serviceRequestId, rating) => {
+			rateProvider: async (providerId, rating) => {
 				try {
-					const response = await fetch(process.env.BACKEND_URL + "api/updateandrenewservicerequest/" + serviceRequestId + "/" + rating
-
-						, {
-							method: "PUT",
-							headers: {
-								"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
-								"Content-Type": "application/json"
-							}
-						});
-
-					if (response.ok) {
-						const data = await response.json();
-						console.log(data.message);
-						await getActions().getUserBookedDays();
-						await getActions().getUserRequests();
-					} else {
-						console.log('Error:', response.status);
+				  const response = await fetch(process.env.BACKEND_URL + "api/rateprovider/" + providerId + "/" + rating, {
+					method: "PUT",
+					headers: {
+					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
+					  "Content-Type": "application/json"
 					}
+				  });
+			  
+				  if (response.ok) {
+					const data = await response.json();
+					console.log(data.message);
+					getActions().alertUser("Provider rated", "#00008B", "white");
+				  } else {
+					console.log('Error:', response.status);
+				  }
 				} catch (error) {
-					console.log('Error:', error);
+				  console.log('Error:', error);
 				}
-			},
+			  },
+
 
 			// PRIVATE USER : update user settings
 
@@ -493,7 +491,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// DELETE user Exclusion Request
+			// DELETE Delete Exclusion 
 
 			deleteExclusion: async (exclusionId) => {
 				try {
@@ -547,7 +545,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
+			// POST Exclude provider
 
+			excldueProvider: async (providerId) => {
+				try {
+				  const response = await fetch(process.env.BACKEND_URL + "api/excludeprovider/" + providerId, {
+					method: "POST",
+					headers: {
+					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
+					  "Content-Type": "application/json"
+					}
+				  });
+			  
+				  if (response.ok) {
+					const data = await response.json();
+					console.log(data.message);
+					await getActions().getUserExclusions();
+					getActions().alertUser("provider excluded", "#00008B", "white");
+				  } else {
+					console.log('Error:', response.status);
+				  }
+				} catch (error) {
+				  console.log('Error:', error);
+				}
+			  },
+			  
 
 
 		}

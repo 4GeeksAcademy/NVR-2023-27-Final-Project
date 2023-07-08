@@ -33,7 +33,15 @@ export const RateBanrModal = (props) => {
         dialog.close();
     };
 
-    const handleRateProvider = () => { };
+    const handleRateProvider = () => {
+        actions.rateProvider (provider_id, providerRating);
+        handleCloseRateBanModal(id);
+     };
+
+    const handleExcludeProvider = () => {
+        actions.excldueProvider(provider_id);
+        handleCloseRateBanModal(id);
+    }
     
     // pre-rpocessing Props
 
@@ -109,8 +117,8 @@ export const RateBanrModal = (props) => {
                                 </span>
                             </div>
                             <div>
-                                <span><button>exclude</button></span>
-                                <span><button>rate</button></span>
+                                <span><button onClick={handleExcludeProvider}>exclude</button></span>
+                                <span><button onClick={handleRateProvider}>rate</button></span>
                             </div>
                         </div>
                         <div>
