@@ -669,7 +669,6 @@ def delete_exclusion(exclusion_id):
 @api.route("/updateservicerequestpasswords/<int:service_request_id>", methods=["PUT"])
 @jwt_required()
 def update_service_request_passwords(service_request_id):
-    print("*************************** Inside the Route")
     try:
         user_email = get_jwt_identity()
         user = UserProfile.query.filter_by(email=user_email).first()
@@ -680,6 +679,7 @@ def update_service_request_passwords(service_request_id):
             if service_request:
                 service_request.verbal_password = body["updatedServiceRequestPasswords"]["verbalPassword"]
                 service_request.qr_password = body["updatedServiceRequestPasswords"]["qrPassword"]
+                service_request.status = 3
                 db.session.commit()
                 return jsonify({"message": "Passwords successfully updated"})
             else:

@@ -536,6 +536,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (response.ok) {
 						const data = await response.json();
 						console.log(data.message);
+						await getActions().getUserRequests();
 						getActions().alertUser("passwords updated", "#00008B", "white");
 					} else {
 						console.log('Error:', response.status);
