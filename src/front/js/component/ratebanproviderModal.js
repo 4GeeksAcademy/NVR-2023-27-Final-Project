@@ -34,7 +34,7 @@ export const RateBanrModal = (props) => {
     };
 
     const handleRateProvider = () => {
-        actions.rateProvider (provider_id, providerRating);
+        actions.rateProvider (id, provider_id, providerRating);
         handleCloseRateBanModal(id);
      };
 

@@ -528,10 +528,9 @@ def updateandrenew_service_request(service_request_id):
 
 # PRIVATE USER endpoints - rate Provider
 
-@api.route("/rateprovider/<int:provider_id>/<string:rating>", methods=["PUT"])
+@api.route("/rateprovider/<int:service_request_id>/<int:provider_id>/<string:rating>", methods=["PUT"])
 @jwt_required()
-def rate_provider(provider_id, rating):
-    print("****************** 1. Eetred function")
+def rate_provider(service_request_id, provider_id, rating):
     rating = float(request.view_args['rating'])
     try:
         user_email = get_jwt_identity()
@@ -539,14 +538,19 @@ def rate_provider(provider_id, rating):
 
         # Update Provider ratings
         if user:
-            print(">>>>>>>>>>>>>>>>> 2. User found")
             provider = ProviderProfile.query.get(provider_id)
             if provider:
-                print("^^^^^^^^^^^^^^^^^^^^ 3. Provider found")
                 provider.average_rating = (
                     (provider.average_rating * provider.ratings_counter) + rating
                 ) / (provider.ratings_counter + 1)
                 provider.ratings_counter += 1
+
+                # Update Status of servie_request to 6 - reviewed
+
+                service_request = ServiceRequest.query.get(service_request_id) 
+                if service_request:
+                        service_request.status = 6   
+
                 db.session.commit()
                 return jsonify({"message": "Provider rating updated successfully"}), 200
             else:

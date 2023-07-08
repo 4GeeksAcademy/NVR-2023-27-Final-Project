@@ -442,9 +442,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			// PRIVATE USER : Rate provider
 
-			rateProvider: async (providerId, rating) => {
+			rateProvider: async (serviceRequestId, providerId, rating) => {
 				try {
-				  const response = await fetch(process.env.BACKEND_URL + "api/rateprovider/" + providerId + "/" + rating, {
+				  const response = await fetch(process.env.BACKEND_URL + "api/rateprovider/" + serviceRequestId + "/" + providerId + "/" + rating, {
 					method: "PUT",
 					headers: {
 					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
@@ -455,7 +455,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  if (response.ok) {
 					const data = await response.json();
 					console.log(data.message);
-					getActions().alertUser("Provider rated", "#00008B", "white");
+					await getActions().getUserRequests();
+					getActions().alertUser("provider rated", "#00008B", "white");
 				  } else {
 					console.log('Error:', response.status);
 				  }
