@@ -54,16 +54,16 @@ export const RateBanrModal = (props) => {
         const renderStar = (indexOfStar) => {
             if (indexOfStar <= Math.floor(providerRating)) {
                 return <span className="filled-star">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 -960 960 960" width="14"><path d="m233-80 65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 -960 960 960" width="10"><path d="m233-80 65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Z" fill="white" /></svg>
                 </span>;
             } else if (indexOfStar === Math.floor(providerRating) + 1 && providerRating % 1 !== 0) {
                 return <span className="half-filled-star">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 -960 960 960" width="14"><path d="m480-299 157 95-42-178 138-120-182-16-71-168v387ZM233-80l65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 -960 960 960" width="10"><path d="m480-299 157 95-42-178 138-120-182-16-71-168v387ZM233-80l65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Z" fill="white" /></svg>
 
                 </span>;
             } else {
                 return <span className="empty-star">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 -960 960 960" width="14"><path d="m323-205 157-94 157 95-42-178 138-120-182-16-71-168-71 167-182 16 138 120-42 178ZM233-80l65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Zm247-355Z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 -960 960 960" width="10"><path d="m323-205 157-94 157 95-42-178 138-120-182-16-71-168-71 167-182 16 138 120-42 178ZM233-80l65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Zm247-355Z" fill="white" /></svg>
                 </span>;
             }
         };
@@ -110,19 +110,19 @@ export const RateBanrModal = (props) => {
                             </div>
                             <div className="d-flex align-items-center">
                                 <span className="d-inline-flex align-items-center">
-                                    <span className="calendarModalTableLabel">rating:</span>
+                                    <span className="calendarModalTableLabel me-3">rating:</span>
                                     <StarRatingPicker />
-                                    <button onClick={handleIncreaseRating} className="clickable">+</button>
-                                    <button onClick={handleDecreaseRating} className="clickable">-</button>
+                                    <button onClick={handleIncreaseRating} className="rateControl clickable">+</button>
+                                    <button onClick={handleDecreaseRating} className="rateControl clickable">-</button>
                                 </span>
                             </div>
-                            <div>
-                                <span><button onClick={handleExcludeProvider}>exclude</button></span>
-                                <span><button onClick={handleRateProvider}>rate</button></span>
+                            <div className="">
+                                <span><button className="rateBanActionButton1 me-1" onClick={handleExcludeProvider}>exclude</button></span>
+                                <span><button className="rateBanActionButton2" onClick={handleRateProvider}>rate</button></span>
                             </div>
                         </div>
                         <div>
-                            <button className="cancelButton" onClick={() => handleCloseRateBanModal(id)}>cancel</button>
+                            <button className="rollUpCancelButton" onClick={() => handleCloseRateBanModal(id)}>cancel</button>
                         </div>
                     </div>
                 </div>
