@@ -7,24 +7,25 @@ export const RateBanrModal = (props) => {
     const { id, provider_id, service, date } = props;
 
     const [providerRating, setProviderRating] = useState(3);
+    const [toBeExcluded, setToBeExcluded] = useState(false)
 
     // handle functions
 
     const handleIncreaseRating = () => {
         if (providerRating === 5) {
-          setProviderRating(1);
+            setProviderRating(1);
         } else {
-          setProviderRating((previousValue) => previousValue + 0.5);
+            setProviderRating((previousValue) => previousValue + 0.5);
         }
-      };
-      
+    };
+
 
     const handleDecreaseRating = () => {
         if (providerRating === 1) {
             setProviderRating(5);
-          } else {
+        } else {
             setProviderRating((previousValue) => previousValue - 0.5);
-          }
+        }
 
     }
 
@@ -33,20 +34,22 @@ export const RateBanrModal = (props) => {
         dialog.close();
     };
 
-    const handleRateProvider = () => {
-        actions.rateProvider (id, provider_id, providerRating);
+    const handleRateProvider = async () => {
+        await actions.rateProvider(id, provider_id, providerRating);
+        if (toBeExcluded) {await actions.excldueProvider(provider_id)};
         handleCloseRateBanModal(id);
-     };
+    };
 
-    const handleExcludeProvider = () => {
-        actions.excldueProvider(provider_id);
-        handleCloseRateBanModal(id);
+
+    const handleToggleExclude = () => {
+        setToBeExcluded((value) => !(value))
     }
-    
+
+
     // pre-rpocessing Props
 
     const serviceString = service.charAt(0).toUpperCase() + service.slice(1);
-    
+
     // Subcomponents
 
     const StarRatingPicker = () => {
@@ -116,13 +119,32 @@ export const RateBanrModal = (props) => {
                                     <button onClick={handleDecreaseRating} className="rateControl clickable">-</button>
                                 </span>
                             </div>
+                            <div>
+                                <span className="calendarModalTableLabel me-1">exclude:</span>
+
+                                <span>
+                                    <button className=" clickable" onClick={handleToggleExclude}>
+                                        {toBeExcluded ?
+                                            (<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="m419-321 289-289-43-43-246 246-119-119-43 43 162 162ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm0-600v600-600Z"
+                                                fill="white"
+                                                stroke="whute"
+                                                strokeWidth=".7" /></svg>)
+                                            :
+                                            (<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Z" 
+                                                fill="white"
+                                                stroke="white"
+                                                strokeWidth=".7"
+                                            /></svg>)
+                                        }
+                                    </button>
+                                </span>
+                            </div>
                             <div className="">
-                                <span><button className="rateBanActionButton1 me-1" onClick={handleExcludeProvider}>exclude</button></span>
                                 <span><button className="rateBanActionButton2" onClick={handleRateProvider}>rate</button></span>
                             </div>
                         </div>
                         <div>
-                            <button className="rollUpCancelButton" onClick={() => handleCloseRateBanModal(id)}>cancel</button>
+                            <button className="rollUpCancelButton2" onClick={() => handleCloseRateBanModal(id)}>cancel</button>
                         </div>
                     </div>
                 </div>

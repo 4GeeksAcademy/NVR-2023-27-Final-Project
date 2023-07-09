@@ -1410,6 +1410,26 @@ table.calendarModalTable td {
 }
 
 
+.rollUpCancelButton2 {
+  background: rgb(166, 166, 166);
+  color: rgb(74, 74, 74);
+  font-variant: small-caps;
+  font-size: 0.63rem;
+  font-weight: 600;
+  width: 4.1rem;
+  height: 1rem;
+  align-items: center;
+  letter-spacing: 0.1rem;
+  padding-inline: 0.63rem;
+  transition: all .27s ease-in-out;
+  transform: translate(.1rem, 6.27rem);
+}
+
+.rollUpCancelButton2:hover {
+  background: white;
+  color: var(--standOutGreen)
+}
+
 
 
 /* Service Request PASSWORD modal */
@@ -1619,16 +1639,17 @@ opacity: .7;
 .rateBanActionButton2 {
   background: var(--standOutGreen);
   color: var(--background);
+  align-items: center;
   border: none;
   font-variant: small-caps;
   font-size: .63rem;
-  width: 3.6rem;
+  width: 4.1rem;
   height: 1rem;
   letter-spacing: .1rem;
   padding-inline: .63rem;
   transition: all .27s ease-in-out;
   position: absolute;
-  transform: translate(.45rem, 5.35rem)
+  transform: translate(4.9rem, 6.62rem)
   
 }
 
