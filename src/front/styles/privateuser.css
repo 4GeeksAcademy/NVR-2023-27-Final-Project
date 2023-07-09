@@ -607,7 +607,7 @@ form input[type=search] {
 .bannerLabel1 {
   display: flex;
   position: absolute;
-  left: 35%;
+  left: 37%;
 }
 
 .bannerLabel2 {
@@ -744,23 +744,6 @@ form input[type=search] {
 }
 
 
-/* book Button  */
-.bookButtonWrapper {
-  display: flex;
-  align-items: center;
-  margin-bottom: .3rem;
-}
-
-.bookButton {
-  background: var(--standOutGreen);
-  color: var(--background);
-  border: none;
-  font-variant: small-caps;
-  font-size: .63rem;
-  width: 2.7rem;
-  letter-spacing: .1rem;
-  padding-inline: .63rem;
-}
 
 button .bookButton,
 button .bookButto:focus,
@@ -1067,15 +1050,50 @@ table.calendarModalTable td {
   text-align: left;
 }
 
-.cancelButton {
+/* book Button  */
+
+.bookButtonWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: .3rem;
+}
+
+.bookButton {
+  background: var(--standOutGreen);
+  color: var(--background);
+  border: none;
+  font-variant: small-caps;
+  font-size: .63rem;
+  width: 2.7rem;
+  letter-spacing: .1rem;
+  padding-inline: .63rem;
+  transition: all .27s ease-in;
+
+}
+
+.bookButton:hover {
   background: white;
-  color: var(--requestRollUpBackground);
+  color: var(--standOutGreen);
+  font-weight: 600;
+}
+
+
+/* Cancel Button */
+
+.cancelButton {
+  background: rgb(111, 111, 111);
+  color: black;
   font-variant: small-caps;
   font-size: 0.63rem;
-  font-weight: 900;
+  font-weight: 600;
   width: 3.6rem;
   letter-spacing: 0.1rem;
   padding-inline: 0.63rem;
+  transition: all .27s ease-in;
+}
+
+.cancelButton:hover {
+  background: white;
 }
 
 
@@ -1089,8 +1107,15 @@ table.calendarModalTable td {
   letter-spacing: .1rem;
   padding-inline: .63rem;
   padding-block: .3rem;
-
+  transition: all .27s ease-in;
 }
+
+.modalBookButton:hover {
+  background: white;
+  color: var(--standOutGreen);
+  font-weight: 600;
+}
+
 
 /* Expandable */
 

@@ -20,7 +20,7 @@
 },
 {
     "category": "cleaning",
-    "service": "move-in/out cleaning",
+    "service": "move-in cleaning",
     "description": "performing comprehensive cleaning services specifically designed for move-in or move-out situations",
     "unit": "1 area of up to 100 m²",
     "duration": 7,
