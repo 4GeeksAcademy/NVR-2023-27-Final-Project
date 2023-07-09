@@ -307,6 +307,14 @@ export const RequestRollUp = (props) => {
                                         </div>
                                     </div>
                                     <div className="expandableColumn4">
+                                        {status === 3 && (
+                                            <button
+                                                onClick={handleClickSafeGuard}
+                                                className="rollUpCancelButton"
+                                            >
+                                                safeguard
+                                            </button>
+                                        )}
                                         {status < 4 && status > 0 && (
                                             <button
                                                 onClick={() => { handleClickCancel(id) }}

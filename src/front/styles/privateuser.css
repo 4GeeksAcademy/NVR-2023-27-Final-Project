@@ -1389,15 +1389,28 @@ table.calendarModalTable td {
 
 
 .rollUpCancelButton {
-  background: white;
+  background: rgb(111, 111, 111);
   color: black;
   font-variant: small-caps;
   font-size: 0.63rem;
-  font-weight: 700;
-  width: 5rem;
+  font-weight: 600;
+  width: 4.5rem;
+  height: 1rem;
   letter-spacing: 0.1rem;
   padding-inline: 0.63rem;
+  transition: all .27s ease-in-out;
+  transform: translatex(4.6rem);
+  margin-bottom: .7rem;
+
 }
+
+.rollUpCancelButton:hover {
+  background: white;
+  color: var(--standOutGreen)
+}
+
+
+
 
 /* Service Request PASSWORD modal */
 
