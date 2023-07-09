@@ -45,7 +45,7 @@ export const SafeguardrModal = (props) => {
               return qrBlob;
             } catch (error) {
               console.error(error);
-              return null;
+              return "";
             }
           };
                           
@@ -207,7 +207,7 @@ export const SafeguardrModal = (props) => {
                   maxLength="12"
                   placeholder="Type…"
                   aria-label="Search"
-                  value={updatedServiceRequestPasswords.verbalPassword}
+                  value={updatedServiceRequestPasswords.verbalPassword || ""}
                   onChange={handleChangeVerbalPassword}
                 />
               </form>
@@ -221,7 +221,7 @@ export const SafeguardrModal = (props) => {
                   maxLength="12"
                   placeholder="Type…"
                   aria-label="Search"
-                  value={updatedServiceRequestPasswords.qrPassword}
+                  value={updatedServiceRequestPasswords.qrPassword || ""}
                   onChange={handleChangeQrPassword}
                 />
               </form>

@@ -168,6 +168,7 @@ button:disabled {
   opacity: 1;
   z-index: 9999;
   animation: fade-in-out 2.1s ease-in-out forwards;
+  box-shadow: .7rem .7rem .7rem 0 rgba(98, 98, 98, 0.36)
 }
 
 @keyframes fade-in-out {
@@ -780,6 +781,8 @@ button .bookButto:active {
   transform: scale(0);
   animation: modal-appear 0.5s ease-in-out forwards;
   overflow: hidden;
+  box-shadow: .7rem .7rem .7rem 0 rgba(65, 65, 65, 0.36)
+
 
 }
 
@@ -922,7 +925,7 @@ dialog:focus {
 }
 
 .calendarCell.currentDay {
-  text-decoration-line: overline;
+    text-decoration-line: overline;
 }
 
 .calendarCell.selectedRequestDay {
