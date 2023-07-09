@@ -699,7 +699,7 @@ form input[type=search] {
 }
 
 .expandableColumn1 {
-  flex: 2;
+  flex: 2.7;
   display: flex;
   flex-direction: column;
   line-height: .7rem;
@@ -1394,12 +1394,12 @@ table.calendarModalTable td {
   font-variant: small-caps;
   font-size: 0.63rem;
   font-weight: 600;
-  width: 4.41rem;
+  width: 4.5rem;
   height: 1rem;
   letter-spacing: 0.1rem;
   padding-inline: 0.63rem;
   transition: all .27s ease-in-out;
-  transform: translatex(4.6rem);
+  transform: translatex(3.75rem);
   margin-bottom: .7rem;
 
 }
@@ -1440,6 +1440,7 @@ table.calendarModalTable td {
   margin-top: 7.48rem;
   width: 33.3%;
   background: var(--modalBackground);
+  box-shadow: .7rem .7rem .7rem 0 rgba(65, 65, 65, 0.36);
   transform: scale(0);
   animation: modal-appear 0.5s ease-in-out forwards;
   overflow: hidden;
@@ -1670,6 +1671,20 @@ opacity: .7;
   color: var(--standOutGreen);
   font-weight: 600;
 }
+
+
+.providerNameLabel1 {
+  position: absolute;
+  left: 12.05rem;
+  bottom: 4.7rem;
+}
+
+.providerNameValue1 {
+  position: absolute;
+  left: 15rem;
+  bottom: 4.7rem;
+}
+
 
 
 
