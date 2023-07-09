@@ -1394,7 +1394,7 @@ table.calendarModalTable td {
   font-variant: small-caps;
   font-size: 0.63rem;
   font-weight: 600;
-  width: 4.5rem;
+  width: 4.41rem;
   height: 1rem;
   letter-spacing: 0.1rem;
   padding-inline: 0.63rem;
@@ -1422,7 +1422,7 @@ table.calendarModalTable td {
   letter-spacing: 0.1rem;
   padding-inline: 0.63rem;
   transition: all .27s ease-in-out;
-  transform: translate(.1rem, 6.27rem);
+  transform: translate(.1rem, 5.31rem);
 }
 
 .rollUpCancelButton2:hover {
@@ -1615,6 +1615,18 @@ opacity: .7;
 
 }
 
+.rateControl1 {
+  position: absolute;
+  right: 1.86rem;
+  bottom: 9.44rem;
+}
+
+.rateControl2 {
+  position: absolute;
+  right: .96rem;
+  bottom: 9.44rem;
+}
+
 
 .rateBanActionButton1 {
   background: var(--standOutGreen);
@@ -1643,13 +1655,13 @@ opacity: .7;
   border: none;
   font-variant: small-caps;
   font-size: .63rem;
-  width: 4.1rem;
+  width: 4.41rem;
   height: 1rem;
   letter-spacing: .1rem;
   padding-inline: .63rem;
   transition: all .27s ease-in-out;
   position: absolute;
-  transform: translate(4.9rem, 6.62rem)
+  transform: translate(4.6rem, 5.65rem)
   
 }
 

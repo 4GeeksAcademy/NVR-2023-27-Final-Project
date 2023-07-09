@@ -98,8 +98,8 @@ export const RateBanrModal = (props) => {
                         )}
                     </div>
                     <div className="gx-4 col-md-6">
-                        <div>
-                            <div>
+                        <div className=""> 
+                            <div className="mt-3">
                                 <span className="calendarModalTableLabel me-1">service:</span>
                                 <span className="calendarModalTableValue">{serviceString}</span>
                             </div>
@@ -115,13 +115,12 @@ export const RateBanrModal = (props) => {
                                 <span className="d-inline-flex align-items-center">
                                     <span className="calendarModalTableLabel me-3">rating:</span>
                                     <StarRatingPicker />
-                                    <button onClick={handleIncreaseRating} className="rateControl clickable">+</button>
-                                    <button onClick={handleDecreaseRating} className="rateControl clickable">-</button>
+                                    <button onClick={handleIncreaseRating} className="rateControl rateControl1 clickabl ms-3e">+</button>
+                                    <button onClick={handleDecreaseRating} className="rateControl rateControl2 clickable">-</button>
                                 </span>
                             </div>
                             <div>
                                 <span className="calendarModalTableLabel me-1">exclude:</span>
-
                                 <span>
                                     <button className=" clickable" onClick={handleToggleExclude}>
                                         {toBeExcluded ?
