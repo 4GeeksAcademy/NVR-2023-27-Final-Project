@@ -243,6 +243,8 @@ button:disabled {
   margin-top: 1.6rem;
 }
 
+
+
 .offcanvas * {
   overflow: hidden;
 }
@@ -368,15 +370,21 @@ button:disabled {
 }
 
 .updateettingsButton {
-  background: grey;
-  color: var(--background);
+  background: var(--standOutGreen);
+  color: white;
   border: none;
   font-variant: small-caps;
   font-size: .63rem;
   width: 8.7rem;
   letter-spacing: .1rem;
   padding-inline: .63rem;
+  transition: all .27s ease-in-out;
+}
 
+.updateettingsButton:hover {
+  background: white;
+  color: var(--standOutGreen);
+  font-weight: 600;
 }
 
 /* excluded Provider Thumbnail */
@@ -739,7 +747,6 @@ form input[type=search] {
   font-variant: small-caps;
   padding-inline: .3rem;
   padding-block: .1rem;
-  letter-spacing: .09rem;
 
 }
 
@@ -1354,15 +1361,30 @@ table.calendarModalTable td {
   justify-content: center;
 }
 
+
+/* Request Action Button */
+
+
 .requestActionButton {
   background: var(--standOutGreen);
   color: var(--background);
+  border: none;
   font-variant: small-caps;
   font-size: .63rem;
-  width: 5rem;
+  width: 4.5rem;
+  height: 1rem;
   letter-spacing: .1rem;
   padding-inline: .63rem;
-  margin-bottom: 10rem;
+  transition: all .27s ease-in-out;
+  position: absolute;
+  right: 14.9rem;
+  transform: translatey(.12rem);
+}
+
+.requestActionButton:hover {
+  background: white;
+  color: var(--standOutGreen);
+  font-weight: 600;
 }
 
 

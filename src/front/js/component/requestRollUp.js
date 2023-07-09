@@ -178,7 +178,7 @@ export const RequestRollUp = (props) => {
         : "";
 
     if (store.userAddresses) {
-        typeOfaddressString = (store.userAddresses.id1 === address_id) ? "main" : "second";
+        typeOfaddressString = (store.userAddresses.id1 === address_id) ? "Main" : "Second";
         addressString = (store.userAddresses.id1 === address_id)
             ? `${store.userAddresses.street1}${store.userAddresses.apartment1 ? ` ${store.userAddresses.apartment1},` : ''}${store.userAddresses.city1 ? ` ${store.userAddresses.city1},` : ''}${store.userAddresses.state1 ? ` ${store.userAddresses.state1},` : ''}${store.userAddresses.postalcode1 ? ` ${store.userAddresses.postalcode1},` : ''}${store.userAddresses.country1 ? ` ${store.userAddresses.country1}` : ''}`
             : `${store.userAddresses.street2}${store.userAddresses.apartment2 ? ` ${store.userAddresses.apartment2},` : ''}${store.userAddresses.city2 ? ` ${store.userAddresses.city2},` : ''}${store.userAddresses.state2 ? ` ${store.userAddresses.state2},` : ''}${store.userAddresses.postalcode2 ? ` ${store.userAddresses.postalcode2},` : ''}${store.userAddresses.country2 ? ` ${store.userAddresses.country2}` : ''}`;
@@ -280,8 +280,8 @@ export const RequestRollUp = (props) => {
                                     <div className="expandableColumn1">
                                         <div>
                                             <span className="expandableDescription me-1">address:</span>
-                                            <span className="typeOfAddressValue" style={{ background: typeOfaddressString === 'main' ? 'var(--scrollBar)' : 'white', color: typeOfaddressString === 'main' ? 'white' : 'black' }}>{typeOfaddressString}</span>
-                                            <div className="expandableValue mt-2" >{addressString}</div>
+                                            <span className="expandableValue">{typeOfaddressString}</span>
+                                            <div className="expandableValue" >{addressString}</div>
                                         </div>
                                     </div>
                                     <div className="expandableColumn2">
