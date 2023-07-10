@@ -36,7 +36,11 @@ export const RateBanrModal = (props) => {
 
     const handleRateProvider = async () => {
         await actions.rateProvider(id, provider_id, providerRating);
-        if (toBeExcluded) {await actions.excldueProvider(provider_id)};
+
+        setTimeout(() => {
+            if (toBeExcluded) { actions.excldueProvider(provider_id)};
+        }, 2100);
+      
         handleCloseRateBanModal(id);
     };
 

@@ -49,15 +49,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			// Displays Alerts, available to every other method 
 			alertUser: (message, backgroundColor, color) => {
+
 				const alertElement = document.createElement("div");
 				alertElement.classList.add("alertUser");
 				alertElement.textContent = message;
 				alertElement.style.backgroundColor = backgroundColor;
 				alertElement.style.color = color;
 				document.body.appendChild(alertElement);
+
 				setTimeout(() => {
 					alertElement.remove();
 				}, 2100);
+				return true;
 			},
 
 			calendarModal: (message, backgroundColor, color) => {
@@ -472,7 +475,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const data = await response.json();
 					console.log(data.message);
 					await getActions().getUserRequests();
-					getActions().alertUser("provider rated", "#00008B", "white");
+					await getActions().alertUser("provider rated", "#00008B", "white");
 				  } else {
 					console.log('Error:', response.status);
 				  }
@@ -579,7 +582,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const data = await response.json();
 					console.log(data.message);
 					await getActions().getUserExclusions();
-					getActions().alertUser("provider excluded", "#00008B", "white");
+					await getActions().alertUser("provider excluded", "#00008B", "white");
 				  } else {
 					console.log('Error:', response.status);
 				  }
