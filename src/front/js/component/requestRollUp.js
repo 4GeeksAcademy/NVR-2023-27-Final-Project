@@ -277,7 +277,7 @@ export const RequestRollUp = (props) => {
                         <div className="requestExpandable">
                             <div className="requestExpandableContent">
                                 <div className="expandableColumns">
-                                    <div className="expandableColumn1">
+                                    <div className="expandableColumn1B">
                                         <div>
                                             <span className="expandableDescription me-1">address:</span>
                                             <span className="expandableValue">{typeOfaddressString}</span>

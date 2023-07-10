@@ -699,6 +699,13 @@ form input[type=search] {
 }
 
 .expandableColumn1 {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  line-height: .7rem;
+}
+
+.expandableColumn1B {
   flex: 2.7;
   display: flex;
   flex-direction: column;
@@ -714,6 +721,10 @@ form input[type=search] {
   text-align: right;
 
 }
+
+
+
+
 
 .expandableColumn3 {
   flex: 1.7;
@@ -1078,6 +1089,7 @@ table.calendarModalTable td {
   letter-spacing: .1rem;
   padding-inline: .63rem;
   transition: all .27s ease-in;
+  transform: translateY(.05rem)
 
 }
 
@@ -1385,7 +1397,7 @@ table.calendarModalTable td {
   transition: all .27s ease-in-out;
   position: absolute;
   right: 14.9rem;
-  transform: translatey(.12rem);
+  transform: translatey(.075rem);
 }
 
 .requestActionButton:hover {
@@ -1405,11 +1417,12 @@ table.calendarModalTable td {
   font-size: 0.63rem;
   font-weight: 600;
   width: 4.5rem;
+  height: 1reM;
   letter-spacing: 0.1rem;
   padding-inline: 0.63rem;
   transition: all .27s ease-in-out;
-  transform: translatex(3.75rem);
-  margin-bottom: .7rem;
+  transform: translateX(3.75rem);
+  margin-bottom: .35rem;
 
 }
 
@@ -1694,14 +1707,14 @@ opacity: .7;
 
 .providerNameLabel1 {
   position: absolute;
-  left: 12.05rem;
-  bottom: 4.7rem;
+  left: 12.3rem;
+  bottom: 4.25rem;
 }
 
 .providerNameValue1 {
   position: absolute;
   left: 15rem;
-  bottom: 4.7rem;
+  bottom: 4.25rem;
 }
 
 
