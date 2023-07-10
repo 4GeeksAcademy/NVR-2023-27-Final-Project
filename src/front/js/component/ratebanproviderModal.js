@@ -138,8 +138,8 @@ export const RateBanrModal = (props) => {
                                     </button>
                                 </span>
                             </div>
-                            <div className="">
-                                <span><button className="rateBanActionButton2" onClick={handleRateProvider}>rate</button></span>
+                            <div className="mt-1">
+                                <span><button className="rateBanActionButton2" onClick={handleRateProvider}>review</button></span>
                             </div>
                         </div>
                         <div>

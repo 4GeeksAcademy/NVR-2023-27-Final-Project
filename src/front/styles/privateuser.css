@@ -639,7 +639,7 @@ form input[type=search] {
 .bannerLabel4 {
   display: flex;
   position: absolute;
-  left: 72.3%;
+  left: 72%;
 }
 
 .bannerDescription {
@@ -1131,7 +1131,7 @@ table.calendarModalTable td {
   width: 10.2rem;
   letter-spacing: .1rem;
   transition: all .27s ease-in;
-  padding-block: .1rem;
+  padding-block: .15rem;
 }
 
 .modalBookButton:hover {
@@ -1381,7 +1381,6 @@ table.calendarModalTable td {
 
 /* Request Action Button */
 
-
 .requestActionButton {
   background: var(--standOutGreen);
   color: var(--background);
@@ -1417,9 +1416,9 @@ table.calendarModalTable td {
   font-size: 0.63rem;
   font-weight: 600;
   width: 4.5rem;
-  height: 1reM;
   letter-spacing: 0.1rem;
   padding-inline: 0.63rem;
+  padding-block: .15rem;
   transition: all .27s ease-in-out;
   transform: translateX(3.75rem);
   margin-bottom: .35rem;
@@ -1442,12 +1441,12 @@ table.calendarModalTable td {
   font-size: 0.63rem;
   font-weight: 600;
   width: 4.1rem;
-  height: 1rem;
   align-items: center;
   letter-spacing: 0.1rem;
   padding-inline: 0.63rem;
+  padding-block: .15rem;
   transition: all .27s ease-in-out;
-  transform: translate(.09rem, 6.68rem);
+  transform: translate(.09rem, 6.3rem);
 }
 
 .rollUpCancelButton2:hover {
@@ -1558,6 +1557,58 @@ table.calendarModalTable td {
     opacity: 1;
   }
 }
+
+.safeguardUpdateButton {
+  background: var(--standOutGreen);
+  color: var(--background);
+  border: none;
+  font-variant: small-caps;
+  font-size: .63rem;
+  width: 7.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: .1rem;
+  padding-inline: .63rem;
+  padding-block: .1rem;
+  transition: all .27s ease-in-out;
+  position: absolute;
+  right: 1.2rem;
+}
+
+.safeguardUpdateButton:hover {
+  background: white;
+  color: var(--standOutGreen);
+  font-weight: 600;
+}
+
+.safeguardCancelButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(166, 166, 166);
+  color: rgb(74, 74, 74);
+  font-variant: small-caps;
+  font-size: 0.63rem;
+  font-weight: 600;
+  width: 4.5rem;
+  letter-spacing: 0.1rem;
+  padding-inline: 0.63rem;
+  padding-block: .1rem;
+  transition: all .27s ease-in-out;
+  transform: translateX(5.7rem);
+
+}
+
+.safeguardCancelButton:hover {
+  background: white;
+  color: var(--standOutGreen)
+}
+
+.qrField {
+  transform: translateX(.8rem);
+}
+
 
 .carouselWrapper {
   width: 3.6rem;
@@ -1689,12 +1740,12 @@ opacity: .7;
   font-variant: small-caps;
   font-size: .63rem;
   width: 4.41rem;
-  height: 1rem;
   letter-spacing: .1rem;
   padding-inline: .63rem;
+  padding-block: .15rem;
   transition: all .27s ease-in-out;
   position: absolute;
-  transform: translate(4.6rem, 6.68rem)
+  transform: translate(4.6rem, 6.3rem)
   
 }
 
@@ -1708,13 +1759,13 @@ opacity: .7;
 .providerNameLabel1 {
   position: absolute;
   left: 12.3rem;
-  bottom: 4.25rem;
+  bottom: 4.7rem;
 }
 
 .providerNameValue1 {
   position: absolute;
   left: 15rem;
-  bottom: 4.25rem;
+  bottom: 4.7rem;
 }
 
 

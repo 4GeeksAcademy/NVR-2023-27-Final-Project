@@ -181,7 +181,7 @@ export const SafeguardrModal = (props) => {
         </div>
         <div className="d-inline-flex inputFormsWrapper">
           <form role="search" onSubmit={(event) => event.preventDefault()}>
-            <label htmlFor="serviceSearchField2" className="calendarModalTableLabel">
+            <label htmlFor="serviceSearchField2" className="calendarModalTableLabel ps-1">
               verbal password:
             </label>
             <input
@@ -194,7 +194,7 @@ export const SafeguardrModal = (props) => {
               onChange={handleChangeVerbalPassword}
             />
           </form>
-          <form role="search" onSubmit={(event) => event.preventDefault()}>
+          <form role="search" onSubmit={(event) => event.preventDefault()} className="qrField">
             <label htmlFor="serviceSearchField3" className="calendarModalTableLabel">
               qr:
             </label>
@@ -209,7 +209,7 @@ export const SafeguardrModal = (props) => {
             />
           </form>
         </div>
-        <div>
+        <div className="mt-3">
           <button className="safeguardUpdateButton" onClick={() => { hamdleUpdateServiceRequestPasswords(id) }} >update</button>
           <button className="safeguardCancelButton" onClick={() => { handleCloseSafeguardModal(id) }}>cancel</button>
         </div>

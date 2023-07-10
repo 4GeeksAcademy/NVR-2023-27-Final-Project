@@ -9,6 +9,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				type: ""
 			},
 
+			// User data structures
+
 			userSettings: null,
 			userAddresses: null,
 			userExclusions: null,
@@ -16,10 +18,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userNotifications: null,
 			userBookedDays: null,
 
-			serviceDescriptions: null,
-
 			providerDetails: null,
 			serviceRequestPasswords: null,
+
+
+			// Provider data structures
+
+			providerAcceptedServices: null,
+			providerProvidedServices: null,
+			providerAvaiabilities: null,
+			providerSettings: null,
+			providerNotifications: null,
+
+
+			// General data structures
+
+			serviceDescriptions: null,
+
 
 		},
 
@@ -571,7 +586,130 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  console.log('Error:', error);
 				}
 			  },
+
 			  
+			  //*********************************/
+			  // Private Provider functions 
+
+
+  			  // GET  Provider Accepted Services 
+			  getProviderAcceptedRequests: async () => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/getprovideracceptedservicerequests", {
+						method: "GET",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+						}
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data);
+						setStore({ providerAcceptedServices: data.provider_accepted_service_requests });
+					} else {
+						console.log("Error:", response.status);
+					}
+				} catch (error) {
+					console.log("An error occurred:", error);
+				}
+			},
+
+
+			// GET  Provider Provided Services 
+			getProviderProvidedServices: async () => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/getproviderprovidedservices", {
+						method: "GET",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+						}
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data);
+						setStore({ providerProvidedServices: data.provider_provided_services });
+					} else {
+						console.log("Error:", response.status);
+					}
+				} catch (error) {
+					console.log("An error occurred:", error);
+				}
+			},
+
+
+			// GET  Provider Avaiabilities
+			
+			getProviderAvailabities: async () => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/getprovideravaiabilities", {
+						method: "GET",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+						}
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data);
+						setStore({ providerAvaiabilities: data.provider_availabilities });
+					} else {
+						console.log("Error:", response.status);
+					}
+				} catch (error) {
+					console.log("An error occurred:", error);
+				}
+			},
+
+			// GET  Provider Notifications
+
+			getProviderNotifications: async () => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/getprovidernotifications", {
+						method: "GET",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+						}
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data);
+						setStore({ providerNotifications: data.provider_notifications });
+					} else {
+						console.log("Error:", response.status);
+					}
+				} catch (error) {
+					console.log("An error occurred:", error);
+				}
+			},
+			
+			// GET  Provider settings
+
+			getProviderSettings: async () => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/getprovidersettings", {
+						method: "GET",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+
+						}
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						setStore({ providerSettings: data.provider_settings });
+					} else {
+						console.log("Error:", response.status);
+					}
+				} catch (error) {
+					console.log("Error:", error);
+				}
+			},
+
+
+
+
 
 
 		}

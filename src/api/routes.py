@@ -143,7 +143,7 @@ def get_provider():
     return jsonify({"provider": provider.serialize()}), 200
 
 
-# PRIVATE USER endpoints
+# General endpoints
 
 @api.route("/servicedescriptions")
 def get_service_descriptions():
@@ -162,7 +162,7 @@ def get_service_descriptions():
         return jsonify({"error": str(e)}), 500
 
 
-# PRIVATE USER endpoints - All USER DATA
+# PRIVATE USER endpoints - user Settings
 
 @api.route("/getusersettings", methods=["GET"])
 @jwt_required()
@@ -718,18 +718,140 @@ def exclude_provider(provider_id):
         return jsonify({"message": "An error occurred", "error": str(e)}), 500
 
 
+# ***********************************************************
+# PRIVATE Provider endpoints - GET Provider Accepted Services
+
+@api.route("/getprovideracceptedservicerequests", methods=["GET"])
+@jwt_required()
+def get_provider_accepted_service_requests():
+    try:
+        provider_email = get_jwt_identity()
+        provider = ProviderProfile.query.filter_by(email=provider_email).first()
+        if provider:
+            service_requests = ServiceRequest.query.filter_by(
+                provider_id=provider.id).all()
+            serialized_service_requests = [
+                request.serialize() for request in service_requests]
+            return jsonify({
+                "message": "Service requests successfully retrieved",
+                "provider_accepted_service_requests": serialized_service_requests
+            })
+        else:
+            return jsonify({"message": "Provider not found"}), 404
+    except Exception as e:
+        print(e)
+        return jsonify({
+            "message": "An error occurred",
+            "error": str(e)
+        }), 500
 
 
+# PRIVATE Provider endpoints - GET Provider Provided Services
+
+@api.route("/getproviderprovidedservices", methods=["GET"])
+@jwt_required()
+def get_provider_provided_services():
+    try:
+        provider_email = get_jwt_identity()
+        provider = ProviderProfile.query.filter_by(email=provider_email).first()
+        if provider:
+            provided_services = ServiceProvided.query.filter_by(
+                provider_id=provider.id).all()
+            serialized_provided_services = [
+                provided.serialize() for provided in provided_services]
+            return jsonify({
+                "message": "Services provided successfully retrieved",
+                "provider_provided_services": serialized_provided_services
+            })
+        else:
+            return jsonify({"message": "Provider not found"}), 404
+    except Exception as e:
+        print(e)
+        return jsonify({
+            "message": "An error occurred",
+            "error": str(e)
+        }), 500
+
+# PRIVATE Provider endpoints - GET Provider availabilities
+
+@api.route("/getprovideravaiabilities", methods=["GET"])
+@jwt_required()
+def get_provider_avaiabilities():
+    try:
+        provider_email = get_jwt_identity()
+        provider = ProviderProfile.query.filter_by(email=provider_email).first()
+        if provider:
+            provider_avaiabilities = ProviderAvailability.query.filter_by(
+                provider_id=provider.id).all()
+            serialized_provider_avaiabilities = [
+                availability.serialize() for availability in provider_avaiabilities]
+            return jsonify({
+                "message": "Provider availabilities  successfully retrieved",
+                "provider_availabilities": serialized_provider_avaiabilities
+            })
+        else:
+            return jsonify({"message": "Provider not found"}), 404
+    except Exception as e:
+        print(e)
+        return jsonify({
+            "message": "An error occurred",
+            "error": str(e)
+        }), 500
 
 
+# PRIVATE Provider endpoints - GET Provider notifications
+
+@api.route("/getprovidernotifications", methods=["GET"])
+@jwt_required()
+def get_provider_notifications():
+    try:
+        provider_email = get_jwt_identity()
+        provider = ProviderProfile.query.filter_by(email=provider_email).first()
+        if provider:
+            provider_notifications = Notification.query.filter_by(
+                provider_id=provider.id).all()
+            serialized_provider_notifications = [
+                notification.serialize() for notification in provider_notifications]
+            return jsonify({
+                "message": "Provider notifications  successfully retrieved",
+                "provider_notifications": serialized_provider_notifications
+            })
+        else:
+            return jsonify({"message": "Provider not found"}), 404
+    except Exception as e:
+        print(e)
+        return jsonify({
+            "message": "An error occurred",
+            "error": str(e)
+        }), 500
 
 
+# PRIVATE Provider endpoints - GET Provider settings
 
+@api.route("/getprovidersettings", methods=["GET"])
+@jwt_required()
+def get_provider_settings():
+    try:
+        provider_email = get_jwt_identity()
+        provider = ProviderProfile.query.filter_by(email=provider_email).first()
 
-
-
-
-
+        if provider:
+            provider_settings = {
+                "id": provider.id,
+                "name": provider.name,
+                "email": provider.email,
+                "has_certificate": provider.has_certificate,
+                "experience": provider.experience,
+                "service_radius": provider.service_radius,
+                "average_rating": provider.average_rating,
+                "ratings_counter": provider.ratings_counter
+            }
+            return jsonify({"message": "Settings successfully retrieved", "provider_settings": provider_settings})
+        else:
+            return jsonify({"message": "Provider not found"}), 404
+    except Exception as e:
+        print(e)
+        return jsonify({"message": "An error occurred", "error": str(e)}), 500
 
 
 
