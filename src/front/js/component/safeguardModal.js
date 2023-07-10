@@ -34,7 +34,7 @@ export const SafeguardrModal = (props) => {
       const credentials = JSON.parse(localStorage.getItem("credentials"));
       const adminText = `Solutioner Security ID: #${id}-${credentials.id}. Service: ${service}, on ${date}. QR password: `;
       const encodedText = encodeURIComponent(adminText + text);
-      const url = `https://image-charts.com/chart?chs=${size}x${size}&cht=qr&chl=${encodedText}&choe=UTF-8&icqrb=7F7F7F&icqrf=FFFFFF`;
+      const url = `https://image-charts.com/chart?chs=${size}x${size}&cht=qr&chl=${encodedText}&choe=UTF-8&icqrb=7F7F7F&icqrf=e0e0e0`;
 
       try {
         const response = await fetch(url);
@@ -150,11 +150,11 @@ export const SafeguardrModal = (props) => {
       <dialog data-modal id={"dialogSafeguard" + id} className="servieRequestPasswordModal">
         <div className="passwordImagesWrapper d-flex align-items-top ">
           {store.providerDetails ? (
-            <div className="providerAvatarImageWrapper p-0 m-0" key={`providerAvatarImage${id}`}>
+            <div className="providerAvatarImageWrapper ms-1" key={`providerAvatarImage${id}`}>
               <img className="providerAvatarImage" src={store.providerDetails.avatar_image} alt="Provider Avatar" />
             </div>
           ) : (
-            <div className="providerAvatarImageWrapper m-0 p-0" key={`providerAvatarReplacement${id}`}>
+            <div className="providerAvatarImageWrapper ms-1" key={`providerAvatarReplacement${id}`}>
               <div className="providerAvatarReplacement"></div>
             </div>
           )}
@@ -210,10 +210,8 @@ export const SafeguardrModal = (props) => {
           </form>
         </div>
         <div>
-          <button className="" onClick={() => { hamdleUpdateServiceRequestPasswords(id) }} >update</button>
-          <button className="rollUpCancelButton" onClick={() => { handleCloseSafeguardModal(id) }}>
-            cancel
-          </button>
+          <button className="safeguardUpdateButton" onClick={() => { hamdleUpdateServiceRequestPasswords(id) }} >update</button>
+          <button className="safeguardCancelButton" onClick={() => { handleCloseSafeguardModal(id) }}>cancel</button>
         </div>
       </dialog>
     </>

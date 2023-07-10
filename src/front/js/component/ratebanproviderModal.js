@@ -99,7 +99,7 @@ export const RateBanrModal = (props) => {
                     </div>
                     <div className="gx-4 col-md-6">
                         <div className=""> 
-                            <div className="mt-3">
+                            <div className="">
                                 <span className="calendarModalTableLabel me-1">service:</span>
                                 <span className="calendarModalTableValue">{serviceString}</span>
                             </div>
@@ -122,7 +122,7 @@ export const RateBanrModal = (props) => {
                             <div>
                                 <span className="calendarModalTableLabel me-1">exclude:</span>
                                 <span>
-                                    <button className=" clickable" onClick={handleToggleExclude}>
+                                    <button className="toBeExcludedToggle  clickable" onClick={handleToggleExclude}>
                                         {toBeExcluded ?
                                             (<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="m419-321 289-289-43-43-246 246-119-119-43 43 162 162ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm0-600v600-600Z"
                                                 fill="white"
