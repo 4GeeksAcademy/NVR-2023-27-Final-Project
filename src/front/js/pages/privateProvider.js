@@ -37,12 +37,12 @@ export const PrivateProvider = () => {
             nameString = "welcome back, " + nameString;
             actions.alertUser(nameString, "yellow", "black");
 
-
             actions.getProviderAcceptedRequests();
             actions.getProviderProvidedServices();
             actions.getProviderAvailabities();
             actions.getProviderNotifications();
             actions.getProviderSettings();
+            actions.getProviderAddress();
 
             actions.getServiceDescriptions();
 

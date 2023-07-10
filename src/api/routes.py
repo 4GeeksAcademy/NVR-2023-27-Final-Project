@@ -854,6 +854,41 @@ def get_provider_settings():
         return jsonify({"message": "An error occurred", "error": str(e)}), 500
 
 
+# PRIVATE Provider endpoints - GET Provider address
+
+@api.route("/getprovideraddress", methods=["GET"])
+@jwt_required()
+def get_provider_addresss():
+    try:
+        provider_email = get_jwt_identity()
+        provider = ProviderProfile.query.filter_by(email=provider_email).first()
+        if provider:
+            address = Address.query.filter_by(
+                provider_id=provider.id).first()
+            provider_address = {
+                "id": address.id or "",
+                "street": address.street or "",
+                "apartment": address.apartment or "",
+                "city": address.city or "",
+                "state": address.state or "",
+                "postalcode": address.postal_code or "",
+                "country": address.country or "",            
+            }
+            print("**********************************")
+            print(provider_address)
+            return jsonify({
+                "message": "Address successfully retrieved",
+                "provider_address": provider_address
+            })
+        else:
+            return jsonify({"message": "Provider not found"}), 404
+    except Exception as e:
+        print(e)
+        return jsonify({
+            "message": "An error occurred",
+            "error": str(e)
+        }), 500
+
 
 
 

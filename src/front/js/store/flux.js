@@ -29,6 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			providerAvaiabilities: null,
 			providerSettings: null,
 			providerNotifications: null,
+			providerAddress: null,
 
 
 			// General data structures
@@ -684,6 +685,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			
+
 			// GET  Provider settings
 
 			getProviderSettings: async () => {
@@ -706,6 +708,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error:", error);
 				}
 			},
+
+
+			// GET  Provider Address
+
+			getProviderAddress: async () => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/getprovideraddress", {
+						method: "GET",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+
+						}
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						setStore({ providerAddress: data.provider_address });
+					} else {
+						console.log("Error:", response.status);
+					}
+				} catch (error) {
+					console.log("Error:", error);
+				}
+			},
+
+
 
 
 
