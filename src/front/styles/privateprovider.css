@@ -1,0 +1,1845 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+/* Base CSS */
+
+:root {
+  --background: #e7e7e7;
+  --serviceRollUpBackground: #d7d7d7;
+  --requestRollUpBackground: #d7d7d7;
+  --requestRollUpColor: black;
+  --scrollBar: #767676;
+  --modalBackground: rgb(127, 127, 127);
+  --modalCOlor: white;
+  --categoryLabelBackground: rgb(173, 173, 173);
+  --standOutGreen: rgb(0, 70, 0);
+  --strikingBlue: #6747C7;
+  --logoAnimationSpeed: 3.6s;
+
+}
+
+body,
+body * {
+  background: var(--background);
+  user-select: none;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+}
+
+/* Base class , taht can be compounded to any element */
+
+.clickable {
+  transition: transform 0.5s ease-in-out;
+}
+
+.clickable:hover {
+  transform: scale(1.2);
+}
+
+.clickable:not(:hover) {
+  transform: scale(1);
+}
+
+
+/* Avater Initials */
+
+.avatarButton {
+  height: 3rem;
+  width: 3rem;
+  font-variant: small-caps;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.09rem;
+  background: yellow;
+  color: black;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatarInitialsInnerWrapper {
+  background: yellow;
+  color: black;
+  z-index: 1;
+  transition: opacity 0.5s;
+}
+
+.avatarButton::after {
+  content: "";
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: .6rem;
+  font-variant: small-caps;
+  transition: opacity 0.5s, content 0.5s;
+}
+
+.avatarButton:hover::after {
+  content: "accouunt";
+  opacity: 1;
+}
+
+.avatarButton:hover .avatarInitialsInnerWrapper {
+  opacity: 0;
+}
+
+.avatarButton:not(:hover) .avatarInitialsInnerWrapper {
+  opacity: 1;
+  transition: opacity .9s;
+}
+
+.avatarButton:hover::after,
+.avatarButton:hover .avatarInitialsInnerWrapper {
+  transition-delay: 0.5s ease-in-out;
+}
+
+.avatarButton:active,
+.avatarButton:focus {
+  background-color: yellow;
+  border-radius: 50%;
+}
+
+.avatarButton:hover {
+  background-color: yellow;
+  border-radius: 50%;
+}
+
+
+/* Scrollbar */
+
+html::-webkit-scrollbar {
+  width: .9vw;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--scrollBar);
+}
+
+html::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+/* Straight buttons */
+
+button,
+button:hover,
+button:focus,
+button:active,
+button:disabled {
+  border-radius: 0;
+  outline: none;
+  border: none;
+}
+
+
+/* Alert User pop up */
+
+.alertUser {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 2rem;
+  width: 10.25rem;
+  border: none;
+  padding: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7rem;
+  font-variant: small-caps;
+  letter-spacing: 0.1rem;
+  opacity: 1;
+  z-index: 9999;
+  animation: fade-in-out 2.1s ease-in-out forwards;
+  box-shadow: .7rem .7rem .7rem 0 rgba(98, 98, 98, 0.36)
+}
+
+@keyframes fade-in-out {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  10% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  90% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+/* Main CSS */
+
+.menuLabel {
+  all: unset;
+  font-variant: small-caps;
+  font-size: 0.875rem;
+  letter-spacing: 0.23rem;
+  text-align: center;
+  margin-inline: 1.2rem;
+  padding-inline: 0;
+  gap: 0;
+  padding-bottom: 0.27rem;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.5s ease-in-out, transform 0.5s, color 0.5s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.menuLabel::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 98%;
+  height: 1px;
+  background-color: black;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.menuLabel:hover {
+  padding-bottom: 0.27rem;
+  border-bottom: 1px solid transparent;
+}
+
+.selectedSectionButton::before {
+  transform: translateX(0);
+}
+
+/* dropdown icons */
+
+.dropDownIcon1,
+.dropDownIcon2,
+.menuIcon3 {
+  padding-right: .5rem;
+  ;
+}
+
+/* OFFCANVAS */
+
+.offcanvasBody {
+  margin-top: 1.6rem;
+}
+
+
+
+.offcanvas * {
+  overflow: hidden;
+}
+
+.sideBanner {
+  border-left: 0.5px solid;
+  background: var(--background);
+  width: 14rem;
+  display: flex;
+  z-index: 99998 !important;
+}
+
+.closeSignOutButtonsWrapper {
+  margin-top: 1.6rem;
+  margin-right: 1.5rem;
+}
+
+.borderRight {
+  border-right: .7px solid black;
+}
+
+.closeSettingsButton {
+  padding-right: .33rem;
+  cursor: pointer;
+}
+
+.accordion-item,
+.accordion-button,
+.accordion-collapse,
+.accordion-body {
+  background-color: var(--background) !important;
+  border: none;
+  color: black !important;
+  margin: 0 !important;
+  padding-block: 0 !important;
+}
+
+.accordion-button:not(.collapsed) {
+  box-shadow: none !important;
+}
+
+/* OFFCANVAS content */
+
+.offCanvasDropDownIcon {
+  position: absolute;
+  left: 11rem;
+}
+
+.settingsLabel {
+  font-weight: 400;
+  font-variant: small-caps;
+  font-size: 0.875rem;
+  letter-spacing: .1rem;
+
+}
+
+.settingsTitles {
+  font-size: .7rem;
+  font-variant: small-caps;
+}
+
+.settingsValue {
+  font-size: .7rem;
+  font-style: italic;
+}
+
+.settingsControl1 {
+  position: absolute;
+  left: 10.61rem;
+  white-space: nowrap;
+}
+
+.settingsControl2 {
+  position: absolute;
+  left: 10.81rem;
+  white-space: nowrap;
+
+}
+
+.settingsControl3 {
+  position: absolute;
+  left: 9.9rem;
+  white-space: nowrap;
+}
+
+.settingsControl4 {
+  position: absolute;
+  left: 10.9rem;
+  white-space: nowrap;
+}
+
+
+.settingsControl5 {
+  position: absolute;
+  left: 10.9rem;
+  white-space: nowrap;
+}
+
+.settingsControl6 {
+  position: absolute;
+  left: 6.5rem;
+  bottom: 1.4rem;
+  white-space: nowrap;
+}
+
+.settingsControl7 {
+  position: absolute;
+  left: 7.5rem;
+  bottom: 1.4rem;
+  white-space: nowrap;
+}
+
+.settingsControl8 {
+  padding-inline-end: .1rem;
+  font-size: .6rem;
+  font-variant: small-caps;
+  white-space: nowrap;
+  font-style: normal;
+
+}
+.settingsRatingLabel {
+  padding-top: .34rem;
+}
+
+.updateettingsButton {
+  background: var(--standOutGreen);
+  color: white;
+  border: none;
+  font-variant: small-caps;
+  font-size: .63rem;
+  width: 8.7rem;
+  letter-spacing: .1rem;
+  padding-inline: .63rem;
+  transition: all .27s ease-in-out;
+}
+
+.updateettingsButton:hover {
+  background: white;
+  color: var(--standOutGreen);
+  font-weight: 600;
+}
+
+/* excluded Provider Thumbnail */
+
+.providerThumbnailWrapper {
+    border: none;
+ }
+
+.providerThumbnail {
+  width: 3.6rem;
+  height: 3.6rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Accordion */
+
+.accordion-button::after {
+  transform: scale(0.5);
+}
+
+.accordion-button.collapsed::after {
+  transform: scale(0.5);
+}
+
+.accordionMarginTopAdjustement {
+  margin-top: 1.3rem;
+}
+
+/* Second Navbar */
+
+.searchRibbon {
+  border-top: .7px solid;
+  border-bottom: .7px solid;
+}
+
+.pullDownLabel {
+  font-size: 0.7rem;
+  letter-spacing: 0.12rem;
+  font-style: italic;
+
+}
+
+input[type="search"] {
+  border: none;
+  outline: none;
+  background: transparent;
+  position: relative;
+  border-bottom: 0.5px solid black;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+input[type="search"] {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  line-height: 1rem;
+  border-bottom: .7px solid;
+}
+
+input::placeholder {
+  color: rgb(79, 79, 79);
+  font-size: .7rem;
+  font-style: italic;
+  opacity: .7;
+}
+
+.firstBavBar {
+  height: 5rem !important;
+}
+
+.secondNavBar {
+  margin-top: 5rem !important;
+  height: 2.5rem !important;
+  border-top: .7px solid rgb(103, 103, 103);
+  border-bottom: .7px solid rgb(103, 103, 103);
+  z-index: 999 !important;
+}
+
+.main {
+  margin-top: 8rem !important;
+}
+
+/* Ribbon elements  */
+
+.ribbonElement1 {
+  position: absolute !important;
+  left: 12% !important;
+}
+
+.ribbonElement2 {
+  position: absolute !important;
+  left: 43% !important;
+}
+
+.ribbonElement3 {
+  position: absolute !important;
+  left: 69% !important;
+}
+
+/* Dropdown lists  */
+ul.dropdown-menu.rounded-0 {
+  padding: 0;
+  width: 12rem;
+  margin-top: 6px;
+  animation: slideDown .45s both;
+  max-height: 0;
+  overflow: hidden !important;
+  opacity: .3;
+  transition: max-height 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  to {
+    max-height: 100vh;
+    opacity: 1;
+  }
+}
+
+/* Ribbon elements  */
+li.list-item {
+  font-size: .7rem;
+  font-style: italic;
+  color: black;
+  border-block: .7px solid transparent;
+}
+
+li.list-item::before {
+  content: " ";
+  display: inline-block;
+  width: .35rem;
+}
+
+li.list-item:hover {
+  border-block: .7px solid black;
+}
+
+/* Dropdown lists  */
+form input[type=search] {
+  font-size: .7rem;
+  font-style: italic;
+}
+
+/* serviceRollUp  */
+.serviceRollUpBanner {
+  background-color: var(--serviceRollUpBackground);
+  height: 1.8rem;
+  width: 36rem;
+  padding-inline: 1rem;
+  padding-block: .3rem;
+  display: flex;
+}
+
+.serviceRollUpBanner * {
+  background-color: var(--serviceRollUpBackground);
+}
+
+.serviceRollUpBanner:hover~.expandableWrapper {
+  grid-template-rows: 1fr;
+}
+
+/* Banner  */
+
+.bannerLabels {
+  align-items: baseline;
+  background: var(--serviceRollUpBackground);
+}
+
+.bannerCategoryColorWrapper {
+  display: flex;
+  align-items: center;
+  transform: skew(-18deg);
+  padding-inline: 3px;
+  width: .25rem;
+}
+
+.bannerCategoryColor {
+  display: inline-block;
+  padding-inline: .1rem;
+  padding-block: .021rem;
+  color: var(--background);
+  transform: skew(18deg);
+  font-size: .63rem;
+}
+
+.bannerCategoryLabelWrapper {
+  display: flex;
+  background-color: var(--categoryLabelBackground);
+  transform: skew(-18deg);
+  padding-inline: 3px;
+}
+
+.bannerCategoryLabel {
+  display: inline-block;
+  align-items: center;
+  padding-inline: .1rem;
+  padding-top: .12rem;
+  background-color: var(--categoryLabelBackground);
+  color: var(--background);
+  transform: skew(18deg);
+  font-variant: small-caps;
+  font-size: .6rem;
+  letter-spacing: .1rem;
+}
+
+.bannerCategoryLabel::before,
+.bannerCategoryLabel::after {
+  content: "";
+  display: inline-block;
+  width: 0.1rem;
+}
+
+.bannerLabels {
+  display: flex;
+  align-items: center;
+}
+
+.bannerLabel1 {
+  display: flex;
+  position: absolute;
+  left: 37%;
+}
+
+.bannerLabel2 {
+  display: flex;
+  position: absolute;
+  left: 53%;
+}
+
+.bannerLabel3 {
+  display: flex;
+  position: absolute;
+  left: 63.3%;
+}
+
+.priceString {
+  display: flex;
+  justify-content: right;
+  text-align: right;
+}
+
+.bannerLabel4 {
+  display: flex;
+  position: absolute;
+  left: 72%;
+}
+
+.bannerDescription {
+  display: flex;
+  align-items: baseline;
+  font-size: .7rem;
+  background: var(--serviceRollUpBackground);
+  font-variant: small-caps;
+}
+
+.bannerValue {
+  display: flex;
+  align-items: baseline;
+  font-size: .7rem;
+  background: var(--serviceRollUpBackground);
+  padding-left: .27rem;
+}
+
+/* Expandable */
+
+.expandableWrapper {
+  width: 36rem;
+  margin: .001rem;
+  padding: .001rem;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 500ms;
+}
+
+.expandableWrapper:hover {
+  grid-template-rows: 1fr;
+
+}
+
+.expandableWrapper>div {
+  overflow: hidden;
+}
+
+.expandable {
+  background-color: var(--serviceRollUpBackground);
+  padding-inline: .7rem;
+}
+
+.expandable * {
+  background-color: inherit;
+}
+
+
+.expandableContent {
+  border-top: .5px solid rgb(111, 111, 111);
+  background-color: var(--serviceRollUpBackground);
+  padding: .3rem;
+}
+
+.expandableColumns {
+  display: flex;
+}
+
+.expandableColumn1 {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  line-height: .7rem;
+}
+
+.expandableColumn1B {
+  flex: 2.7;
+  display: flex;
+  flex-direction: column;
+  line-height: .7rem;
+}
+
+.expandableColumn2 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  line-height: .7rem;
+  justify-content: right;
+  text-align: right;
+
+}
+
+
+
+
+
+.expandableColumn3 {
+  flex: 1.7;
+  display: flex;
+  flex-direction: column;
+  line-height: .7rem;
+}
+
+.expandableColumn4 {
+  flex: 1.7;
+  display: flex;
+  justify-content: right;
+  text-align: right;
+  flex-direction: column;
+  line-height: .7rem;
+}
+
+.expandableDescription {
+  font-size: .675rem;
+  width: 11.1rem;
+  font-variant: small-caps;
+  align-items: top;
+}
+
+.expandableValue {
+  font-size: .6rem;
+}
+
+.typeOfAddressValue {
+  font-size: .6rem;
+  font-variant: small-caps;
+  padding-inline: .3rem;
+  padding-block: .1rem;
+
+}
+
+
+
+button .bookButton,
+button .bookButto:focus,
+button .bookButto:active {
+  outline: none;
+  border: none;
+  border-radius: 0;
+}
+
+/* Calendar Modal */
+
+.largeDialogElement {
+  position: fixed;
+  border: none;
+  margin-top: 7.48rem;
+  width: 33.3%;
+  background: var(--modalBackground);
+  transform: scale(0);
+  animation: modal-appear 0.5s ease-in-out forwards;
+  overflow: hidden;
+  box-shadow: .7rem .7rem .7rem 0 rgba(65, 65, 65, 0.36)
+
+
+}
+
+@keyframes modal-appear {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes modal-disappear {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  90% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+dialog:active,
+dialog:focus {
+  border: noen;
+  outline: none;
+  border-radius: 0;
+}
+
+.largeDialogElement * {
+  background: inherit;
+}
+
+.largeDialogElement::backdrop {
+  background-color: transparent !important;
+}
+
+/* Modal */
+
+.modalTitle {
+  font-size: .7rem;
+  font-variant: small-caps;
+  letter-spacing: .1rem;
+  padding-bottom: .5rem;
+  color: var(--modalCOlor);
+}
+
+.dismissIcon {
+  transform: translateX(9.3rem) translateY(-.18rem);
+}
+
+.dismissIcon path {
+  fill: var(--modalCOlor);
+}
+
+.modalSubTitle {
+  display: flex;
+  align-items: baseline;
+  font-style: bold;
+}
+
+.modalOptionTiltle {
+  font-size: .675rem;
+  font-style: italic;
+  letter-spacing: .1rem;
+
+}
+
+.calendarModalLabel {
+  font-variant: small-caps;
+  font-size: .7rem;
+  letter-spacing: .1rem;
+  font-style: italic;
+}
+
+.calendarModalValue {
+  font-variant: small-caps;
+  font-size: .7rem;
+  letter-spacing: .1rem;
+}
+
+
+/* Calendar */
+
+.calendarContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.calendarAbbreviationsContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+
+}
+
+.weekContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.weekDaysAbbreviations {
+  display: flex;
+  align-Items: center;
+  justify-content: center;
+  text-align: center;
+  height: 1.4rrem;
+  width: 2.1rem;
+  font-size: .6rem;
+  font-variant: small-caps;
+  background: var(--modalBackground);
+  margin-bottom: .3rem;
+}
+
+.calendarCell {
+  text-align: center;
+  height: 1.2rem;
+  width: 2.1rem;
+  font-size: 0.6rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendarCell.viableDay:hover {
+  background: var(--strikingBlue);
+  color: var(--background);
+  z-index: 10000;
+  cursor: crosshair;
+}
+
+.calendarCell.currentDay {
+    text-decoration-line: overline;
+}
+
+.calendarCell.selectedRequestDay {
+  background: var(--strikingBlue);
+  color: var(--background);
+  z-index: 100;
+
+  animation: blinker 1.8s ease-out infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: .12;
+  }
+}
+
+.unviableDay {
+  font-size: .35rem;
+  color: white;
+}
+
+.adjacentCell {
+  font-size: .7rem;
+  transform: translateX(.63rem) translateY(.019rem);
+  z-index: 1;
+  color: transparent;
+  padding: 0rem;
+  margin: 0rem;
+  gap: 0rem;
+}
+
+/* calendarModal Content */
+/* Table */
+
+* td {
+  vertical-align: baseline;
+
+}
+
+.calendarModalTableLabel {
+  font-variant: small-caps;
+  font-size: .7rem;
+  color: var(--modalCOlor);
+  font-weight: 300;
+}
+
+.calendarModalTableValue {
+  font-size: .7rem;
+  color: var(--modalCOlor);
+  font-weight: 300;
+}
+
+table.calendarModalTable {
+  border-collapse: collapse;
+  margin: 0;
+  table-layout: fixed;
+}
+
+table.calendarModalTable td {
+  border-block: .5px solid var(--modalCOlor);
+  overflow: hidden;
+}
+
+.pickerButton button {
+  font-size: .9rem;
+  color: var(--modalCOlor);
+  transition: transform 0.3s ease-in-out;
+}
+
+.pickerButton button:hover {
+  transform: scale(1.5);
+}
+
+
+.calendarModalTable {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.calendarModalTable td {
+  border-block: .7px solid var(--modalCOlor);
+  padding-block: 0;
+}
+
+.pickerButton {
+  width: .7rem;
+}
+
+.calendarModalTableValue {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.calendarModalTable td:nth-child(1) {
+  width: 2.1rem;
+  text-align: left;
+}
+
+.calendarModalTable td:nth-child(2) {
+  width: 2.7rem;
+  text-align: right;
+}
+
+.calendarModalTable td:nth-child(3) {
+  width: 1rem;
+  text-align: left;
+
+}
+
+.calendarModalTable td:nth-child(4) {
+  width: .9rem;
+  text-align: left;
+}
+
+.calendarModalTable td:nth-child(5) {
+  width: .63rem;
+  text-align: left;
+
+}
+
+.calendarModalTable td:nth-child(6) {
+  width: 2.3rem;
+  text-align: left;
+}
+
+.calendarModalTable td:nth-child(7) {
+  width: 2.5rem;
+  text-align: right;
+}
+
+.calendarModalTable td:nth-child(8) {
+  width: 1rem;
+  text-align: left;
+}
+
+.calendarModalTable td:nth-child(9) {
+  width: 1rem;
+  text-align: left;
+}
+
+/* book Button  */
+
+.bookButtonWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: .3rem;
+}
+
+.bookButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--standOutGreen);
+  color: var(--background);
+  border: none;
+  font-variant: small-caps;
+  font-size: .63rem;
+  width: 2.7rem;
+  letter-spacing: .1rem;
+  padding-inline: .63rem;
+  transition: all .27s ease-in;
+  transform: translateY(.05rem)
+
+}
+
+.bookButton:hover {
+  background: white;
+  color: var(--standOutGreen);
+  font-weight: 600;
+}
+
+
+/* Cancel Button */
+
+.cancelButton {
+  background: rgb(111, 111, 111);
+  color: black;
+  font-variant: small-caps;
+  font-size: 0.63rem;
+  font-weight: 600;
+  width: 3.6rem;
+  letter-spacing: 0.1rem;
+  padding-inline: 0.63rem;
+  transition: all .27s ease-in;
+}
+
+.cancelButton:hover {
+  background: white;
+}
+
+
+.modalBookButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--standOutGreen);
+  color: var(--background);
+  border: var(--standOutGreen);
+  font-variant: small-caps;
+  font-size: .63rem;
+  width: 10.2rem;
+  letter-spacing: .1rem;
+  transition: all .27s ease-in;
+  padding-block: .15rem;
+}
+
+.modalBookButton:hover {
+  background: white;
+  color: var(--standOutGreen);
+  font-weight: 600;
+}
+
+
+/* Expandable */
+
+.expand-toggle {
+  display: none;
+  visibility: hidden;
+}
+
+.expand-label {
+  display: block;
+  padding: 0.5em;
+}
+
+.expand-content {
+  height: 0px;
+  overflow: hidden;
+  transition: height 0.5s;
+}
+
+.expand-toggle:checked~.expand-content {
+  height: 50px;
+}
+
+/* requestRollUp  */
+
+.requestRollUpBanner {
+  background-color: var(--requestRollUpBackground);
+  height: 1.8rem;
+  width: 36rem;
+  padding-inline: 1rem;
+  padding-block: .3rem;
+  display: flex;
+}
+
+.requestRollUpBanner * {
+  background-color: var(--requestRollUpBackground);
+}
+
+.requestRollUpBanner:hover~.requestExpandableWrapper {
+  grid-template-rows: 1fr;
+}
+
+/* requestRollUp expandale */
+
+.requestExpandableWrapper {
+  width: 36rem;
+  margin: .001rem;
+  padding: .001rem;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 500ms;
+}
+
+.requestExpandableWrapper:hover {
+  grid-template-rows: 1fr;
+
+}
+
+.requestExpandableWrapper>div {
+  overflow: hidden;
+}
+
+.requestExpandable {
+  background-color: var(--requestRollUpBackground);
+  padding-inline: .7rem;
+}
+
+.requestExpandable * {
+  background-color: inherit;
+}
+
+.requestExpandableContent {
+  border-top: .5px solid rgb(111, 111, 111);
+  background-color: var(--requestRollUpBackground);
+  padding: .3rem;
+}
+
+/* requestRollUp content */
+
+.requestRollUpTitleWrapper {
+  background: var(--categoryLabelBackground);
+  transform: skewx(-18deg);
+  padding-inline: .5rem;
+}
+
+.requestRollUpColorSquare {
+  background: var(--categoryLabelBackground);
+  display: flex;
+  margin-inline: 0;
+  padding-inline: 0;
+  justify-content: left;
+  align-items: baseline;
+  font-size: .7rem;
+  font-variant: small-caps;
+  letter-spacing: .1rem;
+  transform: skewx(18deg);
+  margin-right: .3rem;
+}
+
+.requestRollUpTitleInnerWrapper {
+  background: var(--categoryLabelBackground);
+
+}
+
+.requestRollUpTitleLabel {
+  align-items: center;
+  padding-inline: .1rem;
+  padding-top: .12rem;
+  font-size: .6rem;
+  letter-spacing: .1rem;
+  color: white;
+  background: var(--categoryLabelBackground);
+  display: flex;
+  align-items: baseline;
+  font-size: .7rem;
+  font-variant: small-caps;
+  letter-spacing: .1rem;
+  transform: skewx(18deg);
+}
+
+.rollUpDescription {
+  display: flex;
+  margin-top: .1rem;
+  padding-inline: 0;
+  justify-content: right;
+  align-items: baseline;
+  font-size: .7rem;
+  background: var(--requestRollUpBackground);
+  font-variant: small-caps;
+  color: var(--requestRollUpColor);
+}
+
+.rollUpValue {
+  display: flex;
+  margin-top: .1rem;
+  padding-inline: 0;
+  gap: 0;
+  justify-content: left;
+  align-items: baseline;
+  font-size: .7rem;
+  background: var(--requestRollUpBackground);
+  padding-left: .3rem;
+  color: var(--requestRollUpColor);
+
+}
+
+.requestRollUpColumn1 {
+  display: flex;
+  width: 9.6rem;
+  min-width: 9.6rem;
+
+}
+
+.requestRollUpColumn2 {
+  display: flex;
+  width: 20rem;
+  min-width: 20rem;
+
+}
+
+.requestRollUpColumn3 {
+  display: flex;
+  width: 4.5rem;
+  min-width: 4.5rem;
+
+}
+
+.requestRollUpColumn4 {
+  display: flex;
+  width: 1.2rem;
+  min-width: 1.2rem;
+
+}
+
+.requestRollUpColumn5 {
+  display: flex;
+  width: 5.4rem;
+  min-width: 5.4rem;
+
+}
+
+.requestRollUpColumn6 {
+  display: flex;
+  width: 1.4rem;
+  min-width: 1.4rem;
+
+}
+
+.rquestRollUpColumn7 {
+  display: flex;
+  width: 2.5rem;
+  min-width: 2.5rem;
+}
+
+.rquestRollUpColumn8 {
+  display: flex;
+  width: 2.5rem;
+  min-width: 2.5rem;
+
+}
+
+.rquestRollUpColumn9 {
+  display: flex;
+  width: 6rem;
+  min-width: 6rem;
+}
+
+.rquestRollUpColumn10 {
+  display: flex;
+  width: 5%;
+  min-width: 5%;
+}
+
+/* status Bar */
+
+.requestRollUpStatusLabel {
+  font-variant: small-caps;
+  font-size: .7rem;
+}
+
+.statusBarRow {
+  display: flex;
+  margin-top: .4rem;
+  margin-left: .7rem;
+  background: transaprent;
+  justify-content: center;
+  gap: .07rem;
+}
+
+.statusCircle {
+  width: .5rem;
+  height: .5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Request Action Button */
+
+.requestActionButton {
+  background: var(--standOutGreen);
+  color: var(--background);
+  border: none;
+  font-variant: small-caps;
+  font-size: .63rem;
+  width: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: .1rem;
+  padding-inline: .63rem;
+  transition: all .27s ease-in-out;
+  position: absolute;
+  right: 14.9rem;
+  transform: translatey(.075rem);
+}
+
+.requestActionButton:hover {
+  background: white;
+  color: var(--standOutGreen);
+  font-weight: 600;
+}
+
+
+.rollUpCancelButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(166, 166, 166);
+  color: rgb(74, 74, 74);
+  font-variant: small-caps;
+  font-size: 0.63rem;
+  font-weight: 600;
+  width: 4.5rem;
+  letter-spacing: 0.1rem;
+  padding-inline: 0.63rem;
+  padding-block: .15rem;
+  transition: all .27s ease-in-out;
+  transform: translateX(3.75rem);
+  margin-bottom: .35rem;
+
+}
+
+.rollUpCancelButton:hover {
+  background: white;
+  color: var(--standOutGreen)
+}
+
+
+.rollUpCancelButton2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(166, 166, 166);
+  color: rgb(74, 74, 74);
+  font-variant: small-caps;
+  font-size: 0.63rem;
+  font-weight: 600;
+  width: 4.1rem;
+  align-items: center;
+  letter-spacing: 0.1rem;
+  padding-inline: 0.63rem;
+  padding-block: .15rem;
+  transition: all .27s ease-in-out;
+  transform: translate(.09rem, 6.3rem);
+}
+
+.rollUpCancelButton2:hover {
+  background: white;
+  color: var(--standOutGreen)
+}
+
+
+
+/* Service Request PASSWORD modal */
+
+.servieRequestPasswordModal {
+  position: fixed;
+  border: none;
+  margin-top: 7.48rem;
+  width: 33.3%;
+  background: var(--modalBackground);
+  box-shadow: .7rem .7rem .7rem 0 rgba(65, 65, 65, 0.36);
+  transform: scale(0);
+  animation: modal-appear 0.5s ease-in-out forwards;
+  overflow: hidden;
+
+}
+
+@keyframes modal-appear {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes modal-disappear {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  90% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+
+.servieRequestPasswordModal * {
+  background: inherit;
+}
+
+.servieRequestPasswordModal::backdrop {
+  background-color: transparent !important;
+}
+
+
+/* Service Request password modal IMAGES */
+
+.providerAvatarImageWrapper,
+.qrCodeImageWrapper {
+  width: 160px;
+  height: 250px;
+  min-width: 160px;
+  min-height: 250px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.providerAvatarImageWrapper img,
+.qrCodeImageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: flex;
+  align-items: flex-start !important;
+  opacity: 0;
+  animation: fade-in 0.5s ease-in-out forwards;
+}
+
+.providerAvatarReplacement,
+.replacementQRCode {
+  width: 160px;
+  height: 250px;
+  min-width: 160px;
+  min-height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+} 
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.safeguardUpdateButton {
+  background: var(--standOutGreen);
+  color: var(--background);
+  border: none;
+  font-variant: small-caps;
+  font-size: .63rem;
+  width: 7.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: .1rem;
+  padding-inline: .63rem;
+  padding-block: .1rem;
+  transition: all .27s ease-in-out;
+  position: absolute;
+  right: 1.2rem;
+}
+
+.safeguardUpdateButton:hover {
+  background: white;
+  color: var(--standOutGreen);
+  font-weight: 600;
+}
+
+.safeguardCancelButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(166, 166, 166);
+  color: rgb(74, 74, 74);
+  font-variant: small-caps;
+  font-size: 0.63rem;
+  font-weight: 600;
+  width: 4.5rem;
+  letter-spacing: 0.1rem;
+  padding-inline: 0.63rem;
+  padding-block: .1rem;
+  transition: all .27s ease-in-out;
+  transform: translateX(5.7rem);
+
+}
+
+.safeguardCancelButton:hover {
+  background: white;
+  color: var(--standOutGreen)
+}
+
+.qrField {
+  transform: translateX(.8rem);
+}
+
+
+.carouselWrapper {
+  width: 3.6rem;
+}
+
+.overideBootstarp {
+  color: black !important;
+}
+
+.exclusionCounter {
+  font-size: .6rem;
+  font-variant: small-caps;
+  padding-inline: .1rem;
+  margin-right: .15rem;
+  position: absolute;
+  left: 5.4rem;
+  bottom: 2.8rem;
+  white-space: nowrap;
+
+}
+
+.exclusionName {
+  font-size: .7rem;
+  font-style: italic;
+}
+
+.passwordLabel {
+  font-size: .7rem;
+  font-variant: small-caps;
+  letter-spacing: .1rem;
+  color: white;
+  font-weight: 300;
+}
+
+#serviceSearchField2 , #serviceSearchField3  {
+  color: white;
+  width: 4.5rem;
+  margin-right: 1.2rem;
+}
+
+#serviceSearchField2::placeholder , 
+#serviceSearchField3::placeholder {
+color: white;
+opacity: .7;
+
+}
+
+.starRatingWrapper {
+  display: inline-flex;
+  color: white;
+  gap: .5px;
+}
+
+.starWhite {
+  fill: white;
+}
+
+.inputFormsWrapper {
+  gap: 0;
+}
+
+.certifiedLabel {
+  justify-content: center;
+  align-items: center;
+  text-align: center;;
+  font-size: .6rem;
+  font-variant: small-caps;
+  border: .5px solid white; 
+  color: white;
+  padding-block: .1rem;
+  padding-inline: .15rem;
+  letter-spacing: .05rem;
+  
+
+}
+
+/* rate Ban modal */
+
+.toBeExcludedToggle {
+  position: absolute;
+}
+
+.rateControl {
+  color: white;
+
+}
+
+.rateControl1 {
+  position: absolute;
+  right: 1.86rem;
+  bottom: 10.4rem;
+}
+
+.rateControl2 {
+  position: absolute;
+  right: .96rem;
+  bottom: 10.4rem;
+}
+
+
+.rateBanActionButton1 {
+  background: var(--standOutGreen);
+  color: var(--background);
+  border: none;
+  font-variant: small-caps;
+  font-size: .63rem;
+  width: 3.6rem;
+  height: 1rem;
+  letter-spacing: .1rem;
+  padding-inline: .63rem;
+  transition: all .27s ease-in-out;
+  
+}
+
+.rateBanActionButton1:hover {
+  background: white;
+  color: var(--standOutGreen);
+  font-weight: 600;
+}
+
+.rateBanActionButton2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--standOutGreen);
+  color: var(--background);
+  align-items: center;
+  border: none;
+  font-variant: small-caps;
+  font-size: .63rem;
+  width: 4.41rem;
+  letter-spacing: .1rem;
+  padding-inline: .63rem;
+  padding-block: .15rem;
+  transition: all .27s ease-in-out;
+  position: absolute;
+  transform: translate(4.6rem, 6.3rem)
+  
+}
+
+.rateBanActionButton2:hover {
+  background: white;
+  color: var(--standOutGreen);
+  font-weight: 600;
+}
+
+
+.providerNameLabel1 {
+  position: absolute;
+  left: 12.3rem;
+  bottom: 4.7rem;
+}
+
+.providerNameValue1 {
+  position: absolute;
+  left: 15rem;
+  bottom: 4.7rem;
+}
+
+
+
+
+/*******************/
+/* LOGO Solutioner */
+/* 
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--standOutGreen)
+}
+
+.logoAnimation span {
+  display: inline-block;
+  transform-origin: center;
+}
+
+.logoAnimation span:nth-child(1) {
+  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 0s;
+}
+
+.logoAnimation span:nth-child(2) {
+  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 0.15s;
+}
+
+.logoAnimation span:nth-child(3) {
+  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 0.3s;
+}
+
+.logoAnimation span:nth-child(4) {
+  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 0.45s;
+}
+
+.logoAnimation span:nth-child(5) {
+  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 0.6s;
+}
+
+.logoAnimation span:nth-child(6) {
+  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 0.75s;
+}
+
+.logoAnimation span:nth-child(7) {
+  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 0.9s;
+}
+
+.logoAnimation span:nth-child(8) {
+  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 1.05s;
+}
+
+.logoAnimation span:nth-child(9) {
+  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 1.2s;
+}
+
+.logoAnimation span:nth-child(10) {
+  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 1.35s;
+}
+
+@keyframes rotate-characters {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(90deg);
+  }
+  75% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+   */
