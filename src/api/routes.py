@@ -696,7 +696,6 @@ def update_service_request_passwords(service_request_id):
 @api.route("/excludeprovider/<int:provider_id>", methods=["POST"])
 @jwt_required()
 def exclude_provider(provider_id):
-    print("************************** enterd Exclusion ")
     try:
         user_email = get_jwt_identity()
         user = UserProfile.query.filter_by(email=user_email).first()
@@ -718,7 +717,6 @@ def exclude_provider(provider_id):
         return jsonify({"message": "An error occurred", "error": str(e)}), 500
 
 
-# ***********************************************************
 # PRIVATE Provider endpoints - GET Provider Accepted Services
 
 @api.route("/getprovideracceptedservicerequests", methods=["GET"])
@@ -874,7 +872,6 @@ def get_provider_addresss():
                 "postalcode": address.postal_code or "",
                 "country": address.country or "",            
             }
-            print("**********************************")
             print(provider_address)
             return jsonify({
                 "message": "Address successfully retrieved",
@@ -888,6 +885,35 @@ def get_provider_addresss():
             "message": "An error occurred",
             "error": str(e)
         }), 500
+
+
+# PRIVATE Provider endpoints - PUT update service radius
+
+@api.route("/updateserviceradius/<int:new_service_radius>", methods=["PUT"])
+@jwt_required()
+def update_service_radius(new_service_radius):
+    try:
+        provider_email = get_jwt_identity()
+        provider = ProviderProfile.query.filter_by(email=provider_email).first()
+        if provider:
+            provider.service_radius = new_service_radius
+            db.session.commit()
+            return jsonify({
+                "message": "Service radius successfully updated"
+            })
+        else:
+            return jsonify({"message": "Provider not found"}), 404
+    except Exception as e:
+        print(e)
+        return jsonify({
+            "message": "An error occurred",
+            "error": str(e)
+        }), 500
+
+
+
+
+
 
 
 

@@ -399,7 +399,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					if (response.ok) {
 						const data = await response.json();
-						console.log(data.message);
 						await getActions().getUserBookedDays();
 						await getActions().getUserRequests();
 					} else {
@@ -737,9 +736,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
+			// PUT update Service RAdius
 
+			updateServiceRadius: async (newServiceRadius) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/updateserviceradius/" + newServiceRadius, {
+						method: "PUT",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+						}
+					});
 
-
+					if (response.ok) {
+						await getActions().getProviderSettings();
+						await getActions().alertUser("radius updated", "#00008B", "white");
+					} else {
+						console.log("Error:", response.status);
+					}
+				} catch (error) {
+					console.log("Error:", error);
+				}
+			},
 
 
 

@@ -65,6 +65,9 @@ export const ProviderServiceSettings = () => {
     }
   }
 
+    const handleUpdateServieRadius = () => {
+      actions.updateServiceRadius(newServiceRadius);
+    }
 
 
   // Subcomponents
@@ -127,7 +130,7 @@ export const ProviderServiceSettings = () => {
         <div className="mt-2">
           <span className="settingsTitles">certified:</span>
           <span>
-            <span className="settingsControl1">
+            <span className="settingsControl1 ms-1">
               {store.providerSettings && store.providerSettings.has_certificate &&
                 (store.providerSettings.has_certificate ?
                   (<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="m419-321 289-289-43-43-246 246-119-119-43 43 162 162ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm0-600v600-600Z" /></svg>)
@@ -170,7 +173,7 @@ export const ProviderServiceSettings = () => {
           </span>
         </div>
         <div className="mt-3">
-          <button className="updateettingsButton">update radius</button>
+          <button onClick={handleUpdateServieRadius} className="updateettingsButton">update radius</button>
         </div>
         <div className="mt-5">
           <>
