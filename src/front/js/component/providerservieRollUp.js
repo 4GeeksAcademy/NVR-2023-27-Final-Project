@@ -35,15 +35,13 @@ export const ProviderServiceRollUp = (props) => {
       
     // handle functions
 
-    const handleRegisterService = (service_id) => {
-        actions.registerService(service_id);
-    }
+    const handleChangeServiceStatus = () => {
+        if(isRegistered(id)) {actions.unregsiterService(id)} 
+        else {actions.regsiterService(id)}
 
-    const handleUnregisterService = (service_id) => {
-        actions.unregsiterService(service_id)
     }
-
     // pre-processing props
+    
     service = service.charAt(0).toUpperCase() + service.slice(1);
     description = description.charAt(0).toUpperCase() + description.slice(1);
     unit = unit.charAt(0).toUpperCase() + unit.slice(1);
@@ -91,7 +89,8 @@ export const ProviderServiceRollUp = (props) => {
                     <div className="bookButtonWrapper">
                         <div className="bannerLabel4 d-flex align-items-center">
                             <button
-                                onClick={isRegistered ? () => handleUnregisterService(id) : () => handleRegisterService(id)}
+                                id= {`button-${id}`}
+                                onClick={handleChangeServiceStatus}
                                 className={ isRegisteredBoolean ? "unregisterButton mt-1" : "registerButton mt-1" }
                            
                             >

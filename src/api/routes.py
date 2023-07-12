@@ -940,15 +940,30 @@ def unregister_service(service_id):
         }), 500
 
 
+# PRIVATE Provider endpoints - POST Register service
 
+@ api.route("/registerservice/<int:service_id>", methods=["POST"])
+@ jwt_required()
+def register_service(service_id):
+    try:
+        provider_email = get_jwt_identity()
+        provider = ProviderProfile.query.filter_by(email=provider_email).first()
 
-
-
-
-
-
-
-
+        if provider:
+            registered_service = ServiceProvided()
+            registered_service.provider_id = provider.id
+            registered_service.service_description_id = service_id
+            db.session.add(registered_service)
+            db.session.commit()
+            return jsonify({"message": "Service registered successfully"}), 200
+        else:
+            return jsonify({"message": "Provider not found"}), 404
+    except Exception as e:
+        print(e)
+        return jsonify({
+            "message": "An error occurred",
+            "error": str(e)
+        }), 500
 
 
 

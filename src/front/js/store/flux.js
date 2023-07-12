@@ -28,15 +28,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			providerProvidedServices: null,
 			providerAvaiabilities: null,
 			
-			providerAvailabilityMatrix: [
-				[false,false, false],
-				[false,false, false],
-				[false,false, false],
-				[false,false, false],
-				[false,false, false],
-				[false,false, false],
-				[false,false, false],
-			],
+			providerAvailabilityMatrix: [],
 
 			providerSettings: null,
 			providerNotifications: null,
@@ -665,22 +657,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					if (response.ok) {
 						const data = await response.json();
-						console.log(data);
+						
 						setStore({ providerAvaiabilities: data.provider_availabilities });
-					
+											
+						let temporaryArray = [
+							[false,false, false],
+							[false,false, false],
+							[false,false, false],
+							[false,false, false],
+							[false,false, false],
+							[false,false, false],
+							[false,false, false],
+						]
+
 						getStore().providerAvaiabilities.forEach((item) => {
 							let { day, time_slot } = item;
 							let column = time_slot-1;
-							let row = (day + 1) % 7;
-							console.log(row, column);
-
-							// setStore({providerAvailabilityMatrix[row][column] trie})
-
+							let row = day === 6 ? 0 : day + 1;
+							temporaryArray [row] [column] = true;
 						});
-						  
-						  
-						  
 					
+						setStore({providerAvailabilityMatrix : temporaryArray })
+
 					} else {
 						console.log("Error:", response.status);
 					}
@@ -802,7 +800,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const data = await response.json();
 						console.log(data.message);
 						await getActions().getProviderProvidedServices();
-						await getActions().alertUser("Service unregistered", "#00008B", "white");
+						await getActions().alertUser("service unregistered", "#00008B", "white");
 					
 					} else {
 						console.log('Error:', response.status);
@@ -812,6 +810,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+
+			// POST register service
+
+			regsiterService: async (serviceId) => {
+				try {
+
+					const response = await fetch(process.env.BACKEND_URL + "api/registerservice/" + serviceId
+						, {
+							method: "POST",
+							headers: {
+								"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
+								"Content-Type": "application/json"
+							}
+						});
+
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data.message);
+						await getActions().getProviderProvidedServices();
+						await getActions().alertUser("service registered", "#00008B", "white");
+					
+					} else {
+						console.log('Error:', response.status);
+					}
+				} catch (error) {
+					console.log('Error:', error);
+				}
+			},
 
 
 		}

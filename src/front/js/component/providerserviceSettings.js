@@ -5,9 +5,8 @@ export const ProviderServiceSettings = () => {
   const { store, actions } = useContext(Context);
 
   const [newServiceRadius, setNewServiceRadius] = useState(null);
-  const [availabilityMatrix, setAvailabilityMatrix] = useState([]);
+  const [newAvailabilityMatrix, setNewAvailabilityMatrix] = useState([]);
   
-
   const experienceMap = new Map([
     [1, "1 year"],
     [2, "1 to 3 years"],
@@ -23,21 +22,12 @@ export const ProviderServiceSettings = () => {
   }, [store.providerSettings]);
   
   
-  useEffect( () => {
-
-    if (store.providerAvaiabilities) {
-      store.providerAvaiabilities.forEach((item, index) => {
-        console.log("XXXXXX");
-        console.log(index, item);
-    })
+  useEffect(() => {
+    if (store.providerAvaiabilities && store.providerAvailabilityMatrix) {
+      setNewAvailabilityMatrix(store.providerAvailabilityMatrix);
     }
-
-  }
-    
-  , [store.providerAvailabilities]);
-  
-  
-  
+  }, [store.providerAvaiabilities, store.providerAvailabilityMatrix]);
+     
 
   // Handle Functions
 
@@ -102,16 +92,57 @@ export const ProviderServiceSettings = () => {
   };
   
 
-  // Avaiability Matrix compoenent
+  // xcalendar
 
-  const AvailabilityMatrix = () => {
+const XCalendar = () => {
+  return (
+    <div>
+      {newAvailabilityMatrix && (
+        <table className="availabilityTable">
+          <thead>
+            <tr>
+              <th></th>
+              <th>S</th>
+              <th>M</th>
+              <th>T</th>
+              <th>W</th>
+              <th>T</th>
+              <th>F</th>
+              <th>S</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[0, 1, 2].map((rowIndex) => (
+              <tr key={rowIndex}>
+                <td>{rowIndex + 1}</td>
+                {newAvailabilityMatrix.map((dayAvailability, columnIndex) => (
+                  <td key={columnIndex}>{dayAvailability[rowIndex] ? "1" : "0"}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+};
+
+    
+
+
+
+
+  // Avaiability Calendar compoenent
+
+  const AvailabilityCalendar = () => {
+
     const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
     const timeSlots = ["1", "2", "3"];
   
     const handleToggleAvailability = (x, y) => {
-      const updatedMatrix = [...availabilityMatrix];
+      const updatedMatrix = [...newAvailabilityMatrix];
       updatedMatrix[x][y] = !updatedMatrix[x][y];
-      setAvailabilityMatrix(updatedMatrix);
+      setNewAvailabilityMatrix(updatedMatrix);
     };
   
     return (
@@ -129,7 +160,7 @@ export const ProviderServiceSettings = () => {
             {timeSlots.map((timeSlot, rowIndex) => (
               <tr key={rowIndex}>
                 <td className="availabilityAbbreviations">{timeSlot}</td>
-                {availabilityMatrix.map((row, columnIndex) => (
+                {newAvailabilityMatrix.map((row, columnIndex) => (
                   <td
                     key={columnIndex}
                     style={{
@@ -216,7 +247,7 @@ export const ProviderServiceSettings = () => {
           <button onClick={handleUpdateServieRadius} className="updateettingsButton">update radius</button>
         </div>
         <div className="mt-3">
-          <AvailabilityMatrix />
+          <XCalendar />
         </div>
 
       </div>
