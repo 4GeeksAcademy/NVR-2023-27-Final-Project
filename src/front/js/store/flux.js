@@ -784,6 +784,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
+			// DELETE unregister service
+
+			unregsiterService: async (serviceId) => {
+				try {
+
+					const response = await fetch(process.env.BACKEND_URL + "api/unregisterservice/" + serviceId
+						, {
+							method: "DELETE",
+							headers: {
+								"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
+								"Content-Type": "application/json"
+							}
+						});
+
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data.message);
+						await getActions().getProviderProvidedServices();
+						await getActions().alertUser("Service unregistered", "#00008B", "white");
+					
+					} else {
+						console.log('Error:', response.status);
+					}
+				} catch (error) {
+					console.log('Error:', error);
+				}
+			},
+
+
 
 		}
 	};

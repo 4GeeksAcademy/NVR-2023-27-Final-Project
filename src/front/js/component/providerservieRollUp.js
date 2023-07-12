@@ -59,6 +59,7 @@ export const ProviderServiceRollUp = (props) => {
     const priceString = price + ".00€"
 
     // Main JSX
+    const isRegisteredBoolean = isRegistered(id) ;
     return (
         <>
             <div className="serviceRollUp my-1" id={id}>
@@ -90,9 +91,11 @@ export const ProviderServiceRollUp = (props) => {
                     <div className="bookButtonWrapper">
                         <div className="bannerLabel4 d-flex align-items-center">
                             <button
-                                className="bookButton mt-1"
+                                onClick={isRegistered ? () => handleUnregisterService(id) : () => handleRegisterService(id)}
+                                className={ isRegisteredBoolean ? "unregisterButton mt-1" : "registerButton mt-1" }
+                           
                             >
-                                {isRegistered(id) ? "AAA" : "BBB"}
+                                { isRegisteredBoolean ? "unregister" : "register"}
                             </button>
                         </div>
                     </div>

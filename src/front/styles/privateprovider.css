@@ -765,7 +765,8 @@ form input[type=search] {
 
 button .bookButton,
 button .bookButto:focus,
-button .bookButto:active {
+button .bookButto:active,
+button .unregisterButton {
   outline: none;
   border: none;
   border-radius: 0;
@@ -1768,8 +1769,59 @@ opacity: .7;
   bottom: 4.7rem;
 }
 
-/*******************/
+/* Register/unregister buttons */
 
+.unregisterButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(255, 255, 255);
+  color: var(--standOutGreen);
+  outline: 1.2px solid var(--standOutGreen);
+  font-variant: small-caps;
+  font-size: .63rem;
+  width: 4.5rem;
+  letter-spacing: .1rem;
+  padding-inline: .63rem;
+  transition: all .27s ease-in;
+  transform: translateY(.05rem)
+
+}
+
+.unregisterButton:hover {
+  background: var(--standOutGreen);
+  color: white;
+  font-weight: 600;
+}
+
+.registerButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--standOutGreen);
+  color: white;
+  font-variant: small-caps;
+  font-size: .63rem;
+  width: 4.5rem;
+  letter-spacing: .1rem;
+  padding-inline: .63rem;
+  transition: all .27s ease-in;
+  transform: translateY(.05rem)
+
+}
+
+.registerButton:hover {
+  background: white;
+  color: var(--standOutGreen);
+  outline: 1.2px solid var(--standOutGreen);
+  font-weight: 600;
+}
+
+
+
+
+
+/* Table */
 
 .availabilityAbbreviations {
   font-size: .6rem;
@@ -1777,6 +1829,8 @@ opacity: .7;
   font-weight: 400;
 
 }
+
+
 
 /*******************/
 /* LOGO Solutioner */
