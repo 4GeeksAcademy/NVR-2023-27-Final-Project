@@ -94,39 +94,50 @@ export const ProviderServiceSettings = () => {
 
   // xcalendar
 
-const XCalendar = () => {
-  return (
-    <div>
-      {newAvailabilityMatrix && (
-        <table className="availabilityTable">
-          <thead>
-            <tr>
-              <th></th>
-              <th>S</th>
-              <th>M</th>
-              <th>T</th>
-              <th>W</th>
-              <th>T</th>
-              <th>F</th>
-              <th>S</th>
-            </tr>
-          </thead>
-          <tbody>
-            {[0, 1, 2].map((rowIndex) => (
-              <tr key={rowIndex}>
-                <td>{rowIndex + 1}</td>
-                {newAvailabilityMatrix.map((dayAvailability, columnIndex) => (
-                  <td key={columnIndex}>{dayAvailability[rowIndex] ? "1" : "0"}</td>
-                ))}
+  const XCalendar = () => {
+    return (
+      <div>
+        {newAvailabilityMatrix && (
+          <table className="availabilityTable">
+            <thead>
+              <tr>
+                <th></th>
+                <th className="availabilityAbbreviations">sun</th>
+                <th className="availabilityAbbreviations">mon</th>
+                <th className="availabilityAbbreviations">tue</th>
+                <th className="availabilityAbbreviations">wed</th>
+                <th className="availabilityAbbreviations">thu</th>
+                <th className="availabilityAbbreviations">fri</th>
+                <th className="availabilityAbbreviations">sat</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
-  );
-};
-
+            </thead>
+            <tbody>
+              {[0, 1, 2].map((rowIndex) => (
+                <tr key={rowIndex}>
+                  <td>{rowIndex + 1}</td>
+                  {newAvailabilityMatrix.map((dayAvailability, columnIndex) => (
+                    <td
+                      key={columnIndex}
+                      style={{
+                        width: "1rem",
+                        height: "0.7rem",
+                        padding: "0",
+                        textAlign: "center",
+                        verticalAlign: "middle",
+                      }}
+                    >
+                      {dayAvailability[rowIndex] ? "1" : "0"}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    );
+  };
+  
     
 
 
