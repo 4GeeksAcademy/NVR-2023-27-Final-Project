@@ -4,20 +4,9 @@ import { Context } from "../store/appContext";
 export const ProviderServiceSettings = () => {
   const { store, actions } = useContext(Context);
 
-  const providerSettings = null;
-
   const [newServiceRadius, setNewServiceRadius] = useState(null);
-  const [availabilityMatrix, setAvailabilityMatrix] = useState(
-    [
-      [0, 0, 0],
-      [0, 0, 0],
-      [0, 0, 0],
-      [0, 0, 0],
-      [0, 0, 0],
-      [0, 0, 0],
-      [0, 0, 0],
-    ])
-
+  const [availabilityMatrix, setAvailabilityMatrix] = useState([]);
+  
 
   const experienceMap = new Map([
     [1, "1 year"],
@@ -33,24 +22,22 @@ export const ProviderServiceSettings = () => {
     }
   }, [store.providerSettings]);
   
+  
+  useEffect( () => {
 
-  useEffect(() => {
-    const updateAvailabilityMatrix = () => {
-      if (store.providerAvailabilities) {
-        const updatedMatrix = [...availabilityMatrix];
-        store.providerAvailabilities.forEach((availability) => {
-          const { day, time_slot } = availability;
-          updatedMatrix[day][time_slot - 1] = 1;
-        });
+    if (store.providerAvaiabilities) {
+      store.providerAvaiabilities.forEach((item, index) => {
+        console.log("XXXXXX");
+        console.log(index, item);
+    })
+    }
 
-        setAvailabilityMatrix(updatedMatrix);
-      }
-    };
-
-    updateAvailabilityMatrix();
-  }, [store.providerAvailabilities]);
-
-
+  }
+    
+  , [store.providerAvailabilities]);
+  
+  
+  
 
   // Handle Functions
 
@@ -115,6 +102,60 @@ export const ProviderServiceSettings = () => {
   };
   
 
+  // Avaiability Matrix compoenent
+
+  const AvailabilityMatrix = () => {
+    const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    const timeSlots = ["1", "2", "3"];
+  
+    const handleToggleAvailability = (x, y) => {
+      const updatedMatrix = [...availabilityMatrix];
+      updatedMatrix[x][y] = !updatedMatrix[x][y];
+      setAvailabilityMatrix(updatedMatrix);
+    };
+  
+    return (
+      <div>
+        <table className="avaiabilityTable">
+          <thead>
+            <tr>
+              <th></th>
+              {daysOfWeek.map((day, index) => (
+                <th className="availabilityAbbreviations" key={index}>{day}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {timeSlots.map((timeSlot, rowIndex) => (
+              <tr key={rowIndex}>
+                <td className="availabilityAbbreviations">{timeSlot}</td>
+                {availabilityMatrix.map((row, columnIndex) => (
+                  <td
+                    key={columnIndex}
+                    style={{
+                      padding: "0",
+                      width: "1rem",
+                      height: ".7rem",
+                      background: "red",
+                    }}
+                  >
+                    <button
+                      onClick={() => handleToggleAvailability(columnIndex, rowIndex)}
+                      className={row[rowIndex] === 1 ? "selectedAvailabilityCell" : "selectedAvailabilityCell"}
+                    >
+                        {row[rowIndex] === 1 ? "1" : "0"}
+                    </button>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+      
+
 
   // Pre-processing Props
 
@@ -159,8 +200,7 @@ export const ProviderServiceSettings = () => {
           <span className="settingsValue">{ratingString}</span>
           <span className="settingsValue ms-1">{ratingsCounterString}</span>
         </div>
-        <div>
-        &nbsp;
+        <div className="mt-3">
         </div>
         <div>
           <span className="settingsTitles settingsRatingLabel">service radius:</span>
@@ -175,13 +215,12 @@ export const ProviderServiceSettings = () => {
         <div className="mt-3">
           <button onClick={handleUpdateServieRadius} className="updateettingsButton">update radius</button>
         </div>
-        <div className="mt-5">
-          <>
-
-          </>
+        <div className="mt-3">
+          <AvailabilityMatrix />
         </div>
 
       </div>
     </>
   );
 };
+

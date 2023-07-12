@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import { CalendarModal } from "./calendarModal";
 
 export const ProviderServiceRollUp = (props) => {
     const { store, actions } = useContext(Context);
@@ -26,13 +25,25 @@ export const ProviderServiceRollUp = (props) => {
         ["wellness", "pink"],
     ]);
     
-    // Set store Variables and open Calendar modla
-    const handleBookClick = () => {
-        const dialog = document.querySelector(`#dialog${id}`)
-        dialog.showModal()
-    };
+    // isRegistered function
 
-    // Format props
+    const isRegistered = (target_service_description_id) => {
+        if (store.providerProvidedServices) {
+            return store.providerProvidedServices.some(service => service.service_description_id === target_service_description_id);
+        }
+      }
+      
+    // handle functions
+
+    const handleRegisterService = (service_id) => {
+        actions.registerService(service_id);
+    }
+
+    const handleUnregisterService = (service_id) => {
+        actions.unregsiterService(service_id)
+    }
+
+    // pre-processing props
     service = service.charAt(0).toUpperCase() + service.slice(1);
     description = description.charAt(0).toUpperCase() + description.slice(1);
     unit = unit.charAt(0).toUpperCase() + unit.slice(1);
@@ -68,7 +79,7 @@ export const ProviderServiceRollUp = (props) => {
                             <span className="bannerValue">{durationString}</span>
                         </span>
                         <span className="bannerLabel3">
-                            <span className="bannerDescription">price: </span>
+                            <span className="bannerDescription">fee: </span>
                             <span className="bannerValue">
                                 <span className="priceString">
                                     {priceString}
@@ -80,9 +91,8 @@ export const ProviderServiceRollUp = (props) => {
                         <div className="bannerLabel4 d-flex align-items-center">
                             <button
                                 className="bookButton mt-1"
-                                onClick={handleBookClick}
                             >
-                                book
+                                {isRegistered(id) ? "AAA" : "BBB"}
                             </button>
                         </div>
                     </div>
@@ -123,7 +133,6 @@ export const ProviderServiceRollUp = (props) => {
                         </div>
                     </div>
                 </div>
-                <CalendarModal id={id} service={service} price={price} key={id} />
             </div >
         </>
     );

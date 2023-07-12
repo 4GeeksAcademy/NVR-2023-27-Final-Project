@@ -41,7 +41,7 @@ export const PrivateProvider = () => {
     // Srevices
 
     const [selectedServiceCategory, setSelectedServiceCategory] = useState("Any category");
-    const [selectedServicePrice, setSelectedServicePrice] = useState("Any price");
+    const [selectedServicePrice, setSelectedServicePrice] = useState("Any fee");
     const [serviceSearchBar, setServiceSearchBar] = useState("");
 
     const [serviceCategories, setServiceCategories] = useState([]);
@@ -121,10 +121,7 @@ export const PrivateProvider = () => {
             actions.getProviderAddress();
 
             actions.getServiceDescriptions();
-            // prices for providers are .75 of client prices
-            // function to rectify prices
-            // call fucntion
-            //
+          
 
         }
     }, []);
@@ -132,10 +129,20 @@ export const PrivateProvider = () => {
     // Finds intervals of values paid to providers
 
     useEffect(() => {
+        
         const findPriceIntervals = () => {
             if (store.serviceDescriptions.length === 0) {
                 return null;
             }
+
+            // lower prices for Providers, 75%, rounded to enarst multiple of 10
+            if (store.serviceDescriptions) {
+                store.serviceDescriptions.forEach((service) => {
+                    service.price = Math.round(0.75 * service.price / 10) * 10;
+                  });
+            }
+
+            // Main body of fucntion
 
             const prices = store.serviceDescriptions.map((item) => item.price);
             const lowestPrice = Math.min(...prices);
@@ -274,7 +281,7 @@ export const PrivateProvider = () => {
     // Section initialization
 
     // Register Service filtering and sorting
-    if (selectedSection === "registerService") {
+    if (selectedSection === "registerServices") {
 
         if (store.serviceDescriptions) {
             filteredServices = store.serviceDescriptions.filter((service) => {
@@ -284,7 +291,7 @@ export const PrivateProvider = () => {
                 }
 
                 // Filter by price
-                if (selectedServicePrice !== "Any price") {
+                if (selectedServicePrice !== "Any fee") {
                     const price = parseFloat(service.price);
 
                     if (
@@ -584,7 +591,7 @@ export const PrivateProvider = () => {
                     )}
                     {/* SECOND NAVBAR */}
                     {/* Register Service */}
-                    {selectedSection === "registerService" && (
+                    {selectedSection === "registerServices" && (
                         <nav className="navbar fixed-top secondNavBar d-flex justify-content-center align-items-center ">
                             <div className="d-flex justify-content-center align-items-center">
                                 {/* Category Dropdown*/}
@@ -612,7 +619,7 @@ export const PrivateProvider = () => {
                                         ))}
                                     </ul>
                                 </div>
-                                {/* Price Dropdown*/}
+                                {/* Fee Dropdown*/}
                                 <div className="dropdown ribbonElement2">
                                     <button
                                         className="border-0"
@@ -623,15 +630,15 @@ export const PrivateProvider = () => {
                                         <span className="dropDownIcon2">
                                             <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M192-96v-72h576v72H192Zm288-144L336-384l51-51 57 57v-204l-57 57-51-51 144-144 144 144-51 51-57-57v204l57-57 51 51-144 144ZM192-792v-72h576v72H192Z" /></svg>
                                         </span>
-                                        <span className="pullDownLabel me-1">Price</span>
+                                        <span className="pullDownLabel me-1">Fee</span>
                                         <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M480-384 288-576h384L480-384Z" /></svg>
                                         </span>
                                         <span className="pullDownLabel italic ms-1">{selectedServicePrice}</span>
                                     </button>
                                     <ul className="dropdown-menu rounded-0">
-                                        <li className="list-item" key={0} onClick={() => handleServicePriceSelect("Any price")}>
-                                            Any price
+                                        <li className="list-item" key={0} onClick={() => handleServicePriceSelect("Any fee")}>
+                                            Any fee
                                         </li>
                                         <li className="list-item" key={1} onClick={() => handleServicePriceSelect(`${servicePrices.interval1Min}€ - ${servicePrices.interval1Max}€`)}>
                                             {servicePrices.interval1Min}€ - {servicePrices.interval1Max}€
@@ -752,8 +759,10 @@ export const PrivateProvider = () => {
                     )}
                 </header>
                 <main>
+
                     {/* Service Planner */}
                     {selectedSection === "servicePlanner" && (
+
                         <div className="main container-fluid m-0 p-0 g-0">
                             <div className="row d-flex justify content-center ">
                                 <ProviderServicePlanner />
@@ -761,8 +770,9 @@ export const PrivateProvider = () => {
                         </div>)
                     }
                     {/* Register Service*/}
-                    {selectedSection === "registerService" && (
+                    {selectedSection === "registerServices" && (
                         <div className="main container-fluid m-0 p-0 g-0">
+                                                    
                             <div className="row d-flex justify content-center ">
                                 {filteredServices && filteredServices.map((filteredService, index) => (
                                     <div className="col-12 d-flex justify-content-center" key={filteredService.id}>
@@ -796,18 +806,18 @@ export const PrivateProvider = () => {
 
 
 
-            /*         My requests
-                    {selectedSection === "myRequests" && (
-                        <div className="main container-fluid m-0 p-0 g-0">
-                            <div className="row d-flex justify content-center ">
-                                {filteredRequests && filteredRequests.map((filteredRequest, index) => (
-                                    <div className="col-12 d-flex justify-content-center" key={filteredRequest.id}>
-                                        <div><RequestRollUp requestObject={filteredRequest} /></div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>)
-                    } */
+/*         My requests
+        {selectedSection === "myRequests" && (
+            <div className="main container-fluid m-0 p-0 g-0">
+                <div className="row d-flex justify content-center ">
+                    {filteredRequests && filteredRequests.map((filteredRequest, index) => (
+                        <div className="col-12 d-flex justify-content-center" key={filteredRequest.id}>
+                            <div><RequestRollUp requestObject={filteredRequest} /></div>
+                        </div>
+                    ))}
+                </div>
+            </div>)
+        } */
 
 
 

@@ -1768,8 +1768,15 @@ opacity: .7;
   bottom: 4.7rem;
 }
 
+/*******************/
 
 
+.availabilityAbbreviations {
+  font-size: .6rem;
+  font-variant: small-caps;
+  font-weight: 400;
+
+}
 
 /*******************/
 /* LOGO Solutioner */

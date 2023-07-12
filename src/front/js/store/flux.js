@@ -27,6 +27,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			providerAcceptedServices: null,
 			providerProvidedServices: null,
 			providerAvaiabilities: null,
+			
+			providerAvailabilityMatrix: [
+				[false,false, false],
+				[false,false, false],
+				[false,false, false],
+				[false,false, false],
+				[false,false, false],
+				[false,false, false],
+				[false,false, false],
+			],
+
 			providerSettings: null,
 			providerNotifications: null,
 			providerAddress: null,
@@ -656,6 +667,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const data = await response.json();
 						console.log(data);
 						setStore({ providerAvaiabilities: data.provider_availabilities });
+					
+						getStore().providerAvaiabilities.forEach((item) => {
+							let { day, time_slot } = item;
+							let column = time_slot-1;
+							let row = (day + 1) % 7;
+							console.log(row, column);
+
+							// setStore({providerAvailabilityMatrix[row][column] trie})
+
+						});
+						  
+						  
+						  
+					
 					} else {
 						console.log("Error:", response.status);
 					}
