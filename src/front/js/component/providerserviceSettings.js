@@ -60,20 +60,7 @@ export const ProviderServiceSettings = () => {
     setNewAvailabilityMatrix(updatedMatrix);
   }
 
-  const handleResetAvailability = () => {
-    const auxiliaryMAtrix = [
-      [false, false, false],
-      [false, false, false],
-      [false, false, false],
-      [false, false, false],
-      [false, false, false],
-      [false, false, false],
-      [false, false, false],
-    ]
-    setNewAvailabilityMatrix(auxiliaryMAtrix);
-  }
-
-  const handleActivateAvailability = () => {
+    const handleActivateAllAvailabilities = () => {
     const auxiliaryMAtrix = [
       [true, true, true],
       [true, true, true],
@@ -87,15 +74,25 @@ export const ProviderServiceSettings = () => {
     setNewAvailabilityMatrix(auxiliaryMAtrix);
   }
 
-  const handleInvertAvailability = () => {
+  const handleResetAllAvailabilities = () => {
+    const auxiliaryMAtrix = [
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+    ]
+    setNewAvailabilityMatrix(auxiliaryMAtrix);
+  }
+
+  const handleInvertAllAvailabilities = () => {
     const auxiliaryMArix = [...newAvailabilityMatrix];
     const invertedMatrix = auxiliaryMArix.map(row => row.map(cell => !cell));
     setNewAvailabilityMatrix(invertedMatrix);
   };
   
-  
-
-
 
   // Subcomponents
 
@@ -188,7 +185,7 @@ export const ProviderServiceSettings = () => {
                         onClick={() => {
                           handleToggleAvailability(rowIndex, columnIndex);
                         }}
-                        className={dayAvailability[rowIndex] ? "availabilityTimeSlot avaiableTimeSlot" : "availabilityTimeSlot unavaiableTimeSlot"}
+                        className={dayAvailability[rowIndex] ? "availabilityTimeSlot unavaiableTimeSlot" : "availabilityTimeSlot avaiableTimeSlot"}
 
                       >
                         1
@@ -268,18 +265,18 @@ export const ProviderServiceSettings = () => {
         <div>
           <span>
             <button
-              onClick={handleActivateAvailability}
+              onClick={handleActivateAllAvailabilities}
             >
               <svg className="clickable" xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12"><path d="M450-438v-406h60v406h-60Zm30 320q-74 0-139.5-28.5T226-224q-49-49-77.5-114.5T120-478q0-80 34-149.5T250-751l42 42q-53 43-82.5 102.5T180-478.022Q180-353 267.5-265.5 355-178 480-178q125.357 0 212.679-87.5Q780-353 780-478.022 780-547 750.5-607.5 721-668 670-709l43-42q60 51 93.5 122T840-478q0 74-28.5 139.5t-77 114.5q-48.5 49-114 77.5T480-118Z" /></svg>
             </button>
             <button
-              onClick={handleResetAvailability}
+              onClick={handleResetAllAvailabilities}
 
             >
               <svg className="clickable" xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12"><path d="M382-120v-118L240-394v-215q0-25 17-42.5t41-17.5l60 60h-58v191l142 155.701V-180h76v-82l49-54L67-816l42-42 750 750-42 42-207-207-32 35v118H382Zm310-240-32-32v-217H443L342-710v-130h60v171h156v-171h60v201l-30-30h72q24.75 0 42.375 17.625T720-609v217l-28 32ZM553-499Zm-114 55Z" /></svg>
             </button>
             <button
-              onClick={handleInvertAvailability}
+              onClick={handleInvertAllAvailabilities}
             >
               <svg className="clickable" xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12"><path d="M480-120q-132 0-226-91.5T160-435q0-66 25-122.5T254-658l226-222 226 222q44 44 69 100.5T800-435q0 131-93.5 223T480-120Zm0-60v-616L294-613q-36 36-55 80t-19 98q0 107 76.5 181T480-180Z" /></svg>
             </button>
