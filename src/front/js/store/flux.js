@@ -27,7 +27,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			providerAcceptedServices: null,
 			providerProvidedServices: null,
 			providerAvaiabilities: null,
-			
+
 			providerAvailabilityMatrix: [],
 
 			providerSettings: null,
@@ -47,7 +47,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// resets providerDetails
 
 			resetProviderDetails: () => {
-				setStore({providerDetails: null});
+				setStore({ providerDetails: null });
 			},
 
 			// Displays Alerts, available to every other method 
@@ -416,75 +416,75 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//  Get provider details - for each SERVICE REQUEST
 
 			getProviderDetails: async (providerId) => {
-				try {							
-				  	const response = await fetch(process.env.BACKEND_URL + "api/getproviderdetails/" + providerId, {
-					method: "GET",
-					headers: {
-					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/getproviderdetails/" + providerId, {
+						method: "GET",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+						}
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						setStore({ providerDetails: data.provider_details });
+						console.log(data.message);
+					} else {
+						console.log("Error:", response.status);
 					}
-				  });
-			  
-				  if (response.ok) {
-					const data = await response.json();
-					setStore({ providerDetails: data.provider_details });
-					console.log(data.message);
-				  } else {
-					console.log("Error:", response.status);
-				  }
 				} catch (error) {
-				  console.log("Error:", error);
+					console.log("Error:", error);
 				}
-			  },
-			
+			},
+
 
 			// PRIVATE USER : Get service request passwords
 
 			getServiceRequestPasswords: async (serviceRequestId) => {
-				try {							
-				  	const response = await fetch(process.env.BACKEND_URL + "api/getservicerequestpasswords/" + serviceRequestId, {
-					method: "GET",
-					headers: {
-					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/getservicerequestpasswords/" + serviceRequestId, {
+						method: "GET",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token
+						}
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						setStore({ serviceRequestPasswords: data.service_request_passwords });
+						console.log(data.message);
+					} else {
+						console.log("Error:", response.status);
 					}
-				  });
-			  
-				  if (response.ok) {
-					const data = await response.json();
-					setStore({ serviceRequestPasswords: data.service_request_passwords });
-					console.log(data.message);
-				  } else {
-					console.log("Error:", response.status);
-				  }
 				} catch (error) {
-				  console.log("Error:", error);
+					console.log("Error:", error);
 				}
-			  },
+			},
 
 
 			// PRIVATE USER : Rate provider
 
 			rateProvider: async (serviceRequestId, providerId, rating) => {
 				try {
-				  const response = await fetch(process.env.BACKEND_URL + "api/rateprovider/" + serviceRequestId + "/" + providerId + "/" + rating, {
-					method: "PUT",
-					headers: {
-					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
-					  "Content-Type": "application/json"
+					const response = await fetch(process.env.BACKEND_URL + "api/rateprovider/" + serviceRequestId + "/" + providerId + "/" + rating, {
+						method: "PUT",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
+							"Content-Type": "application/json"
+						}
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data.message);
+						await getActions().getUserRequests();
+						await getActions().alertUser("provider rated", "#00008B", "white");
+					} else {
+						console.log('Error:', response.status);
 					}
-				  });
-			  
-				  if (response.ok) {
-					const data = await response.json();
-					console.log(data.message);
-					await getActions().getUserRequests();
-					await getActions().alertUser("provider rated", "#00008B", "white");
-				  } else {
-					console.log('Error:', response.status);
-				  }
 				} catch (error) {
-				  console.log('Error:', error);
+					console.log('Error:', error);
 				}
-			  },
+			},
 
 
 			// PRIVATE USER : update user settings
@@ -499,7 +499,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 						body: JSON.stringify({ newUserSettings })
 					});
-			
+
 					if (response.ok) {
 						const data = await response.json();
 						console.log(data.message);
@@ -543,7 +543,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			// UPDATE service request passwords
 
-			updateServiceRequestPasswords: async (updatedServiceRequestPasswords , serviceRequestId) => {
+			updateServiceRequestPasswords: async (updatedServiceRequestPasswords, serviceRequestId) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "api/updateservicerequestpasswords/" + serviceRequestId, {
 						method: "PUT",
@@ -551,9 +551,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
 							"Content-Type": "application/json"
 						},
-						body: JSON.stringify({ updatedServiceRequestPasswords: updatedServiceRequestPasswords  })
+						body: JSON.stringify({ updatedServiceRequestPasswords: updatedServiceRequestPasswords })
 					});
-			
+
 					if (response.ok) {
 						const data = await response.json();
 						console.log(data.message);
@@ -572,34 +572,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			excldueProvider: async (providerId) => {
 				try {
-				  const response = await fetch(process.env.BACKEND_URL + "api/excludeprovider/" + providerId, {
-					method: "POST",
-					headers: {
-					  "Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
-					  "Content-Type": "application/json"
+					const response = await fetch(process.env.BACKEND_URL + "api/excludeprovider/" + providerId, {
+						method: "POST",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
+							"Content-Type": "application/json"
+						}
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data.message);
+						await getActions().getUserExclusions();
+						await getActions().alertUser("provider excluded", "#00008B", "white");
+					} else {
+						console.log('Error:', response.status);
 					}
-				  });
-			  
-				  if (response.ok) {
-					const data = await response.json();
-					console.log(data.message);
-					await getActions().getUserExclusions();
-					await getActions().alertUser("provider excluded", "#00008B", "white");
-				  } else {
-					console.log('Error:', response.status);
-				  }
 				} catch (error) {
-				  console.log('Error:', error);
+					console.log('Error:', error);
 				}
-			  },
-
-			  
-			  //*********************************/
-			  // Private Provider functions 
+			},
 
 
-  			  // GET  Provider Accepted Services 
-			  getProviderAcceptedRequests: async () => {
+			//*********************************/
+			// Private Provider functions 
+
+
+			// GET  Provider Accepted Services 
+			getProviderAcceptedRequests: async () => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "api/getprovideracceptedservicerequests", {
 						method: "GET",
@@ -645,7 +645,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			// GET  Provider Avaiabilities
-			
+
 			getProviderAvailabities: async () => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "api/getprovideravaiabilities", {
@@ -657,27 +657,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					if (response.ok) {
 						const data = await response.json();
-						
+
 						setStore({ providerAvaiabilities: data.provider_availabilities });
-											
+
 						let temporaryArray = [
-							[false,false, false],
-							[false,false, false],
-							[false,false, false],
-							[false,false, false],
-							[false,false, false],
-							[false,false, false],
-							[false,false, false],
+							[false, false, false],
+							[false, false, false],
+							[false, false, false],
+							[false, false, false],
+							[false, false, false],
+							[false, false, false],
+							[false, false, false],
 						]
 
 						getStore().providerAvaiabilities.forEach((item) => {
 							let { day, time_slot } = item;
-							let column = time_slot-1;
+							let column = time_slot - 1;
 							let row = day === 6 ? 0 : day + 1;
-							temporaryArray [row] [column] = true;
+							temporaryArray[row][column] = true;
 						});
-					
-						setStore({providerAvailabilityMatrix : temporaryArray })
+
+						setStore({ providerAvailabilityMatrix: temporaryArray })
 
 					} else {
 						console.log("Error:", response.status);
@@ -709,7 +709,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("An error occurred:", error);
 				}
 			},
-			
+
 
 			// GET  Provider settings
 
@@ -801,7 +801,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(data.message);
 						await getActions().getProviderProvidedServices();
 						await getActions().alertUser("service unregistered", "#00008B", "white");
-					
+
 					} else {
 						console.log('Error:', response.status);
 					}
@@ -830,7 +830,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(data.message);
 						await getActions().getProviderProvidedServices();
 						await getActions().alertUser("service registered", "#00008B", "white");
-					
+
+					} else {
+						console.log('Error:', response.status);
+					}
+				} catch (error) {
+					console.log('Error:', error);
+				}
+			},
+
+
+			// PUT Update provider availability
+
+			updateProviderAvailability: async (availabilityObjectArray) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "api/updateprovideravailability", {
+						method: "PUT",
+						headers: {
+							"Authorization": "Bearer " + JSON.parse(localStorage.getItem("credentials")).token,
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ availabilityObjectArray }),
+					});
+
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data.message);
+						await getActions().getProviderAvailabities();
+						await getActions().alertUser("availability updated", "#00008B", "white");
 					} else {
 						console.log('Error:', response.status);
 					}

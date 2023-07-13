@@ -112,7 +112,7 @@ export const ProviderServiceSettings = () => {
       }
     }
   
-    console.log(availabilityObjectArray)
+    actions.updateProviderAvailability(availabilityObjectArray)
   
   }
 

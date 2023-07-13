@@ -966,6 +966,50 @@ def register_service(service_id):
         }), 500
 
 
+# PRIVATE Provider endpoints - PUT update Provider availability
+
+@api.route("/updateprovideravailability", methods=["PUT"])
+@jwt_required()
+def update_provider_availability():
+    try:
+        provider_email = get_jwt_identity()
+        provider = ProviderProfile.query.filter_by(email=provider_email).first()
+
+        if provider:
+            # Get incoming availabilities
+            provider_current_availabilities = ProviderAvailability.query.filter_by(
+                provider_id=provider.id).all()
+
+            # Delete existing provider availabilities
+            for availability in provider_current_availabilities:
+                db.session.delete(availability)
+
+            # Get incoming availabilities
+            body = request.json
+            availability_objects = body.get("availabilityObjectArray")
+
+            # Create and add new provider availabilities
+            for availability_object in availability_objects:
+                new_availability = ProviderAvailability(
+                    provider_id=provider.id,
+                    day=availability_object["day"],
+                    time_slot=availability_object["time_slot"]
+                )
+                db.session.add(new_availability)
+
+            db.session.commit()
+            return jsonify({
+                "message": "Provider availability successfully updated"
+            })
+        else:
+            return jsonify({"message": "Provider not found"}), 404
+    except Exception as e:
+        print(e)
+        return jsonify({
+            "message": "An error occurred",
+            "error": str(e)
+        }), 500
+
 
 
 
