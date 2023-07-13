@@ -13,6 +13,11 @@ export const ProviderServiceSettings = () => {
     [3, "over 3 years"],
   ]);
 
+  const timeslotMap = new Map([
+    [1, "AM"],
+    [2, "PM"],
+    [3, "EVE"],
+  ])
   // useEffects
 
   useEffect(() => {
@@ -98,6 +103,7 @@ export const ProviderServiceSettings = () => {
     );
   };
 
+// Availability CAlendar
 
   const AvailabilityCalendar = () => {
     return (
@@ -125,8 +131,8 @@ export const ProviderServiceSettings = () => {
                       key={columnIndex}
                       className="availabilityAbbreviations"
                       style={{
-                        width: "1rem",
-                        minWidth: "1rem",
+                        width: ".9rem",
+                        minWidth: ".9rem",
                         height: ".7rem",
                         minHeight: ".7rem",
                         padding: "0",
@@ -137,14 +143,16 @@ export const ProviderServiceSettings = () => {
                         padding: "0",
                         margin: "0",
                         gap: "0",
+
                       }}
                     >
                       <button
                         onClick={() => { handleToggleAvailability(rowIndex, columnIndex);
-                      }}                      
+                      }}
+                       className={ dayAvailability[rowIndex] ? "availabilityTimeSlot avaiableTimeSlot" : "availabilityTimeSlot unavaiableTimeSlot" }
+                     
                       >
-
-                        {dayAvailability[rowIndex] ? "1" : "0"}
+                        1
                       </button>
                     </td>
                   ))}
@@ -156,10 +164,7 @@ export const ProviderServiceSettings = () => {
       </div>
     );
   };
-  
-    
-
-
+ 
   // Pre-processing Props
 
   const averageRating = store.providerSettings?.average_rating;
@@ -230,7 +235,7 @@ export const ProviderServiceSettings = () => {
 
 
   // Avaiability Calendar compoenent
-
+/* 
   const AvailabilityCalendar = () => {
 
     const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
@@ -283,3 +288,4 @@ export const ProviderServiceSettings = () => {
     );
   };
       
+ */

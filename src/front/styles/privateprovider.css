@@ -1821,7 +1821,7 @@ opacity: .7;
 
 
 
-/* Table */
+/* Availability calendar */
 
 .availabilityAbbreviations {
   font-size: .675rem;
@@ -1830,6 +1830,26 @@ opacity: .7;
 
 }
 
+.availabilityTimeSlot {
+  color: transparent;
+  transition: all 0.3s ease-in-out;
+  cursor: crosshair;
+}
+
+.availabilityTimeSlot:hover {
+  background-color: var(--standOutGreen);
+  cursor: crosshair;
+
+}
+
+
+.avaiableTimeSlot {
+  background: transaprent;
+}
+
+.unavaiableTimeSlot {
+  background: var(--modalBackground);
+}
 
 
 /*******************/
