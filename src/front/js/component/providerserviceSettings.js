@@ -51,13 +51,53 @@ export const ProviderServiceSettings = () => {
       actions.updateServiceRadius(newServiceRadius);
     }
 
+    // Availabity Calendar
     // Matrix rotated 90 degrees. Rows and COlumns have to be switched
+
     const handleToggleAvailability = (rowIndex, columnIndex) => {
       const updatedMatrix = [...newAvailabilityMatrix]; 
       updatedMatrix[columnIndex][rowIndex] = !newAvailabilityMatrix[columnIndex][rowIndex];
     setNewAvailabilityMatrix(updatedMatrix);
     }
     
+    const handleResetAvailability = () => {
+      const auxiliaryMAtrix = [
+        [false, false, false],
+        [false, false, false],
+        [false, false, false],
+        [false, false, false],
+        [false, false, false],
+        [false, false, false],
+        [false, false, false],
+      ]
+      setNewAvailabilityMatrix(auxiliaryMAtrix);
+    }
+
+    const handleActivateAvailability = () => {
+      const auxiliaryMAtrix = [
+        [true, true, true],
+        [true, true, true],
+        [true, true, true],
+        [true, true, true],
+        [true, true, true],
+        [true, true, true],
+        [true, true, true],
+       ]
+
+      setNewAvailabilityMatrix(auxiliaryMAtrix);
+    }
+
+    const handleInvertAvailability = () => {
+      const auxiliaryMatrix = [...newAvailabilityMatrix];
+      for (let i = 0; i < auxiliaryMatrix.length; i++) {
+        for (let j = 0; j < auxiliaryMatrix[i].length; j++) {
+          auxiliaryMatrix[i][j] = !auxiliaryMatrix[i][j];
+        }
+      }
+      setNewAvailabilityMatrix(auxiliaryMatrix);
+    };
+    
+
 
   // Subcomponents
 
@@ -225,6 +265,17 @@ export const ProviderServiceSettings = () => {
         </div>
         <div className="mt-3">
           <AvailabilityCalendar />
+        </div>
+        <div>
+          <span>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+          </span>
+        </div>
+        <div>
+          <button className="updateettingsButton">update availability</button>
+
         </div>
 
       </div>
