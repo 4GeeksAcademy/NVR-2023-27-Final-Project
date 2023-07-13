@@ -1830,6 +1830,12 @@ opacity: .7;
 
 }
 
+.timeSlotAbbreviations {
+  font-variant: small-caps;
+  font-size: .45rem !important;
+
+}
+
 .availabilityTimeSlot {
   color: transparent;
   transition: all 0.3s ease-in-out;
@@ -1837,7 +1843,7 @@ opacity: .7;
 }
 
 .availabilityTimeSlot:hover {
-  background-color: var(--standOutGreen);
+  background-color: var(--strikingBlue);
   cursor: crosshair;
 
 }

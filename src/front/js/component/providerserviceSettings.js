@@ -14,9 +14,9 @@ export const ProviderServiceSettings = () => {
   ]);
 
   const timeslotMap = new Map([
-    [1, "AM"],
-    [2, "PM"],
-    [3, "EVE"],
+    [1, "M"],
+    [2, "A"],
+    [3, "E"],
   ])
   // useEffects
 
@@ -60,8 +60,8 @@ export const ProviderServiceSettings = () => {
     setNewAvailabilityMatrix(updatedMatrix);
   }
 
-    const handleActivateAllAvailabilities = () => {
-    const auxiliaryMAtrix = [
+  const handleActivateAllAvailabilities = () => {
+    const auxiliaryMatrix = [
       [true, true, true],
       [true, true, true],
       [true, true, true],
@@ -71,11 +71,11 @@ export const ProviderServiceSettings = () => {
       [true, true, true],
     ]
 
-    setNewAvailabilityMatrix(auxiliaryMAtrix);
+    setNewAvailabilityMatrix(auxiliaryMatrix);
   }
 
   const handleResetAllAvailabilities = () => {
-    const auxiliaryMAtrix = [
+    const auxiliaryMatrix = [
       [false, false, false],
       [false, false, false],
       [false, false, false],
@@ -84,7 +84,7 @@ export const ProviderServiceSettings = () => {
       [false, false, false],
       [false, false, false],
     ]
-    setNewAvailabilityMatrix(auxiliaryMAtrix);
+    setNewAvailabilityMatrix(auxiliaryMatrix);
   }
 
   const handleInvertAllAvailabilities = () => {
@@ -92,7 +92,29 @@ export const ProviderServiceSettings = () => {
     const invertedMatrix = auxiliaryMArix.map(row => row.map(cell => !cell));
     setNewAvailabilityMatrix(invertedMatrix);
   };
+
+  // handleUpdateAvailability
+
+  const handleAvailabilityUpdate = () => {
+    let availabilityObjectArray = [];
+
+    if (newAvailabilityMatrix) {
+      for (let row = 0; row < newAvailabilityMatrix.length; row++) {
+        for (let column = 0; column < 3; column++) {
+          let availabilityObject = {}
+          if (newAvailabilityMatrix[row][column]) {
+            if (row === 0) { availabilityObject.day = 6 }
+            else { availabilityObject.day = row - 1; }
+            availabilityObject.time_slot = column + 1;
+            availabilityObjectArray.push(availabilityObject);
+          }
+        }
+      }
+    }
   
+    console.log(availabilityObjectArray)
+  
+  }
 
   // Subcomponents
 
@@ -159,8 +181,9 @@ export const ProviderServiceSettings = () => {
             </thead>
             <tbody>
               {[0, 1, 2].map((rowIndex) => (
-                <tr key={rowIndex}>
-                  <td className="availabilityAbbreviations">{rowIndex + 1}</td>
+                <tr
+                  key={rowIndex}>
+                  <td className="timeSlotAbbreviations"></td>
                   {newAvailabilityMatrix.map((dayAvailability, columnIndex) => (
                     <td
                       key={columnIndex}
@@ -283,7 +306,7 @@ export const ProviderServiceSettings = () => {
           </span>
         </div>
         <div>
-          <button className="updateettingsButton">update availability</button>
+          <button onClick={handleAvailabilityUpdate} className="updateettingsButton">update availability</button>
 
         </div>
 
