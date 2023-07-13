@@ -114,16 +114,22 @@ export const ProviderServiceSettings = () => {
             <tbody>
               {[0, 1, 2].map((rowIndex) => (
                 <tr key={rowIndex}>
-                  <td>{rowIndex + 1}</td>
+                  <td className="availabilityAbbreviations">{rowIndex + 1}</td>
                   {newAvailabilityMatrix.map((dayAvailability, columnIndex) => (
                     <td
                       key={columnIndex}
+                      className="availabilityAbbreviations"
                       style={{
                         width: "1rem",
-                        height: "0.7rem",
+                        height: ".7rem",
                         padding: "0",
                         textAlign: "center",
                         verticalAlign: "middle",
+                        border: ".7px solid black",
+                        borderCollapse: "collapse",
+                        padding: "0",
+                        margin: "0",
+                        gap: "0",
                       }}
                     >
                       {dayAvailability[rowIndex] ? "1" : "0"}
