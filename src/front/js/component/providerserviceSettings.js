@@ -46,6 +46,13 @@ export const ProviderServiceSettings = () => {
       actions.updateServiceRadius(newServiceRadius);
     }
 
+    // Matrix rotated 90 degrees. Rows and COlumns have to be switched
+    const handleToggleAvailability = (rowIndex, columnIndex) => {
+      const updatedMatrix = [...newAvailabilityMatrix]; 
+      updatedMatrix[columnIndex][rowIndex] = !newAvailabilityMatrix[columnIndex][rowIndex];
+    setNewAvailabilityMatrix(updatedMatrix);
+    }
+    
 
   // Subcomponents
 
@@ -90,7 +97,6 @@ export const ProviderServiceSettings = () => {
       </div>
     );
   };
-  
 
 
   const AvailabilityCalendar = () => {
@@ -134,7 +140,7 @@ export const ProviderServiceSettings = () => {
                       }}
                     >
                       <button
-                        onClick={() => { alert("Row Index: " + rowIndex + ", Column Index: " + columnIndex);
+                        onClick={() => { handleToggleAvailability(rowIndex, columnIndex);
                       }}                      
                       >
 
