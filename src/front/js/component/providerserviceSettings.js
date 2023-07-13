@@ -6,7 +6,7 @@ export const ProviderServiceSettings = () => {
 
   const [newServiceRadius, setNewServiceRadius] = useState(null);
   const [newAvailabilityMatrix, setNewAvailabilityMatrix] = useState([]);
-  
+
   const experienceMap = new Map([
     [1, "1 year"],
     [2, "1 to 3 years"],
@@ -25,88 +25,86 @@ export const ProviderServiceSettings = () => {
       setNewServiceRadius(store.providerSettings.service_radius);
     }
   }, [store.providerSettings]);
-  
-  
+
+
   useEffect(() => {
     if (store.providerAvaiabilities && store.providerAvailabilityMatrix) {
       setNewAvailabilityMatrix(store.providerAvailabilityMatrix);
     }
   }, [store.providerAvaiabilities, store.providerAvailabilityMatrix]);
-     
+
 
   // Handle Functions
 
   const handleIncreaseRadius = () => {
-    setNewServiceRadius((value) => value = value +1)
+    setNewServiceRadius((value) => value = value + 1)
   }
 
   const handleDecreaseRadius = () => {
-    if (newServiceRadius === 5 ) {return}
+    if (newServiceRadius === 5) { return }
     else {
-      setNewServiceRadius((value) => value = value -1)
+      setNewServiceRadius((value) => value = value - 1)
     }
   }
 
-    const handleUpdateServieRadius = () => {
-      actions.updateServiceRadius(newServiceRadius);
-    }
+  const handleUpdateServieRadius = () => {
+    actions.updateServiceRadius(newServiceRadius);
+  }
 
-    // Availabity Calendar
-    // Matrix rotated 90 degrees. Rows and COlumns have to be switched
+  // Availabity Calendar
+  // Matrix rotated 90 degrees. Rows and COlumns have to be switched
 
-    const handleToggleAvailability = (rowIndex, columnIndex) => {
-      const updatedMatrix = [...newAvailabilityMatrix]; 
-      updatedMatrix[columnIndex][rowIndex] = !newAvailabilityMatrix[columnIndex][rowIndex];
+  const handleToggleAvailability = (rowIndex, columnIndex) => {
+    const updatedMatrix = [...newAvailabilityMatrix];
+    updatedMatrix[columnIndex][rowIndex] = !newAvailabilityMatrix[columnIndex][rowIndex];
     setNewAvailabilityMatrix(updatedMatrix);
-    }
-    
-    const handleResetAvailability = () => {
-      const auxiliaryMAtrix = [
-        [false, false, false],
-        [false, false, false],
-        [false, false, false],
-        [false, false, false],
-        [false, false, false],
-        [false, false, false],
-        [false, false, false],
-      ]
-      setNewAvailabilityMatrix(auxiliaryMAtrix);
-    }
+  }
 
-    const handleActivateAvailability = () => {
-      const auxiliaryMAtrix = [
-        [true, true, true],
-        [true, true, true],
-        [true, true, true],
-        [true, true, true],
-        [true, true, true],
-        [true, true, true],
-        [true, true, true],
-       ]
+  const handleResetAvailability = () => {
+    const auxiliaryMAtrix = [
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+    ]
+    setNewAvailabilityMatrix(auxiliaryMAtrix);
+  }
 
-      setNewAvailabilityMatrix(auxiliaryMAtrix);
-    }
+  const handleActivateAvailability = () => {
+    const auxiliaryMAtrix = [
+      [true, true, true],
+      [true, true, true],
+      [true, true, true],
+      [true, true, true],
+      [true, true, true],
+      [true, true, true],
+      [true, true, true],
+    ]
 
-    const handleInvertAvailability = () => {
-      const auxiliaryMatrix = [...newAvailabilityMatrix];
-      for (let i = 0; i < auxiliaryMatrix.length; i++) {
-        for (let j = 0; j < auxiliaryMatrix[i].length; j++) {
-          auxiliaryMatrix[i][j] = !auxiliaryMatrix[i][j];
-        }
-      }
-      setNewAvailabilityMatrix(auxiliaryMatrix);
-    };
-    
+    setNewAvailabilityMatrix(auxiliaryMAtrix);
+  }
+
+  const handleInvertAvailability = () => {
+    const auxiliaryMArix = [...newAvailabilityMatrix];
+    const invertedMatrix = auxiliaryMArix.map(row => row.map(cell => !cell));
+    setNewAvailabilityMatrix(invertedMatrix);
+  };
+  
+  
+
 
 
   // Subcomponents
 
   const StarRatingPicker = () => {
     const providerRating = store.providerSettings?.average_rating;
-  
+
     const renderStar = (indexOfStar) => {
       const roundedRating = Math.floor(providerRating * 2) / 2; // Round down the rating to the nearest half star
-  
+
       if (indexOfStar <= roundedRating) {
         return (
           <span className="filled-star">
@@ -133,7 +131,7 @@ export const ProviderServiceSettings = () => {
         );
       }
     };
-  
+
     return (
       <div className="star-rating">
         {store.providerSettings && providerRating && [1, 2, 3, 4, 5].map((index) => (
@@ -143,7 +141,7 @@ export const ProviderServiceSettings = () => {
     );
   };
 
-// Availability CAlendar
+  // Availability CAlendar
 
   const AvailabilityCalendar = () => {
     return (
@@ -187,10 +185,11 @@ export const ProviderServiceSettings = () => {
                       }}
                     >
                       <button
-                        onClick={() => { handleToggleAvailability(rowIndex, columnIndex);
-                      }}
-                       className={ dayAvailability[rowIndex] ? "availabilityTimeSlot avaiableTimeSlot" : "availabilityTimeSlot unavaiableTimeSlot" }
-                     
+                        onClick={() => {
+                          handleToggleAvailability(rowIndex, columnIndex);
+                        }}
+                        className={dayAvailability[rowIndex] ? "availabilityTimeSlot avaiableTimeSlot" : "availabilityTimeSlot unavaiableTimeSlot"}
+
                       >
                         1
                       </button>
@@ -204,13 +203,13 @@ export const ProviderServiceSettings = () => {
       </div>
     );
   };
- 
+
   // Pre-processing Props
 
   const averageRating = store.providerSettings?.average_rating;
   const ratingString = averageRating ? averageRating.toFixed(2).padStart(4, '0') : "";
   const ratingsCounter = store.providerSettings?.ratings_counter;
-  const ratingsCounterString = ratingsCounter ? ( ratingsCounter == 1 ? " - 1 rating" : " - "+ ratingsCounter + " ratings"): "";
+  const ratingsCounterString = ratingsCounter ? (ratingsCounter == 1 ? " - 1 rating" : " - " + ratingsCounter + " ratings") : "";
 
   // Main JSX
   return (
@@ -268,9 +267,22 @@ export const ProviderServiceSettings = () => {
         </div>
         <div>
           <span>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
+            <button
+              onClick={handleActivateAvailability}
+            >
+              <svg className="clickable" xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12"><path d="M450-438v-406h60v406h-60Zm30 320q-74 0-139.5-28.5T226-224q-49-49-77.5-114.5T120-478q0-80 34-149.5T250-751l42 42q-53 43-82.5 102.5T180-478.022Q180-353 267.5-265.5 355-178 480-178q125.357 0 212.679-87.5Q780-353 780-478.022 780-547 750.5-607.5 721-668 670-709l43-42q60 51 93.5 122T840-478q0 74-28.5 139.5t-77 114.5q-48.5 49-114 77.5T480-118Z" /></svg>
+            </button>
+            <button
+              onClick={handleResetAvailability}
+
+            >
+              <svg className="clickable" xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12"><path d="M382-120v-118L240-394v-215q0-25 17-42.5t41-17.5l60 60h-58v191l142 155.701V-180h76v-82l49-54L67-816l42-42 750 750-42 42-207-207-32 35v118H382Zm310-240-32-32v-217H443L342-710v-130h60v171h156v-171h60v201l-30-30h72q24.75 0 42.375 17.625T720-609v217l-28 32ZM553-499Zm-114 55Z" /></svg>
+            </button>
+            <button
+              onClick={handleInvertAvailability}
+            >
+              <svg className="clickable" xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 -960 960 960" width="12"><path d="M480-120q-132 0-226-91.5T160-435q0-66 25-122.5T254-658l226-222 226 222q44 44 69 100.5T800-435q0 131-93.5 223T480-120Zm0-60v-616L294-613q-36 36-55 80t-19 98q0 107 76.5 181T480-180Z" /></svg>
+            </button>
           </span>
         </div>
         <div>
