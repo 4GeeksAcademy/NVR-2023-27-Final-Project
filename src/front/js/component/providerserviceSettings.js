@@ -92,9 +92,8 @@ export const ProviderServiceSettings = () => {
   };
   
 
-  // xcalendar
 
-  const XCalendar = () => {
+  const AvailabilityCalendar = () => {
     return (
       <div>
         {newAvailabilityMatrix && (
@@ -121,7 +120,9 @@ export const ProviderServiceSettings = () => {
                       className="availabilityAbbreviations"
                       style={{
                         width: "1rem",
+                        minWidth: "1rem",
                         height: ".7rem",
+                        minHeight: ".7rem",
                         padding: "0",
                         textAlign: "center",
                         verticalAlign: "middle",
@@ -132,7 +133,13 @@ export const ProviderServiceSettings = () => {
                         gap: "0",
                       }}
                     >
-                      {dayAvailability[rowIndex] ? "1" : "0"}
+                      <button
+                        onClick={() => { alert("Row Index: " + rowIndex + ", Column Index: " + columnIndex);
+                      }}                      
+                      >
+
+                        {dayAvailability[rowIndex] ? "1" : "0"}
+                      </button>
                     </td>
                   ))}
                 </tr>
@@ -145,64 +152,6 @@ export const ProviderServiceSettings = () => {
   };
   
     
-
-
-
-
-  // Avaiability Calendar compoenent
-
-  const AvailabilityCalendar = () => {
-
-    const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-    const timeSlots = ["1", "2", "3"];
-  
-    const handleToggleAvailability = (x, y) => {
-      const updatedMatrix = [...newAvailabilityMatrix];
-      updatedMatrix[x][y] = !updatedMatrix[x][y];
-      setNewAvailabilityMatrix(updatedMatrix);
-    };
-  
-    return (
-      <div>
-        <table className="avaiabilityTable">
-          <thead>
-            <tr>
-              <th></th>
-              {daysOfWeek.map((day, index) => (
-                <th className="availabilityAbbreviations" key={index}>{day}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {timeSlots.map((timeSlot, rowIndex) => (
-              <tr key={rowIndex}>
-                <td className="availabilityAbbreviations">{timeSlot}</td>
-                {newAvailabilityMatrix.map((row, columnIndex) => (
-                  <td
-                    key={columnIndex}
-                    style={{
-                      padding: "0",
-                      width: "1rem",
-                      height: ".7rem",
-                      background: "red",
-                    }}
-                  >
-                    <button
-                      onClick={() => handleToggleAvailability(columnIndex, rowIndex)}
-                      className={row[rowIndex] === 1 ? "selectedAvailabilityCell" : "selectedAvailabilityCell"}
-                    >
-                        {row[rowIndex] === 1 ? "1" : "0"}
-                    </button>
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  };
-      
 
 
   // Pre-processing Props
@@ -264,7 +213,7 @@ export const ProviderServiceSettings = () => {
           <button onClick={handleUpdateServieRadius} className="updateettingsButton">update radius</button>
         </div>
         <div className="mt-3">
-          <XCalendar />
+          <AvailabilityCalendar />
         </div>
 
       </div>
@@ -272,3 +221,59 @@ export const ProviderServiceSettings = () => {
   );
 };
 
+
+
+  // Avaiability Calendar compoenent
+
+  const AvailabilityCalendar = () => {
+
+    const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    const timeSlots = ["1", "2", "3"];
+  
+    const handleToggleAvailability = (x, y) => {
+      const updatedMatrix = [...newAvailabilityMatrix];
+      updatedMatrix[x][y] = !updatedMatrix[x][y];
+      setNewAvailabilityMatrix(updatedMatrix);
+    };
+  
+    return (
+      <div>
+        <table className="avaiabilityTable">
+          <thead>
+            <tr>
+              <th></th>
+              {daysOfWeek.map((day, index) => (
+                <th className="availabilityAbbreviations" key={index}>{day}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {timeSlots.map((timeSlot, rowIndex) => (
+              <tr key={rowIndex}>
+                <td className="availabilityAbbreviations">{timeSlot}</td>
+                {newAvailabilityMatrix.map((row, columnIndex) => (
+                  <td
+                    key={columnIndex}
+                    style={{
+                      padding: "0",
+                      width: "1rem",
+                      height: ".7rem",
+                      background: "red",
+                    }}
+                  >
+                    <button
+                      onClick={() => handleToggleAvailability(columnIndex, rowIndex)}
+                      className={row[rowIndex] === 1 ? "selectedAvailabilityCell" : "selectedAvailabilityCell"}
+                    >
+                        {row[rowIndex] === 1 ? "1" : "0"}
+                    </button>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+      
