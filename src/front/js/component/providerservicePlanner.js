@@ -7,7 +7,7 @@ export const ProviderServicePlanner = () => {
     return(
         <>
             <div>
-            Service Planner Connected
+            
             </div>        
         </>
     )

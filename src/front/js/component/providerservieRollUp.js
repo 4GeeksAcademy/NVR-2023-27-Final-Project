@@ -69,15 +69,15 @@ export const ProviderServiceRollUp = (props) => {
                         <span className="bannerCategoryLabel">{category}</span>
                     </div>
                     <div className="bannerLabels">
-                        <span className="bannerLabel1">
+                        <span className="bannerLabel11">
                             <span className="bannerDescription">service:</span>
                             <span className="bannerValue">{service}</span>
                         </span>
-                        <span className="bannerLabel2 d-flex align-items-center">
+                        <span className="bannerLabel12 d-flex align-items-center">
                             <span className="bannerDescription">duration: </span>
                             <span className="bannerValue">{durationString}</span>
                         </span>
-                        <span className="bannerLabel3">
+                        <span className="bannerLabel13">
                             <span className="bannerDescription">fee: </span>
                             <span className="bannerValue">
                                 <span className="priceString">
@@ -87,7 +87,7 @@ export const ProviderServiceRollUp = (props) => {
                         </span>
                     </div>
                     <div className="bookButtonWrapper">
-                        <div className="bannerLabel4 d-flex align-items-center">
+                        <div className="bannerLabel14 d-flex align-items-center">
                             <button
                                 id= {`button-${id}`}
                                 onClick={handleChangeServiceStatus}
@@ -109,7 +109,7 @@ export const ProviderServiceRollUp = (props) => {
                                         <span className="expandableValue">{description}</span>
                                     </div>
                                 </div>
-                                <div className="expandableColumn2">
+                                <div className="expandableColumn12">
                                     <div>
                                         <span className="expandableDescription me-1">unit:</span>
                                     </div>

@@ -612,22 +612,22 @@ form input[type=search] {
   align-items: center;
 }
 
-.bannerLabel1 {
+.bannerLabel11 {
   display: flex;
   position: absolute;
-  left: 37%;
+  left: 35%;
 }
 
-.bannerLabel2 {
+.bannerLabel12 {
   display: flex;
   position: absolute;
-  left: 53%;
+  left: 50%;
 }
 
-.bannerLabel3 {
+.bannerLabel13 {
   display: flex;
   position: absolute;
-  left: 63.3%;
+  left: 61%;
 }
 
 .priceString {
@@ -636,10 +636,10 @@ form input[type=search] {
   text-align: right;
 }
 
-.bannerLabel4 {
+.bannerLabel14 {
   display: flex;
   position: absolute;
-  left: 72%;
+  left: 69%;
 }
 
 .bannerDescription {
@@ -712,8 +712,9 @@ form input[type=search] {
   line-height: .7rem;
 }
 
-.expandableColumn2 {
-  flex: 1;
+
+.expandableColumn12 {
+  flex: .3;
   display: flex;
   flex-direction: column;
   line-height: .7rem;
@@ -721,7 +722,6 @@ form input[type=search] {
   text-align: right;
 
 }
-
 
 
 
@@ -1412,7 +1412,7 @@ table.calendarModalTable td {
   align-items: center;
   justify-content: center;
   background: rgb(166, 166, 166);
-  color: rgb(74, 74, 74);
+  color: white;
   font-variant: small-caps;
   font-size: 0.63rem;
   font-weight: 600;
@@ -1775,9 +1775,8 @@ opacity: .7;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(255, 255, 255);
-  color: var(--standOutGreen);
-  outline: 1.2px solid var(--standOutGreen);
+  background: var(--categoryLabelBackground);
+  color: white;
   font-variant: small-caps;
   font-size: .63rem;
   width: 4.5rem;
@@ -1789,8 +1788,8 @@ opacity: .7;
 }
 
 .unregisterButton:hover {
-  background: var(--standOutGreen);
-  color: white;
+  background: white;
+  color: var(--standOutGreen);
   font-weight: 600;
 }
 
@@ -1813,12 +1812,8 @@ opacity: .7;
 .registerButton:hover {
   background: white;
   color: var(--standOutGreen);
-  outline: 1.2px solid var(--standOutGreen);
   font-weight: 600;
 }
-
-
-
 
 
 /* Availability calendar */
@@ -1858,75 +1853,13 @@ opacity: .7;
 }
 
 
-/*******************/
-/* LOGO Solutioner */
-/* 
+/* Logo */
+
 .logoWrapper {
   display: flex;
   align-items: center;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 900;
   color: var(--standOutGreen)
 }
 
-.logoAnimation span {
-  display: inline-block;
-  transform-origin: center;
-}
-
-.logoAnimation span:nth-child(1) {
-  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 0s;
-}
-
-.logoAnimation span:nth-child(2) {
-  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 0.15s;
-}
-
-.logoAnimation span:nth-child(3) {
-  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 0.3s;
-}
-
-.logoAnimation span:nth-child(4) {
-  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 0.45s;
-}
-
-.logoAnimation span:nth-child(5) {
-  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 0.6s;
-}
-
-.logoAnimation span:nth-child(6) {
-  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 0.75s;
-}
-
-.logoAnimation span:nth-child(7) {
-  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 0.9s;
-}
-
-.logoAnimation span:nth-child(8) {
-  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 1.05s;
-}
-
-.logoAnimation span:nth-child(9) {
-  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 1.2s;
-}
-
-.logoAnimation span:nth-child(10) {
-  animation: rotate-characters var(--logoAnimationSpeed) ease-in-out infinite 1.35s;
-}
-
-@keyframes rotate-characters {
-  0% {
-    transform: rotateY(0deg);
-  }
-  50% {
-    transform: rotateY(90deg);
-  }
-  75% {
-    transform: rotateY(180deg);
-  }
-  100% {
-    transform: rotateY(360deg);
-  }
-}
-
-   */
