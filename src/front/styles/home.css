@@ -35,7 +35,7 @@ button:disabled {
   justify-content: center;
   background: rgb(1, 36, 4);
   color: rgb(226, 224, 157);
-  border: 1px solid rgb(226, 224, 157);
+  border: 1px solid rgb(226, 224, 157) !important;
   margin-right: .7rem;
   font-variant: small-caps;
   font-size: .63rem;
@@ -76,6 +76,30 @@ button:disabled {
 }
 
 
+.loginUserButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(226, 224, 157) !important;
+  color:  rgb(1, 36, 4) !important;
+  border: 1px solid rgb(226, 224, 157);
+  font-variant: small-caps;
+  font-size: .63rem;
+  font-weight: 600;
+  width: 29.3rem;
+  letter-spacing: .1rem;
+  padding-inline: .63rem;
+  transition: all .27s ease-in;
+  margin-left: 1rem;
+
+}
+
+.loginUserButton:hover {
+  background: white;
+  border: 1px solid white;
+  color: var(--standOutGreen);
+}
+
 
 
 /* Home page - logo */
@@ -83,10 +107,35 @@ button:disabled {
 .logo {
   display: flex;
   margin-left: 2.1rem; 
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: .1rem;
   color: rgb(226, 224, 157);
+}
+
+
+.logoModal {
+
+    font-size: .7rem;
+  
+}
+
+.modal * {
+  color: rgb(226, 224, 157);
+  background:  rgb(1, 36, 4);}
+
+
+.inputLoginModal {
+  border: none;
+  border-radius: 0;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 1px solid rgb(226, 224, 157);
+}
+
+.inputLoginModal:focus,
+.inputLoginModal:active {
+  border-bottom: none;
 }
 
 
@@ -146,6 +195,18 @@ button:disabled {
   font-weight: 300;
 }
 
+.loginLabel {
+  font-size: .9rem;
+  font-variant: small-caps;
+  letter-spacing: .1rem;
+  font-weight: 400;
+}
+
+
+.buttonSpacer {
+  margin-right: 5rem;
+}
+
 .captionArrow {
   padding-left: .18rem;
   padding-top: .12rem;
@@ -203,7 +264,7 @@ button:disabled {
 }
 
 .providerButtonsWrapper {
-  margin-left: 13.45rem;
+  margin-left: 12.4rem;
 }
 
 .providerHoemButton {
