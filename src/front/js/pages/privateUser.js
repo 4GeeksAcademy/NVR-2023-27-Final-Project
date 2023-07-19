@@ -862,7 +862,7 @@ export const PrivateUser = () => {
                             <div className="row d-flex justify content-center ">
                                 {filteredNotifications && filteredNotifications.map((filteredNotification) => (
                                     <div className="col-12 d-flex justify-content-center" key={filteredNotification.id}>
-                                        <div><NotificationRollUp notificationObject={filteredNotification} /></div>
+                                        {/* <div><NotificationRollUp notificationObject={filteredNotification} /></div> */}
                                     </div>
                                 ))}
                             </div>

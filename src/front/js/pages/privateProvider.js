@@ -795,7 +795,7 @@ export const PrivateProvider = () => {
                             <div className="row d-flex justify content-center ">
                                 {filteredNotifications && filteredNotifications.map((filteredNotification) => (
                                     <div className="col-12 d-flex justify-content-center" key={filteredNotification.id}>
-                                        <div><ProviderNotificationRollUp notificationObject={filteredNotification} /></div>
+                                        {/* <div><ProviderNotificationRollUp notificationObject={filteredNotification} /></div> */}
                                     </div>
                                 ))}
                             </div>
