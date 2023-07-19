@@ -80,8 +80,7 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(226, 224, 157) !important;
-  color:  rgb(1, 36, 4) !important;
+  color: rgb(226, 224, 157) !important;
   border: 1px solid rgb(226, 224, 157);
   font-variant: small-caps;
   font-size: .63rem;
@@ -96,8 +95,8 @@ button:disabled {
 
 .loginUserButton:hover {
   background: white;
+  color:  var(--standOutGreen) !important;
   border: 1px solid white;
-  color: var(--standOutGreen);
 }
 
 
@@ -120,21 +119,23 @@ button:disabled {
   
 }
 
-.modal * {
-  color: rgb(226, 224, 157);
-  background:  rgb(1, 36, 4);}
 
 
 .inputLoginModal {
   border: none;
   border-radius: 0;
   outline: none;
-  background-color: transparent;
-  border-bottom: 1px solid rgb(226, 224, 157);
+
 }
 
 .inputLoginModal:focus,
 .inputLoginModal:active {
+  outline: none; /* Remove the outline when focused or active */
+}
+
+.inputLoginModal:focus,
+.inputLoginModal:active {
+  background: transaprent;
   border-bottom: none;
 }
 
