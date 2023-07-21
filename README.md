@@ -1,3 +1,17 @@
+
+***************************************************************************************************************
+Exercise #27: Final Project
+Full-stack app from concept to execution using React, Flask, and SQLAlchemy, plus 3 APIs for geolocation and QR code generation. Initially developed from mid-May 2023 to mid-July 2023.
+
+The app will be undergoing extensive CSS revision.
+
+By Nuno Rodrigues
+
+Mark received:
+Date:
+Teacher:
+***************************************************************************************************************
+
 # WebApp boilerplate with React JS and Flask API
 
 Build web applications using React.js for the front end and python/flask for your backend API.
